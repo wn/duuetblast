@@ -1,0 +1,50 @@
+//
+//  CannonObject.swift
+//  LevelDesigner
+//
+//  Created by Ang Wei Neng on 15/2/19.
+//  Copyright © 2019 nus.cs3217.a0164178x. All rights reserved.
+//
+import CoreGraphics
+
+class CannonObject: GameObject {
+
+    private var firingBubble: GameBubble?
+    private var angle: CGFloat = 0
+    private weak var delegate: GameEngine?
+
+    private static let firingVelocity: CGFloat = 1500
+
+    override init(position: CGPoint) {
+        super.init(position: position)
+    }
+
+    func setDelegate(gameEngine: GameEngine) {
+        delegate = gameEngine
+    }
+
+    func fireBubble() {
+        guard let bubbleToFire = firingBubble else {
+            print(1)
+            return
+        }
+        guard delegate?.collidedBubble(bubbleToFire) == nil else {
+            print(2)
+            return
+        }
+        bubbleToFire.setVelocity(speed: CannonObject.firingVelocity, angle: angle)
+        firingBubble = nil
+        delegate?.movingFiringBubble(bubbleToFire)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.delegate?.generateFiringBubble()
+        }
+    }
+
+    func loadBubble(_ bubble: GameBubble) {
+        firingBubble = bubble
+    }
+
+    func setAngle(_ angle: CGFloat) {
+        self.angle = angle
+    }
+}
