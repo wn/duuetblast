@@ -9,7 +9,7 @@
 import UIKit
 
 class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
-
+    var isDualCannon = false
     @IBOutlet private var statusView: UIView!
 
     @IBOutlet private var gameBubbleCollection: UICollectionView!
@@ -26,7 +26,8 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
         radius: bubbleRadius,
         firingPosition: firingPosition,
         gameoverLine: gameoverLine,
-        gameLayout: gameLayout)
+        gameLayout: gameLayout,
+        isDualCannon: isDualCannon)
 
     private var gameoverLine: CGFloat {
         let numOfGridBubbles = gameBubbleCollection.numberOfItems(inSection: 0)
@@ -46,11 +47,35 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         layout.delegate = self
 
-        // For getting angle in game
-        let singleTapForGameplayArea = UITapGestureRecognizer(target: self, action: #selector(fireBubble(_:)))
-        singleTapForGameplayArea.delegate = self
-        gameBubbleCollection.isUserInteractionEnabled = true
-        gameBubbleCollection.addGestureRecognizer(singleTapForGameplayArea)
+        // Create left and right view
+        let gameWidth = gameBubbleCollection.frame.width
+        let gameHeight = gameBubbleCollection.frame.height
+        let leftView = UIView(frame: CGRect(x: 0, y: 0, width: gameWidth / 2, height: gameHeight))
+        leftView.backgroundColor = .yellow
+
+        let rightView = UIView(frame: CGRect(x: gameWidth / 2, y: 0, width: gameWidth / 2, height: gameHeight))
+        rightView.backgroundColor = .red
+
+        func setupFiringZone(view: UIView) {
+            gameBubbleCollection.addSubview(view)
+            gameBubbleCollection.sendSubviewToBack(view)
+            setupTap(view: view)
+            view.alpha = 0.1
+        }
+
+        func setupTap(view: UIView) {
+            // For getting angle in game
+            let singleTapForGameplayArea = UITapGestureRecognizer(target: self, action: #selector(fireBubble(_:)))
+            singleTapForGameplayArea.delegate = self
+            view.addGestureRecognizer(singleTapForGameplayArea)
+        }
+
+        if isDualCannon {
+            setupFiringZone(view: leftView)
+            setupFiringZone(view: rightView)
+        } else {
+            setupTap(view: gameBubbleCollection)
+        }
 
         gameEngine.gameDelegate = self
         restartLevel()
@@ -97,7 +122,9 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
         gameEngine.restartEngine()
         setupLevel(level: loadedLevel)
         gameEngine.setupLevel(level: loadedLevel.clone())
-        gameEngine.generateFiringBubble()
+        for cannon in gameEngine.cannons {
+            gameEngine.generateFiringBubble(cannon: cannon)
+        }
         for index in 0..<gameLayout.totalNumberOfBubble {
             // Apparently reloadData doesn't work here.
             reload(index: index)
@@ -146,6 +173,7 @@ extension GameEngineViewController: UICollectionViewDataSource, UICollectionView
                 as! GameEngineBubbleCollectionViewCell
             let bubbleType = currentLevel.getBubbleTypeAtIndex(index: indexPath.item)
             cell.setImage(imageUrl: bubbleType.imageUrl)
+            gameBubbleCollection.bringSubviewToFront(cell)
             return cell
     }
 }

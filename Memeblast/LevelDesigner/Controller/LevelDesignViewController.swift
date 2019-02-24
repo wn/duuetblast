@@ -12,6 +12,12 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet private var gameArea: UIView!
     @IBOutlet private var paletteViewArea: UIView!
 
+    var isDualCannon = true
+
+    @IBAction func dualCannon(_ sender: UIButton) {
+        isDualCannon = !isDualCannon
+    }
+
     @IBOutlet private var colorSelectorCollection: UICollectionView!
     let paletteCellIdentifier = "paletteSelectorBubbleCell"
 
@@ -102,12 +108,13 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate {
 
     private func transitToGame() {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let levelSelectorController =
+        let gameEngineController =
             storyBoard.instantiateViewController(
                 withIdentifier: "gameEngine")
                 as! GameEngineViewController
-        levelSelectorController.loadedLevel = currentLevel.clone()
-        self.present(levelSelectorController, animated: true, completion: nil)
+        gameEngineController.loadedLevel = currentLevel.clone()
+        gameEngineController.isDualCannon = isDualCannon
+        self.present(gameEngineController, animated: true, completion: nil)
     }
 
     /// Button to save current level.

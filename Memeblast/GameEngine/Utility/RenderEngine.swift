@@ -12,20 +12,74 @@ public class RenderEngine {
     private let diameter: CGFloat
 
     private var gameplayArea: UIView
-    private lazy var cannonView: CannonView = CannonView(position: firingPosition, superView: gameplayArea)
-    let firingPosition: CGPoint
+    var firingPosition: CGPoint
 
-    private var gameEngine: GameEngine
+    let physicsEngine = PhysicsEngine()
+
+    var cannonsView: [CannonView] = []
 
     internal var gameBubblesView: [GameBubble: GameBubbleView] = [:]
+    internal var cannonsViewMap: [CannonObject: CannonView] = [:]
 
-    init(gameEngine: GameEngine, gameplayArea: UIView, gameoverHeight: CGFloat, firingPosition: CGPoint) {
-        self.gameEngine = gameEngine
+    init(gameplayArea: UIView, gameoverHeight: CGFloat, firingPosition: CGPoint, diameter: CGFloat) {
         self.gameplayArea = gameplayArea
         self.firingPosition = firingPosition
-        diameter = gameEngine.bubbleDiameter
-        cannonView.render()
+        self.diameter = diameter
+
         renderGameLine(height: gameoverHeight)
+    }
+
+    func getClosestCannon(_ point: CGPoint) -> CannonObject {
+        var displacement = CGFloat.infinity
+        // Get cannon closest to the point
+        var closestCannon: CannonObject? = nil
+        for (cannon, cannonView) in cannonsViewMap {
+            let position = cannonView.firingPosition
+            let currDisplacement =  point.displacementTo(point: position)
+            if currDisplacement < displacement {
+                displacement = currDisplacement
+                closestCannon = cannon
+            }
+        }
+        return closestCannon!
+    }
+
+    func renderCannon(cannons: [CannonObject]) {
+        for cannon in cannons {
+            let newView = CannonView(position: cannon.position, superView: gameplayArea)
+            cannonsViewMap[cannon] = newView
+            cannonsView.append(newView)
+            newView.render()
+        }
+        print(gameplayArea.subviews)
+    }
+
+    func rerenderCannon(_ cannon: CannonObject) {
+        guard let cannonView = cannonsViewMap[cannon] else {
+            return
+        }
+        cannonView.rotateAngle(cannon.angle)
+    }
+
+    func setCannonAngle(_ towards: CGPoint) -> CannonObject {
+        let closestCannon = getClosestCannon(towards)
+        guard let cannonView = cannonsViewMap[closestCannon] else {
+            fatalError("Cannon should exist in view!")
+        }
+        closestCannon.setAngle(physicsEngine.getBearing(startPoint: towards, endPoint: cannonView.firingPosition))
+        rerenderCannon(closestCannon)
+        return closestCannon
+    }
+
+    func getCannonPositions(dual: Bool) -> [CGPoint] {
+        if dual {
+            let quarterMark = gameplayArea.frame.width / 4
+            let leftPosition = firingPosition.shiftHorizontal(-quarterMark)
+            let rightPosition = firingPosition.shiftHorizontal(quarterMark)
+            return [leftPosition, rightPosition]
+        } else {
+            return [firingPosition]
+        }
     }
 
     private func renderGameLine(height: CGFloat) {
@@ -44,20 +98,27 @@ public class RenderEngine {
         gameplayArea.layer.addSublayer(shapeLayer)
     }
 
-    public func renderBubble(bubbleType: BubbleType) -> GameBubble {
-        let bubble = GameBubble(position: firingPosition, diameter: diameter, type: bubbleType)
+    public func renderBubble(cannon: CannonObject, bubbleType: BubbleType) -> GameBubble {
+        guard let cannonView = cannonsViewMap[cannon] else {
+            fatalError("non gameplay cannon shouldnt be rendering bubbles!")
+        }
+        let firePosition = cannonView.firingPosition
+        let bubble = GameBubble(position: firePosition, diameter: diameter, type: bubbleType)
         let newBubbleView = GameBubbleView(
-            position: firingPosition,
+            position: firePosition,
             imageURL: bubbleType.imageUrl,
             diameter: diameter)
         gameBubblesView[bubble] = newBubbleView
         gameplayArea.addSubview(newBubbleView.imageView)
-        gameplayArea.sendSubviewToBack(newBubbleView.imageView)
+        gameplayArea.bringSubviewToFront(newBubbleView.imageView)
         return bubble
     }
 
-    func animateCannon() {
-        cannonView.animate()
+    func animateCannon(_ cannon: CannonObject) {
+        guard let view = cannonsViewMap[cannon] else {
+            return
+        }
+        view.animate()
     }
 
     public func renderFallingBubble(bubble: GameBubble, topLeftPosition: CGPoint) {
@@ -94,7 +155,9 @@ public class RenderEngine {
     }
 
     public func setAngle(angle: CGFloat) {
-        cannonView.rotateAngle(angle)
+        for view in cannonsView {
+            view.rotateAngle(angle)
+        }
     }
 
     private var gameplayWidth: CGFloat {
@@ -106,6 +169,14 @@ public class RenderEngine {
     }
 
     private var gameBubbleRadius: CGFloat {
-        return gameEngine.bubbleRadius
+        return diameter / 2
+    }
+}
+
+extension CGPoint {
+    func shiftHorizontal(_ by: CGFloat) -> CGPoint {
+        let newX = self.x + by
+        let newY = self.y
+        return CGPoint(x: newX, y: newY)
     }
 }

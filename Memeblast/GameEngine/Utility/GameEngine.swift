@@ -15,8 +15,8 @@ public class GameEngine {
     let physicsEngine = PhysicsEngine()
     private let gameplayArea: UIView
     weak var gameDelegate: UIGameDelegate?
-    private lazy var renderEngine: RenderEngine = RenderEngine(gameEngine: self, gameplayArea: gameplayArea, gameoverHeight: gameoverHeight, firingPosition: firingPosition)
-    private var cannon: CannonObject
+    private var renderEngine: RenderEngine
+    var cannons: [CannonObject] = []
     lazy private var obstacles = generateObstacle()
     let gameLayout: GameLayout
     private let gameoverHeight: CGFloat
@@ -25,34 +25,64 @@ public class GameEngine {
     private var refreshScreenTime: Double {
         return Double(1) / FPS
     }
-    let firingPosition: CGPoint
+    //let firingPosition: CGPoint
 
     init(
         gameplayArea: UIView,
         radius: CGFloat,
         firingPosition: CGPoint,
         gameoverLine: CGFloat,
-        gameLayout: GameLayout) {
+        gameLayout: GameLayout,
+        isDualCannon: Bool) {
 
         self.gameplayArea = gameplayArea
         self.bubbleRadius = radius
         self.gameoverHeight = gameoverLine
         self.gameLayout = gameLayout
-        self.firingPosition = firingPosition
 
-        cannon = CannonObject(position: firingPosition)
-        cannon.setDelegate(gameEngine: self)
+        renderEngine = RenderEngine(gameplayArea: gameplayArea, gameoverHeight: gameoverHeight, firingPosition: firingPosition, diameter: radius * 2)
+
+        for cannonPosition in renderEngine.getCannonPositions(dual: isDualCannon) {
+            let newCannon = CannonObject(position: cannonPosition)
+            newCannon.setDelegate(gameEngine: self)
+            cannons.append(newCannon)
+        }
+        renderEngine.renderCannon(cannons: cannons)
     }
 
     /// Spawn a firing bubble at firing point
-    public func generateFiringBubble() {
+    func generateFiringBubble(cannon: CannonObject) {
         guard !gameOver else {
             return
         }
         let nextBubbleType = getNextBubbleType()
-        let newBubble = renderEngine.renderBubble(bubbleType: nextBubbleType)
+        let newBubble = renderEngine.renderBubble(cannon: cannon, bubbleType: nextBubbleType)
         gameBubbles.insert(newBubble)
+
         cannon.loadBubble(newBubble)
+    }
+
+    /// Logic to fire a bubble towards `fireTowards`
+    func fireBubble(fireTowards: CGPoint) {
+        guard fireTowards.y < renderEngine.firingPosition.y else {
+            // Only allow the user to launch bubbles upwards.
+            return
+        }
+        let firingCannon = renderEngine.setCannonAngle(fireTowards)
+        guard !gameOver else {
+            return
+        }
+        /// 0.5 is half of animation time
+        /// TODO: Refactor 0.25 to be in constant file.
+        DispatchQueue.main.asyncAfter(wallDeadline: .now() + 0.25) {
+            firingCannon.fireBubble()
+        }
+    }
+
+    /// Logic to determine next bubble
+    // TODO: Only generate bubbles that is in game
+    private func getNextBubbleType() -> BubbleType {
+        return Bubble.getRandomBubble()
     }
 
     func setupLevel(level: LevelGame) {
@@ -70,32 +100,6 @@ public class GameEngine {
             generatedBubble.setTopLeftPointToCenter(topLeftPoint: currPos)
         }
         dropNonAttachedBubbles()
-    }
-
-    /// Logic to fire a bubble towards `fireTowards`
-    func fireBubble(fireTowards: CGPoint) {
-        let newAngle = physicsEngine.getBearing(startPoint: renderEngine.firingPosition, endPoint: fireTowards)
-        guard fireTowards.y < renderEngine.firingPosition.y else {
-            // Only allow the user to launch bubbles upwards.
-            return
-        }
-        cannon.setAngle(newAngle)
-        renderEngine.setAngle(angle: newAngle)
-        guard !gameOver else {
-            return
-        }
-        renderEngine.animateCannon()
-        /// 0.5 is half of animation time
-        /// TODO: Refactor 0.25 to be in constant file.
-        DispatchQueue.main.asyncAfter(wallDeadline: .now() + 0.25) {
-            self.cannon.fireBubble()
-        }
-    }
-
-    /// Logic to determine next bubble
-    // TODO: Only generate bubbles that is in game
-    private func getNextBubbleType() -> BubbleType {
-        return Bubble.getRandomBubble()
     }
 
     /// Check for collision with obstacles. If collision occur, execute obstacle action.

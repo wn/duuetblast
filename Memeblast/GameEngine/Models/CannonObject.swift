@@ -7,10 +7,10 @@
 //
 import CoreGraphics
 
-class CannonObject: GameObject {
+public class CannonObject: GameObject {
 
     private var firingBubble: GameBubble?
-    private var angle: CGFloat = 0
+    var angle: CGFloat = 0
     private weak var delegate: GameEngine?
 
     private static let firingVelocity: CGFloat = 1500
@@ -33,8 +33,8 @@ class CannonObject: GameObject {
         bubbleToFire.setVelocity(speed: CannonObject.firingVelocity, angle: angle)
         firingBubble = nil
         delegate?.movingFiringBubble(bubbleToFire)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            self.delegate?.generateFiringBubble()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+            self.delegate?.generateFiringBubble(cannon: self)
         }
     }
 
