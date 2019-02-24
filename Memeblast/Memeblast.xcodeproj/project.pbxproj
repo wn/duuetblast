@@ -20,7 +20,7 @@
 		EB276CDA21FDE17500C23E9C /* Bubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB276CD921FDE17500C23E9C /* Bubble.swift */; };
 		EB342BA422044FBC004537E5 /* GameBubbleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB342BA322044FBC004537E5 /* GameBubbleCollectionViewCell.swift */; };
 		EB342BA622044FCC004537E5 /* PaletteBubbleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB342BA522044FCC004537E5 /* PaletteBubbleCollectionViewCell.swift */; };
-		EB342BA9220584C3004537E5 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB342BA8220584C3004537E5 /* GridLayout.swift */; };
+		EB342BA9220584C3004537E5 /* IsometricViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB342BA8220584C3004537E5 /* IsometricViewLayout.swift */; };
 		EB5A1C4B2206ABFA005F1DA1 /* PaletteBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A1C4A2206ABFA005F1DA1 /* PaletteBubble.swift */; };
 		EB5A1C4D2206AD02005F1DA1 /* GridBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A1C4C2206AD02005F1DA1 /* GridBubble.swift */; };
 		EB5A1C4F2206AD5D005F1DA1 /* PaletteBubbles.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A1C4E2206AD5D005F1DA1 /* PaletteBubbles.swift */; };
@@ -45,7 +45,11 @@
 		EB8B3866221962CE00E1CD5A /* Acceleration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B3865221962CE00E1CD5A /* Acceleration.swift */; };
 		EB8B38692219636600E1CD5A /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B38682219636600E1CD5A /* Vector.swift */; };
 		EB8B386E221AD6FC00E1CD5A /* GameEngine+DropLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B386D221AD6FC00E1CD5A /* GameEngine+DropLogic.swift */; };
-		EB8B3870221BDBF500E1CD5A /* GameLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B386F221BDBF500E1CD5A /* GameLayout.swift */; };
+		EB8B3870221BDBF500E1CD5A /* IsometricLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B386F221BDBF500E1CD5A /* IsometricLayout.swift */; };
+		EB9AE2A62222CE0A009BC786 /* GameLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9AE2A52222CE0A009BC786 /* GameLayout.swift */; };
+		EB9AE2A82222CF07009BC786 /* RectLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9AE2A72222CF07009BC786 /* RectLayout.swift */; };
+		EB9AE2AA2222D408009BC786 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9AE2A92222D408009BC786 /* GridLayout.swift */; };
+		EB9AE2AE2222DA86009BC786 /* RectViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9AE2AD2222DA86009BC786 /* RectViewLayout.swift */; };
 		EB9DB725220D929100241AB1 /* GridBubbleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DB724220D929100241AB1 /* GridBubbleData.swift */; };
 		EBCD31FE2206066B0003EF8E /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCD31FD2206066B0003EF8E /* Level.swift */; };
 /* End PBXBuildFile section */
@@ -87,7 +91,7 @@
 		EB276CD921FDE17500C23E9C /* Bubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bubble.swift; sourceTree = "<group>"; };
 		EB342BA322044FBC004537E5 /* GameBubbleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBubbleCollectionViewCell.swift; sourceTree = "<group>"; };
 		EB342BA522044FCC004537E5 /* PaletteBubbleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteBubbleCollectionViewCell.swift; sourceTree = "<group>"; };
-		EB342BA8220584C3004537E5 /* GridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
+		EB342BA8220584C3004537E5 /* IsometricViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsometricViewLayout.swift; sourceTree = "<group>"; };
 		EB5A1C4A2206ABFA005F1DA1 /* PaletteBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteBubble.swift; sourceTree = "<group>"; };
 		EB5A1C4C2206AD02005F1DA1 /* GridBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridBubble.swift; sourceTree = "<group>"; };
 		EB5A1C4E2206AD5D005F1DA1 /* PaletteBubbles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteBubbles.swift; sourceTree = "<group>"; };
@@ -112,7 +116,11 @@
 		EB8B3865221962CE00E1CD5A /* Acceleration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Acceleration.swift; sourceTree = "<group>"; };
 		EB8B38682219636600E1CD5A /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
 		EB8B386D221AD6FC00E1CD5A /* GameEngine+DropLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameEngine+DropLogic.swift"; sourceTree = "<group>"; };
-		EB8B386F221BDBF500E1CD5A /* GameLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLayout.swift; sourceTree = "<group>"; };
+		EB8B386F221BDBF500E1CD5A /* IsometricLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsometricLayout.swift; sourceTree = "<group>"; };
+		EB9AE2A52222CE0A009BC786 /* GameLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLayout.swift; sourceTree = "<group>"; };
+		EB9AE2A72222CF07009BC786 /* RectLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectLayout.swift; sourceTree = "<group>"; };
+		EB9AE2A92222D408009BC786 /* GridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
+		EB9AE2AD2222DA86009BC786 /* RectViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectViewLayout.swift; sourceTree = "<group>"; };
 		EB9DB724220D929100241AB1 /* GridBubbleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridBubbleData.swift; sourceTree = "<group>"; };
 		EBCD31FD2206066B0003EF8E /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -218,8 +226,10 @@
 		EB342BA722058498004537E5 /* Layouts */ = {
 			isa = PBXGroup;
 			children = (
-				EB342BA8220584C3004537E5 /* GridLayout.swift */,
-				EB8B386F221BDBF500E1CD5A /* GameLayout.swift */,
+				EB9AE2AC2222DA77009BC786 /* Rect */,
+				EB9AE2AB2222DA6F009BC786 /* Isometric */,
+				EB9AE2A52222CE0A009BC786 /* GameLayout.swift */,
+				EB9AE2A92222D408009BC786 /* GridLayout.swift */,
 			);
 			path = Layouts;
 			sourceTree = "<group>";
@@ -263,7 +273,6 @@
 		EB5A1C6E22070E94005F1DA1 /* Bubbles */ = {
 			isa = PBXGroup;
 			children = (
-				EB342BA722058498004537E5 /* Layouts */,
 				EB276CD921FDE17500C23E9C /* Bubble.swift */,
 				EB5A1C6A22070601005F1DA1 /* BubbleType.swift */,
 			);
@@ -353,6 +362,7 @@
 			isa = PBXGroup;
 			children = (
 				EB8B3873221D138200E1CD5A /* Level */,
+				EB342BA722058498004537E5 /* Layouts */,
 				EB5A1C6E22070E94005F1DA1 /* Bubbles */,
 			);
 			path = Game;
@@ -365,6 +375,24 @@
 				EB8B38562211635D00E1CD5A /* LevelGame.swift */,
 			);
 			path = Level;
+			sourceTree = "<group>";
+		};
+		EB9AE2AB2222DA6F009BC786 /* Isometric */ = {
+			isa = PBXGroup;
+			children = (
+				EB342BA8220584C3004537E5 /* IsometricViewLayout.swift */,
+				EB8B386F221BDBF500E1CD5A /* IsometricLayout.swift */,
+			);
+			path = Isometric;
+			sourceTree = "<group>";
+		};
+		EB9AE2AC2222DA77009BC786 /* Rect */ = {
+			isa = PBXGroup;
+			children = (
+				EB9AE2A72222CF07009BC786 /* RectLayout.swift */,
+				EB9AE2AD2222DA86009BC786 /* RectViewLayout.swift */,
+			);
+			path = Rect;
 			sourceTree = "<group>";
 		};
 		EBCD31FF2206A6980003EF8E /* Model */ = {
@@ -545,13 +573,17 @@
 				EB9DB725220D929100241AB1 /* GridBubbleData.swift in Sources */,
 				EB8B3866221962CE00E1CD5A /* Acceleration.swift in Sources */,
 				EB5A1C6B22070601005F1DA1 /* BubbleType.swift in Sources */,
-				EB8B3870221BDBF500E1CD5A /* GameLayout.swift in Sources */,
+				EB8B3870221BDBF500E1CD5A /* IsometricLayout.swift in Sources */,
 				EB5A1C4D2206AD02005F1DA1 /* GridBubble.swift in Sources */,
 				EB8B386E221AD6FC00E1CD5A /* GameEngine+DropLogic.swift in Sources */,
+				EB9AE2A82222CF07009BC786 /* RectLayout.swift in Sources */,
 				EB0F2ACF2208B42B000A5770 /* SelectLevelViewController.swift in Sources */,
 				EB0F292C2202C2DF000EC7D6 /* BubbleCollectionViewCell.swift in Sources */,
-				EB342BA9220584C3004537E5 /* GridLayout.swift in Sources */,
+				EB9AE2A62222CE0A009BC786 /* GameLayout.swift in Sources */,
+				EB9AE2AA2222D408009BC786 /* GridLayout.swift in Sources */,
+				EB342BA9220584C3004537E5 /* IsometricViewLayout.swift in Sources */,
 				EB8B384C2210301A00E1CD5A /* PhysicsEngine.swift in Sources */,
+				EB9AE2AE2222DA86009BC786 /* RectViewLayout.swift in Sources */,
 				EB276CAC21FDD07900C23E9C /* AppDelegate.swift in Sources */,
 				EB8B3850221043C000E1CD5A /* GameObject.swift in Sources */,
 			);

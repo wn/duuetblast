@@ -19,6 +19,7 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate {
     let gameBubbleCellIdentifier = "gameBubbleCell"
 
     var currentLevel = LevelGame(rows: Settings.numberOfRow, col: Settings.numberOfColumns, fillType: .empty)
+    let gameLayout = IsometricLayout(rows: Settings.numberOfRow, firstRowCol: Settings.numberOfColumns, secondRowCol: Settings.numberOfColumns)
     let paletteBubbles = PaletteBubbles()
 
     var levelName: String?
@@ -27,7 +28,7 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         loadBackground()
 
-        guard let layout = gameBubbleCollection?.collectionViewLayout as? GridLayout else {
+        guard let layout = gameBubbleCollection?.collectionViewLayout as? IsometricViewLayout else {
             fatalError("There should be a layout for gameBubbleCollection!")
         }
 
@@ -62,21 +63,51 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate {
 
     @IBAction func startGame(_ sender: UIButton) {
         if !currentLevel.isEmpty {
-            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let levelSelectorController =
-                storyBoard.instantiateViewController(
-                    withIdentifier: "gameEngine")
-                    as! GameEngineViewController
-            levelSelectorController.loadedLevel = currentLevel.clone()
-            self.present(levelSelectorController, animated: true, completion: nil)
+            if haveBubbleConnectedToTopWall {
+                transitToGame()
+            } else {
+                noFirstRowAlert()
+            }
         } else {
-            let alert = UIAlertController(
-                title: "Empty grid",
-                message: "Whachu tryna do with empty?",
-                preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Sorry boss", style: .default, handler: nil))
-            self.present(alert, animated: true)
+            emptyGridAlert()
         }
+    }
+
+    var haveBubbleConnectedToTopWall: Bool {
+        for index in gameLayout.getRowIndexes(0) {
+            if !currentLevel.isEmptyAtIndex(index: index) {
+                return true
+            }
+        }
+        return false
+    }
+
+    private func emptyGridAlert() {
+        let alert = UIAlertController(
+            title: "Empty grid",
+            message: "Whachu tryna do with empty?",
+            preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Sorry boss", style: .default, handler: nil))
+        self.present(alert, animated: true)
+    }
+
+    private func noFirstRowAlert() {
+        let alert = UIAlertController(
+            title: "First row cannot be empty",
+            message: "If the first row is empty, the game will end immediately.",
+            preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Sorry boss", style: .default, handler: nil))
+        self.present(alert, animated: true)
+    }
+
+    private func transitToGame() {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let levelSelectorController =
+            storyBoard.instantiateViewController(
+                withIdentifier: "gameEngine")
+                as! GameEngineViewController
+        levelSelectorController.loadedLevel = currentLevel.clone()
+        self.present(levelSelectorController, animated: true, completion: nil)
     }
 
     /// Button to save current level.

@@ -27,7 +27,7 @@
                                             <collectionView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gQf-dM-KDF">
                                                 <rect key="frame" x="0.0" y="0.0" width="834" height="920"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <collectionViewLayout key="collectionViewLayout" id="njm-6d-8We" customClass="GridLayout" customModule="Memeblast" customModuleProvider="target"/>
+                                                <collectionViewLayout key="collectionViewLayout" id="njm-6d-8We" customClass="IsometricViewLayout" customModule="Memeblast" customModuleProvider="target"/>
                                                 <cells>
                                                     <collectionViewCell autoresizesSubviews="NO" opaque="NO" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="gameBubbleCell" id="J0I-SK-Ywb" customClass="GameBubbleCollectionViewCell" customModule="Memeblast" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="203" height="152"/>
@@ -216,10 +216,14 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="OfC-EE-FNY">
                                         <rect key="frame" x="0.0" y="0.0" width="834" height="1150"/>
                                         <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QiX-oP-jb2">
+                                                <rect key="frame" x="0.0" y="0.0" width="834" height="115"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.50489619006849318" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </view>
                                             <collectionView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JxS-TL-u5k">
-                                                <rect key="frame" x="0.0" y="0.0" width="834" height="690"/>
+                                                <rect key="frame" x="0.0" y="115" width="834" height="977.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <collectionViewLayout key="collectionViewLayout" id="GgO-mi-24M" customClass="GridLayout" customModule="Memeblast" customModuleProvider="target"/>
+                                                <collectionViewLayout key="collectionViewLayout" id="PDU-cs-ZGd" customClass="IsometricViewLayout" customModule="Memeblast" customModuleProvider="target"/>
                                                 <cells>
                                                     <collectionViewCell autoresizesSubviews="NO" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="gameEngineBubbleCell" id="I0P-LC-BoZ" customClass="GameEngineBubbleCollectionViewCell" customModule="Memeblast" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="203" height="152"/>
@@ -229,7 +233,7 @@
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3fv-im-cw8">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="203" height="0.0"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="203" height="294.5"/>
                                                                 </imageView>
                                                             </subviews>
                                                         </view>
@@ -250,16 +254,11 @@
                                                     <outlet property="delegate" destination="qp4-rh-UbL" id="T3u-Xw-hQ0"/>
                                                 </connections>
                                             </collectionView>
-                                            <view opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZSY-RB-LD9">
-                                                <rect key="frame" x="0.0" y="690" width="834" height="172.5"/>
-                                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <viewLayoutGuide key="safeArea" id="pqb-G1-3SN"/>
-                                            </view>
                                             <stackView clearsContextBeforeDrawing="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="7GF-Uh-9gJ">
-                                                <rect key="frame" x="0.0" y="862.5" width="834" height="287.5"/>
+                                                <rect key="frame" x="0.0" y="1092.5" width="834" height="57.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9SK-Es-Riw">
-                                                        <rect key="frame" x="0.0" y="0.0" width="417" height="287.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="417" height="57.5"/>
                                                         <color key="backgroundColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                         <state key="normal" title="BACK">
@@ -270,7 +269,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pQD-GQ-Afi">
-                                                        <rect key="frame" x="417" y="0.0" width="417" height="287.5"/>
+                                                        <rect key="frame" x="417" y="0.0" width="417" height="57.5"/>
                                                         <color key="backgroundColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                         <state key="normal" title="RESTART">
@@ -286,14 +285,14 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="JxS-TL-u5k" firstAttribute="height" secondItem="OfC-EE-FNY" secondAttribute="height" multiplier="0.6" id="6hr-E4-of1"/>
+                                            <constraint firstItem="JxS-TL-u5k" firstAttribute="height" secondItem="OfC-EE-FNY" secondAttribute="height" multiplier="0.85" id="6hr-E4-of1"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="OfC-EE-FNY" secondAttribute="bottom" id="1Vl-pi-M8c"/>
-                                    <constraint firstItem="ZSY-RB-LD9" firstAttribute="height" secondItem="9Ik-yq-zvt" secondAttribute="height" multiplier="0.15" id="QWx-Do-xfP"/>
+                                    <constraint firstItem="QiX-oP-jb2" firstAttribute="height" secondItem="9Ik-yq-zvt" secondAttribute="height" multiplier="0.1" id="POE-Cr-E35"/>
                                     <constraint firstItem="OfC-EE-FNY" firstAttribute="leading" secondItem="9Ik-yq-zvt" secondAttribute="leading" id="S68-q6-4Eb"/>
                                     <constraint firstItem="OfC-EE-FNY" firstAttribute="top" secondItem="9Ik-yq-zvt" secondAttribute="top" id="nhU-af-wSy"/>
                                     <constraint firstAttribute="trailing" secondItem="OfC-EE-FNY" secondAttribute="trailing" id="q67-bb-bJf"/>
@@ -310,8 +309,8 @@
                         <viewLayoutGuide key="safeArea" id="KHz-NF-6uZ"/>
                     </view>
                     <connections>
-                        <outlet property="firingArea" destination="ZSY-RB-LD9" id="xDX-Fq-bfY"/>
                         <outlet property="gameBubbleCollection" destination="JxS-TL-u5k" id="OTD-J9-PKz"/>
+                        <outlet property="statusView" destination="QiX-oP-jb2" id="jyg-4e-GNe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S3X-4j-4Zd" userLabel="First Responder" sceneMemberID="firstResponder"/>

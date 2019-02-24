@@ -13,14 +13,16 @@ public class RenderEngine {
 
     private var gameplayArea: UIView
     private lazy var cannonView: CannonView = CannonView(position: firingPosition, superView: gameplayArea)
+    let firingPosition: CGPoint
 
     private var gameEngine: GameEngine
 
     internal var gameBubblesView: [GameBubble: GameBubbleView] = [:]
 
-    init(gameEngine: GameEngine, gameplayArea: UIView, gameoverHeight: CGFloat) {
+    init(gameEngine: GameEngine, gameplayArea: UIView, gameoverHeight: CGFloat, firingPosition: CGPoint) {
         self.gameEngine = gameEngine
         self.gameplayArea = gameplayArea
+        self.firingPosition = firingPosition
         diameter = gameEngine.bubbleDiameter
         cannonView.render()
         renderGameLine(height: gameoverHeight)
@@ -50,7 +52,12 @@ public class RenderEngine {
             diameter: diameter)
         gameBubblesView[bubble] = newBubbleView
         gameplayArea.addSubview(newBubbleView.imageView)
+        gameplayArea.sendSubviewToBack(newBubbleView.imageView)
         return bubble
+    }
+
+    func animateCannon() {
+        cannonView.animate()
     }
 
     public func renderFallingBubble(bubble: GameBubble, topLeftPosition: CGPoint) {
@@ -88,12 +95,6 @@ public class RenderEngine {
 
     public func setAngle(angle: CGFloat) {
         cannonView.rotateAngle(angle)
-    }
-
-    public var firingPosition: CGPoint {
-        let xCoordinate = gameplayArea.frame.width / 2
-        let yCoordinate = gameplayArea.frame.height - gameBubbleRadius
-        return CGPoint(x: xCoordinate, y: yCoordinate)
     }
 
     private var gameplayWidth: CGFloat {

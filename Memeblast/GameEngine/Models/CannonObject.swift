@@ -25,17 +25,15 @@ class CannonObject: GameObject {
 
     func fireBubble() {
         guard let bubbleToFire = firingBubble else {
-            print(1)
             return
         }
         guard delegate?.collidedBubble(bubbleToFire) == nil else {
-            print(2)
             return
         }
         bubbleToFire.setVelocity(speed: CannonObject.firingVelocity, angle: angle)
         firingBubble = nil
         delegate?.movingFiringBubble(bubbleToFire)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.delegate?.generateFiringBubble()
         }
     }

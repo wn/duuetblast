@@ -10,7 +10,8 @@ import UIKit
 
 class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
 
-    @IBOutlet private var firingArea: UIView!
+    @IBOutlet private var statusView: UIView!
+
     @IBOutlet private var gameBubbleCollection: UICollectionView!
 
     private let gameEngineBubbleCellIdentifier = "gameEngineBubbleCell"
@@ -18,14 +19,14 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
 
     var loadedLevel: LevelGame?
 
-    let gridLayout = GameLayout(rows: Settings.numberOfRow, firstRowCol: Settings.numberOfColumns, secondRowCol: Settings.numberOfColumns - 1)
+    let gameLayout = IsometricLayout(rows: Settings.numberOfRow, firstRowCol: Settings.numberOfColumns, secondRowCol: Settings.numberOfColumns - 1)
 
     lazy private var gameEngine = GameEngine(
         gameplayArea: gameBubbleCollection,
         radius: bubbleRadius,
         firingPosition: firingPosition,
         gameoverLine: gameoverLine,
-        gameLayout: gridLayout)
+        gameLayout: gameLayout)
 
     private var gameoverLine: CGFloat {
         let numOfGridBubbles = gameBubbleCollection.numberOfItems(inSection: 0)
@@ -40,7 +41,7 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         loadBackground()
 
-        guard let layout = gameBubbleCollection?.collectionViewLayout as? GridLayout else {
+        guard let layout = gameBubbleCollection?.collectionViewLayout as? IsometricViewLayout else {
             fatalError("There should be a layout for gameBubbleCollection!")
         }
         layout.delegate = self
@@ -97,7 +98,7 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
         setupLevel(level: loadedLevel)
         gameEngine.setupLevel(level: loadedLevel.clone())
         gameEngine.generateFiringBubble()
-        for index in 0..<gridLayout.totalNumberOfBubble {
+        for index in 0..<gameLayout.totalNumberOfBubble {
             // Apparently reloadData doesn't work here.
             reload(index: index)
         }

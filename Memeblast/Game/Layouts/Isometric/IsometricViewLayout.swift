@@ -8,29 +8,7 @@
 
 import UIKit
 
-protocol GridLayoutDelegate: class {
-    func getHeightOfGameArea() -> CGFloat
-}
-
-class GridLayout: UICollectionViewLayout {
-    weak var delegate: GridLayoutDelegate!
-
-    fileprivate var cache = [UICollectionViewLayoutAttributes]()
-
-    fileprivate var contentHeight: CGFloat = 0
-
-    fileprivate var contentWidth: CGFloat {
-        guard let collectionView = collectionView else {
-            return 0
-        }
-        let insets = collectionView.contentInset
-        return collectionView.bounds.width - (insets.left + insets.right)
-    }
-
-    override var collectionViewContentSize: CGSize {
-        return CGSize(width: contentWidth, height: contentHeight)
-    }
-
+class IsometricViewLayout: GridLayout {
     override func prepare() {
         func addFrameToAttributeAndCache(frame: CGRect, indexPath: IndexPath) {
             let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
@@ -93,22 +71,5 @@ class GridLayout: UICollectionViewLayout {
             add(xCoordinates: xOffsetOdd, yCoordinate: yCoordinate)
             add(xCoordinates: xOffsetEven, yCoordinate: yCoordinate)
         }
-    }
-
-    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-
-        var visibleLayoutAttributes = [UICollectionViewLayoutAttributes]()
-
-        // Loop through the cache and look for items in the rect
-        for attributes in cache {
-            if attributes.frame.intersects(rect) {
-                visibleLayoutAttributes.append(attributes)
-            }
-        }
-        return visibleLayoutAttributes
-    }
-
-    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        return cache[indexPath.item]
     }
 }

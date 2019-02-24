@@ -17,16 +17,18 @@ class CannonView {
         self.firingPosition = position
         //let image = UIImage(named: "cannon.png")
         let image = CannonView.cannonSpriteBase
-        let imageFrame = CGRect(x: 0, y: 0, width: CannonView.cannonSpriteWidth, height: CannonView.cannonSpriteHeight)
+        let imageFrame = CGRect(x: 0, y: 0, width: 100, height: 200)
         imageView = UIImageView(frame: imageFrame)
         imageView.image = image
 
         imageView.animationImages = CannonView.cannonSpriteAnimationSet
+        imageView.animationDuration = 0.5
         imageView.animationRepeatCount = 1
 
         rotatedAngle = 0
         imageView.transform = CGAffineTransform(rotationAngle: rotatedAngle)
         superView.addSubview(imageView)
+        superView.bringSubviewToFront(imageView)
         render()
     }
 
@@ -41,17 +43,21 @@ class CannonView {
         imageView.frame.origin = topLeftOfCannon
     }
 
+    func animate() {
+        self.imageView.startAnimating()
+    }
+
     var topLeftOfCannon: CGPoint {
-        let xCoordinate = firingPosition.x - CannonView.cannonSpriteWidth / 2
-        let yCoordinate = firingPosition.y - CannonView.cannonSpriteHeight / 2
+        let xCoordinate = firingPosition.x - imageView.frame.width / 2
+        let yCoordinate = firingPosition.y - imageView.frame.height / 2
         return CGPoint(x: xCoordinate, y: yCoordinate)
     }
 
     static let cannonSpriteRows = 2
     static let cannonSpriteCols = 6
     static let cannonSprite = #imageLiteral(resourceName: "cannon").cgImage!
-    static let cannonSpriteWidth = CGFloat(cannonSprite.width / cannonSpriteCols)
-    static let cannonSpriteHeight = CGFloat(cannonSprite.height / cannonSpriteRows)
+    static let cannonSpriteWidth = CGFloat(cannonSprite.width) / CGFloat(cannonSpriteCols)
+    static let cannonSpriteHeight = CGFloat(cannonSprite.height) / CGFloat(cannonSpriteRows)
     static let cannonSpriteSize = CGSize(width: cannonSpriteWidth,
                                          height: cannonSpriteHeight)
     static let cannonSpriteBase = UIImage(cgImage: cannonSprite.cropping(to:

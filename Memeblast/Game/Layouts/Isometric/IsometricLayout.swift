@@ -6,7 +6,7 @@
 //  Copyright © 2019 nus.cs3217.a0164178x. All rights reserved.
 //
 
-struct GameLayout {
+struct IsometricLayout: GameLayout {
     let numberOfRows: Int
     let numberOfColInFirstRow: Int
     let numberOfColInSecondRow: Int
@@ -58,13 +58,11 @@ struct GameLayout {
         guard index >= 0 && index < totalNumberOfBubble else {
             return []
         }
-        let firstRow = 12
-        let secondRow = firstRow - 1
-        let loop = [firstRow, secondRow]
+        let loop = [numberOfColInFirstRow, numberOfColInSecondRow]
         var currIndex = 0
         for rowNumber in 0..<numberOfRows {
             let numOfBubblesInRow = loop[rowNumber % 2]
-            if index > currIndex && index < currIndex + numOfBubblesInRow {
+            if index >= currIndex && index < currIndex + numOfBubblesInRow {
                 return Array(currIndex..<(currIndex + numOfBubblesInRow))
             }
             currIndex += numOfBubblesInRow
