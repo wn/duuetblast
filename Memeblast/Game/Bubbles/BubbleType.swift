@@ -6,7 +6,7 @@
  - Date: 27/1/19
  */
 
-public enum BubbleType: Int {
+public enum BubbleType: Int, CaseIterable {
     case red = 0
     case blue = 1
     case orange = 2
@@ -30,30 +30,33 @@ public enum BubbleType: Int {
         return bubbleType
     }
 
-    var imageUrl: String {
+    var isNormalBubble: Bool {
         switch self {
-        case .red:
-            return "bubble-red.png"
-        case .blue:
-            return "bubble-blue.png"
-        case .orange:
-            return "bubble-orange.png"
-        case .green:
-            return "bubble-green.png"
-        case .empty:
-            return "bubble-grey.png"
-        case .erase:
-            return "erase.png"
-        case .bomb:
-            return "bubble-bomb.png"
-        case .indestructible:
-            return "bubble-indestructible.png"
-        case .star:
-            return "bubble-star.png"
-        case .lightning:
-            return "bubble-lightning.png"
-        case .invisible:
-            return "bubble-transluent_white.png"
+        case .red, .blue, .green, .orange:
+            return true
+        default:
+            return false
         }
+    }
+
+    var isPowerBubble: Bool {
+        switch self {
+        case .bomb, .lightning, .star, .indestructible:
+            return true
+        default:
+            return false
+        }
+    }
+
+    static var getNormalBubbles: [BubbleType] {
+        return BubbleType.allCases.filter { $0.isNormalBubble }
+    }
+
+    static var getSpecialBubbles: [BubbleType] {
+        return BubbleType.allCases.filter { $0.isPowerBubble }
+    }
+
+    static var getAllPaletteBubbles: [BubbleType] {
+        return BubbleType.allCases.filter { $0.isNormalBubble || $0.isPowerBubble }
     }
 }

@@ -8,15 +8,15 @@
 import UIKit
 import CoreData
 
-class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate {
+class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate, BubbleRenderer {
     @IBOutlet private var gameArea: UIView!
     @IBOutlet private var paletteViewArea: UIView!
 
-    var isDualCannon = true
-
-    @IBAction func dualCannon(_ sender: UIButton) {
-        isDualCannon = !isDualCannon
+    var dualCannon: Bool {
+        return isDualCannon.isOn
     }
+
+    @IBOutlet var isDualCannon: UISwitch!
 
     @IBOutlet private var colorSelectorCollection: UICollectionView!
     let paletteCellIdentifier = "paletteSelectorBubbleCell"
@@ -113,7 +113,7 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate {
                 withIdentifier: "gameEngine")
                 as! GameEngineViewController
         gameEngineController.loadedLevel = currentLevel.clone()
-        gameEngineController.isDualCannon = isDualCannon
+        gameEngineController.isDualCannon = dualCannon
         self.present(gameEngineController, animated: true, completion: nil)
     }
 
@@ -139,7 +139,13 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate {
             }
 
             alert.addAction(UIAlertAction(title: "Save", style: .default) { _ in
-                let levelName = alert.textFields?.first?.text ??  ""
+                var levelName = alert.textFields?.first?.text ??  ""
+                while levelName.hasPrefix(" ") {
+                    levelName = String(levelName.dropFirst())
+                }
+                while levelName.hasSuffix(" ") {
+                    levelName = String(levelName.dropLast())
+                }
                 self.saveAndAlert(levelName: levelName)
             })
             self.present(alert, animated: true)
@@ -220,9 +226,7 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate {
         currentLevel.saveGridBubblesToDatabase(name: levelName)
         do {
             try context.save()
-            confirmAlert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-                self.presentLevelSelector()
-            })
+            confirmAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.levelName = levelName
         } catch {
             title = "Saving failed"
@@ -380,7 +384,7 @@ extension LevelDesignViewController: UICollectionViewDataSource, UICollectionVie
                 for: indexPath as IndexPath)
                 as! PaletteBubbleCollectionViewCell
             let selectedPaletteBubble = paletteBubbles.getBubbleAtIndex(index: indexPath.item)
-            cell.setupImage(imageUrl: selectedPaletteBubble.imageUrl, isSelected: selectedPaletteBubble.isSelected)
+            cell.setupImage(imageUrl: getBubbleTypePath(type: selectedPaletteBubble.bubbleType), isSelected: selectedPaletteBubble.isSelected)
             return cell
         case gameBubbleCollection:
             let cell = collectionView.dequeueReusableCell(
@@ -388,10 +392,43 @@ extension LevelDesignViewController: UICollectionViewDataSource, UICollectionVie
                 for: indexPath as IndexPath)
                 as! GameBubbleCollectionViewCell
             let bubbleType = currentLevel.getBubbleTypeAtIndex(index: indexPath.item)
-            cell.setImage(imageUrl: bubbleType.imageUrl)
+            cell.setImage(imageUrl: getBubbleTypePath(type: bubbleType))
             return cell
         default:
             fatalError("There should only be two collectionView.")
+        }
+    }
+}
+
+protocol BubbleRenderer {
+    
+}
+
+extension BubbleRenderer {
+    func getBubbleTypePath(type: BubbleType) -> String {
+        switch type {
+        case .red:
+            return "bubble-red.png"
+        case .blue:
+            return "bubble-blue.png"
+        case .orange:
+            return "bubble-orange.png"
+        case .green:
+            return "bubble-green.png"
+        case .empty:
+            return "bubble-grey.png"
+        case .erase:
+            return "erase.png"
+        case .bomb:
+            return "bubble-bomb.png"
+        case .indestructible:
+            return "bubble-indestructible.png"
+        case .star:
+            return "bubble-star.png"
+        case .lightning:
+            return "bubble-lightning.png"
+        case .invisible:
+            return "bubble-transluent_white.png"
         }
     }
 }

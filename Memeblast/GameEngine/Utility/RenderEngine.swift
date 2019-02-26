@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class RenderEngine {
+public class RenderEngine: BubbleRenderer {
     private let diameter: CGFloat
 
     private var gameplayArea: UIView
@@ -51,7 +51,6 @@ public class RenderEngine {
             cannonsView.append(newView)
             newView.render()
         }
-        print(gameplayArea.subviews)
     }
 
     func rerenderCannon(_ cannon: CannonObject) {
@@ -106,11 +105,11 @@ public class RenderEngine {
         let bubble = GameBubble(position: firePosition, diameter: diameter, type: bubbleType)
         let newBubbleView = GameBubbleView(
             position: firePosition,
-            imageURL: bubbleType.imageUrl,
+            imageURL: getBubbleTypePath(type: bubbleType),
             diameter: diameter)
         gameBubblesView[bubble] = newBubbleView
         gameplayArea.addSubview(newBubbleView.imageView)
-        gameplayArea.bringSubviewToFront(newBubbleView.imageView)
+        gameplayArea.sendSubviewToBack(newBubbleView.imageView)
         return bubble
     }
 
@@ -130,7 +129,7 @@ public class RenderEngine {
         let bubbleType = bubble.bubbleType
         let newBubbleView = GameBubbleView(
             position: bubble.position,
-            imageURL: bubbleType.imageUrl,
+            imageURL: getBubbleTypePath(type: bubbleType),
             diameter: diameter)
         newBubbleView.fadedBubble()
         gameBubblesView[bubble] = newBubbleView

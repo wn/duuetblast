@@ -18,11 +18,12 @@ class GridBubble: Bubble {
 
     /// Get next bubble in cycle, used for singleTapForGameBubble gesture.
     public func cycleNextColor() {
-        guard let currentBubbleTypeIndex = Bubble.playableBubbles.firstIndex(of: bubbleType) else {
+        let normalBubbles = BubbleType.getNormalBubbles
+        guard let currentBubbleTypeIndex = normalBubbles.firstIndex(of: bubbleType) else {
             return
         }
-        let index = (currentBubbleTypeIndex + 1) % Bubble.playableBubbles.count
-        bubbleType = Bubble.playableBubbles[index]
+        let index = (currentBubbleTypeIndex + 1) % normalBubbles.count
+        bubbleType = normalBubbles[index]
     }
 
     /// Get core data object with bubble data

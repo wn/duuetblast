@@ -11,10 +11,10 @@ class PaletteBubbles {
     private var paletteBubbles: [PaletteBubble] = []
 
     public init() {
-        for color in Bubble.playableBubbles {
+        for color in BubbleType.getNormalBubbles {
             paletteBubbles.append(PaletteBubble(bubbleType: color))
         }
-        for color in Bubble.specialBubbles {
+        for color in BubbleType.getSpecialBubbles {
             paletteBubbles.append(PaletteBubble(bubbleType: color))
         }
         // Add erase button to palette

@@ -10,21 +10,12 @@ import Foundation
 class Bubble {
     var bubbleType: BubbleType
 
-    /// List of all bubbles that is part of the game.
-    public static let playableBubbles: [BubbleType] = [.red, .blue, .orange, .green]
-    public static let specialBubbles: [BubbleType] = [.indestructible, .lightning, .bomb, .star]
-
     internal init(bubbleType: BubbleType) {
         self.bubbleType = bubbleType
     }
-
-    /// Image url to retrieve image of bubble.
-    public var imageUrl: String {
-        return bubbleType.imageUrl
-    }
-
+    
     public static func getRandomBubble() -> BubbleType {
-        guard let randomBubble = Bubble.playableBubbles.randomElement() else {
+        guard let randomBubble = BubbleType.getNormalBubbles.randomElement() else {
             fatalError("There must be a bubble in playableBubbles")
         }
         return randomBubble

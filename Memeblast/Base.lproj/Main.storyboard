@@ -27,16 +27,29 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SYb-kX-rIS">
                                                 <rect key="frame" x="0.0" y="0.0" width="834" height="119.5"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0bh-Th-NsC">
-                                                        <rect key="frame" x="667" y="44" width="88" height="30"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <state key="normal" title="Dual Cannon"/>
-                                                        <connections>
-                                                            <action selector="dualCannon:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZE8-PD-DJp"/>
-                                                        </connections>
-                                                    </button>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cB7-d6-jEo">
+                                                        <rect key="frame" x="667" y="0.0" width="167" height="119.5"/>
+                                                        <subviews>
+                                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yzg-4T-Krz">
+                                                                <rect key="frame" x="59" y="0.0" width="51" height="31"/>
+                                                                <accessibility key="accessibilityConfiguration" label="xxx"/>
+                                                            </switch>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dual Cannon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nzf-4H-m77">
+                                                                <rect key="frame" x="34.5" y="15" width="98" height="104.5"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="cB7-d6-jEo" secondAttribute="trailing" id="0Gq-vW-6nV"/>
+                                                    <constraint firstItem="cB7-d6-jEo" firstAttribute="width" secondItem="SYb-kX-rIS" secondAttribute="width" multiplier="0.2" id="MNw-l8-RBH"/>
+                                                    <constraint firstItem="cB7-d6-jEo" firstAttribute="height" secondItem="SYb-kX-rIS" secondAttribute="height" id="aRu-7B-XMY"/>
+                                                    <constraint firstItem="cB7-d6-jEo" firstAttribute="centerY" secondItem="SYb-kX-rIS" secondAttribute="centerY" id="tWB-4M-XpF"/>
+                                                </constraints>
                                             </view>
                                             <collectionView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gQf-dM-KDF">
                                                 <rect key="frame" x="0.0" y="119.5" width="834" height="805"/>
@@ -210,6 +223,7 @@
                         <outlet property="colorSelectorCollection" destination="ko8-Mi-pGb" id="64T-wE-ZwI"/>
                         <outlet property="gameArea" destination="qit-9o-fzF" id="rub-1u-a0p"/>
                         <outlet property="gameBubbleCollection" destination="gQf-dM-KDF" id="Zmh-fK-igf"/>
+                        <outlet property="isDualCannon" destination="Yzg-4T-Krz" id="AkR-rb-6hf"/>
                         <outlet property="paletteViewArea" destination="wuP-86-MVv" id="6xt-Q2-ywy"/>
                     </connections>
                 </viewController>

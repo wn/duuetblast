@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
+class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate, BubbleRenderer {
     var isDualCannon = false
     @IBOutlet private var statusView: UIView!
 
@@ -172,7 +172,7 @@ extension GameEngineViewController: UICollectionViewDataSource, UICollectionView
                 for: indexPath as IndexPath)
                 as! GameEngineBubbleCollectionViewCell
             let bubbleType = currentLevel.getBubbleTypeAtIndex(index: indexPath.item)
-            cell.setImage(imageUrl: bubbleType.imageUrl)
+        cell.setImage(imageUrl: getBubbleTypePath(type: bubbleType))
             gameBubbleCollection.bringSubviewToFront(cell)
             return cell
     }
