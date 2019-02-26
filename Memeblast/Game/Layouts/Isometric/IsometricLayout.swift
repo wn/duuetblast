@@ -11,10 +11,10 @@ struct IsometricLayout: GameLayout {
     let numberOfColInFirstRow: Int
     let numberOfColInSecondRow: Int
 
-    init(rows: Int, firstRowCol: Int, secondRowCol: Int) {
+    init(rows: Int, firstRowCol: Int) {
         numberOfRows = rows
         numberOfColInFirstRow = firstRowCol
-        numberOfColInSecondRow = secondRowCol
+        numberOfColInSecondRow = firstRowCol - 1
     }
 
     var totalNumberOfBubble: Int {

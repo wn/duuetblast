@@ -10,7 +10,6 @@ import CoreData
 
 class GridBubble: Bubble {
     private let position: Int
-
     public init(bubbleType: BubbleType, index: Int) {
         position = index
         super.init(bubbleType: bubbleType)

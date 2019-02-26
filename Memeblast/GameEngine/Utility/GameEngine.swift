@@ -25,7 +25,6 @@ public class GameEngine {
     private var refreshScreenTime: Double {
         return Double(1) / FPS
     }
-    //let firingPosition: CGPoint
 
     init(
         gameplayArea: UIView,
@@ -48,6 +47,7 @@ public class GameEngine {
             cannons.append(newCannon)
         }
         renderEngine.renderCannon(cannons: cannons)
+
     }
 
     /// Spawn a firing bubble at firing point
@@ -196,6 +196,7 @@ public class GameEngine {
         case .falling:
             if isBubbleOutOfGame(bubble) {
                 renderEngine.derenderBubble(bubble)
+                return
             }
         case .moving:
             collisionWithBubble(bubble: bubble)
@@ -216,11 +217,8 @@ public class GameEngine {
                 dropFiringBubble(bubble: bubble, collidedBubble: collidedBubble)
 
                 activatePower(collidedBubble: collidedBubble, collidee: bubble)
-
                 // Check if winning condition met
-                if wonGame {
-                    winGame()
-                }
+                activateWinningActionIfWin()
                 return
             case .moving:
                 // Guard against multiple collision with the same object
@@ -232,7 +230,7 @@ public class GameEngine {
 
                 collisionLogic(bubbleOne: bubble, bubbleTwo: collidedBubble)
             case .inCannon:
-                break
+                return
             }
         } else {
             bubble.lastCollidedBubble = nil
@@ -241,10 +239,20 @@ public class GameEngine {
     }
 
     var wonGame: Bool {
-        return gameplayBubbles.count == 0
+        for (_, bubble) in gameplayBubbles {
+            let type = bubble.bubbleType
+            if type.isNormalBubble || type.isPowerBubble {
+                return false
+            }
+        }
+        print("WON GAME")
+        return true
     }
 
-    private func winGame() {
+    private func activateWinningActionIfWin() {
+        guard wonGame else {
+            return
+        }
         completedGame(.falling)
         let alert = UIAlertController(title: "YAY YOU WON", message: "WANNA RESTART?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "CONFIRM", style: .default) {
@@ -354,7 +362,7 @@ public class GameEngine {
         bubble.velocity.stop()
 
         // Gravity
-        bubble.acceleration += Acceleration.gravity
+        bubble.acceleration = Acceleration.gravity
         bubble.isFalling = true
         renderEngine.renderFallingBubble(bubble: bubble, topLeftPosition: bubble.position)
         movingFiringBubble(bubble)

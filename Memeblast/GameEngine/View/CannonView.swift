@@ -49,7 +49,7 @@ class CannonView {
 
     var topLeftOfCannon: CGPoint {
         let xCoordinate = firingPosition.x - imageView.frame.width / 2
-        let yCoordinate = firingPosition.y - imageView.frame.height / 2
+        let yCoordinate = firingPosition.y - imageView.frame.height
         return CGPoint(x: xCoordinate, y: yCoordinate)
     }
 

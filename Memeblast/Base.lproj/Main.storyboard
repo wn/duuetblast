@@ -54,7 +54,7 @@
                                             <collectionView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gQf-dM-KDF">
                                                 <rect key="frame" x="0.0" y="119.5" width="834" height="805"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <collectionViewLayout key="collectionViewLayout" id="njm-6d-8We" customClass="IsometricViewLayout" customModule="Memeblast" customModuleProvider="target"/>
+                                                <collectionViewLayout key="collectionViewLayout" id="njm-6d-8We" customClass="RectViewLayout" customModule="Memeblast" customModuleProvider="target"/>
                                                 <cells>
                                                     <collectionViewCell autoresizesSubviews="NO" opaque="NO" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="gameBubbleCell" id="J0I-SK-Ywb" customClass="GameBubbleCollectionViewCell" customModule="Memeblast" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="203" height="152"/>
@@ -252,7 +252,7 @@
                                             <collectionView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JxS-TL-u5k">
                                                 <rect key="frame" x="0.0" y="115" width="834" height="977.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <collectionViewLayout key="collectionViewLayout" id="PDU-cs-ZGd" customClass="IsometricViewLayout" customModule="Memeblast" customModuleProvider="target"/>
+                                                <collectionViewLayout key="collectionViewLayout" id="PDU-cs-ZGd" customClass="GridLayout" customModule="Memeblast" customModuleProvider="target"/>
                                                 <cells>
                                                     <collectionViewCell autoresizesSubviews="NO" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="gameEngineBubbleCell" id="I0P-LC-BoZ" customClass="GameEngineBubbleCollectionViewCell" customModule="Memeblast" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="203" height="152"/>

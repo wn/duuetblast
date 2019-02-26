@@ -58,7 +58,16 @@ extension SelectLevelViewController {
             storyBoard.instantiateViewController(
                 withIdentifier: "levelDesigner")
                 as! LevelDesignViewController
-        self.present(levelDesignerController, animated: true, completion: nil)
+        let alert = UIAlertController(title: "Rectangular OR Isometric?", message: "FUCKING MODULE", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Rectangular", style: .default) { _ in
+            levelDesignerController.isRectGrid = true
+            self.present(levelDesignerController, animated: true, completion: nil)
+        })
+        alert.addAction(UIAlertAction(title: "Isometric", style: .default) { _ in
+            levelDesignerController.isRectGrid = false
+            self.present(levelDesignerController, animated: true, completion: nil)
+        })
+        self.present(alert, animated: true)
     }
 }
 

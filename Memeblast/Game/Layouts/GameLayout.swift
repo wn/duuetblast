@@ -11,7 +11,7 @@ import Foundation
 protocol GameLayout {
     var totalNumberOfBubble: Int {get}
 
-    init(rows: Int, firstRowCol: Int, secondRowCol: Int)
+    init(rows: Int, firstRowCol: Int)
     func getNeighboursAtIndex(_ index: Int) -> [Int]
     func getRowIndexes(_ index: Int) -> [Int]
 }

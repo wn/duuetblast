@@ -6,11 +6,12 @@
         <relationship name="level" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LevelData" inverseName="bubbles" inverseEntity="LevelData" syncable="YES"/>
     </entity>
     <entity name="LevelData" representedClassName=".LevelData" syncable="YES" codeGenerationType="category">
+        <attribute name="isRectGrid" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="levelName" attributeType="String" minValueString="3" maxValueString="20" syncable="YES"/>
         <relationship name="bubbles" toMany="YES" deletionRule="Cascade" destinationEntity="GridBubbleData" inverseName="level" inverseEntity="GridBubbleData" syncable="YES"/>
     </entity>
     <elements>
         <element name="GridBubbleData" positionX="82.625" positionY="20.06640625" width="128" height="90"/>
-        <element name="LevelData" positionX="366.875" positionY="-5.9140625" width="128" height="75"/>
+        <element name="LevelData" positionX="366.875" positionY="-5.9140625" width="128" height="90"/>
     </elements>
 </model>

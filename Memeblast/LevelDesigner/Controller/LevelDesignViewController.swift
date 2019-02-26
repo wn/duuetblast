@@ -12,6 +12,8 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate, 
     @IBOutlet private var gameArea: UIView!
     @IBOutlet private var paletteViewArea: UIView!
 
+    var isRectGrid = false
+
     var dualCannon: Bool {
         return isDualCannon.isOn
     }
@@ -24,8 +26,24 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate, 
     @IBOutlet private var gameBubbleCollection: UICollectionView!
     let gameBubbleCellIdentifier = "gameBubbleCell"
 
-    var currentLevel = LevelGame(rows: Constants.numOfRows, col: Constants.numOfCols, fillType: .empty)
-    let gameLayout = IsometricLayout(rows: Constants.numOfRows, firstRowCol: Constants.numOfCols, secondRowCol: Constants.numOfCols)
+    lazy var currentLevel = LevelGame(totalBubbles: gameLayout.totalNumberOfBubble, fillType: .empty, isRect: isRectGrid)
+    
+    var gameLayout: GameLayout {
+        if isRectGrid {
+        return RectLayout(rows: Constants.numOfRows, firstRowCol: Constants.numOfCols)
+        }
+        return IsometricLayout(rows: Constants.numOfRows, firstRowCol: Constants.numOfCols)
+    }
+
+    var viewLayout: GridLayout {
+        var result: GridLayout = IsometricViewLayout()
+        if isRectGrid {
+            result = RectViewLayout()
+        }
+        result.delegate = self
+        return result
+    }
+
     let paletteBubbles = PaletteBubbles()
 
     var levelName: String?
@@ -34,11 +52,7 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate, 
         super.viewDidLoad()
         loadBackground()
 
-        guard let layout = gameBubbleCollection?.collectionViewLayout as? IsometricViewLayout else {
-            fatalError("There should be a layout for gameBubbleCollection!")
-        }
-
-        layout.delegate = self
+        gameBubbleCollection!.collectionViewLayout = viewLayout
 
         // The following blocks are for adding gestures:
 
@@ -68,15 +82,29 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate, 
     }
 
     @IBAction func startGame(_ sender: UIButton) {
-        if !currentLevel.isEmpty {
-            if haveBubbleConnectedToTopWall {
-                transitToGame()
-            } else {
-                noFirstRowAlert()
-            }
-        } else {
+        guard !currentLevel.isEmpty else {
             emptyGridAlert()
+            return
         }
+        guard haveBubbleConnectedToTopWall else {
+            noFirstRowAlert()
+            return
+        }
+        guard containsPlayableBubble else {
+            noPlayableBubbleAlert()
+            return
+        }
+        transitToGame()
+    }
+
+    var containsPlayableBubble: Bool {
+        for index in 0..<gameLayout.totalNumberOfBubble {
+            let type = currentLevel.getBubbleTypeAtIndex(index: index)
+            if BubbleType.isPlayableBubble(type: type) {
+                return true
+            }
+        }
+        return false
     }
 
     var haveBubbleConnectedToTopWall: Bool {
@@ -106,12 +134,24 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate, 
         self.present(alert, animated: true)
     }
 
+    private func noPlayableBubbleAlert() {
+        let alert = UIAlertController(
+            title: "No playable bubble",
+            message: "There must be a playable bubble. Empty grid or indestructible bubble doesn't count.",
+            preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Sorry boss", style: .default, handler: nil))
+        self.present(alert, animated: true)
+    }
+
     private func transitToGame() {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let gameEngineController =
             storyBoard.instantiateViewController(
                 withIdentifier: "gameEngine")
                 as! GameEngineViewController
+        // isRectGrid MUST be set before loadedLevel or else
+        // bad things will happen
+        gameEngineController.isRectGrid = isRectGrid
         gameEngineController.loadedLevel = currentLevel.clone()
         gameEngineController.isDualCannon = dualCannon
         self.present(gameEngineController, animated: true, completion: nil)
@@ -223,7 +263,7 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate, 
             self.present(didNotSaveAlert, animated: true)
             return
         }
-        currentLevel.saveGridBubblesToDatabase(name: levelName)
+        currentLevel.saveGridBubblesToDatabase(name: levelName, isRectGrid: isRectGrid)
         do {
             try context.save()
             confirmAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -244,6 +284,10 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate, 
             let levelBubbles = level.bubbles as? Set<GridBubbleData> else {
             return
         }
+        guard let isRectGrid = level.value(forKey: "isRectGrid") as? Bool else {
+            fatalError("isRectGrid should have been set in core data")
+        }
+        self.isRectGrid = isRectGrid
         for bubble in levelBubbles {
             guard let index = bubble.value(forKey: "position") as? Int,
                 let bubbleTypeIndex = bubble.value(forKey: "bubbleTypeId") as? Int else {

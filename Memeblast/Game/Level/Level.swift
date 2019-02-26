@@ -12,24 +12,15 @@ import CoreData
 public class Level {
     var gridBubbles: [GridBubble] = []
     var emptyType: BubbleType
-    let rows: Int
-    let cols: Int
+    let isRect: Bool
 
-    public init(rows: Int, col: Int, fillType: BubbleType) {
-        self.rows = rows
-        self.cols = col
-        var index = 0
+    public init(totalBubbles: Int, fillType: BubbleType, isRect: Bool) {
+        self.isRect = isRect
         emptyType = fillType
         // Generate bubbles based on
-        for row in 0..<rows {
-            // There should be one less bubble in odd rows to create the required pattern from
-            // https://cs3217.gitbooks.io/problem-sets/content/ps/PS3/PS3.html#create-the-bubble-palette
-            let numOfColumnsToGenerate = row % 2 == 0 ? col : col - 1
-            for _ in 0..<numOfColumnsToGenerate {
-                let newBubble = GridBubble(bubbleType: fillType, index: index)
-                gridBubbles.append(newBubble)
-                index += 1
-            }
+        for index in 0..<totalBubbles {
+            let newBubble = GridBubble(bubbleType: fillType, index: index)
+            gridBubbles.append(newBubble)
         }
     }
 
@@ -68,8 +59,9 @@ public class Level {
     }
 
     /// Save level to database.
-    public func saveGridBubblesToDatabase(name: String) {
-        let levelData = LevelData(name: name)
+    public func saveGridBubblesToDatabase(name: String, isRectGrid: Bool) {
+        let levelData = LevelData(name: name, isRect: isRectGrid)
+
         levelData.saveBubbles(bubbles: gridBubbles)
     }
 

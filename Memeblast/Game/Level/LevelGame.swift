@@ -9,8 +9,8 @@
 import Foundation
 
 public class LevelGame: Level {
-    public override init(rows: Int, col: Int, fillType: BubbleType) {
-        super.init(rows: rows, col: col, fillType: fillType)
+    public override init(totalBubbles: Int, fillType: BubbleType, isRect: Bool) {
+        super.init(totalBubbles: totalBubbles, fillType: fillType, isRect: isRect)
     }
 
     func isEmptyAtIndex(index: Int) -> Bool {
@@ -22,7 +22,7 @@ public class LevelGame: Level {
     }
 
     func clone() -> LevelGame {
-        let newLevel = LevelGame(rows: rows, col: cols, fillType: emptyType)
+        let newLevel = LevelGame(totalBubbles: gridBubbles.count, fillType: emptyType, isRect: isRect)
         for index in 0..<gridBubbles.count {
             let bubbleType = getBubbleTypeAtIndex(index: index)
             newLevel.setBubbleTypeAtIndex(index: index, bubbleType: bubbleType)

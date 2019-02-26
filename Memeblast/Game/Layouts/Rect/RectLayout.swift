@@ -12,7 +12,7 @@ struct RectLayout: GameLayout {
     let numberOfRows: Int
     let numberOfColInRow: Int
 
-    init(rows: Int, firstRowCol: Int, secondRowCol: Int) {
+    init(rows: Int, firstRowCol: Int) {
         numberOfRows = rows
         numberOfColInRow = firstRowCol
     }

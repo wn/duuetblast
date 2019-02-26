@@ -12,14 +12,21 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate, B
     var isDualCannon = false
     @IBOutlet private var statusView: UIView!
 
+    var isRectGrid = true
+
     @IBOutlet private var gameBubbleCollection: UICollectionView!
 
     private let gameEngineBubbleCellIdentifier = "gameEngineBubbleCell"
-    var currentLevel = LevelGame(rows: Constants.numOfRows, col: Constants.numOfCols, fillType: .invisible)
+    lazy var currentLevel = LevelGame(totalBubbles: gameLayout.totalNumberOfBubble, fillType: .invisible, isRect: isRectGrid)
 
     var loadedLevel: LevelGame?
 
-    let gameLayout = IsometricLayout(rows: Constants.numOfRows, firstRowCol: Constants.numOfCols, secondRowCol: Constants.numOfCols - 1)
+    var gameLayout: GameLayout {
+        if isRectGrid {
+            return RectLayout(rows: Constants.numOfRows, firstRowCol: Constants.numOfCols)
+        }
+        return IsometricLayout(rows: Constants.numOfRows, firstRowCol: Constants.numOfCols)
+    }
 
     lazy private var gameEngine = GameEngine(
         gameplayArea: gameBubbleCollection,
@@ -38,14 +45,20 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate, B
         return lastBubbleFrame.origin.y + 2 * bubbleRadius
     }
 
+    var viewLayout: GridLayout {
+        var result: GridLayout = IsometricViewLayout()
+        if isRectGrid {
+            result = RectViewLayout()
+        }
+        result.delegate = self
+        return result
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         loadBackground()
 
-        guard let layout = gameBubbleCollection?.collectionViewLayout as? IsometricViewLayout else {
-            fatalError("There should be a layout for gameBubbleCollection!")
-        }
-        layout.delegate = self
+        gameBubbleCollection!.collectionViewLayout = viewLayout
 
         // Create left and right view
         let gameWidth = gameBubbleCollection.frame.width
@@ -164,6 +177,7 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate, B
             storyBoard.instantiateViewController(
                 withIdentifier: "levelDesigner")
                 as! LevelDesignViewController
+        levelDesignerController.isRectGrid = isRectGrid
         levelDesignerController.loadGrid(level: loadedLevel)
         self.present(levelDesignerController, animated: true, completion: nil)
     }

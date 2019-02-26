@@ -41,7 +41,7 @@ public enum BubbleType: Int, CaseIterable {
 
     var isPowerBubble: Bool {
         switch self {
-        case .bomb, .lightning, .star, .indestructible:
+        case .bomb, .lightning, .star:
             return true
         default:
             return false
@@ -52,11 +52,15 @@ public enum BubbleType: Int, CaseIterable {
         return BubbleType.allCases.filter { $0.isNormalBubble }
     }
 
-    static var getSpecialBubbles: [BubbleType] {
+    static var getPowerBubbles: [BubbleType] {
         return BubbleType.allCases.filter { $0.isPowerBubble }
     }
 
     static var getAllPaletteBubbles: [BubbleType] {
-        return BubbleType.allCases.filter { $0.isNormalBubble || $0.isPowerBubble }
+        return BubbleType.allCases.filter { $0.isNormalBubble || $0.isPowerBubble || $0 == .indestructible }
+    }
+
+    static func isPlayableBubble(type: BubbleType) -> Bool {
+        return BubbleType.getPowerBubbles.contains(type) || BubbleType.getNormalBubbles.contains(type)
     }
 }

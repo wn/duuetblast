@@ -15,13 +15,14 @@ class LevelData: NSManagedObject {
         super.init(entity: entity, insertInto: context)
     }
 
-    init(name: String) {
+    init(name: String, isRect: Bool) {
         let context = AppDelegate.viewContext
         guard let entity = NSEntityDescription.entity(forEntityName: "LevelData", in: context) else {
             fatalError("Core data must contain entity LevelData!")
         }
         super.init(entity: entity, insertInto: context)
         levelName = name
+        self.isRectGrid = isRect
     }
 
     func saveBubbles(bubbles: [GridBubble]) {
