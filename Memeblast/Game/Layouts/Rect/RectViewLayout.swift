@@ -9,7 +9,7 @@
 import UIKit
 
 class RectViewLayout: GridLayout {
-    let gameLayout = RectLayout(rows: 9, firstRowCol: 12, secondRowCol: 12)
+    let gameLayout = RectLayout(rows: Constants.numOfRows, firstRowCol: Constants.numOfCols, secondRowCol: Constants.numOfCols)
     override func prepare() {
         func addFrameToAttributeAndCache(frame: CGRect, indexPath: IndexPath) {
             let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
@@ -21,8 +21,8 @@ class RectViewLayout: GridLayout {
             return
         }
 
-        let numberOfColumns = Settings.numberOfColumns
-        let numberOfRows = Settings.numberOfRow
+        let numberOfColumns = Constants.numOfCols
+        let numberOfRows = Constants.numOfRows
 
         var sizeOfGameBubble: CGFloat {
             return contentWidth / CGFloat(numberOfColumns)

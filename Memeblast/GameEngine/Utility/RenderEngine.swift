@@ -25,7 +25,6 @@ public class RenderEngine: BubbleRenderer {
         self.gameplayArea = gameplayArea
         self.firingPosition = firingPosition
         self.diameter = diameter
-
         renderGameLine(height: gameoverHeight)
     }
 

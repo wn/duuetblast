@@ -20,8 +20,8 @@ class IsometricViewLayout: GridLayout {
             return
         }
 
-        let numberOfColumns = Settings.numberOfColumns
-        let numberOfRows = Settings.numberOfRow
+        let numberOfColumns = Constants.numOfCols
+        let numberOfRows = Constants.numOfRows
 
         var sizeOfGameBubble: CGFloat {
             return contentWidth / CGFloat(numberOfColumns)

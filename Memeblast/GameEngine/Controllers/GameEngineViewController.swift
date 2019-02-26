@@ -15,11 +15,11 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate, B
     @IBOutlet private var gameBubbleCollection: UICollectionView!
 
     private let gameEngineBubbleCellIdentifier = "gameEngineBubbleCell"
-    var currentLevel = LevelGame(rows: Settings.numberOfRow, col: Settings.numberOfColumns, fillType: .invisible)
+    var currentLevel = LevelGame(rows: Constants.numOfRows, col: Constants.numOfCols, fillType: .invisible)
 
     var loadedLevel: LevelGame?
 
-    let gameLayout = IsometricLayout(rows: Settings.numberOfRow, firstRowCol: Settings.numberOfColumns, secondRowCol: Settings.numberOfColumns - 1)
+    let gameLayout = IsometricLayout(rows: Constants.numOfRows, firstRowCol: Constants.numOfCols, secondRowCol: Constants.numOfCols - 1)
 
     lazy private var gameEngine = GameEngine(
         gameplayArea: gameBubbleCollection,
@@ -64,10 +64,15 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate, B
         }
 
         func setupTap(view: UIView) {
-            // For getting angle in game
+            // For firing bubble from cannon
             let singleTapForGameplayArea = UITapGestureRecognizer(target: self, action: #selector(fireBubble(_:)))
             singleTapForGameplayArea.delegate = self
             view.addGestureRecognizer(singleTapForGameplayArea)
+
+            // For setting cannon angle
+            let panningForGameplayArea = UIPanGestureRecognizer(target: self, action: #selector(changeAngle(_:)))
+            panningForGameplayArea.delegate = self
+            view.addGestureRecognizer(panningForGameplayArea)
         }
 
         if isDualCannon {
@@ -89,9 +94,28 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate, B
 
     @objc
     private func fireBubble(_ sender: UITapGestureRecognizer) {
-
         gameEngine.fireBubble(fireTowards: sender.location(in: gameBubbleCollection))
     }
+
+    @objc
+    func changeAngle(_ sender : UIPanGestureRecognizer) {
+        let pos = sender.location(in: gameBubbleCollection)
+        let gameHeight = gameBubbleCollection.frame.height
+        guard pos.y < gameHeight - Constants.cannonHeight else {
+            return
+        }
+        guard sender.view != nil else {return}
+        switch sender.state {
+
+        case .possible, .began, .changed:
+            gameEngine.changeCannonAngle(pos)
+        case .ended:
+            gameEngine.fireBubble(fireTowards: pos)
+        default:
+            break
+        }
+    }
+
 
     // Get center of firing position
     public var firingPosition: CGPoint {
@@ -99,7 +123,7 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate, B
     }
 
     private var bubbleRadius: CGFloat {
-        return gameBubbleCollection.frame.width / CGFloat(Settings.numberOfColumns) / 2
+        return gameBubbleCollection.frame.width / CGFloat(Constants.numOfCols) / 2
     }
 
     @IBAction func restartLevel(_ sender: UIButton) {

@@ -79,6 +79,10 @@ public class GameEngine {
         }
     }
 
+    func changeCannonAngle(_ angleTowards: CGPoint) {
+        _ = renderEngine.setCannonAngle(angleTowards)
+    }
+
     /// Logic to determine next bubble
     // TODO: Only generate bubbles that is in game
     private func getNextBubbleType() -> BubbleType {

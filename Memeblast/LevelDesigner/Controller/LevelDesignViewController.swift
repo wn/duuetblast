@@ -24,8 +24,8 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate, 
     @IBOutlet private var gameBubbleCollection: UICollectionView!
     let gameBubbleCellIdentifier = "gameBubbleCell"
 
-    var currentLevel = LevelGame(rows: Settings.numberOfRow, col: Settings.numberOfColumns, fillType: .empty)
-    let gameLayout = IsometricLayout(rows: Settings.numberOfRow, firstRowCol: Settings.numberOfColumns, secondRowCol: Settings.numberOfColumns)
+    var currentLevel = LevelGame(rows: Constants.numOfRows, col: Constants.numOfCols, fillType: .empty)
+    let gameLayout = IsometricLayout(rows: Constants.numOfRows, firstRowCol: Constants.numOfCols, secondRowCol: Constants.numOfCols)
     let paletteBubbles = PaletteBubbles()
 
     var levelName: String?

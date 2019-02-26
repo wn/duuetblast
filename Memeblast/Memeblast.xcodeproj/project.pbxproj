@@ -24,8 +24,6 @@
 		EB5A1C4B2206ABFA005F1DA1 /* PaletteBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A1C4A2206ABFA005F1DA1 /* PaletteBubble.swift */; };
 		EB5A1C4D2206AD02005F1DA1 /* GridBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A1C4C2206AD02005F1DA1 /* GridBubble.swift */; };
 		EB5A1C4F2206AD5D005F1DA1 /* PaletteBubbles.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A1C4E2206AD5D005F1DA1 /* PaletteBubbles.swift */; };
-		EB5A1C532206BE1A005F1DA1 /* GameSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB5A1C522206BE1A005F1DA1 /* GameSettings.plist */; };
-		EB5A1C552206BFBF005F1DA1 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A1C542206BFBF005F1DA1 /* Settings.swift */; };
 		EB5A1C6B22070601005F1DA1 /* BubbleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A1C6A22070601005F1DA1 /* BubbleType.swift */; };
 		EB5A1C95220730DC005F1DA1 /* LevelDesignerData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EB5A1C93220730DC005F1DA1 /* LevelDesignerData.xcdatamodeld */; };
 		EB887A64220C996700028F6F /* LevelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB887A63220C996700028F6F /* LevelData.swift */; };
@@ -46,6 +44,7 @@
 		EB8B38692219636600E1CD5A /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B38682219636600E1CD5A /* Vector.swift */; };
 		EB8B386E221AD6FC00E1CD5A /* GameEngine+DropLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B386D221AD6FC00E1CD5A /* GameEngine+DropLogic.swift */; };
 		EB8B3870221BDBF500E1CD5A /* IsometricLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B386F221BDBF500E1CD5A /* IsometricLayout.swift */; };
+		EB94227122251C3400D31C73 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB94227022251C3400D31C73 /* Constants.swift */; };
 		EB9AE2A62222CE0A009BC786 /* GameLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9AE2A52222CE0A009BC786 /* GameLayout.swift */; };
 		EB9AE2A82222CF07009BC786 /* RectLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9AE2A72222CF07009BC786 /* RectLayout.swift */; };
 		EB9AE2AA2222D408009BC786 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9AE2A92222D408009BC786 /* GridLayout.swift */; };
@@ -95,8 +94,6 @@
 		EB5A1C4A2206ABFA005F1DA1 /* PaletteBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteBubble.swift; sourceTree = "<group>"; };
 		EB5A1C4C2206AD02005F1DA1 /* GridBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridBubble.swift; sourceTree = "<group>"; };
 		EB5A1C4E2206AD5D005F1DA1 /* PaletteBubbles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteBubbles.swift; sourceTree = "<group>"; };
-		EB5A1C522206BE1A005F1DA1 /* GameSettings.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = GameSettings.plist; sourceTree = "<group>"; };
-		EB5A1C542206BFBF005F1DA1 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		EB5A1C6A22070601005F1DA1 /* BubbleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleType.swift; sourceTree = "<group>"; };
 		EB5A1C94220730DC005F1DA1 /* LevelDesignerData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LevelDesignerData.xcdatamodel; sourceTree = "<group>"; };
 		EB887A63220C996700028F6F /* LevelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelData.swift; sourceTree = "<group>"; };
@@ -117,6 +114,7 @@
 		EB8B38682219636600E1CD5A /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
 		EB8B386D221AD6FC00E1CD5A /* GameEngine+DropLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameEngine+DropLogic.swift"; sourceTree = "<group>"; };
 		EB8B386F221BDBF500E1CD5A /* IsometricLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsometricLayout.swift; sourceTree = "<group>"; };
+		EB94227022251C3400D31C73 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EB9AE2A52222CE0A009BC786 /* GameLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLayout.swift; sourceTree = "<group>"; };
 		EB9AE2A72222CF07009BC786 /* RectLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectLayout.swift; sourceTree = "<group>"; };
 		EB9AE2A92222D408009BC786 /* GridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
@@ -170,12 +168,12 @@
 		EB276C9F21FDD07900C23E9C = {
 			isa = PBXGroup;
 			children = (
+				EB94227022251C3400D31C73 /* Constants.swift */,
 				EB8B38582213D7BD00E1CD5A /* GameEngine */,
 				EB276CAA21FDD07900C23E9C /* LevelDesigner */,
 				EB276CA921FDD07900C23E9C /* Products */,
 				EBCD32002206A6B90003EF8E /* Supporting Files */,
 				EB8B3872221D137000E1CD5A /* Game */,
-				EB5A1C542206BFBF005F1DA1 /* Settings.swift */,
 				EB276CAF21FDD07900C23E9C /* Main.storyboard */,
 			);
 			sourceTree = "<group>";
@@ -197,7 +195,6 @@
 				EB5A1C472206A71E005F1DA1 /* Controller */,
 				EB5A1C462206A711005F1DA1 /* View */,
 				EB276CB721FDD07C00C23E9C /* Info.plist */,
-				EB5A1C522206BE1A005F1DA1 /* GameSettings.plist */,
 				EB5A1C93220730DC005F1DA1 /* LevelDesignerData.xcdatamodeld */,
 				EB276CBF21FDD07C00C23E9C /* LevelDesignerTests */,
 				EB276CCA21FDD07C00C23E9C /* LevelDesignerUITests */,
@@ -522,7 +519,6 @@
 				EB276CB621FDD07C00C23E9C /* LaunchScreen.storyboard in Resources */,
 				EB276CB321FDD07C00C23E9C /* Assets.xcassets in Resources */,
 				EB276CB121FDD07900C23E9C /* Main.storyboard in Resources */,
-				EB5A1C532206BE1A005F1DA1 /* GameSettings.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,7 +547,6 @@
 				EB8B38692219636600E1CD5A /* Vector.swift in Sources */,
 				EB5A1C4F2206AD5D005F1DA1 /* PaletteBubbles.swift in Sources */,
 				EB8B384E221043A200E1CD5A /* GameBubble.swift in Sources */,
-				EB5A1C552206BFBF005F1DA1 /* Settings.swift in Sources */,
 				EB5A1C95220730DC005F1DA1 /* LevelDesignerData.xcdatamodeld in Sources */,
 				EB342BA422044FBC004537E5 /* GameBubbleCollectionViewCell.swift in Sources */,
 				EB342BA622044FCC004537E5 /* PaletteBubbleCollectionViewCell.swift in Sources */,
@@ -562,6 +557,7 @@
 				EB8B38612217EC8200E1CD5A /* CannonView.swift in Sources */,
 				EB8B3852221043E600E1CD5A /* Velocity.swift in Sources */,
 				EB8B38642218129700E1CD5A /* GameBubbleView.swift in Sources */,
+				EB94227122251C3400D31C73 /* Constants.swift in Sources */,
 				EBCD31FE2206066B0003EF8E /* Level.swift in Sources */,
 				EB887A64220C996700028F6F /* LevelData.swift in Sources */,
 				EB8B38462210122B00E1CD5A /* GameEngineViewController.swift in Sources */,

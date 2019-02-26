@@ -17,7 +17,7 @@ class CannonView {
         self.firingPosition = position
         //let image = UIImage(named: "cannon.png")
         let image = CannonView.cannonSpriteBase
-        let imageFrame = CGRect(x: 0, y: 0, width: 100, height: 200)
+        let imageFrame = CGRect(x: 0, y: 0, width: Constants.cannonWidth, height: Constants.cannonHeight)
         imageView = UIImageView(frame: imageFrame)
         imageView.image = image
 
