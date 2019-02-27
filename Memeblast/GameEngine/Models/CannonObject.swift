@@ -6,10 +6,11 @@
 //  Copyright © 2019 nus.cs3217.a0164178x. All rights reserved.
 //
 import CoreGraphics
+import AVFoundation
 
 public class CannonObject: GameObject {
 
-    private var firingBubble: GameBubble?
+    var firingBubble: GameBubble?
     var angle: CGFloat = 0
     private weak var delegate: GameEngine?
 
@@ -27,9 +28,7 @@ public class CannonObject: GameObject {
         guard let bubbleToFire = firingBubble else {
             return
         }
-        guard delegate?.collidedBubble(bubbleToFire) == nil else {
-            return
-        }
+
         bubbleToFire.setVelocity(speed: CannonObject.firingVelocity, angle: angle)
         firingBubble = nil
         delegate?.movingFiringBubble(bubbleToFire)

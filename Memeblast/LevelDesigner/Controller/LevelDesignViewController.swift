@@ -6,9 +6,12 @@
  */
 
 import UIKit
+import AVFoundation
 import CoreData
 
-class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate, BubbleRenderer {
+class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate, BubbleRenderer, MusicPlayer {
+    var audioPlayer: [AVAudioPlayer] = []
+
     @IBOutlet private var gameArea: UIView!
     @IBOutlet private var paletteViewArea: UIView!
 
@@ -94,6 +97,7 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate, 
             noPlayableBubbleAlert()
             return
         }
+        audioPlayer = playSoundWith(musics: audioPlayer, filename: Constants.start_game_sound, loop: 0, vol: 0.8)
         transitToGame()
     }
 

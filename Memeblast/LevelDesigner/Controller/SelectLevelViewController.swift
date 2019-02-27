@@ -7,8 +7,10 @@
 
 import UIKit
 import CoreData
+import AVFoundation
 
 class SelectLevelViewController: UIViewController, UIGestureRecognizerDelegate {
+
     @IBOutlet private var levelSelectorCollection: UITableView!
     let levelSelectionCellIdentifier = "levelSelectionCell"
 
@@ -17,7 +19,6 @@ class SelectLevelViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadSavedLevel()
-
         // Add single tap gesture for color selector
         let singleTapForLevel = UITapGestureRecognizer(target: self, action: #selector(handleLevelSelected(_:)))
         singleTapForLevel.delegate = self

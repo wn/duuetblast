@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import AVFoundation
 
-public class GameEngine {
+public class GameEngine: MusicPlayer {
+    var audioPlayer: [AVAudioPlayer] = []
+
     private var gameBubbles = Set<GameBubble>()
     private var gameplayBubbles: [Int: GameBubble] = [:]
     var bubbleRadius: CGFloat
@@ -25,6 +28,8 @@ public class GameEngine {
     private var refreshScreenTime: Double {
         return Double(1) / FPS
     }
+
+
 
     init(
         gameplayArea: UIView,
@@ -47,7 +52,6 @@ public class GameEngine {
             cannons.append(newCannon)
         }
         renderEngine.renderCannon(cannons: cannons)
-
     }
 
     /// Spawn a firing bubble at firing point
@@ -58,20 +62,33 @@ public class GameEngine {
         let nextBubbleType = getNextBubbleType()
         let newBubble = renderEngine.renderBubble(cannon: cannon, bubbleType: nextBubbleType)
         gameBubbles.insert(newBubble)
-
         cannon.loadBubble(newBubble)
     }
 
     /// Logic to fire a bubble towards `fireTowards`
     func fireBubble(fireTowards: CGPoint) {
+        let firingCannon = renderEngine.setCannonAngle(fireTowards)
         guard fireTowards.y < renderEngine.firingPosition.y else {
             // Only allow the user to launch bubbles upwards.
             return
         }
-        let firingCannon = renderEngine.setCannonAngle(fireTowards)
         guard !gameOver else {
             return
         }
+
+        guard let bubbleToFire = firingCannon.firingBubble else {
+            return
+        }
+
+        guard collidedBubble(bubbleToFire) == nil else {
+            return
+        }
+
+        // Play music
+        audioPlayer = playSoundWith(musics: audioPlayer, filename: Constants.firing_sound, loop: 0, vol: 0.8)
+
+        renderEngine.animateCannon(firingCannon)
+
         /// 0.5 is half of animation time
         /// TODO: Refactor 0.25 to be in constant file.
         DispatchQueue.main.asyncAfter(wallDeadline: .now() + 0.25) {
@@ -91,12 +108,12 @@ public class GameEngine {
 
     func setupLevel(level: LevelGame) {
         // We assume a 1 to 1 maping, from index of grid to index of gridbubble in level.
-        let gridbubbles = level.gridBubbles
-        for index in 0..<gridbubbles.count where !level.isEmptyAtIndex(index: index) {
+        //let gridbubbles = level.gridBubbles
+        for index in 0..<level.count where !level.isEmptyAtIndex(index: index) {
             guard let currPos = gameDelegate?.getPositionAtIndex(index: index) else {
                 fatalError("Position from levelDesigner must be synchronized to gameEngine")
             }
-            let type = gridbubbles[index].bubbleType
+            let type = level.getBubbleTypeAtIndex(index: index)
             let generatedBubble = GameBubble(position: currPos, diameter: bubbleDiameter, type: type)
             generatedBubble.index = index
             gameBubbles.insert(generatedBubble)
@@ -121,6 +138,7 @@ public class GameEngine {
         let leftWallAction = {(bubble: GameBubble) in
             bubble.velocity.setXDirection(.positive)
             bubble.position.x = bubble.radius
+            self.audioPlayer = self.playSoundWith(musics: self.audioPlayer, filename: Constants.bounce_wall, loop: 0, vol: 0.8)
         }
         let leftWall = Wall(frame: leftWallFrame, stable: false, action: leftWallAction)
         result.append(leftWall)
@@ -133,6 +151,7 @@ public class GameEngine {
         let rightWallAction = {(bubble: GameBubble) in
             bubble.velocity.setXDirection(.negative)
             bubble.position.x = self.gameplayArea.frame.width - bubble.radius
+            self.audioPlayer = self.playSoundWith(musics: self.audioPlayer, filename: Constants.bounce_wall, loop: 0, vol: 0.8)
         }
         let rightWall = Wall(frame: rightWallFrame, stable: false, action: rightWallAction)
         result.append(rightWall)
@@ -192,9 +211,14 @@ public class GameEngine {
     }
 
     public func movingFiringBubble(_ bubble: GameBubble) {
+        guard gameBubbles.contains(bubble) else {
+            renderEngine.derenderBubble(bubble)
+            return
+        }
         switch bubble.movementType {
         case .falling:
             if isBubbleOutOfGame(bubble) {
+                gameBubbles.remove(bubble)
                 renderEngine.derenderBubble(bubble)
                 return
             }
@@ -270,6 +294,7 @@ public class GameEngine {
         if collidedBubble.isSpecialBubble {
             switch collidedBubble.bubbleType {
             case .lightning:
+                audioPlayer = playSoundWith(musics: audioPlayer, filename: Constants.zap_sound, loop: 0, vol: 0.8)
                 let rows = gameLayout.getRowIndexes(index)
                 for bubbleIndex in rows {
                     if let rowBubble = gameplayBubbles[bubbleIndex] {
@@ -277,6 +302,7 @@ public class GameEngine {
                     }
                 }
             case .bomb:
+                audioPlayer = playSoundWith(musics: audioPlayer, filename: Constants.bomb_sound, loop: 0, vol: 0.8)
                 let rows = gameLayout.getNeighboursAtIndex(index)
                 for bubbleIndex in rows {
                     if let rowBubble = gameplayBubbles[bubbleIndex] {
@@ -340,19 +366,16 @@ public class GameEngine {
         guard toDestroy.count >= 3 else {
             return
         }
-        for bubble in toDestroy {
-            deregisterBubble(bubble: bubble, type: .match)
-        }
+        toDestroy.forEach { deregisterBubble(bubble: $0, type: .match) }
     }
 
     // Only game engine can deregister bubble from game
     private func deregisterBubble(bubble: GameBubble, type: RemovingBubbleType) {
-        gameBubbles.remove(bubble)
         switch type {
         case .falling:
             setFreefallBubble(bubble)
         case .match:
-            break
+            gameBubbles.remove(bubble)
         }
         removeBubbleFromGrid(bubble)
     }
@@ -405,9 +428,11 @@ public class GameEngine {
 
     private func dropNonAttachedBubbles() {
         let attachedBubbles = isAttachedBubbles()
-        for bubble in gameBubbles where !attachedBubbles.contains(bubble) && bubble.movementType == .stationary {
+        let nonAttachedBubbles = gameBubbles.filter { !attachedBubbles.contains($0) && $0.movementType == .stationary }
+        for bubble in nonAttachedBubbles {
             deregisterBubble(bubble: bubble, type: .falling)
         }
+        //nonAttachedBubbles.forEach { deregisterBubble(bubble: $0, type: .falling) }
     }
 
     private func isStableBubble(_ bubble: GameBubble) -> Bool {
@@ -440,6 +465,7 @@ public class GameEngine {
     }
 
     private func gameoverAction() {
+        audioPlayer = playSoundWith(musics: audioPlayer, filename: Constants.gameover_sound, loop: 0, vol: 0.8)
         // Must fall, or else bubble that just dropped will not have an index + no speed, causing it to be 'in-cannon'
         completedGame(.falling)
         guard let gameDelegate = gameDelegate else {
@@ -473,6 +499,7 @@ public class GameEngine {
     /// Reinit all variables.
     public func restartEngine() {
         completedGame(.match)
+        renderEngine.resetCannon()
         print("restart")
         gameOver = false
     }
@@ -482,7 +509,7 @@ public class GameEngine {
         for bubble in gameBubbles {
             deregisterBubble(bubble: bubble, type: type)
         }
-        gameBubbles = Set<GameBubble>()
+        // gameBubbles = Set<GameBubble>()
         gameplayBubbles = [:]
     }
 

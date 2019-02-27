@@ -28,7 +28,7 @@ public class RenderEngine: BubbleRenderer {
         renderGameLine(height: gameoverHeight)
     }
 
-    func getClosestCannon(_ point: CGPoint) -> CannonObject {
+    private func getClosestCannon(_ point: CGPoint) -> CannonObject {
         var displacement = CGFloat.infinity
         // Get cannon closest to the point
         var closestCannon: CannonObject? = nil
@@ -43,16 +43,25 @@ public class RenderEngine: BubbleRenderer {
         return closestCannon!
     }
 
+    func resetCannon() {
+        for (cannon, _) in cannonsViewMap {
+            guard let bubble = cannon.firingBubble else {
+                return
+            }
+            cannon.firingBubble = nil
+            derenderBubble(bubble)
+        }
+    }
+
     func renderCannon(cannons: [CannonObject]) {
         for cannon in cannons {
             let newView = CannonView(position: cannon.position, superView: gameplayArea)
             cannonsViewMap[cannon] = newView
             cannonsView.append(newView)
-            newView.render()
         }
     }
 
-    func rerenderCannon(_ cannon: CannonObject) {
+    private func rerenderCannon(_ cannon: CannonObject) {
         guard let cannonView = cannonsViewMap[cannon] else {
             return
         }
@@ -103,7 +112,7 @@ public class RenderEngine: BubbleRenderer {
         let firePosition = cannonView.firingPosition
         let bubble = GameBubble(position: firePosition, diameter: diameter, type: bubbleType)
         let newBubbleView = GameBubbleView(
-            position: firePosition,
+            position: bubble.getTopLeftOfBubble,
             imageURL: getBubbleTypePath(type: bubbleType),
             diameter: diameter)
         gameBubblesView[bubble] = newBubbleView
@@ -112,7 +121,7 @@ public class RenderEngine: BubbleRenderer {
         return bubble
     }
 
-    func animateCannon(_ cannon: CannonObject) {
+    public func animateCannon(_ cannon: CannonObject) {
         guard let view = cannonsViewMap[cannon] else {
             return
         }

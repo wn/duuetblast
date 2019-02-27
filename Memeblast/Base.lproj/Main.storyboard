@@ -240,17 +240,17 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Ik-yq-zvt">
-                                <rect key="frame" x="0.0" y="22" width="834" height="1150"/>
+                                <rect key="frame" x="0.0" y="24" width="834" height="1148"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="OfC-EE-FNY">
-                                        <rect key="frame" x="0.0" y="0.0" width="834" height="1150"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="834" height="1148"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QiX-oP-jb2">
                                                 <rect key="frame" x="0.0" y="0.0" width="834" height="115"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.50489619006849318" colorSpace="custom" customColorSpace="sRGB"/>
                                             </view>
                                             <collectionView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JxS-TL-u5k">
-                                                <rect key="frame" x="0.0" y="115" width="834" height="977.5"/>
+                                                <rect key="frame" x="0.0" y="115" width="834" height="975.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <collectionViewLayout key="collectionViewLayout" id="PDU-cs-ZGd" customClass="GridLayout" customModule="Memeblast" customModuleProvider="target"/>
                                                 <cells>
@@ -262,7 +262,7 @@
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3fv-im-cw8">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="203" height="294.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="203" height="272"/>
                                                                 </imageView>
                                                             </subviews>
                                                         </view>
@@ -284,7 +284,7 @@
                                                 </connections>
                                             </collectionView>
                                             <stackView clearsContextBeforeDrawing="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="7GF-Uh-9gJ">
-                                                <rect key="frame" x="0.0" y="1092.5" width="834" height="57.5"/>
+                                                <rect key="frame" x="0.0" y="1090.5" width="834" height="57.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9SK-Es-Riw">
                                                         <rect key="frame" x="0.0" y="0.0" width="417" height="57.5"/>
@@ -331,9 +331,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="9Ik-yq-zvt" firstAttribute="leading" secondItem="Omt-M8-YXB" secondAttribute="leading" id="AV5-Mx-uPc"/>
-                            <constraint firstItem="9Ik-yq-zvt" firstAttribute="centerY" secondItem="Omt-M8-YXB" secondAttribute="centerY" id="KFJ-Sz-YFG"/>
-                            <constraint firstItem="KHz-NF-6uZ" firstAttribute="bottom" secondItem="9Ik-yq-zvt" secondAttribute="bottom" constant="2" id="ZTu-ut-8q3"/>
+                            <constraint firstItem="9Ik-yq-zvt" firstAttribute="top" secondItem="KHz-NF-6uZ" secondAttribute="top" id="HIe-x0-9Zs"/>
                             <constraint firstAttribute="trailing" secondItem="9Ik-yq-zvt" secondAttribute="trailing" id="p5n-FV-Sm9"/>
+                            <constraint firstItem="KHz-NF-6uZ" firstAttribute="bottom" secondItem="9Ik-yq-zvt" secondAttribute="bottom" constant="2" id="rrr-aZ-HoF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KHz-NF-6uZ"/>
                     </view>
@@ -358,7 +358,7 @@
                                 <rect key="frame" x="0.0" y="24" width="834" height="1150"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tk5-no-VvO">
-                                        <rect key="frame" x="0.0" y="0.0" width="834" height="1120"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="834" height="974"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="levelSelectionCell" id="HUP-l8-ebF" customClass="LevelSelectionTableViewCell" customModule="Memeblast" customModuleProvider="target">
@@ -369,7 +369,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WDa-mL-Spn">
-                                                            <rect key="frame" x="0.0" y="0.0" width="834" height="43.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="768" height="43.5"/>
                                                             <accessibility key="accessibilityConfiguration">
                                                                 <accessibilityTraits key="traits" button="YES" staticText="YES"/>
                                                             </accessibility>
@@ -396,7 +396,7 @@
                                         </connections>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dkn-eX-7pF" userLabel="New Level">
-                                        <rect key="frame" x="0.0" y="1120" width="834" height="30"/>
+                                        <rect key="frame" x="0.0" y="974" width="834" height="176"/>
                                         <state key="normal" title="New Level"/>
                                         <connections>
                                             <action selector="createNewLevel:" destination="bfG-bH-Yqe" eventType="touchUpInside" id="HPG-DY-CXI"/>

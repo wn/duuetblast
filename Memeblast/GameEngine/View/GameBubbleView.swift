@@ -25,6 +25,9 @@ class GameBubbleView {
     }
 
     func rerender() {
+        guard let _ = imageView.superview else {
+            return
+        }
         let xCoordinate = position.x - radius
         let yCoordinate = position.y - radius
         imageView.frame.origin = CGPoint(x: xCoordinate, y: yCoordinate)
