@@ -54,6 +54,8 @@
 		EB94227F2225944A00D31C73 /* start_sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EB94227A2225944A00D31C73 /* start_sound.mp3 */; };
 		EB94228722259E7A00D31C73 /* cannon_sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EB94228622259E7A00D31C73 /* cannon_sound.mp3 */; };
 		EB9422912225B52E00D31C73 /* bounce.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EB9422902225B52E00D31C73 /* bounce.mp3 */; };
+		EB9422952227AE4200D31C73 /* BubbleThemes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9422942227AE4200D31C73 /* BubbleThemes.swift */; };
+		EB9422972227B06A00D31C73 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9422962227B06A00D31C73 /* Settings.swift */; };
 		EB9AE2A62222CE0A009BC786 /* GameLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9AE2A52222CE0A009BC786 /* GameLayout.swift */; };
 		EB9AE2A82222CF07009BC786 /* RectLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9AE2A72222CF07009BC786 /* RectLayout.swift */; };
 		EB9AE2AA2222D408009BC786 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9AE2A92222D408009BC786 /* GridLayout.swift */; };
@@ -133,6 +135,8 @@
 		EB94227A2225944A00D31C73 /* start_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = start_sound.mp3; path = ../../../../../../Desktop/start_sound.mp3; sourceTree = "<group>"; };
 		EB94228622259E7A00D31C73 /* cannon_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = cannon_sound.mp3; path = ../../../../../../Desktop/cannon_sound.mp3; sourceTree = "<group>"; };
 		EB9422902225B52E00D31C73 /* bounce.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bounce.mp3; path = ../../../../../../Desktop/bounce.mp3; sourceTree = "<group>"; };
+		EB9422942227AE4200D31C73 /* BubbleThemes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleThemes.swift; sourceTree = "<group>"; };
+		EB9422962227B06A00D31C73 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		EB9AE2A52222CE0A009BC786 /* GameLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLayout.swift; sourceTree = "<group>"; };
 		EB9AE2A72222CF07009BC786 /* RectLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectLayout.swift; sourceTree = "<group>"; };
 		EB9AE2A92222D408009BC786 /* GridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
@@ -195,6 +199,7 @@
 				EB9422762225944A00D31C73 /* zap_sound.mp3 */,
 				EB94227222258A9500D31C73 /* maplestory.mp3 */,
 				EB94227022251C3400D31C73 /* Constants.swift */,
+				EB9422962227B06A00D31C73 /* Settings.swift */,
 				EB8B38582213D7BD00E1CD5A /* GameEngine */,
 				EB276CAA21FDD07900C23E9C /* LevelDesigner */,
 				EB276CA921FDD07900C23E9C /* Products */,
@@ -299,6 +304,7 @@
 			children = (
 				EB276CD921FDE17500C23E9C /* Bubble.swift */,
 				EB5A1C6A22070601005F1DA1 /* BubbleType.swift */,
+				EB9422942227AE4200D31C73 /* BubbleThemes.swift */,
 			);
 			path = Bubbles;
 			sourceTree = "<group>";
@@ -596,6 +602,7 @@
 				EB94227122251C3400D31C73 /* Constants.swift in Sources */,
 				EBCD31FE2206066B0003EF8E /* Level.swift in Sources */,
 				EB887A64220C996700028F6F /* LevelData.swift in Sources */,
+				EB9422972227B06A00D31C73 /* Settings.swift in Sources */,
 				EB8B38462210122B00E1CD5A /* GameEngineViewController.swift in Sources */,
 				EB8B385E22171B9700E1CD5A /* Wall.swift in Sources */,
 				EB0F2AD32208B928000A5770 /* LevelSelectionTableViewCell.swift in Sources */,
@@ -614,6 +621,7 @@
 				EB9AE2A62222CE0A009BC786 /* GameLayout.swift in Sources */,
 				EB9AE2AA2222D408009BC786 /* GridLayout.swift in Sources */,
 				EB342BA9220584C3004537E5 /* IsometricViewLayout.swift in Sources */,
+				EB9422952227AE4200D31C73 /* BubbleThemes.swift in Sources */,
 				EB8B384C2210301A00E1CD5A /* PhysicsEngine.swift in Sources */,
 				EB9AE2AE2222DA86009BC786 /* RectViewLayout.swift in Sources */,
 				EB276CAC21FDD07900C23E9C /* AppDelegate.swift in Sources */,

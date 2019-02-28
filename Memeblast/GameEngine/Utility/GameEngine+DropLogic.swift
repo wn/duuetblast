@@ -14,7 +14,7 @@ extension GameEngine {
         guard let collidedBubbleIndex = collidedBubble.index else {
             fatalError("Collied bubble must be in game, hence must have an index.")
         }
-        let topLeftPoint = bubble.getTopLeftOfBubble // We use top-left as grid references are all using top-left
+        let topLeftPoint = bubble.getRenderingPosition // We use top-left as grid references are all using top-left
         guard let delegate = gameDelegate else {
             return nil
         }
@@ -53,7 +53,6 @@ extension GameEngine {
     }
 
     public func getNeighbouringIndex(_ index: Int) -> [Int] {
-        // TODO
         let result = gameLayout.getNeighboursAtIndex(index)
         return result.filter { $0 >= 0 && $0 < gameLayout.totalNumberOfBubble }
     }

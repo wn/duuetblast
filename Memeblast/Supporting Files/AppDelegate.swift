@@ -13,16 +13,14 @@ import CoreData
 import AVFoundation
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, MusicPlayer {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-    var audioPlayer: [AVAudioPlayer] = []
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 
-        audioPlayer = playSoundWith(musics: audioPlayer, filename: Constants.background_music, loop: -1, vol: 0.3)
+        Settings.musicPlayer.playSoundWith(Constants.firing_sound)
         return true
     }
 

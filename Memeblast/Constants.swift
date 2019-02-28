@@ -15,7 +15,7 @@ class Constants {
     static let numOfRows = 9
     static let numOfCols = 12
 
-    /// Music
+    // MARK: - Music
     static let music_ext = ".mp3"
     static let background_music = "maplestoryx" // TODO: remove x
     static let zap_sound = "zap_sound"
@@ -26,8 +26,26 @@ class Constants {
     static let gameover_sound = "gameover_sound"
     static let firing_sound = "cannon_sound"
     static let bounce_wall = "bounce"
+    static let chainsaw_sound = "chainsaw_sound"
     // TODO: 2 ball colliding sound
     // Drop to collection sound
+    /// Settings.musicPlayer.playSoundWith(Constants.gameover_sound)
 
     static let cannon_base_image = "cannon-base.png"
+
+    // MARK: - Themes
+    static let standardTheme: [BubbleType: String] = [
+        .red: "bubble-red.png",
+        .blue: "bubble-blue.png",
+        .orange: "bubble-orange.png",
+        .green: "bubble-green.png",
+        .empty: "bubble-grey.png",
+        .erase: "erase.png",
+        .bomb: "bubble-bomb.png",
+        .indestructible: "bubble-indestructible.png",
+        .star: "bubble-star.png",
+        .lightning: "bubble-lightning.png",
+        .invisible: "bubble-transluent_white.png",
+        .chainsaw_bubble: "bubble-indestructible.png" // TODO: CHANGE IMAGE
+    ]
 }

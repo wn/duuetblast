@@ -32,7 +32,7 @@ public class GameBubble: GameObject {
     }
 
     /// Convert point from top left to center and rerender
-    func setTopLeftPointToCenter(topLeftPoint: CGPoint) {
+    func setRenderingPosition(topLeftPoint: CGPoint) {
         let xCoordinate = topLeftPoint.x + radius
         let yCoordinate = topLeftPoint.y + radius
         position = CGPoint(x: xCoordinate, y: yCoordinate)
@@ -46,14 +46,14 @@ public class GameBubble: GameObject {
         return position
     }
 
-    var getTopLeftOfBubble: CGPoint {
+    var getRenderingPosition: CGPoint {
         let xCoordinate = position.x - radius
         let yCoordinate = position.y - radius
         return CGPoint(x: xCoordinate, y: yCoordinate)
     }
 
     var frame: CGRect {
-        let topLeft = getTopLeftOfBubble
+        let topLeft = getRenderingPosition
         return CGRect(x: topLeft.x, y: topLeft.y, width: diameter, height: diameter)
     }
 

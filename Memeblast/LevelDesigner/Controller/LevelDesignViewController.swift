@@ -9,9 +9,7 @@ import UIKit
 import AVFoundation
 import CoreData
 
-class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate, BubbleRenderer, MusicPlayer {
-    var audioPlayer: [AVAudioPlayer] = []
-
+class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet private var gameArea: UIView!
     @IBOutlet private var paletteViewArea: UIView!
 
@@ -97,7 +95,7 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate, 
             noPlayableBubbleAlert()
             return
         }
-        audioPlayer = playSoundWith(musics: audioPlayer, filename: Constants.start_game_sound, loop: 0, vol: 0.8)
+        Settings.musicPlayer.playSoundWith(Constants.start_game_sound)
         transitToGame()
     }
 
@@ -432,7 +430,7 @@ extension LevelDesignViewController: UICollectionViewDataSource, UICollectionVie
                 for: indexPath as IndexPath)
                 as! PaletteBubbleCollectionViewCell
             let selectedPaletteBubble = paletteBubbles.getBubbleAtIndex(index: indexPath.item)
-            cell.setupImage(imageUrl: getBubbleTypePath(type: selectedPaletteBubble.bubbleType), isSelected: selectedPaletteBubble.isSelected)
+            cell.setupImage(imageUrl: Settings.selectedTheme.getBubbleTypePath(type: selectedPaletteBubble.bubbleType), isSelected: selectedPaletteBubble.isSelected)
             return cell
         case gameBubbleCollection:
             let cell = collectionView.dequeueReusableCell(
@@ -440,43 +438,45 @@ extension LevelDesignViewController: UICollectionViewDataSource, UICollectionVie
                 for: indexPath as IndexPath)
                 as! GameBubbleCollectionViewCell
             let bubbleType = currentLevel.getBubbleTypeAtIndex(index: indexPath.item)
-            cell.setImage(imageUrl: getBubbleTypePath(type: bubbleType))
+            cell.setImage(imageUrl: Settings.selectedTheme.getBubbleTypePath(type: bubbleType))
             return cell
         default:
             fatalError("There should only be two collectionView.")
         }
     }
 }
-
-protocol BubbleRenderer {
-    
-}
-
-extension BubbleRenderer {
-    func getBubbleTypePath(type: BubbleType) -> String {
-        switch type {
-        case .red:
-            return "bubble-red.png"
-        case .blue:
-            return "bubble-blue.png"
-        case .orange:
-            return "bubble-orange.png"
-        case .green:
-            return "bubble-green.png"
-        case .empty:
-            return "bubble-grey.png"
-        case .erase:
-            return "erase.png"
-        case .bomb:
-            return "bubble-bomb.png"
-        case .indestructible:
-            return "bubble-indestructible.png"
-        case .star:
-            return "bubble-star.png"
-        case .lightning:
-            return "bubble-lightning.png"
-        case .invisible:
-            return "bubble-transluent_white.png"
-        }
-    }
-}
+//
+//protocol BubbleRenderer {
+//
+//}
+//
+//extension BubbleRenderer {
+//    func getBubbleTypePath(type: BubbleType) -> String {
+//        switch type {
+//        case .red:
+//            return "bubble-red.png"
+//        case .blue:
+//            return "bubble-blue.png"
+//        case .orange:
+//            return "bubble-orange.png"
+//        case .green:
+//            return "bubble-green.png"
+//        case .empty:
+//            return "bubble-grey.png"
+//        case .erase:
+//            return "erase.png"
+//        case .bomb:
+//            return "bubble-bomb.png"
+//        case .indestructible:
+//            return "bubble-indestructible.png"
+//        case .star:
+//            return "bubble-star.png"
+//        case .lightning:
+//            return "bubble-lightning.png"
+//        case .invisible:
+//            return "bubble-transluent_white.png"
+//        case .chainsaw_bubble:
+//            return "bubble-indestructible.png"
+//        }
+//    }
+//}

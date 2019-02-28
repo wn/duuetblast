@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate, BubbleRenderer {
+class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
     var isDualCannon = false
     @IBOutlet private var statusView: UIView!
 
@@ -113,10 +113,10 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate, B
     @objc
     func changeAngle(_ sender : UIPanGestureRecognizer) {
         let pos = sender.location(in: gameBubbleCollection)
-        let gameHeight = gameBubbleCollection.frame.height
-        guard pos.y < gameHeight - Constants.cannonHeight else {
-            return
-        }
+//        let gameHeight = gameBubbleCollection.frame.height
+//        guard pos.y < gameHeight - Constants.cannonHeight else {
+//            return
+//        }
         guard sender.view != nil else {return}
         switch sender.state {
 
@@ -209,8 +209,9 @@ extension GameEngineViewController: UICollectionViewDataSource, UICollectionView
                 withReuseIdentifier: gameEngineBubbleCellIdentifier,
                 for: indexPath as IndexPath)
                 as! GameEngineBubbleCollectionViewCell
+        let selectedTheme = Settings.selectedTheme
             let bubbleType = currentLevel.getBubbleTypeAtIndex(index: indexPath.item)
-        cell.setImage(imageUrl: getBubbleTypePath(type: bubbleType))
+        cell.setImage(imageUrl: selectedTheme.getBubbleTypePath(type: bubbleType))
             gameBubbleCollection.bringSubviewToFront(cell)
             return cell
     }

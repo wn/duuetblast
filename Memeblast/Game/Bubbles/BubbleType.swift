@@ -18,6 +18,7 @@ public enum BubbleType: Int, CaseIterable {
     case lightning = 8
     case erase = 9
     case invisible = 10
+    case chainsaw_bubble = 11
 
     var getBubbleIndex: Int {
         return self.rawValue

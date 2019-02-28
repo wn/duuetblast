@@ -9,8 +9,7 @@
 import UIKit
 import AVFoundation
 
-public class GameEngine: MusicPlayer {
-    var audioPlayer: [AVAudioPlayer] = []
+public class GameEngine {
 
     private var gameBubbles = Set<GameBubble>()
     private var gameplayBubbles: [Int: GameBubble] = [:]
@@ -52,6 +51,7 @@ public class GameEngine: MusicPlayer {
             cannons.append(newCannon)
         }
         renderEngine.renderCannon(cannons: cannons)
+        generateChainBubble()
     }
 
     /// Spawn a firing bubble at firing point
@@ -67,25 +67,19 @@ public class GameEngine: MusicPlayer {
 
     /// Logic to fire a bubble towards `fireTowards`
     func fireBubble(fireTowards: CGPoint) {
-        let firingCannon = renderEngine.setCannonAngle(fireTowards)
-        guard fireTowards.y < renderEngine.firingPosition.y else {
-            // Only allow the user to launch bubbles upwards.
+        guard let firingCannon = renderEngine.setCannonAngle(fireTowards) else {
+            // Ensure that renderEngine can set angle.
             return
         }
-        guard !gameOver else {
-            return
-        }
-
-        guard let bubbleToFire = firingCannon.firingBubble else {
-            return
-        }
-
-        guard collidedBubble(bubbleToFire) == nil else {
+        guard !gameOver,
+            let bubbleToFire = firingCannon.firingBubble,
+            collidedBubble(bubbleToFire) == nil else {
+            // Guard against gameover, cannon contains bubble and no other bubble is touching the cannon.
             return
         }
 
         // Play music
-        audioPlayer = playSoundWith(musics: audioPlayer, filename: Constants.firing_sound, loop: 0, vol: 0.8)
+        Settings.musicPlayer.playSoundWith(Constants.firing_sound)
 
         renderEngine.animateCannon(firingCannon)
 
@@ -118,8 +112,9 @@ public class GameEngine: MusicPlayer {
             generatedBubble.index = index
             gameBubbles.insert(generatedBubble)
             gameplayBubbles[index] = generatedBubble
-            generatedBubble.setTopLeftPointToCenter(topLeftPoint: currPos)
+            generatedBubble.setRenderingPosition(topLeftPoint: currPos)
         }
+        generateChainBubble()
         dropNonAttachedBubbles()
     }
 
@@ -130,6 +125,17 @@ public class GameEngine: MusicPlayer {
         }
     }
 
+    func generateChainBubble() {
+        // We need to get center position of bubble just below gameover line
+        let pos = CGPoint(x: bubbleRadius, y: gameoverHeight + bubbleRadius)
+        let chainBubble = renderEngine.renderBubble(position: pos, bubbleType: .chainsaw_bubble)
+        chainBubble.setVelocity(speed: 200, angle: CGFloat.pi / 2)
+        // TODO: Remove hard coding
+
+        gameBubbles.insert(chainBubble)
+        moveBubble(chainBubble)
+    }
+
     /// Generate obstacles to be used in game engine
     private func generateObstacle() -> [Obstacle] {
         var result: [Obstacle] = []
@@ -138,7 +144,7 @@ public class GameEngine: MusicPlayer {
         let leftWallAction = {(bubble: GameBubble) in
             bubble.velocity.setXDirection(.positive)
             bubble.position.x = bubble.radius
-            self.audioPlayer = self.playSoundWith(musics: self.audioPlayer, filename: Constants.bounce_wall, loop: 0, vol: 0.8)
+            Settings.musicPlayer.playSoundWith(Constants.bounce_wall)
         }
         let leftWall = Wall(frame: leftWallFrame, stable: false, action: leftWallAction)
         result.append(leftWall)
@@ -151,7 +157,7 @@ public class GameEngine: MusicPlayer {
         let rightWallAction = {(bubble: GameBubble) in
             bubble.velocity.setXDirection(.negative)
             bubble.position.x = self.gameplayArea.frame.width - bubble.radius
-            self.audioPlayer = self.playSoundWith(musics: self.audioPlayer, filename: Constants.bounce_wall, loop: 0, vol: 0.8)
+            Settings.musicPlayer.playSoundWith(Constants.bounce_wall)
         }
         let rightWall = Wall(frame: rightWallFrame, stable: false, action: rightWallAction)
         result.append(rightWall)
@@ -245,9 +251,15 @@ public class GameEngine: MusicPlayer {
                 activateWinningActionIfWin()
                 return
             case .moving:
+
                 // Guard against multiple collision with the same object
                 guard bubble.lastCollidedBubble != collidedBubble else {
                     break
+                }
+                guard bubble.bubbleType != .chainsaw_bubble && collidedBubble.bubbleType != .chainsaw_bubble else {
+                    Settings.musicPlayer.playSoundWith(Constants.chainsaw_sound)
+                    gameoverAction()
+                    return
                 }
                 bubble.lastCollidedBubble = collidedBubble
                 collidedBubble.lastCollidedBubble = bubble
@@ -294,7 +306,7 @@ public class GameEngine: MusicPlayer {
         if collidedBubble.isSpecialBubble {
             switch collidedBubble.bubbleType {
             case .lightning:
-                audioPlayer = playSoundWith(musics: audioPlayer, filename: Constants.zap_sound, loop: 0, vol: 0.8)
+                Settings.musicPlayer.playSoundWith(Constants.zap_sound)
                 let rows = gameLayout.getRowIndexes(index)
                 for bubbleIndex in rows {
                     if let rowBubble = gameplayBubbles[bubbleIndex] {
@@ -302,7 +314,7 @@ public class GameEngine: MusicPlayer {
                     }
                 }
             case .bomb:
-                audioPlayer = playSoundWith(musics: audioPlayer, filename: Constants.bomb_sound, loop: 0, vol: 0.8)
+                Settings.musicPlayer.playSoundWith(Constants.bomb_sound)
                 let rows = gameLayout.getNeighboursAtIndex(index)
                 for bubbleIndex in rows {
                     if let rowBubble = gameplayBubbles[bubbleIndex] {
@@ -465,7 +477,7 @@ public class GameEngine: MusicPlayer {
     }
 
     private func gameoverAction() {
-        audioPlayer = playSoundWith(musics: audioPlayer, filename: Constants.gameover_sound, loop: 0, vol: 0.8)
+        Settings.musicPlayer.playSoundWith(Constants.gameover_sound)
         // Must fall, or else bubble that just dropped will not have an index + no speed, causing it to be 'in-cannon'
         completedGame(.falling)
         guard let gameDelegate = gameDelegate else {
@@ -493,7 +505,7 @@ public class GameEngine: MusicPlayer {
         renderEngine.derenderBubble(bubble)
         gameplayBubbles[index] = bubble
         destroyBubble(bubble: bubble, destroyType: .matchThree)
-        bubble.setTopLeftPointToCenter(topLeftPoint: dropPosition)
+        bubble.setRenderingPosition(topLeftPoint: dropPosition)
     }
 
     /// Reinit all variables.
@@ -518,6 +530,7 @@ public class GameEngine: MusicPlayer {
     }
 }
 
+// TODO: Refactor to new class
 public enum CollisionType {
     case leftWall
     case rightWall

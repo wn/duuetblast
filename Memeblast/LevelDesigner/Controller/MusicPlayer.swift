@@ -9,18 +9,16 @@
 import Foundation
 import AVFoundation
 
-protocol MusicPlayer: class {
-    var audioPlayer: [AVAudioPlayer] {get set}
-}
+class MusicPlayer {
+    var audioPlayer: [AVAudioPlayer] = []
 
-extension MusicPlayer {
-    func playSoundWith(musics: [AVAudioPlayer], filename: String, loop: Int, vol: Float) -> [AVAudioPlayer] {
+    func playSoundWith(_ filename: String, loop: Int = 0, vol: Float = 1) {
         let audioSourceUrl = Bundle.main.url(forResource: filename, withExtension: Constants.music_ext)
-        var playingMusics = musics.filter { $0.isPlaying }
+        var playingMusics = audioPlayer.filter { $0.isPlaying }
 
         guard let audioUrl = audioSourceUrl else {
-            print("NO MUSIC FOUND")
-            return []
+            print("NO MUSICPATH for \(filename)")
+            return
         }
         do {
             let musicPlayer = try AVAudioPlayer.init(contentsOf: audioUrl)
@@ -29,10 +27,10 @@ extension MusicPlayer {
             musicPlayer.volume = vol
             musicPlayer.play()
             playingMusics.append(musicPlayer)
-            return playingMusics
+            audioPlayer = playingMusics
         } catch {
             print("NO MUSIC for \(filename)")
-            return []
+            return
         }
     }
 }

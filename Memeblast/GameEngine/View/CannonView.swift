@@ -15,14 +15,15 @@ class CannonView {
 
 
     init(position: CGPoint, superView: UIView) {
-        self.firingPosition = position
+        firingPosition = position
         let cannonWidth = Constants.cannonWidth
         let cannonHeight = Constants.cannonHeight
-        let imageFrame = CGRect(x: firingPosition.x - cannonWidth / 2, y: superView.frame.height - cannonHeight, width: cannonWidth, height: cannonHeight)
+        let topLeftXOfFrame = firingPosition.x - cannonWidth / 2
+        let imageFrame = CGRect(x: topLeftXOfFrame, y: superView.frame.height - cannonHeight, width: cannonWidth, height: cannonHeight)
         cannonView = UIImageView(frame: imageFrame)
         renderCannonAndBase(superView: superView)
 
-        setNewFiringPosition()
+        firingPosition.y = cannonView.frame.origin.y + cannonView.frame.height * 0.81
     }
 
     func rotateAngle(_ angle: CGFloat) {
@@ -30,11 +31,6 @@ class CannonView {
         UIView.animate(withDuration: 0.1) {
             self.cannonView.transform = CGAffineTransform(rotationAngle: angle)
         }
-    }
-
-    var canFireBubble: Bool {
-        print("FALSE")
-        return false
     }
 
     private func renderCannonAndBase(superView: UIView) {
@@ -69,10 +65,6 @@ class CannonView {
 
     func animate() {
         self.cannonView.startAnimating()
-    }
-
-    private func setNewFiringPosition() {
-        firingPosition.y = cannonView.frame.origin.y + cannonView.frame.height * 0.81
     }
 
     static let cannonSpriteRows = 2

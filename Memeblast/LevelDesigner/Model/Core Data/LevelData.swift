@@ -74,7 +74,7 @@ class LevelData: NSManagedObject {
                 savedLevels.append(levelName)
             }
         } catch {
-            print("Failed")
+            return []
         }
         return savedLevels
     }
