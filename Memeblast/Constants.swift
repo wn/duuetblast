@@ -28,8 +28,9 @@ class Constants {
     static let bounce_wall = "bounce"
     static let chainsaw_sound = "chainsaw_sound"
     // TODO: 2 ball colliding sound
+    // winning sound
     // Drop to collection sound
-    /// Settings.musicPlayer.playSoundWith(Constants.gameover_sound)
+    /// Settings.playSoundWith(Constants.gameover_sound)
 
     static let cannon_base_image = "cannon-base.png"
 
@@ -46,6 +47,10 @@ class Constants {
         .star: "bubble-star.png",
         .lightning: "bubble-lightning.png",
         .invisible: "bubble-transluent_white.png",
-        .chainsaw_bubble: "bubble-indestructible.png" // TODO: CHANGE IMAGE
+        .chainsaw_bubble: "bubble-chainsaw.png",
+        .magnet: "bubble-magnet.png",
+        .rocket: "bubble-rocket.png",
+        .random: "bubble-random.png",
+        .bin: "bubble-bin.png",
     ]
 }

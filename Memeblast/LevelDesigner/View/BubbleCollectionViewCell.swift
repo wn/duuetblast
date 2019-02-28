@@ -8,5 +8,5 @@
 import UIKit
 
 class BubbleCollectionViewCell: UICollectionViewCell {
-    var emptyBubbleImageUrl = "bubble-grey.png"
+
 }

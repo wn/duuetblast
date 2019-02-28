@@ -95,7 +95,7 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate {
             noPlayableBubbleAlert()
             return
         }
-        Settings.musicPlayer.playSoundWith(Constants.start_game_sound)
+        Settings.playSoundWith(Constants.start_game_sound)
         transitToGame()
     }
 
@@ -151,19 +151,19 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate {
             storyBoard.instantiateViewController(
                 withIdentifier: "gameEngine")
                 as! GameEngineViewController
+        print(CFGetRetainCount(gameEngineController))
         // isRectGrid MUST be set before loadedLevel or else
         // bad things will happen
         gameEngineController.isRectGrid = isRectGrid
         gameEngineController.loadedLevel = currentLevel.clone()
         gameEngineController.isDualCannon = dualCannon
-        self.present(gameEngineController, animated: true, completion: nil)
+        renderChildController(gameEngineController)
     }
 
     /// Button to save current level.
     /// Saving using core data solution from https://www.youtube.com/watch?v=dIXkR-2rdvM
     /// Alert solution inspired from https://learnappmaking.com/uialertcontroller-alerts-swift-how-to/
     @IBAction func saveLevel(_ sender: UIButton) {
-
         if let levelName = levelName {
             // Override
             _ = LevelData.deleteLevel(name: levelName)
@@ -208,8 +208,9 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate {
                 return
             })
             self.present(alert, animated: true)
+        } else {
+            presentLevelSelector()
         }
-        presentLevelSelector()
     }
 
     // Set up grid for level with name `levelName`.
@@ -311,14 +312,18 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate {
         gameArea.sendSubviewToBack(background)
     }
 
-    // Present the level selector storyboard to user.
+    /// Present the level selector storyboard to user.
     private func presentLevelSelector() {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let levelSelectorController =
+        let newVC =
             storyBoard.instantiateViewController(
                 withIdentifier: "levelSelector")
                 as! SelectLevelViewController
-        self.present(levelSelectorController, animated: true, completion: nil)
+        guard let parent = parent else {
+            return
+        }
+        derenderChildController(true)
+        parent.renderChildController(newVC)
     }
 
     // Present the alert indicating that saving of data has failed.
@@ -333,8 +338,8 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate {
 }
 
 extension LevelDesignViewController: GridLayoutDelegate {
-    // For GridLayoutDelegate. Used to determine the maximum number of rows to generate
-    // in the grid.
+    /// For GridLayoutDelegate. Used to determine the maximum number of rows to generate
+    /// in the grid.
     func getHeightOfGameArea() -> CGFloat {
         return gameBubbleCollection.frame.size.height
     }
@@ -372,7 +377,7 @@ extension LevelDesignViewController {
         gameBubbleCollection.reloadItems(at: [indexPath])
     }
 
-    // Erase bubble when grid bubble was long-pressed.
+    /// Erase bubble when grid bubble was long-pressed.
     @objc
     func handleLongPress(_ sender: UILongPressGestureRecognizer) {
         guard sender.state == UIGestureRecognizer.State.began else {
@@ -387,7 +392,7 @@ extension LevelDesignViewController {
         gameBubbleCollection.reloadItems(at: [indexPath])
     }
 
-    // Set grid bubble to currently selected bubble type when panning.
+    /// Set grid bubble to currently selected bubble type when panning.
     @objc
     func handlePanning(_ sender: UIPanGestureRecognizer) {
         guard sender.state == UIGestureRecognizer.State.changed else {
@@ -408,7 +413,7 @@ extension LevelDesignViewController {
     }
 }
 
-// Extension to mainain collectionView actions.
+/// Extension to mainain collectionView actions.
 extension LevelDesignViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     // Tell the collection view how many cells to make
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -419,7 +424,7 @@ extension LevelDesignViewController: UICollectionViewDataSource, UICollectionVie
         }
     }
 
-    // Make a cell for each cell index path
+    /// Make a cell for each cell index path
     func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -445,38 +450,3 @@ extension LevelDesignViewController: UICollectionViewDataSource, UICollectionVie
         }
     }
 }
-//
-//protocol BubbleRenderer {
-//
-//}
-//
-//extension BubbleRenderer {
-//    func getBubbleTypePath(type: BubbleType) -> String {
-//        switch type {
-//        case .red:
-//            return "bubble-red.png"
-//        case .blue:
-//            return "bubble-blue.png"
-//        case .orange:
-//            return "bubble-orange.png"
-//        case .green:
-//            return "bubble-green.png"
-//        case .empty:
-//            return "bubble-grey.png"
-//        case .erase:
-//            return "erase.png"
-//        case .bomb:
-//            return "bubble-bomb.png"
-//        case .indestructible:
-//            return "bubble-indestructible.png"
-//        case .star:
-//            return "bubble-star.png"
-//        case .lightning:
-//            return "bubble-lightning.png"
-//        case .invisible:
-//            return "bubble-transluent_white.png"
-//        case .chainsaw_bubble:
-//            return "bubble-indestructible.png"
-//        }
-//    }
-//}

@@ -10,7 +10,7 @@ import UIKit
 
 public class RenderEngine {
     private let diameter: CGFloat
-    private var gameplayArea: UIView
+    unowned private var gameplayArea: UIView
     var firingPosition: CGPoint
     let physicsEngine = PhysicsEngine()
     var cannonsView: [CannonView] = []
@@ -131,7 +131,7 @@ public class RenderEngine {
         let bubble = GameBubble(position: position, diameter: diameter, type: bubbleType)
         let newBubbleView = GameBubbleView(
             position: bubble.getRenderingPosition,
-            imageURL: Settings.selectedTheme.getBubbleTypePath(type: bubbleType),
+            imageUrl: Settings.selectedTheme.getBubbleTypePath(type: bubbleType),
             diameter: diameter)
         gameBubblesView[bubble] = newBubbleView
         gameplayArea.addSubview(newBubbleView.imageView)
@@ -139,14 +139,13 @@ public class RenderEngine {
         return bubble
     }
 
-    public func rerenderBubble(gameBubble: GameBubble) {
+    public func rerenderBubble(_ gameBubble: GameBubble) {
         guard let bubbleView = gameBubblesView[gameBubble] else {
             return
         }
         bubbleView.position = gameBubble.position
         bubbleView.rerender()
     }
-
 
     public func derenderBubble(_ bubble: GameBubble) {
         guard let bubbleView = gameBubblesView[bubble] else {
@@ -165,11 +164,25 @@ public class RenderEngine {
         let bubbleType = bubble.bubbleType
         let newBubbleView = GameBubbleView(
             position: bubble.getRenderingPosition,
-            imageURL: Settings.selectedTheme.getBubbleTypePath(type: bubbleType),
+            imageUrl: Settings.selectedTheme.getBubbleTypePath(type: bubbleType),
             diameter: diameter)
         newBubbleView.fadedBubble()
         gameBubblesView[bubble] = newBubbleView
         gameplayArea.addSubview(newBubbleView.imageView)
+    }
+
+    // TODO: NOT USED
+    // CAN BE USED FOR ROCKET
+    func rerenderBubbleImage(_ bubble: GameBubble) {
+        let bubbleType = bubble.bubbleType
+        guard let bubbleView = gameBubblesView[bubble] else {
+            return
+        }
+        let correctViewImage = Settings.selectedTheme.getBubbleTypePath(type: bubbleType)
+        guard correctViewImage != bubbleView.imageUrl else {
+            return
+        }
+        bubbleView.rerenderImage(imageUrl: correctViewImage)
     }
 
     // MARK: - Helper properties

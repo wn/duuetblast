@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bfG-bH-Yqe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DsL-fC-jsI">
     <device id="ipad11_0rounded" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -262,7 +262,7 @@
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3fv-im-cw8">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="203" height="272"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="203" height="294.5"/>
                                                                 </imageView>
                                                             </subviews>
                                                         </view>
@@ -346,6 +346,63 @@
             </objects>
             <point key="canvasLocation" x="895.68345323741016" y="135.678391959799"/>
         </scene>
+        <!--Start Game Controller-->
+        <scene sceneID="GDs-iB-31g">
+            <objects>
+                <viewController storyboardIdentifier="mainMenu" id="DsL-fC-jsI" customClass="StartGameController" customModule="Memeblast" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Wws-h4-ePt">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="MEMEBLAST" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ShR-E0-56c">
+                                <rect key="frame" x="132" y="537" width="571" height="120"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="100"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="CH4-SH-3hd">
+                                <rect key="frame" x="173" y="788" width="489" height="164"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pRk-bI-R6t">
+                                        <rect key="frame" x="0.0" y="0.0" width="489" height="72"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                        <state key="normal" title="Select Level"/>
+                                        <connections>
+                                            <action selector="selectLevel:" destination="DsL-fC-jsI" eventType="touchUpInside" id="uvf-c3-cNI"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MGi-n1-I0g">
+                                        <rect key="frame" x="0.0" y="92" width="489" height="72"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                        <state key="normal" title="Design Your Own Level"/>
+                                        <connections>
+                                            <action selector="designLevel:" destination="DsL-fC-jsI" eventType="touchUpInside" id="R9a-Sk-GQR"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <variation key="heightClass=regular-widthClass=regular" alignment="fill" axis="vertical" spacing="20"/>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="8XQ-MT-FfI"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="ShR-E0-56c"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="subviews">
+                                <include reference="ShR-E0-56c"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PKt-kU-Qt0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1867" y="138"/>
+        </scene>
         <!--LevelSelector-->
         <scene sceneID="ytB-oW-rvx">
             <objects>
@@ -357,8 +414,48 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Xy6-EI-HvP">
                                 <rect key="frame" x="0.0" y="24" width="834" height="1150"/>
                                 <subviews>
+                                    <view clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GwF-8y-YWK">
+                                        <rect key="frame" x="0.0" y="0.0" width="834" height="119.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8aI-Ag-6C3">
+                                                <rect key="frame" x="379" y="44" width="131" height="29.5"/>
+                                                <state key="normal" title="Back to main menu"/>
+                                                <connections>
+                                                    <action selector="renderMainMenu:" destination="bfG-bH-Yqe" eventType="touchUpInside" id="5Zs-vq-YW1"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" button="YES"/>
+                                        </accessibility>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="8aI-Ag-6C3" secondAttribute="bottom" constant="46" id="0e0-lr-Sri"/>
+                                            <constraint firstItem="8aI-Ag-6C3" firstAttribute="leading" secondItem="GwF-8y-YWK" secondAttribute="leading" constant="379" id="S0t-d3-e0Q"/>
+                                            <constraint firstItem="8aI-Ag-6C3" firstAttribute="top" secondItem="GwF-8y-YWK" secondAttribute="top" constant="44" id="ekd-2o-Ehb"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8aI-Ag-6C3" secondAttribute="trailing" constant="20" symbolic="YES" id="qmD-Y4-dEB"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="subviews">
+                                                <exclude reference="8aI-Ag-6C3"/>
+                                            </mask>
+                                            <mask key="constraints">
+                                                <exclude reference="0e0-lr-Sri"/>
+                                                <exclude reference="ekd-2o-Ehb"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <mask key="subviews">
+                                                <include reference="8aI-Ag-6C3"/>
+                                            </mask>
+                                            <mask key="constraints">
+                                                <include reference="0e0-lr-Sri"/>
+                                                <include reference="ekd-2o-Ehb"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tk5-no-VvO">
-                                        <rect key="frame" x="0.0" y="0.0" width="834" height="974"/>
+                                        <rect key="frame" x="0.0" y="119.5" width="834" height="1030.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="levelSelectionCell" id="HUP-l8-ebF" customClass="LevelSelectionTableViewCell" customModule="Memeblast" customModuleProvider="target">
@@ -368,8 +465,9 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="834" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WDa-mL-Spn">
-                                                            <rect key="frame" x="0.0" y="0.0" width="768" height="43.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WDa-mL-Spn">
+                                                            <rect key="frame" x="0.0" y="0.0" width="834" height="43.5"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <accessibility key="accessibilityConfiguration">
                                                                 <accessibilityTraits key="traits" button="YES" staticText="YES"/>
                                                             </accessibility>
@@ -378,12 +476,6 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <constraints>
-                                                        <constraint firstAttribute="trailing" secondItem="WDa-mL-Spn" secondAttribute="trailing" id="30K-VF-0r0"/>
-                                                        <constraint firstItem="WDa-mL-Spn" firstAttribute="top" secondItem="fAI-kG-Uw2" secondAttribute="top" id="K2Z-f8-hrY"/>
-                                                        <constraint firstAttribute="bottom" secondItem="WDa-mL-Spn" secondAttribute="bottom" id="LCd-FU-e2D"/>
-                                                        <constraint firstItem="WDa-mL-Spn" firstAttribute="leading" secondItem="fAI-kG-Uw2" secondAttribute="leading" id="rwV-is-6Lt"/>
-                                                    </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="levelName" destination="WDa-mL-Spn" id="RjT-xf-OfY"/>
@@ -397,20 +489,28 @@
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dkn-eX-7pF" userLabel="New Level">
                                         <rect key="frame" x="0.0" y="974" width="834" height="176"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="New Level"/>
                                         <connections>
                                             <action selector="createNewLevel:" destination="bfG-bH-Yqe" eventType="touchUpInside" id="HPG-DY-CXI"/>
                                         </connections>
                                     </button>
                                 </subviews>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <mask key="subviews">
+                                        <include reference="GwF-8y-YWK"/>
+                                        <exclude reference="dkn-eX-7pF"/>
+                                    </mask>
+                                </variation>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Xy6-EI-HvP" firstAttribute="trailing" secondItem="bMY-9m-Eba" secondAttribute="trailing" id="N7j-AY-n72"/>
-                            <constraint firstItem="Xy6-EI-HvP" firstAttribute="leading" secondItem="bMY-9m-Eba" secondAttribute="leading" id="PFi-qF-fno"/>
-                            <constraint firstItem="Xy6-EI-HvP" firstAttribute="top" secondItem="bMY-9m-Eba" secondAttribute="top" id="tSk-8E-i2i"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="Xy6-EI-HvP" secondAttribute="bottom" id="u4R-JK-XIY"/>
+                            <constraint firstItem="bMY-9m-Eba" firstAttribute="bottom" secondItem="Xy6-EI-HvP" secondAttribute="bottom" id="4a5-uN-aLf"/>
+                            <constraint firstItem="GwF-8y-YWK" firstAttribute="height" secondItem="oC3-IT-XQf" secondAttribute="height" multiplier="0.1" id="4dP-6d-QKu"/>
+                            <constraint firstItem="Xy6-EI-HvP" firstAttribute="top" secondItem="bMY-9m-Eba" secondAttribute="top" id="U8b-Xr-sHp"/>
+                            <constraint firstItem="Xy6-EI-HvP" firstAttribute="leading" secondItem="bMY-9m-Eba" secondAttribute="leading" id="bk1-6D-bxU"/>
+                            <constraint firstItem="bMY-9m-Eba" firstAttribute="trailing" secondItem="Xy6-EI-HvP" secondAttribute="trailing" id="mif-Mr-hJK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bMY-9m-Eba"/>
                     </view>

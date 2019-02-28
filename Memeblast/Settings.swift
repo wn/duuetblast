@@ -12,4 +12,8 @@ class Settings {
     static var isMusicOn = true
     static var selectedTheme = BubbleThemes.init(theme: .standard)
     static var musicPlayer = MusicPlayer()
+
+    static func playSoundWith(_ filename: String, loop: Int = 0, vol: Float = 1) {
+        musicPlayer.playSoundWith(filename, loop: loop, vol: vol)
+    }
 }

@@ -72,11 +72,6 @@ public class GameBubble: GameObject {
             }
         }
     }
-
-    var isSpecialBubble: Bool {
-        let specialBubbles: [BubbleType] = [.bomb, .indestructible, .star, .lightning]
-        return specialBubbles.contains(bubbleType)
-    }
 }
 
 enum MovementType {

@@ -19,6 +19,10 @@ public enum BubbleType: Int, CaseIterable {
     case erase = 9
     case invisible = 10
     case chainsaw_bubble = 11
+    case magnet = 12
+    case rocket = 13
+    case random = 14
+    case bin = 15
 
     var getBubbleIndex: Int {
         return self.rawValue
@@ -42,7 +46,7 @@ public enum BubbleType: Int, CaseIterable {
 
     var isPowerBubble: Bool {
         switch self {
-        case .bomb, .lightning, .star:
+        case .bomb, .lightning, .star, .random, .bin:
             return true
         default:
             return false
@@ -58,10 +62,23 @@ public enum BubbleType: Int, CaseIterable {
     }
 
     static var getAllPaletteBubbles: [BubbleType] {
-        return BubbleType.allCases.filter { $0.isNormalBubble || $0.isPowerBubble || $0 == .indestructible }
+        return BubbleType.allCases.filter {
+            $0.isNormalBubble
+                || $0.isPowerBubble
+                || $0 == .indestructible
+                || $0 == .magnet
+        }
     }
 
     static func isPlayableBubble(type: BubbleType) -> Bool {
         return BubbleType.getPowerBubbles.contains(type) || BubbleType.getNormalBubbles.contains(type)
+    }
+
+    static var getRandomBubble: BubbleType {
+        let randomBubble = getPowerBubbles.filter { $0 != .random}.randomElement()
+        guard let bubble = randomBubble else {
+            fatalError("There must be an existing power bubble other than random.")
+        }
+        return bubble
     }
 }

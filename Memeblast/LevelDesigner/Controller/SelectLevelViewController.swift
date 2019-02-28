@@ -49,26 +49,18 @@ extension SelectLevelViewController {
                 withIdentifier: "levelDesigner")
                 as! LevelDesignViewController
         levelDesignerController.loadGrid(levelName: selectedLevel)
-        self.present(levelDesignerController, animated: true, completion: nil)
+        renderChildController(levelDesignerController)
     }
 
     /// Button to create a new level.
-    @IBAction func createNewLevel(_ sender: Any) {
+    @IBAction func renderMainMenu(_ sender: Any) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let levelDesignerController =
+        let newVC =
             storyBoard.instantiateViewController(
-                withIdentifier: "levelDesigner")
-                as! LevelDesignViewController
-        let alert = UIAlertController(title: "Rectangular OR Isometric?", message: "FUCKING MODULE", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Rectangular", style: .default) { _ in
-            levelDesignerController.isRectGrid = true
-            self.present(levelDesignerController, animated: true, completion: nil)
-        })
-        alert.addAction(UIAlertAction(title: "Isometric", style: .default) { _ in
-            levelDesignerController.isRectGrid = false
-            self.present(levelDesignerController, animated: true, completion: nil)
-        })
-        self.present(alert, animated: true)
+                withIdentifier: "mainMenu")
+                as! StartGameController
+        derenderChildController(false)
+        renderChildController(newVC)
     }
 }
 

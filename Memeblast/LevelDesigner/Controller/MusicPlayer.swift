@@ -11,8 +11,12 @@ import AVFoundation
 
 class MusicPlayer {
     var audioPlayer: [AVAudioPlayer] = []
+    var isMusicActive: Bool = true
 
     func playSoundWith(_ filename: String, loop: Int = 0, vol: Float = 1) {
+        guard isMusicActive else {
+            return
+        }
         let audioSourceUrl = Bundle.main.url(forResource: filename, withExtension: Constants.music_ext)
         var playingMusics = audioPlayer.filter { $0.isPlaying }
 
@@ -23,7 +27,7 @@ class MusicPlayer {
         do {
             let musicPlayer = try AVAudioPlayer.init(contentsOf: audioUrl)
             musicPlayer.prepareToPlay()
-            musicPlayer.numberOfLoops = loop // infinite loop
+            musicPlayer.numberOfLoops = loop
             musicPlayer.volume = vol
             musicPlayer.play()
             playingMusics.append(musicPlayer)
@@ -31,6 +35,20 @@ class MusicPlayer {
         } catch {
             print("NO MUSIC for \(filename)")
             return
+        }
+    }
+
+    func stopAllMusic() {
+        isMusicActive = false
+        for player in audioPlayer {
+            player.stop()
+        }
+    }
+
+    func playAllMusic() {
+        isMusicActive = true
+        for player in audioPlayer {
+            player.play()
         }
     }
 }

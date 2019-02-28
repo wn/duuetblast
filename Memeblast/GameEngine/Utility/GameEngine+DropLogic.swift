@@ -28,7 +28,7 @@ extension GameEngine {
         bubble.index = minNeighbourIndex
         return delegate.setBubbleTypeAndGetPosition(
             bubbleType: bubble.bubbleType,
-            indexPath: delegate.getIndexPathAtIndex(index: minNeighbourIndex))
+            index: minNeighbourIndex)
     }
 
     public func getNearestEmptyNeighbourIndex(topLeftPoint: CGPoint, collidedBubbleIndex: Int) -> Int? {

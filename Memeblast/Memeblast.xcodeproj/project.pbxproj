@@ -56,6 +56,8 @@
 		EB9422912225B52E00D31C73 /* bounce.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EB9422902225B52E00D31C73 /* bounce.mp3 */; };
 		EB9422952227AE4200D31C73 /* BubbleThemes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9422942227AE4200D31C73 /* BubbleThemes.swift */; };
 		EB9422972227B06A00D31C73 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9422962227B06A00D31C73 /* Settings.swift */; };
+		EB94229B2227E51400D31C73 /* UIViewController+Render.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB94229A2227E51400D31C73 /* UIViewController+Render.swift */; };
+		EB94229E222833BF00D31C73 /* StartGameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB94229D222833BF00D31C73 /* StartGameController.swift */; };
 		EB9AE2A62222CE0A009BC786 /* GameLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9AE2A52222CE0A009BC786 /* GameLayout.swift */; };
 		EB9AE2A82222CF07009BC786 /* RectLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9AE2A72222CF07009BC786 /* RectLayout.swift */; };
 		EB9AE2AA2222D408009BC786 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9AE2A92222D408009BC786 /* GridLayout.swift */; };
@@ -137,6 +139,8 @@
 		EB9422902225B52E00D31C73 /* bounce.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bounce.mp3; path = ../../../../../../Desktop/bounce.mp3; sourceTree = "<group>"; };
 		EB9422942227AE4200D31C73 /* BubbleThemes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleThemes.swift; sourceTree = "<group>"; };
 		EB9422962227B06A00D31C73 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		EB94229A2227E51400D31C73 /* UIViewController+Render.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Render.swift"; sourceTree = "<group>"; };
+		EB94229D222833BF00D31C73 /* StartGameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartGameController.swift; sourceTree = "<group>"; };
 		EB9AE2A52222CE0A009BC786 /* GameLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLayout.swift; sourceTree = "<group>"; };
 		EB9AE2A72222CF07009BC786 /* RectLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectLayout.swift; sourceTree = "<group>"; };
 		EB9AE2A92222D408009BC786 /* GridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
@@ -391,9 +395,11 @@
 		EB8B3872221D137000E1CD5A /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				EB94229C222833A600D31C73 /* Controller */,
 				EB8B3873221D138200E1CD5A /* Level */,
 				EB342BA722058498004537E5 /* Layouts */,
 				EB5A1C6E22070E94005F1DA1 /* Bubbles */,
+				EB94229A2227E51400D31C73 /* UIViewController+Render.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -405,6 +411,14 @@
 				EB8B38562211635D00E1CD5A /* LevelGame.swift */,
 			);
 			path = Level;
+			sourceTree = "<group>";
+		};
+		EB94229C222833A600D31C73 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				EB94229D222833BF00D31C73 /* StartGameController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		EB9AE2AB2222DA6F009BC786 /* Isometric */ = {
@@ -589,6 +603,7 @@
 				EB5A1C4F2206AD5D005F1DA1 /* PaletteBubbles.swift in Sources */,
 				EB8B384E221043A200E1CD5A /* GameBubble.swift in Sources */,
 				EB5A1C95220730DC005F1DA1 /* LevelDesignerData.xcdatamodeld in Sources */,
+				EB94229B2227E51400D31C73 /* UIViewController+Render.swift in Sources */,
 				EB342BA422044FBC004537E5 /* GameBubbleCollectionViewCell.swift in Sources */,
 				EB342BA622044FCC004537E5 /* PaletteBubbleCollectionViewCell.swift in Sources */,
 				EB94227522258D0100D31C73 /* MusicPlayer.swift in Sources */,
@@ -615,6 +630,7 @@
 				EB8B3870221BDBF500E1CD5A /* IsometricLayout.swift in Sources */,
 				EB5A1C4D2206AD02005F1DA1 /* GridBubble.swift in Sources */,
 				EB8B386E221AD6FC00E1CD5A /* GameEngine+DropLogic.swift in Sources */,
+				EB94229E222833BF00D31C73 /* StartGameController.swift in Sources */,
 				EB9AE2A82222CF07009BC786 /* RectLayout.swift in Sources */,
 				EB0F2ACF2208B42B000A5770 /* SelectLevelViewController.swift in Sources */,
 				EB0F292C2202C2DF000EC7D6 /* BubbleCollectionViewCell.swift in Sources */,

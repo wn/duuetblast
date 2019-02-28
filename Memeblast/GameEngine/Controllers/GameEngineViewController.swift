@@ -10,11 +10,11 @@ import UIKit
 
 class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
     var isDualCannon = false
-    @IBOutlet private var statusView: UIView!
+    @IBOutlet private weak var statusView: UIView!
 
     var isRectGrid = true
 
-    @IBOutlet private var gameBubbleCollection: UICollectionView!
+    @IBOutlet private weak var gameBubbleCollection: UICollectionView!
 
     private let gameEngineBubbleCellIdentifier = "gameEngineBubbleCell"
     lazy var currentLevel = LevelGame(totalBubbles: gameLayout.totalNumberOfBubble, fillType: .invisible, isRect: isRectGrid)
@@ -28,13 +28,7 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
         return IsometricLayout(rows: Constants.numOfRows, firstRowCol: Constants.numOfCols)
     }
 
-    lazy private var gameEngine = GameEngine(
-        gameplayArea: gameBubbleCollection,
-        radius: bubbleRadius,
-        firingPosition: firingPosition,
-        gameoverLine: gameoverLine,
-        gameLayout: gameLayout,
-        isDualCannon: isDualCannon)
+    private weak var gameEngine: GameEngine?
 
     private var gameoverLine: CGFloat {
         let numOfGridBubbles = gameBubbleCollection.numberOfItems(inSection: 0)
@@ -77,15 +71,10 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
         }
 
         func setupTap(view: UIView) {
-            // For firing bubble from cannon
-            let singleTapForGameplayArea = UITapGestureRecognizer(target: self, action: #selector(fireBubble(_:)))
-            singleTapForGameplayArea.delegate = self
-            view.addGestureRecognizer(singleTapForGameplayArea)
-
-            // For setting cannon angle
-            let panningForGameplayArea = UIPanGestureRecognizer(target: self, action: #selector(changeAngle(_:)))
-            panningForGameplayArea.delegate = self
-            view.addGestureRecognizer(panningForGameplayArea)
+            let longPressForGameplayArea = UILongPressGestureRecognizer(target: self, action: #selector(fireBubble(_:)))
+            longPressForGameplayArea.delegate = self
+            longPressForGameplayArea.minimumPressDuration = 0
+            view.addGestureRecognizer(longPressForGameplayArea)
         }
 
         if isDualCannon {
@@ -95,7 +84,17 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
             setupTap(view: gameBubbleCollection)
         }
 
-        gameEngine.gameDelegate = self
+        let gameEngineTemp = GameEngine(
+            gameplayArea: gameBubbleCollection,
+            radius: bubbleRadius,
+            firingPosition: firingPosition,
+            gameoverLine: gameoverLine,
+            gameLayout: gameLayout,
+            isDualCannon: isDualCannon)
+
+        gameEngine = gameEngineTemp
+
+        gameEngine?.gameDelegate = self
         restartLevel()
     }
 
@@ -106,24 +105,15 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
     }
 
     @objc
-    private func fireBubble(_ sender: UITapGestureRecognizer) {
-        gameEngine.fireBubble(fireTowards: sender.location(in: gameBubbleCollection))
-    }
-
-    @objc
-    func changeAngle(_ sender : UIPanGestureRecognizer) {
+    private func fireBubble(_ sender: UILongPressGestureRecognizer) {
         let pos = sender.location(in: gameBubbleCollection)
-//        let gameHeight = gameBubbleCollection.frame.height
-//        guard pos.y < gameHeight - Constants.cannonHeight else {
-//            return
-//        }
         guard sender.view != nil else {return}
         switch sender.state {
 
         case .possible, .began, .changed:
-            gameEngine.changeCannonAngle(pos)
+            gameEngine?.changeCannonAngle(pos)
         case .ended:
-            gameEngine.fireBubble(fireTowards: pos)
+            gameEngine?.fireBubble(fireTowards: pos)
         default:
             break
         }
@@ -152,16 +142,14 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
     }
 
     func restartLevel() {
-        guard let loadedLevel = loadedLevel else {
+        guard let loadedLevel = loadedLevel, let gameEngine = gameEngine else {
             fatalError("Level must be loaded before it can be restarted.")
         }
 
         gameEngine.restartEngine()
         setupLevel(level: loadedLevel)
         gameEngine.setupLevel(level: loadedLevel.clone())
-        for cannon in gameEngine.cannons {
-            gameEngine.generateFiringBubble(cannon: cannon)
-        }
+        gameEngine.cannons.forEach { gameEngine.generateFiringBubble(cannon: $0) }
         for index in 0..<gameLayout.totalNumberOfBubble {
             // Apparently reloadData doesn't work here.
             reload(index: index)
@@ -169,17 +157,7 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
     }
 
     @IBAction func backToLevelSelector(_ sender: UIButton) {
-        guard let loadedLevel = loadedLevel else {
-            return
-        }
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let levelDesignerController =
-            storyBoard.instantiateViewController(
-                withIdentifier: "levelDesigner")
-                as! LevelDesignViewController
-        levelDesignerController.isRectGrid = isRectGrid
-        levelDesignerController.loadGrid(level: loadedLevel)
-        self.present(levelDesignerController, animated: true, completion: nil)
+        derenderChildController()
     }
 
     /// Function to load background
@@ -241,7 +219,8 @@ extension GameEngineViewController: UIGameDelegate {
     }
 
     /// Precondition: indexPath must be in game!
-    internal func setBubbleTypeAndGetPosition(bubbleType: BubbleType, indexPath: IndexPath) -> CGPoint? {
+    internal func setBubbleTypeAndGetPosition(bubbleType: BubbleType, index: Int) -> CGPoint? {
+        let indexPath = getIndexPathAtIndex(index: index)
         currentLevel.setBubbleTypeAtIndex(index: indexPath.item, bubbleType: bubbleType)
         UIView.performWithoutAnimation {
             gameBubbleCollection.reloadItems(at: [indexPath])
@@ -262,7 +241,7 @@ public protocol UIGameDelegate: class {
     var currentLevel: LevelGame { get }
     func reload(index: Int)
     func getPositionAtIndex(index: Int) -> CGPoint?
-    func setBubbleTypeAndGetPosition(bubbleType: BubbleType, indexPath: IndexPath) -> CGPoint?
+    func setBubbleTypeAndGetPosition(bubbleType: BubbleType, index: Int) -> CGPoint?
     func getIndexPathAtIndex(index: Int) -> IndexPath
     func getIndexPathAtPoint(point: CGPoint) -> IndexPath?
     func present(_ alert: UIAlertController, animated: Bool)
