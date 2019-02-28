@@ -32,6 +32,9 @@ public class CannonObject: GameObject {
         bubbleToFire.setVelocity(speed: CannonObject.firingVelocity, angle: angle)
         firingBubble = nil
         delegate?.movingFiringBubble(bubbleToFire)
+        guard let gameEngine = delegate, !gameEngine.gameOver else {
+            return
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
             self.delegate?.generateFiringBubble(cannon: self)
         }

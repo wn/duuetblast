@@ -9,7 +9,6 @@
 import UIKit
 
 class RectViewLayout: GridLayout {
-    let gameLayout = RectLayout(rows: Constants.numOfRows, firstRowCol: Constants.numOfCols)
     override func prepare() {
         func addFrameToAttributeAndCache(frame: CGRect, indexPath: IndexPath) {
             let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)

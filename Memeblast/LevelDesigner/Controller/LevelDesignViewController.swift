@@ -151,7 +151,7 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate {
             storyBoard.instantiateViewController(
                 withIdentifier: "gameEngine")
                 as! GameEngineViewController
-        print(CFGetRetainCount(gameEngineController))
+
         // isRectGrid MUST be set before loadedLevel or else
         // bad things will happen
         gameEngineController.isRectGrid = isRectGrid
@@ -305,7 +305,7 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate {
     private func loadBackground() {
         let gameViewHeight = gameArea.frame.size.height
         let gameViewWidth = gameArea.frame.size.width
-        let backgroundImage = UIImage(named: "background.png")
+        let backgroundImage = UIImage(named: Constants.background)
         let background = UIImageView(image: backgroundImage)
         background.frame = CGRect(x: 0, y: 0, width: gameViewWidth, height: gameViewHeight)
         gameArea.addSubview(background)

@@ -9,34 +9,25 @@
 import UIKit
 
 class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
-    var isDualCannon = false
+    // UI outlets
     @IBOutlet private weak var statusView: UIView!
+    @IBOutlet private weak var timeLabel: UILabel!
 
-    var isRectGrid = true
-
-    @IBOutlet private weak var gameBubbleCollection: UICollectionView!
-
-    private let gameEngineBubbleCellIdentifier = "gameEngineBubbleCell"
+    // MARK: Level's settings
     lazy var currentLevel = LevelGame(totalBubbles: gameLayout.totalNumberOfBubble, fillType: .invisible, isRect: isRectGrid)
-
     var loadedLevel: LevelGame?
+
+    // MARK: Layout properties
+    var isDualCannon = false
+    @IBOutlet private weak var gameBubbleCollection: UICollectionView!
+    private let gameEngineBubbleCellIdentifier = "gameEngineBubbleCell"
+    var isRectGrid = true
 
     var gameLayout: GameLayout {
         if isRectGrid {
             return RectLayout(rows: Constants.numOfRows, firstRowCol: Constants.numOfCols)
         }
         return IsometricLayout(rows: Constants.numOfRows, firstRowCol: Constants.numOfCols)
-    }
-
-    private weak var gameEngine: GameEngine?
-
-    private var gameoverLine: CGFloat {
-        let numOfGridBubbles = gameBubbleCollection.numberOfItems(inSection: 0)
-        let lastBubbleIndexPath = getIndexPathAtIndex(index: numOfGridBubbles - 1)
-        guard let lastBubbleFrame = gameBubbleCollection.layoutAttributesForItem(at: lastBubbleIndexPath)?.frame else {
-            fatalError("There must be a last bubble!")
-        }
-        return lastBubbleFrame.origin.y + 2 * bubbleRadius
     }
 
     var viewLayout: GridLayout {
@@ -48,6 +39,16 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
         return result
     }
 
+    private var gameoverLine: CGFloat {
+        let numOfGridBubbles = gameBubbleCollection.numberOfItems(inSection: 0)
+        let lastBubbleIndexPath = getIndexPathAtIndex(index: numOfGridBubbles - 1)
+        guard let lastBubbleFrame = gameBubbleCollection.layoutAttributesForItem(at: lastBubbleIndexPath)?.frame else {
+            fatalError("There must be a last bubble!")
+        }
+        return lastBubbleFrame.origin.y + 2 * bubbleRadius
+    }
+
+    private var gameEngine: GameEngine?
     override func viewDidLoad() {
         super.viewDidLoad()
         loadBackground()
@@ -119,6 +120,17 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        // We have to set game over to be true as game engine
+        // contains async code, which does variable capturing.
+        // Failure to set game over to be true will cause
+        // memory leak.
+        gameEngine?.completedGame(.falling)
+        gameEngine?.gameOver = true
+    }
+
 
     // Get center of firing position
     public var firingPosition: CGPoint {
@@ -164,7 +176,7 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
     private func loadBackground() {
         let gameViewHeight = self.view.frame.size.height
         let gameViewWidth = self.view.frame.size.width
-        let backgroundImage = UIImage(named: "background.png")
+        let backgroundImage = UIImage(named: Constants.background)
         let background = UIImageView(image: backgroundImage)
         background.frame = CGRect(x: 0, y: 0, width: gameViewWidth, height: gameViewHeight)
         self.view.addSubview(background)
@@ -205,21 +217,21 @@ extension GameEngineViewController: GridLayoutDelegate {
 
 /// Helper functions for Collection View
 extension GameEngineViewController: UIGameDelegate {
-    internal func present(_ alert: UIAlertController, animated: Bool) {
+    func present(_ alert: UIAlertController, animated: Bool) {
         super.present(alert, animated: animated)
     }
 
-    internal func reload(index: Int) {
+    func reload(index: Int) {
         let indexPath = getIndexPathAtIndex(index: index)
         gameBubbleCollection.reloadItems(at: [indexPath])
     }
 
-    internal func getPositionAtIndex(index: Int) -> CGPoint? {
+    func getPositionAtIndex(index: Int) -> CGPoint? {
         return gameBubbleCollection.layoutAttributesForItem(at: getIndexPathAtIndex(index: index))?.frame.origin
     }
 
     /// Precondition: indexPath must be in game!
-    internal func setBubbleTypeAndGetPosition(bubbleType: BubbleType, index: Int) -> CGPoint? {
+    func setBubbleTypeAndGetPosition(bubbleType: BubbleType, index: Int) -> CGPoint? {
         let indexPath = getIndexPathAtIndex(index: index)
         currentLevel.setBubbleTypeAtIndex(index: indexPath.item, bubbleType: bubbleType)
         UIView.performWithoutAnimation {
@@ -228,12 +240,18 @@ extension GameEngineViewController: UIGameDelegate {
         return gameBubbleCollection.layoutAttributesForItem(at: indexPath)?.frame.origin
     }
 
-    internal func getIndexPathAtIndex(index: Int) -> IndexPath {
+    func getIndexPathAtIndex(index: Int) -> IndexPath {
         return IndexPath(item: index, section: 0)
     }
 
-    internal func getIndexPathAtPoint(point: CGPoint) -> IndexPath? {
+    func getIndexPathAtPoint(point: CGPoint) -> IndexPath? {
         return self.gameBubbleCollection?.indexPathForItem(at: point)
+    }
+
+    func setTime(seconds: Int) {
+        let min = seconds / 60
+        let sec = seconds % 60
+        timeLabel.text = "Time left: \(min) min \(sec) seconds"
     }
 }
 
@@ -246,4 +264,5 @@ public protocol UIGameDelegate: class {
     func getIndexPathAtPoint(point: CGPoint) -> IndexPath?
     func present(_ alert: UIAlertController, animated: Bool)
     func restartLevel()
+    func setTime(seconds: Int)
 }

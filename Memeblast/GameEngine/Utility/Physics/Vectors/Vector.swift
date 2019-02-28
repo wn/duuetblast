@@ -27,6 +27,11 @@ public class Vector {
         yDirection = 0
     }
 
+    public init(_ point: CGPoint) {
+        xDirection = point.x
+        yDirection = point.y
+    }
+
     public var isNull: Bool {
         return xDirection == 0 && yDirection == 0
     }
@@ -51,11 +56,6 @@ public class Vector {
         return Vector(
             xDirection: right.xDirection * CGFloat(left),
             yDirection: right.yDirection * CGFloat(left))
-    }
-
-    public init(_ point: CGPoint) {
-        xDirection = point.x
-        yDirection = point.y
     }
 }
 

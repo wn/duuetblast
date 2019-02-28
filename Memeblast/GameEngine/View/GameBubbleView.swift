@@ -22,6 +22,7 @@ class GameBubbleView {
         let image = UIImage(named: imageUrl)
         imageView = UIImageView(frame: CGRect(x: position.x, y: position.y, width: diameter, height: diameter))
         imageView.image = image
+        imageView.transform = CGAffineTransform(rotationAngle: 0)
 
         rerender()
     }
@@ -33,14 +34,6 @@ class GameBubbleView {
         let xCoordinate = position.x - radius
         let yCoordinate = position.y - radius
         imageView.frame.origin = CGPoint(x: xCoordinate, y: yCoordinate)
-    }
-
-    func rerenderImage(imageUrl: String) {
-        self.imageUrl = imageUrl
-        let image = UIImage(named: imageUrl)
-        imageView = UIImageView(frame: CGRect(x: position.x, y: position.y, width: diameter, height: diameter))
-        imageView.image = image
-        print("LOL")
     }
 
     func fadedBubble() {
