@@ -6,7 +6,8 @@
 //  Copyright © 2019 nus.cs3217.a0164178x. All rights reserved.
 //
 
-import CoreGraphics
+import UIKit
+
 
 class Constants {
     static let cannonHeight: CGFloat = 200
@@ -17,7 +18,7 @@ class Constants {
 
     // MARK: - Background
     // TODO: Dark theme and light theme
-    static let background = "background-bridge.jpg"
+    static let background = "background-hill.png"
 
     // MARK: - Music
     static let music_ext = ".mp3"

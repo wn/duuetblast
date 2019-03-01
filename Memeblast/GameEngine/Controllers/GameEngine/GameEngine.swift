@@ -78,8 +78,8 @@ public class GameEngine {
         // TODO: FEATURES!!!!!!!!
         // HAVE FLAG IN LEVEL SELECTOR
         generateChainBubble()
-        spawnRandomBubble()
-        startTimer(seconds: 10)
+        spawnRandomBubble(time: 5)
+        startTimer(seconds: 120)
 
         dropNonAttachedBubbles()
     }
@@ -151,11 +151,11 @@ public class GameEngine {
     }
 
     /// Randomly spawn a connected bubble
-    func spawnRandomBubble() {
+    func spawnRandomBubble(time: Double) {
         guard !gameOver else {
             return
         }
-        DispatchQueue.main.asyncAfter(wallDeadline: .now() + 5.0) { [weak self] () in
+        DispatchQueue.main.asyncAfter(wallDeadline: .now() + time) { [weak self] () in
             guard let strongself = self else { return }
             var connected = strongself.isAttachedBubbles()
             while let bubble = connected.randomElement(), let index = bubble.index {
@@ -183,7 +183,7 @@ public class GameEngine {
                 break
             }
 
-            strongself.spawnRandomBubble()
+            strongself.spawnRandomBubble(time: time)
         }
     }
 

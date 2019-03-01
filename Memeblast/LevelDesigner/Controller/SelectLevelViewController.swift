@@ -18,6 +18,9 @@ class SelectLevelViewController: UIViewController, UIGestureRecognizerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        Settings.loadBackground(view: view)
+
         loadSavedLevel()
         // Add single tap gesture for color selector
         let singleTapForLevel = UITapGestureRecognizer(target: self, action: #selector(handleLevelSelected(_:)))

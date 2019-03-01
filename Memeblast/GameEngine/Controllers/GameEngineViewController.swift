@@ -51,7 +51,7 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
     private var gameEngine: GameEngine?
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadBackground()
+        Settings.loadBackground(view: view)
 
         gameBubbleCollection!.collectionViewLayout = viewLayout
 
@@ -170,17 +170,6 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
 
     @IBAction func backToLevelSelector(_ sender: UIButton) {
         derenderChildController()
-    }
-
-    /// Function to load background
-    private func loadBackground() {
-        let gameViewHeight = self.view.frame.size.height
-        let gameViewWidth = self.view.frame.size.width
-        let backgroundImage = UIImage(named: Constants.background)
-        let background = UIImageView(image: backgroundImage)
-        background.frame = CGRect(x: 0, y: 0, width: gameViewWidth, height: gameViewHeight)
-        self.view.addSubview(background)
-        self.view.sendSubviewToBack(background)
     }
 }
 

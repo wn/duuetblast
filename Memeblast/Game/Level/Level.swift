@@ -13,6 +13,7 @@ public class Level {
     var gridBubbles: [GridBubble] = []
     var emptyType: BubbleType
     let isRect: Bool
+    var levelName: String?
 
     public init(totalBubbles: Int, fillType: BubbleType, isRect: Bool) {
         self.isRect = isRect
@@ -61,6 +62,7 @@ public class Level {
     /// Save level to database.
     public func saveGridBubblesToDatabase(name: String, isRectGrid: Bool) {
         let levelData = LevelData(name: name, isRect: isRectGrid)
+        levelName = name
 
         levelData.saveBubbles(bubbles: gridBubbles)
     }

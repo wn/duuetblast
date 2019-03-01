@@ -13,6 +13,8 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet private var gameArea: UIView!
     @IBOutlet private var paletteViewArea: UIView!
 
+    @IBOutlet var startButton: UIButton!
+
     var isRectGrid = false
 
     var dualCannon: Bool {
@@ -51,7 +53,7 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadBackground()
+        Settings.loadBackground(view: view)
 
         gameBubbleCollection!.collectionViewLayout = viewLayout
 
@@ -80,6 +82,16 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate {
         panningGameBubble.minimumNumberOfTouches = 1
         panningGameBubble.maximumNumberOfTouches = 1
         gameBubbleCollection.addGestureRecognizer(panningGameBubble)
+
+        setStartName(levelName)
+    }
+
+    private func setStartName(_ name: String?) {
+        guard let name = name else {
+            startButton.setTitle("START", for: .normal)
+            return
+        }
+        startButton.setTitle("START - \(name)", for: .normal)
     }
 
     @IBAction func startGame(_ sender: UIButton) {
@@ -271,6 +283,7 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate {
             try context.save()
             confirmAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.levelName = levelName
+            setStartName(levelName)
         } catch {
             title = "Saving failed"
             message = "Try again. If problem persist, just minus marks...."
@@ -301,29 +314,9 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
 
-    /// Function to load background
-    private func loadBackground() {
-        let gameViewHeight = gameArea.frame.size.height
-        let gameViewWidth = gameArea.frame.size.width
-        let backgroundImage = UIImage(named: Constants.background)
-        let background = UIImageView(image: backgroundImage)
-        background.frame = CGRect(x: 0, y: 0, width: gameViewWidth, height: gameViewHeight)
-        gameArea.addSubview(background)
-        gameArea.sendSubviewToBack(background)
-    }
-
     /// Present the level selector storyboard to user.
     private func presentLevelSelector() {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let newVC =
-            storyBoard.instantiateViewController(
-                withIdentifier: "levelSelector")
-                as! SelectLevelViewController
-        guard let parent = parent else {
-            return
-        }
         derenderChildController(true)
-        parent.renderChildController(newVC)
     }
 
     // Present the alert indicating that saving of data has failed.
