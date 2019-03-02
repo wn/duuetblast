@@ -34,8 +34,6 @@ class SelectLevelViewController: UIViewController, UIGestureRecognizerDelegate {
         let singleTapForLevel = UITapGestureRecognizer(target: self, action: #selector(handleLevelSelected(_:)))
         singleTapForLevel.delegate = self
         levelSelectorCollection.addGestureRecognizer(singleTapForLevel)
-
-        levelSelectorCollection.collectionViewLayout = UICollectionViewFlowLayout()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -81,16 +79,7 @@ extension SelectLevelViewController {
         gameEngineController.isDualCannon = true
         renderChildController(gameEngineController)
 
-        // For editing of level
-//        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//        let levelDesignerController =
-//            storyBoard.instantiateViewController(
-//                withIdentifier: "levelDesigner")
-//                as! LevelDesignViewController
-//        levelDesignerController.loadGrid(levelName: levelName)
-//        renderChildController(levelDesignerController)
     }
-
     /// Button to create a new level.
     @IBAction func renderMainMenu(_ sender: Any) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)

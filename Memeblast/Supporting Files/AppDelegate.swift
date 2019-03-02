@@ -10,7 +10,6 @@
 
 import UIKit
 import CoreData
-import AVFoundation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

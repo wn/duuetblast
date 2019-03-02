@@ -199,7 +199,6 @@ class LevelDesignViewController: UIViewController {
         // Remove time and all empty bubbles
         let timeString = timeLabel?.text
         timeLabel?.text = ""
-        currentLevel.setEmptyCells(type: .invisible)
 
         gameBubbleCollection.reloadData()
         UIGraphicsBeginImageContext(gameBubbleCollection.frame.size)
@@ -211,7 +210,6 @@ class LevelDesignViewController: UIViewController {
         UIGraphicsEndImageContext()
 
         // Show time and all empty bubbles
-        currentLevel.setEmptyCells(type: .empty)
         gameBubbleCollection.reloadData()
         timeLabel?.text = timeString
         return screenshot
