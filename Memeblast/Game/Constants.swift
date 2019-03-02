@@ -58,4 +58,20 @@ class Constants {
         .random: "bubble-random.png",
         .bin: "bubble-bin.png",
     ]
+
+    // MARK: - Gameplay scoring
+    static let initialScore = 10000
+    static let unattachedBubble = 293
+    static let firingBubble = -300
+    static let matchBubble = 373
+    static let binBubble = 524
+    static let starBubble = 337
+    static let bombScore = 412
+    static let lightningScore = 237
+    static let rocketScore = 282
+
+    // MARK: Gameplay time
+    static let randomBubbleInterval: Double = 10
+    // Used when instantiating new level and timestepper isnt rendered yet.
+    static let defaultTime = 100
 }

@@ -12,8 +12,11 @@ import CoreData
 public class Level {
     var gridBubbles: [GridBubble] = []
     var emptyType: BubbleType
-    let isRect: Bool
+    var isRect: Bool
     var levelName: String?
+    var time: Int = Constants.defaultTime
+    var highscore: Int = 0
+    var screenshot: Data?
 
     public init(totalBubbles: Int, fillType: BubbleType, isRect: Bool) {
         self.isRect = isRect
@@ -59,10 +62,26 @@ public class Level {
         gridBubbles.forEach { $0.bubbleType = type }
     }
 
+    public func saveHighScore(score: Int) {
+        guard let levelName = levelName, let screenshot = screenshot else {
+            return
+        }
+        guard score > 0, score > highscore else {
+            return
+        }
+        highscore = score
+        saveGridBubblesToDatabase(name: levelName, isRectGrid: isRect, time: time, screenshot: screenshot, highscore: score)
+    }
+
     /// Save level to database.
-    public func saveGridBubblesToDatabase(name: String, isRectGrid: Bool) {
-        let levelData = LevelData(name: name, isRect: isRectGrid)
+    public func saveGridBubblesToDatabase(name: String, isRectGrid: Bool, time: Int, screenshot: Data, highscore: Int = 0) {
+        // If level exist, we delete it.
+        _ = LevelData.deleteLevel(name: name)
+
+        let levelData = LevelData(name: name, isRect: isRectGrid, time: Int16(time), highscore: Int32(highscore), screenshot: screenshot)
         levelName = name
+        self.time = time
+        self.screenshot = screenshot
 
         levelData.saveBubbles(bubbles: gridBubbles)
     }

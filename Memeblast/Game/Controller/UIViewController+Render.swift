@@ -13,15 +13,20 @@ extension UIViewController: UIViewControllerTransitioningDelegate {
         self.addChild(child)
         view.addSubview(child.view)
         didMove(toParent: self)
+        child.viewWillAppear(true)
     }
 
 
     func derenderChildController(_ moveToParent: Bool = true) {
+        guard let parent = self.parent else {
+            return
+        }
         view.removeFromSuperview()
         removeFromParent()
         guard moveToParent else {
             return
         }
         willMove(toParent: nil)
+        parent.viewWillAppear(true)
     }
 }

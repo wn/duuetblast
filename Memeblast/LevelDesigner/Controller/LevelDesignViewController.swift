@@ -9,25 +9,64 @@ import UIKit
 import AVFoundation
 import CoreData
 
-class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate {
+class LevelDesignViewController: UIViewController {
     @IBOutlet private var gameArea: UIView!
     @IBOutlet private var paletteViewArea: UIView!
 
     @IBOutlet var startButton: UIButton!
 
-    var isRectGrid = false
-
-    var dualCannon: Bool {
-        return isDualCannon.isOn
-    }
-
-    @IBOutlet var isDualCannon: UISwitch!
+    @IBOutlet var timeStepper: UIStepper!
+    @IBOutlet var numOfPlayer: UISegmentedControl!
 
     @IBOutlet private var colorSelectorCollection: UICollectionView!
     let paletteCellIdentifier = "paletteSelectorBubbleCell"
 
     @IBOutlet private var gameBubbleCollection: UICollectionView!
     let gameBubbleCellIdentifier = "gameBubbleCell"
+
+    @IBAction func timeSetting(_ sender: UIStepper) {
+        let time = Int(sender.value)
+        timeLabel?.text = "Time: \(Int(time))"
+        self.time = time
+        currentLevel.time = time
+    }
+
+    @IBAction func startGame(_ sender: UIButton) {
+        guard !currentLevel.isEmpty else {
+            emptyGridAlert()
+            return
+        }
+        guard haveBubbleConnectedToTopWall else {
+            noFirstRowAlert()
+            return
+        }
+        guard containsPlayableBubble else {
+            noPlayableBubbleAlert()
+            return
+        }
+        Settings.playSoundWith(Constants.start_game_sound)
+        transitToGame()
+    }
+
+    /// Button to load level. Switch to levelSelector view.
+    @IBAction func loadLevel(_ sender: UIButton) {
+        if !currentLevel.isEmpty {
+            loseCurrentDataAlert()
+        } else {
+            presentLevelSelector()
+        }
+    }
+
+    var timeLabel: UILabel?
+    lazy var time: Int = currentLevel.time
+    var isRectGrid = false
+    let paletteBubbles = PaletteBubbles()
+    var levelName: String?
+
+    var dualCannon: Bool {
+        // TODO: ADD TO CORE DATA
+        return numOfPlayer.selectedSegmentIndex == 1
+    }
 
     lazy var currentLevel = LevelGame(totalBubbles: gameLayout.totalNumberOfBubble, fillType: .empty, isRect: isRectGrid)
     
@@ -47,68 +86,32 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate {
         return result
     }
 
-    let paletteBubbles = PaletteBubbles()
-
-    var levelName: String?
-
     override func viewDidLoad() {
         super.viewDidLoad()
         Settings.loadBackground(view: view)
 
         gameBubbleCollection!.collectionViewLayout = viewLayout
 
-        // The following blocks are for adding gestures:
+        addGestures()
 
-        // Add single tap gesture for color selector
-        let singleTapForPalette = UITapGestureRecognizer(target: self, action: #selector(handlePaletteTap(_:)))
-        singleTapForPalette.delegate = self
-        colorSelectorCollection.addGestureRecognizer(singleTapForPalette)
+        // Render time label
+        let frameWidth = gameBubbleCollection.frame.width
+        let frameHeight = gameBubbleCollection.frame.height
+        let posX = frameWidth / 2
+        let posY = 5 * frameHeight / 6
+        let timeLabel = UILabel(frame: CGRect(x: 0, y: 0, width: frameWidth, height: frameHeight))
+        timeLabel.center = CGPoint(x: posX, y: posY)
 
-        // Add long press gesture for game bubble
-        let longPressForGameBubble = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
-        longPressForGameBubble.minimumPressDuration = 0.5
-        longPressForGameBubble.delegate = self
-        longPressForGameBubble.delaysTouchesBegan = true
-        gameBubbleCollection.addGestureRecognizer(longPressForGameBubble)
+        timeLabel.textAlignment = .center
+        timeLabel.text = "Time: \(time)"
+        timeLabel.textColor = .white
+        timeLabel.font = UIFont.systemFont(ofSize: 120, weight: .light)
+        timeLabel.alpha = 0.6
+        gameBubbleCollection.addSubview(timeLabel)
+        gameBubbleCollection.sendSubviewToBack(timeLabel)
 
-        // Add single tap gesture for game bubble
-        let singleTapForGameBubble = UITapGestureRecognizer(target: self, action: #selector(handleGameBubbleTap(_:)))
-        singleTapForGameBubble.delegate = self
-        gameBubbleCollection.addGestureRecognizer(singleTapForGameBubble)
-
-        // Add panning gesture for game bubble
-        let panningGameBubble = UIPanGestureRecognizer(target: self, action: #selector(handlePanning(_:)))
-        panningGameBubble.delegate = self
-        panningGameBubble.minimumNumberOfTouches = 1
-        panningGameBubble.maximumNumberOfTouches = 1
-        gameBubbleCollection.addGestureRecognizer(panningGameBubble)
-
-        setStartName(levelName)
-    }
-
-    private func setStartName(_ name: String?) {
-        guard let name = name else {
-            startButton.setTitle("START", for: .normal)
-            return
-        }
-        startButton.setTitle("START - \(name)", for: .normal)
-    }
-
-    @IBAction func startGame(_ sender: UIButton) {
-        guard !currentLevel.isEmpty else {
-            emptyGridAlert()
-            return
-        }
-        guard haveBubbleConnectedToTopWall else {
-            noFirstRowAlert()
-            return
-        }
-        guard containsPlayableBubble else {
-            noPlayableBubbleAlert()
-            return
-        }
-        Settings.playSoundWith(Constants.start_game_sound)
-        transitToGame()
+        self.timeLabel = timeLabel
+        timeStepper.value = Double(currentLevel.time)
     }
 
     var containsPlayableBubble: Bool {
@@ -157,6 +160,20 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate {
         self.present(alert, animated: true)
     }
 
+    func loseCurrentDataAlert() {
+        let alert = UIAlertController(
+            title: "Are you sure you want to continue?",
+            message: "Your current data will be loss.",
+            preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Confirm", style: .default) { _ in
+            self.presentLevelSelector()
+        })
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            return
+        })
+        self.present(alert, animated: true)
+    }
+
     private func transitToGame() {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let gameEngineController =
@@ -172,13 +189,61 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate {
         renderChildController(gameEngineController)
     }
 
+    func takeScreenshot() -> UIImage? {
+        UIGraphicsBeginImageContext(gameBubbleCollection.frame.size)
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return nil
+        }
+        gameBubbleCollection.layer.render(in: context)
+        let screenshot = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return screenshot
+    }
+
+    // Save current grid arrangement to core data and show alert.
+    private func saveAndAlert(levelName: String) {
+        let context = AppDelegate.viewContext
+        var title = "Saved"
+        var message = "Level \(levelName) has been saved successfully! 🥰"
+        let confirmAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        guard let screenshot = takeScreenshot(), let pngData = screenshot.pngData() else {
+            return
+        }
+        guard levelName.count >= 3 && levelName.count <= 20 else {
+            // TODO: NEW ALERT
+            title = "Saving failed"
+            message = "Name of level should be between 3 and 20 characters."
+            let didNotSaveAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            didNotSaveAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(didNotSaveAlert, animated: true)
+            return
+        }
+        currentLevel.saveGridBubblesToDatabase(name: levelName, isRectGrid: isRectGrid, time: self.time, screenshot: pngData)
+        do {
+            try context.save()
+            confirmAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.levelName = levelName
+            self.present(confirmAlert, animated: true)
+        } catch {
+            self.savingFailureAlert()
+        }
+
+    }
+
+    /// Present the level selector storyboard to user.
+    private func presentLevelSelector() {
+        derenderChildController(true)
+    }
+}
+
+/// Level setup from core data
+extension LevelDesignViewController {
     /// Button to save current level.
     /// Saving using core data solution from https://www.youtube.com/watch?v=dIXkR-2rdvM
     /// Alert solution inspired from https://learnappmaking.com/uialertcontroller-alerts-swift-how-to/
     @IBAction func saveLevel(_ sender: UIButton) {
         if let levelName = levelName {
             // Override
-            _ = LevelData.deleteLevel(name: levelName)
             self.saveAndAlert(levelName: levelName)
         } else {
             // Prompt for new name
@@ -206,31 +271,11 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
 
-    /// Button to load level. Switch to levelSelector view.
-    @IBAction func loadLevel(_ sender: UIButton) {
-        if !currentLevel.isEmpty {
-            let alert = UIAlertController(
-                title: "Are you sure you want to continue?",
-                message: "Your current data will be loss.",
-                preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Confirm", style: .default) { _ in
-                self.presentLevelSelector()
-            })
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in
-                return
-            })
-            self.present(alert, animated: true)
-        } else {
-            presentLevelSelector()
-        }
-    }
-
     // Set up grid for level with name `levelName`.
     func loadGrid(levelName: String) {
         let context = AppDelegate.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "LevelData")
         request.returnsObjectsAsFaults = false
-
         do {
             let result = try context.fetch(request)
             for level in result as! [LevelData] {
@@ -247,76 +292,35 @@ class LevelDesignViewController: UIViewController, UIGestureRecognizerDelegate {
         self.levelName = levelName
     }
 
-    func loadGrid(level: LevelGame) {
-        currentLevel = level
-    }
-
-    @IBAction func resetGrid(_ sender: UIButton) {
-        let alert = UIAlertController(
-            title: "Reset level design",
-            message: "Are you sure you want to reset the grid? This move is not reversible.",
-            preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Confirm", style: .default) { _ in
-            self.currentLevel.eraseAllBubbles()
-            self.gameBubbleCollection.reloadData()
-        })
-        self.present(alert, animated: true)
-    }
-
-    // Save current grid arrangement to core data and show alert.
-    private func saveAndAlert(levelName: String) {
-        let context = AppDelegate.viewContext
-        var title = "Saved"
-        var message = "Level \(levelName) has been saved successfully! 🥰"
-        var confirmAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        guard levelName.count >= 3 && levelName.count <= 20 else {
-            title = "Saving failed"
-            message = "Name of level should be between 3 and 20 characters."
-            let didNotSaveAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            didNotSaveAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(didNotSaveAlert, animated: true)
-            return
-        }
-        currentLevel.saveGridBubblesToDatabase(name: levelName, isRectGrid: isRectGrid)
-        do {
-            try context.save()
-            confirmAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.levelName = levelName
-            setStartName(levelName)
-        } catch {
-            title = "Saving failed"
-            message = "Try again. If problem persist, just minus marks...."
-            confirmAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            confirmAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        }
-        self.present(confirmAlert, animated: true)
-    }
-
     // Set up grid if the name provided matches level.
     private func updateGridIfMatch(name: String, level: LevelData) {
         guard let levelName = level.value(forKey: "levelName") as? String,
             name == levelName,
             let levelBubbles = level.bubbles as? Set<GridBubbleData> else {
-            return
+                return
         }
         guard let isRectGrid = level.value(forKey: "isRectGrid") as? Bool else {
             fatalError("isRectGrid should have been set in core data")
         }
         self.isRectGrid = isRectGrid
+        guard let time = level.value(forKey: "time") as? Int else {
+            fatalError("time should have been set in core data")
+        }
+        self.time = time
+        guard let highscore = level.value(forKey: "highscore") as? Int else {
+            fatalError("time should have been set in core data")
+        }
+        currentLevel.isRect = isRectGrid
+        currentLevel.time = time
+        currentLevel.highscore = highscore
         for bubble in levelBubbles {
             guard let index = bubble.value(forKey: "position") as? Int,
                 let bubbleTypeIndex = bubble.value(forKey: "bubbleTypeId") as? Int else {
-                fatalError("Database should not have saved an out of bound index or bubbleType," +
-                    "and they should be of type Int!")
+                    fatalError("Database should not have saved an out of bound index or bubbleType," +
+                        "and they should be of type Int!")
             }
             self.currentLevel.setBubbleTypeAtIndex(index: index, bubbleTypeIndex: bubbleTypeIndex)
         }
-    }
-
-    /// Present the level selector storyboard to user.
-    private func presentLevelSelector() {
-        derenderChildController(true)
     }
 
     // Present the alert indicating that saving of data has failed.
@@ -338,8 +342,73 @@ extension LevelDesignViewController: GridLayoutDelegate {
     }
 }
 
-// Extend view controller to hold gesture actions
-extension LevelDesignViewController {
+/// Extension to mainain collectionView actions.
+extension LevelDesignViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    // Tell the collection view how many cells to make
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == colorSelectorCollection {
+            return paletteBubbles.count
+        } else {
+            return currentLevel.count
+        }
+    }
+
+    /// Make a cell for each cell index path
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        switch collectionView {
+        case colorSelectorCollection:
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: paletteCellIdentifier,
+                for: indexPath as IndexPath)
+                as! PaletteBubbleCollectionViewCell
+            let selectedPaletteBubble = paletteBubbles.getBubbleAtIndex(index: indexPath.item)
+            cell.setupImage(imageUrl: Settings.selectedTheme.getBubbleTypePath(type: selectedPaletteBubble.bubbleType), isSelected: selectedPaletteBubble.isSelected)
+            return cell
+        case gameBubbleCollection:
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: gameBubbleCellIdentifier,
+                for: indexPath as IndexPath)
+                as! GameBubbleCollectionViewCell
+            let bubbleType = currentLevel.getBubbleTypeAtIndex(index: indexPath.item)
+            cell.setImage(imageUrl: Settings.selectedTheme.getBubbleTypePath(type: bubbleType))
+            return cell
+        default:
+            fatalError("There should only be two collectionView.")
+        }
+    }
+}
+
+extension LevelDesignViewController: UIGestureRecognizerDelegate {
+    func addGestures() {
+        // The following blocks are for adding gestures:
+
+        // Add single tap gesture for color selector
+        let singleTapForPalette = UITapGestureRecognizer(target: self, action: #selector(handlePaletteTap(_:)))
+        singleTapForPalette.delegate = self
+        colorSelectorCollection.addGestureRecognizer(singleTapForPalette)
+
+        // Add long press gesture for game bubble
+        let longPressForGameBubble = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+        longPressForGameBubble.minimumPressDuration = 0.5
+        longPressForGameBubble.delegate = self
+        longPressForGameBubble.delaysTouchesBegan = true
+        gameBubbleCollection.addGestureRecognizer(longPressForGameBubble)
+
+        // Add single tap gesture for game bubble
+        let singleTapForGameBubble = UITapGestureRecognizer(target: self, action: #selector(handleGameBubbleTap(_:)))
+        singleTapForGameBubble.delegate = self
+        gameBubbleCollection.addGestureRecognizer(singleTapForGameBubble)
+
+        // Add panning gesture for game bubble
+        let panningGameBubble = UIPanGestureRecognizer(target: self, action: #selector(handlePanning(_:)))
+        panningGameBubble.delegate = self
+        panningGameBubble.minimumNumberOfTouches = 1
+        panningGameBubble.maximumNumberOfTouches = 1
+        gameBubbleCollection.addGestureRecognizer(panningGameBubble)
+    }
+
     /// Gesture to set currently selected palette
     @objc
     func handlePaletteTap(_ sender: UITapGestureRecognizer) {
@@ -403,43 +472,5 @@ extension LevelDesignViewController {
             index: indexPath.item,
             bubbleType: currentPaletteColorType)
         gameBubbleCollection.reloadItems(at: [indexPath])
-    }
-}
-
-/// Extension to mainain collectionView actions.
-extension LevelDesignViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    // Tell the collection view how many cells to make
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == colorSelectorCollection {
-            return paletteBubbles.count
-        } else {
-            return currentLevel.count
-        }
-    }
-
-    /// Make a cell for each cell index path
-    func collectionView(
-        _ collectionView: UICollectionView,
-        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch collectionView {
-        case colorSelectorCollection:
-            let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: paletteCellIdentifier,
-                for: indexPath as IndexPath)
-                as! PaletteBubbleCollectionViewCell
-            let selectedPaletteBubble = paletteBubbles.getBubbleAtIndex(index: indexPath.item)
-            cell.setupImage(imageUrl: Settings.selectedTheme.getBubbleTypePath(type: selectedPaletteBubble.bubbleType), isSelected: selectedPaletteBubble.isSelected)
-            return cell
-        case gameBubbleCollection:
-            let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: gameBubbleCellIdentifier,
-                for: indexPath as IndexPath)
-                as! GameBubbleCollectionViewCell
-            let bubbleType = currentLevel.getBubbleTypeAtIndex(index: indexPath.item)
-            cell.setImage(imageUrl: Settings.selectedTheme.getBubbleTypePath(type: bubbleType))
-            return cell
-        default:
-            fatalError("There should only be two collectionView.")
-        }
     }
 }

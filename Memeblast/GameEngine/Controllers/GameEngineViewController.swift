@@ -11,7 +11,6 @@ import UIKit
 class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
     // UI outlets
     @IBOutlet private weak var statusView: UIView!
-    @IBOutlet private weak var timeLabel: UILabel!
 
     // MARK: Level's settings
     lazy var currentLevel = LevelGame(totalBubbles: gameLayout.totalNumberOfBubble, fillType: .invisible, isRect: isRectGrid)
@@ -49,6 +48,7 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
     }
 
     private var gameEngine: GameEngine?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         Settings.loadBackground(view: view)
@@ -93,10 +93,56 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
             gameLayout: gameLayout,
             isDualCannon: isDualCannon)
 
-        gameEngine = gameEngineTemp
+        // Add a score betwen base and gameover line
 
+        func setupLabel(_ label: UILabel, size: CGFloat = 120) {
+            label.textAlignment = .center
+            label.text = "I'm a test label"
+            label.textColor = .white
+            label.font = UIFont.systemFont(ofSize: size, weight: .light)
+            label.alpha = 0.6
+            gameBubbleCollection.addSubview(label)
+            gameBubbleCollection.sendSubviewToBack(label)
+        }
+
+        // Setup score label
+        let scoreY = gameoverLine + bubbleRadius * 2 // Just below chainsaw
+        let scoreLabel = UILabel(frame: CGRect(x: 0, y: 0, width: gameWidth, height: gameHeight))
+        scoreLabel.center = CGPoint(x: gameWidth / 2, y: scoreY)
+        setupLabel(scoreLabel)
+        self.scoreLabel = scoreLabel
+
+        // Setup time label
+        let timeLabel = UILabel(frame: CGRect(x: 0, y: 0, width: gameWidth, height: gameHeight))
+        timeLabel.center = CGPoint(x: gameWidth / 2, y: gameoverLine / 2)
+        setupLabel(timeLabel, size: 240)
+        self.timeLabel = timeLabel
+
+        gameEngine = gameEngineTemp
         gameEngine?.gameDelegate = self
         restartLevel()
+    }
+
+    var timeLabel: UILabel?
+    var time: Int = 0
+
+    func setTime(_ time: Int) {
+        timeLabel?.text = "\(time)"
+        self.time = time
+
+        if time <= 5 {
+            timeLabel?.textColor = .red
+        } else if time <= 20 {
+            timeLabel?.textColor = .orange
+        }
+    }
+
+    var scoreLabel: UILabel?
+    var gamePoints: Int = 0
+
+    func setScore(_ score: Int) {
+        scoreLabel?.text = "\(score)"
+        gamePoints = score
     }
 
     func setupLevel(level: LevelGame) {
@@ -237,15 +283,29 @@ extension GameEngineViewController: UIGameDelegate {
         return self.gameBubbleCollection?.indexPathForItem(at: point)
     }
 
-    func setTime(seconds: Int) {
-        let min = seconds / 60
-        let sec = seconds % 60
-        timeLabel.text = "Time left: \(min) min \(sec) seconds"
+    var score: Int {
+        get {
+            return gamePoints
+        }
+        set (value) {
+            setScore(value)
+        }
+    }
+
+    var timeValue: Int {
+        get {
+            return time
+        }
+        set (value) {
+            setTime(value)
+        }
     }
 }
 
 public protocol UIGameDelegate: class {
     var currentLevel: LevelGame { get }
+    var timeValue: Int {get set}
+    var score: Int {get set}
     func reload(index: Int)
     func getPositionAtIndex(index: Int) -> CGPoint?
     func setBubbleTypeAndGetPosition(bubbleType: BubbleType, index: Int) -> CGPoint?
@@ -253,5 +313,4 @@ public protocol UIGameDelegate: class {
     func getIndexPathAtPoint(point: CGPoint) -> IndexPath?
     func present(_ alert: UIAlertController, animated: Bool)
     func restartLevel()
-    func setTime(seconds: Int)
 }

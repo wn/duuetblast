@@ -12,7 +12,7 @@
 		E32D62287237137903FB6A1A /* Pods_MemeblastUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AEBB26A207569C1D8FB1A41 /* Pods_MemeblastUITests.framework */; };
 		EB0F292C2202C2DF000EC7D6 /* BubbleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0F292B2202C2DF000EC7D6 /* BubbleCollectionViewCell.swift */; };
 		EB0F2ACF2208B42B000A5770 /* SelectLevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0F2ACE2208B42B000A5770 /* SelectLevelViewController.swift */; };
-		EB0F2AD32208B928000A5770 /* LevelSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0F2AD22208B928000A5770 /* LevelSelectionTableViewCell.swift */; };
+		EB0F2AD32208B928000A5770 /* LevelSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0F2AD22208B928000A5770 /* LevelSelectionCollectionViewCell.swift */; };
 		EB276CAC21FDD07900C23E9C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB276CAB21FDD07900C23E9C /* AppDelegate.swift */; };
 		EB276CAE21FDD07900C23E9C /* LevelDesignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB276CAD21FDD07900C23E9C /* LevelDesignViewController.swift */; };
 		EB276CB121FDD07900C23E9C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB276CAF21FDD07900C23E9C /* Main.storyboard */; };
@@ -93,7 +93,7 @@
 		E556ECA35BC05AADDD93B5C6 /* Pods_Memeblast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Memeblast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB0F292B2202C2DF000EC7D6 /* BubbleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleCollectionViewCell.swift; sourceTree = "<group>"; };
 		EB0F2ACE2208B42B000A5770 /* SelectLevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLevelViewController.swift; sourceTree = "<group>"; };
-		EB0F2AD22208B928000A5770 /* LevelSelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSelectionTableViewCell.swift; sourceTree = "<group>"; };
+		EB0F2AD22208B928000A5770 /* LevelSelectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSelectionCollectionViewCell.swift; sourceTree = "<group>"; };
 		EB276CA821FDD07900C23E9C /* Memeblast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memeblast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB276CAB21FDD07900C23E9C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB276CAD21FDD07900C23E9C /* LevelDesignViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDesignViewController.swift; sourceTree = "<group>"; };
@@ -203,7 +203,7 @@
 		EB0F2AD422096322000A5770 /* LevelSelector */ = {
 			isa = PBXGroup;
 			children = (
-				EB0F2AD22208B928000A5770 /* LevelSelectionTableViewCell.swift */,
+				EB0F2AD22208B928000A5770 /* LevelSelectionCollectionViewCell.swift */,
 			);
 			path = LevelSelector;
 			sourceTree = "<group>";
@@ -775,7 +775,7 @@
 				EB9422972227B06A00D31C73 /* Settings.swift in Sources */,
 				EB8B38462210122B00E1CD5A /* GameEngineViewController.swift in Sources */,
 				EB8B385E22171B9700E1CD5A /* Wall.swift in Sources */,
-				EB0F2AD32208B928000A5770 /* LevelSelectionTableViewCell.swift in Sources */,
+				EB0F2AD32208B928000A5770 /* LevelSelectionCollectionViewCell.swift in Sources */,
 				EB8B38572211635D00E1CD5A /* LevelGame.swift in Sources */,
 				EB5A1C4B2206ABFA005F1DA1 /* PaletteBubble.swift in Sources */,
 				EB276CDA21FDE17500C23E9C /* Bubble.swift in Sources */,

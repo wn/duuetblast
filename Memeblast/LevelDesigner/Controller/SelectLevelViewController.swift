@@ -7,14 +7,14 @@
 
 import UIKit
 import CoreData
-import AVFoundation
 
 class SelectLevelViewController: UIViewController, UIGestureRecognizerDelegate {
 
-    @IBOutlet private var levelSelectorCollection: UITableView!
+    @IBOutlet var levelSelectorCollection: UICollectionView!
+
     let levelSelectionCellIdentifier = "levelSelectionCell"
 
-    private var levels: [String] = []
+    private var levels: [LevelData] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,10 +28,27 @@ class SelectLevelViewController: UIViewController, UIGestureRecognizerDelegate {
         levelSelectorCollection.addGestureRecognizer(singleTapForLevel)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Ensure that we update highscores and newly saved level
+        loadSavedLevel()
+        levelSelectorCollection.reloadData()
+    }
+
     /// Load saved levels and show in UITableView
     /// Read from database and show name of all saved levels in UITableView.
     func loadSavedLevel() {
-        levels = LevelData.namesOfSavedGames
+        let context = AppDelegate.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "LevelData")
+        request.returnsObjectsAsFaults = false
+
+        do {
+            let result = try context.fetch(request) as! [LevelData]
+            levels = result
+        } catch {
+            return
+        }
+
         levelSelectorCollection?.reloadData()
     }
 }
@@ -41,7 +58,7 @@ extension SelectLevelViewController {
     @objc
     func handleLevelSelected(_ sender: UITapGestureRecognizer) {
         let point = sender.location(in: self.levelSelectorCollection)
-        guard let indexPath = (self.levelSelectorCollection?.indexPathForRow(at: point)) else {
+        guard let indexPath = (self.levelSelectorCollection?.indexPathForItem(at: point)) else {
             return
         }
 
@@ -51,7 +68,10 @@ extension SelectLevelViewController {
             storyBoard.instantiateViewController(
                 withIdentifier: "levelDesigner")
                 as! LevelDesignViewController
-        levelDesignerController.loadGrid(levelName: selectedLevel)
+        guard let levelName = selectedLevel.levelName else {
+            return
+        }
+        levelDesignerController.loadGrid(levelName: levelName)
         renderChildController(levelDesignerController)
     }
 
@@ -67,32 +87,24 @@ extension SelectLevelViewController {
     }
 }
 
-extension SelectLevelViewController: UITableViewDelegate, UITableViewDataSource {
-    internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension SelectLevelViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    // Tell the collection view how many cells to make
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return levels.count
     }
 
-    internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: levelSelectionCellIdentifier,
+    /// Make a cell for each cell index path
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: levelSelectionCellIdentifier,
             for: indexPath as IndexPath)
-            as! LevelSelectionTableViewCell
-        cell.setLevelName(name: levels[indexPath.item])
+            as! LevelSelectionCollectionViewCell
+        let level = levels[indexPath.item]
+        cell.setLevelName(name: level.levelName)
+        cell.setImage(level.screenshot)
+        levelSelectorCollection.bringSubviewToFront(cell)
         return cell
-    }
-
-    internal func tableView(
-        _ tableView: UITableView,
-        editActionsForRowAt indexPath: IndexPath)
-        -> [UITableViewRowAction]? {
-        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { _, indexPath in
-            let levelName = self.levels[indexPath.item]
-            if LevelData.deleteLevel(name: levelName) {
-                self.levels.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .fade)
-            }
-        }
-        return [delete]
-
     }
 }

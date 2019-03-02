@@ -47,5 +47,7 @@
 		<string>OpenSans-Regular.ttf</string>
 		<string>Blueberry-Regular.otf</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>For screenshot</string>
 </dict>
 </plist>

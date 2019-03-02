@@ -78,8 +78,9 @@ public class GameEngine {
         // TODO: FEATURES!!!!!!!!
         // HAVE FLAG IN LEVEL SELECTOR
         generateChainBubble()
-        spawnRandomBubble(time: 5)
-        startTimer(seconds: 120)
+        spawnRandomBubble(time: Constants.randomBubbleInterval)
+        startTimer(seconds: level.time)
+        gameDelegate?.score = Constants.initialScore
 
         dropNonAttachedBubbles()
     }
@@ -113,7 +114,7 @@ public class GameEngine {
         Settings.playSoundWith(Constants.firing_sound)
 
         renderEngine.animateCannon(firingCannon)
-
+        gameDelegate?.score -= 300
         /// 0.5 is half of animation time
         /// TODO: Refactor 0.25 to be in constant file.
         DispatchQueue.main.asyncAfter(wallDeadline: .now() + 0.25) {
@@ -139,7 +140,7 @@ public class GameEngine {
         guard !gameOver else {
             return
         }
-        gameDelegate?.setTime(seconds: seconds)
+        gameDelegate?.timeValue = seconds
         if seconds <= 0 {
             print("TIMESUP")
             gameoverAction()
@@ -350,6 +351,7 @@ public class GameEngine {
                     for hitBubble in allCollidedBubbles(bubble) {
                         activatePower(collidedBubble: hitBubble, collidee: bubble)
                         deregisterBubble(bubble: hitBubble, type: .instant)
+                        gameDelegate?.score += Constants.rocketScore
                     }
                     dropNonAttachedBubbles()
                     return
@@ -394,6 +396,7 @@ public class GameEngine {
             for bubbleIndex in rows {
                 if let rowBubble = gameplayBubbles[bubbleIndex] {
                     deregisterBubble(bubble: rowBubble, type: .falling)
+                    gameDelegate?.score += Constants.lightningScore
                 }
             }
         case .bomb:
@@ -402,6 +405,7 @@ public class GameEngine {
             for bubbleIndex in rows {
                 if let rowBubble = gameplayBubbles[bubbleIndex] {
                     deregisterBubble(bubble: rowBubble, type: .match)
+                    gameDelegate?.score += Constants.bombScore
                 }
             }
             deregisterBubble(bubble: collidedBubble, type: .match)
@@ -411,6 +415,7 @@ public class GameEngine {
             for bubble in gameBubbles where bubble.movementType == .stationary {
                 if bubble.bubbleType == collidee.bubbleType{
                     deregisterBubble(bubble: bubble, type: .match)
+                    gameDelegate?.score += Constants.starBubble
                 }
             }
             deregisterBubble(bubble: collidedBubble, type: .match)
@@ -428,6 +433,7 @@ public class GameEngine {
             // TODO: MUSIC
             deregisterBubble(bubble: collidedBubble, type: .match)
             deregisterBubble(bubble: collidee, type: .match)
+            gameDelegate?.score += Constants.binBubble
         default:
             // Non-special bubbles or indestructible.
             break
@@ -511,6 +517,7 @@ public class GameEngine {
         guard toDestroy.count >= 3 else {
             return
         }
+        gameDelegate?.score += toDestroy.count * Constants.matchBubble
         toDestroy.forEach { deregisterBubble(bubble: $0, type: .match) }
     }
 
@@ -578,6 +585,7 @@ public class GameEngine {
         let attachedBubbles = isAttachedBubbles()
         let nonAttachedBubbles = gameBubbles.filter { !attachedBubbles.contains($0) && $0.movementType == .stationary }
         nonAttachedBubbles.forEach { deregisterBubble(bubble: $0, type: .falling) }
+        gameDelegate?.score += nonAttachedBubbles.count * Constants.unattachedBubble
 
         // We check if win in this function as before winning,
         // this function must be called.

@@ -27,6 +27,8 @@ public class LevelGame: Level {
             let bubbleType = getBubbleTypeAtIndex(index: index)
             newLevel.setBubbleTypeAtIndex(index: index, bubbleType: bubbleType)
         }
+        newLevel.time = time
+        newLevel.highscore = highscore
         return newLevel
     }
 }
