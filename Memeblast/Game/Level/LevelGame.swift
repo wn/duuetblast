@@ -20,6 +20,7 @@ public class LevelGame: Level {
 
     func setEmptyCells(type: BubbleType) {
         gridBubbles.filter {$0.bubbleType == emptyType}.forEach {$0.bubbleType = type}
+        emptyType = type
     }
 
     func clone() -> LevelGame {

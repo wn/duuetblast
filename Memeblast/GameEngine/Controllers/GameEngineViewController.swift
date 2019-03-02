@@ -13,7 +13,7 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet private weak var statusView: UIView!
 
     // MARK: Level's settings
-    lazy var currentLevel = LevelGame(totalBubbles: gameLayout.totalNumberOfBubble, fillType: .invisible, isRect: isRectGrid)
+    lazy var currentLevel = LevelGame(totalBubbles: gameLayout.totalNumberOfBubble, fillType: .invisible, isRect: true)
     var loadedLevel: LevelGame?
 
     // MARK: Layout properties
@@ -41,7 +41,9 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
     private var gameoverLine: CGFloat {
         let numOfGridBubbles = gameBubbleCollection.numberOfItems(inSection: 0)
         let lastBubbleIndexPath = getIndexPathAtIndex(index: numOfGridBubbles - 1)
+
         guard let lastBubbleFrame = gameBubbleCollection.layoutAttributesForItem(at: lastBubbleIndexPath)?.frame else {
+
             fatalError("There must be a last bubble!")
         }
         return lastBubbleFrame.origin.y + 2 * bubbleRadius
@@ -55,6 +57,22 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
 
         gameBubbleCollection!.collectionViewLayout = viewLayout
 
+        let gameEngineTemp = GameEngine(
+            gameplayArea: gameBubbleCollection,
+            radius: bubbleRadius,
+            firingPosition: firingPosition,
+            gameoverLine: gameoverLine,
+            gameLayout: gameLayout,
+            isDualCannon: isDualCannon)
+
+        gameEngine = gameEngineTemp
+        gameEngine?.gameDelegate = self
+        restartLevel()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
         // Create left and right view
         let gameWidth = gameBubbleCollection.frame.width
         let gameHeight = gameBubbleCollection.frame.height
@@ -64,18 +82,18 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
         let rightView = UIView(frame: CGRect(x: gameWidth / 2, y: 0, width: gameWidth / 2, height: gameHeight))
         rightView.backgroundColor = .red
 
-        func setupFiringZone(view: UIView) {
-            gameBubbleCollection.addSubview(view)
-            gameBubbleCollection.sendSubviewToBack(view)
-            setupTap(view: view)
-            view.alpha = 0.1
-        }
-
         func setupTap(view: UIView) {
             let longPressForGameplayArea = UILongPressGestureRecognizer(target: self, action: #selector(fireBubble(_:)))
             longPressForGameplayArea.delegate = self
             longPressForGameplayArea.minimumPressDuration = 0
             view.addGestureRecognizer(longPressForGameplayArea)
+        }
+
+        func setupFiringZone(view: UIView) {
+            gameBubbleCollection.addSubview(view)
+            gameBubbleCollection.sendSubviewToBack(view)
+            setupTap(view: view)
+            view.alpha = 0.02
         }
 
         if isDualCannon {
@@ -85,19 +103,9 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
             setupTap(view: gameBubbleCollection)
         }
 
-        let gameEngineTemp = GameEngine(
-            gameplayArea: gameBubbleCollection,
-            radius: bubbleRadius,
-            firingPosition: firingPosition,
-            gameoverLine: gameoverLine,
-            gameLayout: gameLayout,
-            isDualCannon: isDualCannon)
-
-        // Add a score betwen base and gameover line
-
         func setupLabel(_ label: UILabel, size: CGFloat = 120) {
             label.textAlignment = .center
-            label.text = "I'm a test label"
+            label.text = ""
             label.textColor = .white
             label.font = UIFont.systemFont(ofSize: size, weight: .light)
             label.alpha = 0.6
@@ -117,10 +125,6 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
         timeLabel.center = CGPoint(x: gameWidth / 2, y: gameoverLine / 2)
         setupLabel(timeLabel, size: 240)
         self.timeLabel = timeLabel
-
-        gameEngine = gameEngineTemp
-        gameEngine?.gameDelegate = self
-        restartLevel()
     }
 
     var timeLabel: UILabel?
@@ -146,9 +150,10 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
     }
 
     func setupLevel(level: LevelGame) {
+        loadedLevel = level
         currentLevel = level.clone()
         currentLevel.setEmptyCells(type: .invisible)
-        currentLevel.emptyType = .invisible
+        isRectGrid = level.isRect
     }
 
     @objc
@@ -250,7 +255,7 @@ extension GameEngineViewController: GridLayoutDelegate {
     }
 }
 
-/// Helper functions for Collection View
+/// Functions for game engine
 extension GameEngineViewController: UIGameDelegate {
     func present(_ alert: UIAlertController, animated: Bool) {
         super.present(alert, animated: animated)
@@ -302,10 +307,14 @@ extension GameEngineViewController: UIGameDelegate {
     }
 
     func saveScore() {
-        if currentLevel.saveHighScore(score: score) {
-            // animate new highscore
-            // TODO: animate
+        guard let loadedLevel = loadedLevel else {
+            fatalError("Cant reach here is there is no loaded level.")
         }
+        loadedLevel.saveHighScore(score: score)
+//        if loadedLevel.saveHighScore(score: score) {
+//            // animate new highscore
+//            // TODO: animate
+//        }
     }
 }
 

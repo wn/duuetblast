@@ -20,7 +20,6 @@ class LevelDesignViewController: UIViewController {
 
     @IBOutlet private var colorSelectorCollection: UICollectionView!
     let paletteCellIdentifier = "paletteSelectorBubbleCell"
-
     @IBOutlet private var gameBubbleCollection: UICollectionView!
     let gameBubbleCellIdentifier = "gameBubbleCell"
 
@@ -32,20 +31,50 @@ class LevelDesignViewController: UIViewController {
     }
 
     @IBAction func startGame(_ sender: UIButton) {
-        guard !currentLevel.isEmpty else {
-            emptyGridAlert()
-            return
-        }
-        guard haveBubbleConnectedToTopWall else {
-            noFirstRowAlert()
-            return
-        }
-        guard containsPlayableBubble else {
-            noPlayableBubbleAlert()
+        guard checkValidGrid() else {
             return
         }
         Settings.playSoundWith(Constants.start_game_sound)
         transitToGame()
+    }
+
+    func checkValidGrid() -> Bool {
+        guard !currentLevel.isEmpty else {
+            emptyGridAlert()
+            return false
+        }
+        guard haveBubbleConnectedToTopWall else {
+            noFirstRowAlert()
+            return false
+        }
+        guard containsPlayableBubble else {
+            noPlayableBubbleAlert()
+            return false
+        }
+        return true
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        // Render time label
+        let frameWidth = gameBubbleCollection.frame.width
+        let frameHeight = gameBubbleCollection.frame.height
+        let posX = frameWidth / 2
+        let posY = 5 * frameHeight / 6
+        let timeLabel = UILabel(frame: CGRect(x: 0, y: 0, width: frameWidth, height: frameHeight))
+        timeLabel.center = CGPoint(x: posX, y: posY)
+
+        timeLabel.textAlignment = .center
+        timeLabel.text = "Time: \(time)"
+        timeLabel.textColor = .white
+        timeLabel.font = UIFont.systemFont(ofSize: 120, weight: .light)
+        timeLabel.alpha = 0.6
+        gameBubbleCollection.addSubview(timeLabel)
+        gameBubbleCollection.sendSubviewToBack(timeLabel)
+
+        self.timeLabel = timeLabel
+        timeStepper.value = Double(currentLevel.time)
     }
 
     /// Button to load level. Switch to levelSelector view.
@@ -93,25 +122,6 @@ class LevelDesignViewController: UIViewController {
         gameBubbleCollection!.collectionViewLayout = viewLayout
 
         addGestures()
-
-        // Render time label
-        let frameWidth = gameBubbleCollection.frame.width
-        let frameHeight = gameBubbleCollection.frame.height
-        let posX = frameWidth / 2
-        let posY = 5 * frameHeight / 6
-        let timeLabel = UILabel(frame: CGRect(x: 0, y: 0, width: frameWidth, height: frameHeight))
-        timeLabel.center = CGPoint(x: posX, y: posY)
-
-        timeLabel.textAlignment = .center
-        timeLabel.text = "Time: \(time)"
-        timeLabel.textColor = .white
-        timeLabel.font = UIFont.systemFont(ofSize: 120, weight: .light)
-        timeLabel.alpha = 0.6
-        gameBubbleCollection.addSubview(timeLabel)
-        gameBubbleCollection.sendSubviewToBack(timeLabel)
-
-        self.timeLabel = timeLabel
-        timeStepper.value = Double(currentLevel.time)
     }
 
     var containsPlayableBubble: Bool {
@@ -190,6 +200,12 @@ class LevelDesignViewController: UIViewController {
     }
 
     func takeScreenshot() -> UIImage? {
+        // Remove time and all empty bubbles
+        let timeString = timeLabel?.text
+        timeLabel?.text = ""
+        currentLevel.setEmptyCells(type: .invisible)
+
+        gameBubbleCollection.reloadData()
         UIGraphicsBeginImageContext(gameBubbleCollection.frame.size)
         guard let context = UIGraphicsGetCurrentContext() else {
             return nil
@@ -197,6 +213,11 @@ class LevelDesignViewController: UIViewController {
         gameBubbleCollection.layer.render(in: context)
         let screenshot = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
+
+        // Show time and all empty bubbles
+        currentLevel.setEmptyCells(type: .empty)
+        gameBubbleCollection.reloadData()
+        timeLabel?.text = timeString
         return screenshot
     }
 
@@ -241,6 +262,9 @@ extension LevelDesignViewController {
     /// Saving using core data solution from https://www.youtube.com/watch?v=dIXkR-2rdvM
     /// Alert solution inspired from https://learnappmaking.com/uialertcontroller-alerts-swift-how-to/
     @IBAction func saveLevel(_ sender: UIButton) {
+        guard checkValidGrid() else {
+            return
+        }
         if let levelName = currentLevel.levelName {
             // Override
             self.saveAndAlert(levelName: levelName)
@@ -310,7 +334,13 @@ extension LevelDesignViewController: GridLayoutDelegate {
 }
 
 /// Extension to mainain collectionView actions.
-extension LevelDesignViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension LevelDesignViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let cellRadius = colorSelectorCollection.frame.size.height / 2 + 1
+
+        return CGSize(width: cellRadius, height: cellRadius)
+    }
+
     // Tell the collection view how many cells to make
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == colorSelectorCollection {
@@ -332,6 +362,9 @@ extension LevelDesignViewController: UICollectionViewDataSource, UICollectionVie
                 as! PaletteBubbleCollectionViewCell
             let selectedPaletteBubble = paletteBubbles.getBubbleAtIndex(index: indexPath.item)
             cell.setupImage(imageUrl: Settings.selectedTheme.getBubbleTypePath(type: selectedPaletteBubble.bubbleType), isSelected: selectedPaletteBubble.isSelected)
+            let cellDiameter = colorSelectorCollection.frame.height / 2
+            let yPos = cell.frame.origin.y + cellDiameter / 2
+            cell.frame = CGRect(x: cell.frame.origin.x, y: yPos, width: cellDiameter, height:cellDiameter)
             return cell
         case gameBubbleCollection:
             let cell = collectionView.dequeueReusableCell(

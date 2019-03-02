@@ -45,7 +45,7 @@ class Constants {
         .blue: "bubble-blue.png",
         .orange: "bubble-orange.png",
         .green: "bubble-green.png",
-        .empty: "bubble-grey.png",
+        .empty: "bubble-empty.png",
         .erase: "erase.png",
         .bomb: "bubble-bomb.png",
         .indestructible: "bubble-indestructible.png",
@@ -61,6 +61,7 @@ class Constants {
 
     // MARK: - Gameplay scoring
     static let initialScore = 10000
+    static let extraTimePoints = 151
     static let unattachedBubble = 293
     static let firingBubble = -300
     static let matchBubble = 373

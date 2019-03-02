@@ -31,10 +31,6 @@ public class GameEngine {
         return bubbleRadius * 2
     }
 
-    deinit {
-        print("DEINITED GAME ENGINE")
-    }
-
     // MARK: - Instantiation method
     init(
         gameplayArea: UIView,
@@ -465,12 +461,16 @@ public class GameEngine {
     }
 
     private var wonGame: Bool {
+        guard !gameOver else {
+            return false
+        }
         for (_, bubble) in gameplayBubbles {
             let type = bubble.bubbleType
             if type.isNormalBubble || type.isPowerBubble {
                 return false
             }
         }
+
         print("WON GAME")
         return true
     }
@@ -480,7 +480,8 @@ public class GameEngine {
             return
         }
         completedGame(.falling)
-        gameDelegate.score += gameDelegate.timeValue * 1000
+        gameDelegate.score += gameDelegate.timeValue * Constants.extraTimePoints
+        gameDelegate.timeValue = 0
         gameDelegate.saveScore()
         let alert = UIAlertController(title: "YAY YOU WON", message: "WANNA RESTART?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "CONFIRM", style: .default) { _ in

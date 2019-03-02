@@ -64,9 +64,11 @@ public class Level {
 
     public func saveHighScore(score: Int) -> Bool {
         guard let levelName = levelName, let screenshot = screenshot else {
+            print(2)
             return false
         }
         guard score > 0, score > highscore else {
+            print(1)
             return false
         }
         highscore = score
@@ -84,6 +86,12 @@ public class Level {
         self.time = time
         self.screenshot = screenshot
         levelData.saveBubbles(bubbles: gridBubbles)
+
+        do {
+            _ = try AppDelegate.viewContext.save()
+        } catch {
+            fatalError("We cant save!")
+        }
     }
 
     var isEmpty: Bool {

@@ -22,6 +22,13 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>For screenshot</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>OpenSans-Regular.ttf</string>
+		<string>Blueberry-Regular.otf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LevelSelector</string>
 	<key>UIMainStoryboardFile</key>
@@ -33,7 +40,7 @@
 	<key>UIRequiresFullScreen</key>
 	<true/>
 	<key>UIStatusBarHidden</key>
-	<false/>
+	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -42,12 +49,5 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>UIAppFonts</key>
-	<array>
-		<string>OpenSans-Regular.ttf</string>
-		<string>Blueberry-Regular.otf</string>
-	</array>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>For screenshot</string>
 </dict>
 </plist>
