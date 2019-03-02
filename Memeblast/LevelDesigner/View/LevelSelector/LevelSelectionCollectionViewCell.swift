@@ -11,8 +11,12 @@ class LevelSelectionCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet var screenshot: UIImageView!
 
+    @IBOutlet var highscore: UILabel!
+    @IBOutlet var levelName: UILabel!
+    
+
     func setLevelName(name: String?) {
-        //levelName.text = name
+        levelName.text = name
     }
 
     func setImage(_ data: Data?) {
@@ -23,10 +27,10 @@ class LevelSelectionCollectionViewCell: UICollectionViewCell {
     }
 
     func setHighScore(_ score: Int) {
-//        if score == 0 {
-//            highscore.text = "-"
-//        } else {
-//            highscore.text = "\(score)"
-//        }
+        if score == 0 {
+            highscore.text = "-"
+        } else {
+            highscore.text = "\(score)"
+        }
     }
 }

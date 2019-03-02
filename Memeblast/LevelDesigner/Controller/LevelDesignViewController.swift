@@ -61,7 +61,7 @@ class LevelDesignViewController: UIViewController {
     lazy var time: Int = currentLevel.time
     var isRectGrid = false
     let paletteBubbles = PaletteBubbles()
-    var levelName: String?
+    //var levelName: String?
 
     var dualCannon: Bool {
         // TODO: ADD TO CORE DATA
@@ -222,7 +222,6 @@ class LevelDesignViewController: UIViewController {
         do {
             try context.save()
             confirmAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.levelName = levelName
             self.present(confirmAlert, animated: true)
         } catch {
             self.savingFailureAlert()
@@ -242,7 +241,7 @@ extension LevelDesignViewController {
     /// Saving using core data solution from https://www.youtube.com/watch?v=dIXkR-2rdvM
     /// Alert solution inspired from https://learnappmaking.com/uialertcontroller-alerts-swift-how-to/
     @IBAction func saveLevel(_ sender: UIButton) {
-        if let levelName = levelName {
+        if let levelName = currentLevel.levelName {
             // Override
             self.saveAndAlert(levelName: levelName)
         } else {
@@ -273,54 +272,22 @@ extension LevelDesignViewController {
 
     // Set up grid for level with name `levelName`.
     func loadGrid(levelName: String) {
-        let context = AppDelegate.viewContext
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "LevelData")
-        request.returnsObjectsAsFaults = false
-        do {
-            let result = try context.fetch(request)
-            for level in result as! [LevelData] {
-                self.updateGridIfMatch(name: levelName, level: level)
-            }
-        } catch {
-            let alert = UIAlertController(
-                title: "Loading failed!",
-                message: "Unable to fetch data. Just uninstall and reinstall.",
-                preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK Can", style: .default, handler: nil))
-            self.present(alert, animated: true)
+        guard let loadedLevel = LevelGame.retrieveLevel(levelName) else {
+            cantRetrieveDataAlert()
+            return
         }
-        self.levelName = levelName
+        self.isRectGrid = loadedLevel.isRect
+        self.time = loadedLevel.time
+        currentLevel = loadedLevel
     }
 
-    // Set up grid if the name provided matches level.
-    private func updateGridIfMatch(name: String, level: LevelData) {
-        guard let levelName = level.value(forKey: "levelName") as? String,
-            name == levelName,
-            let levelBubbles = level.bubbles as? Set<GridBubbleData> else {
-                return
-        }
-        guard let isRectGrid = level.value(forKey: "isRectGrid") as? Bool else {
-            fatalError("isRectGrid should have been set in core data")
-        }
-        self.isRectGrid = isRectGrid
-        guard let time = level.value(forKey: "time") as? Int else {
-            fatalError("time should have been set in core data")
-        }
-        self.time = time
-        guard let highscore = level.value(forKey: "highscore") as? Int else {
-            fatalError("time should have been set in core data")
-        }
-        currentLevel.isRect = isRectGrid
-        currentLevel.time = time
-        currentLevel.highscore = highscore
-        for bubble in levelBubbles {
-            guard let index = bubble.value(forKey: "position") as? Int,
-                let bubbleTypeIndex = bubble.value(forKey: "bubbleTypeId") as? Int else {
-                    fatalError("Database should not have saved an out of bound index or bubbleType," +
-                        "and they should be of type Int!")
-            }
-            self.currentLevel.setBubbleTypeAtIndex(index: index, bubbleTypeIndex: bubbleTypeIndex)
-        }
+    private func cantRetrieveDataAlert() {
+        let alert = UIAlertController(
+            title: "Loading failed!",
+            message: "Unable to fetch data. Just uninstall and reinstall.",
+            preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK Can", style: .default, handler: nil))
+        self.present(alert, animated: true)
     }
 
     // Present the alert indicating that saving of data has failed.

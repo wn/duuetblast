@@ -104,6 +104,7 @@ extension SelectLevelViewController: UICollectionViewDataSource, UICollectionVie
         let level = levels[indexPath.item]
         cell.setLevelName(name: level.levelName)
         cell.setImage(level.screenshot)
+        cell.setHighScore(Int(level.highscore))
         levelSelectorCollection.bringSubviewToFront(cell)
         return cell
     }

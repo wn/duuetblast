@@ -443,12 +443,16 @@ public class GameEngine {
 
     // MARK: - Endgame mechanics
     private func gameoverAction() {
+        guard !gameOver else {
+            return
+        }
         Settings.playSoundWith(Constants.gameover_sound)
         // Must fall, or else bubble that just dropped will not have an index + no speed, causing it to be 'in-cannon'
         completedGame(.falling)
         guard let gameDelegate = gameDelegate else {
             return
         }
+        gameDelegate.saveScore()
         let alert = UIAlertController(
             title: "Game Over!",
             message: "Do you want to restart the game?",
@@ -472,17 +476,18 @@ public class GameEngine {
     }
 
     private func activateWinningActionIfWin() {
-        guard wonGame else {
+        guard wonGame, let gameDelegate = gameDelegate else {
             return
         }
         completedGame(.falling)
+        gameDelegate.score += gameDelegate.timeValue * 1000
+        gameDelegate.saveScore()
         let alert = UIAlertController(title: "YAY YOU WON", message: "WANNA RESTART?", preferredStyle: .alert)
-        weak var gameEngine = self
         alert.addAction(UIAlertAction(title: "CONFIRM", style: .default) { _ in
-            gameEngine?.gameDelegate?.restartLevel()
+            gameDelegate.restartLevel()
         })
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        gameDelegate?.present(alert, animated: true)
+        gameDelegate.present(alert, animated: true)
     }
 
     // MARK: - Clearing of bubbles logic

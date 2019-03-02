@@ -276,7 +276,7 @@ extension GameEngineViewController: UIGameDelegate {
     }
 
     func getIndexPathAtIndex(index: Int) -> IndexPath {
-        return IndexPath(item: index, section: 0)
+        return IndexPath(item : index, section: 0)
     }
 
     func getIndexPathAtPoint(point: CGPoint) -> IndexPath? {
@@ -300,6 +300,13 @@ extension GameEngineViewController: UIGameDelegate {
             setTime(value)
         }
     }
+
+    func saveScore() {
+        if currentLevel.saveHighScore(score: score) {
+            // animate new highscore
+            // TODO: animate
+        }
+    }
 }
 
 public protocol UIGameDelegate: class {
@@ -313,4 +320,5 @@ public protocol UIGameDelegate: class {
     func getIndexPathAtPoint(point: CGPoint) -> IndexPath?
     func present(_ alert: UIAlertController, animated: Bool)
     func restartLevel()
+    func saveScore()
 }

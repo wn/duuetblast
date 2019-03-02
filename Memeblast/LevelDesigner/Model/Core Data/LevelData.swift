@@ -24,6 +24,7 @@ class LevelData: NSManagedObject {
         levelName = name
         self.isRectGrid = isRect
         self.highscore = highscore
+        print(highscore)
         self.time = time
         self.screenshot = screenshot
     }

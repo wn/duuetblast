@@ -15,7 +15,7 @@ public class Level {
     var isRect: Bool
     var levelName: String?
     var time: Int = Constants.defaultTime
-    var highscore: Int = 0
+    var highscore = 0
     var screenshot: Data?
 
     public init(totalBubbles: Int, fillType: BubbleType, isRect: Bool) {
@@ -62,19 +62,20 @@ public class Level {
         gridBubbles.forEach { $0.bubbleType = type }
     }
 
-    public func saveHighScore(score: Int) {
+    public func saveHighScore(score: Int) -> Bool {
         guard let levelName = levelName, let screenshot = screenshot else {
-            return
+            return false
         }
         guard score > 0, score > highscore else {
-            return
+            return false
         }
         highscore = score
-        saveGridBubblesToDatabase(name: levelName, isRectGrid: isRect, time: time, screenshot: screenshot, highscore: score)
+        saveGridBubblesToDatabase(name: levelName, isRectGrid: isRect, time: time, screenshot: screenshot)
+        return true
     }
 
     /// Save level to database.
-    public func saveGridBubblesToDatabase(name: String, isRectGrid: Bool, time: Int, screenshot: Data, highscore: Int = 0) {
+    public func saveGridBubblesToDatabase(name: String, isRectGrid: Bool, time: Int, screenshot: Data) {
         // If level exist, we delete it.
         _ = LevelData.deleteLevel(name: name)
 
@@ -82,7 +83,6 @@ public class Level {
         levelName = name
         self.time = time
         self.screenshot = screenshot
-
         levelData.saveBubbles(bubbles: gridBubbles)
     }
 

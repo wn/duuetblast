@@ -29,6 +29,6 @@ class PaletteBubbleCollectionViewCell: BubbleCollectionViewCell {
         layer.borderColor = nil
         layer.borderWidth = 0
         layer.cornerRadius = 0
-        alpha = 0.8
+        alpha = 0.6
     }
 }
