@@ -7,6 +7,7 @@ target 'Memeblast' do
 
   # Pods for Memeblast
   pod "TransitionButton"
+  pod 'WNPhysicsEngine'
 
   target 'MemeblastTests' do
     inherit! :search_paths

@@ -8,7 +8,7 @@
 
 import CoreGraphics
 
-public class Acceleraxtion: Vector {
+public class Acceleration: Vector {
     // Vector addition:
     public static func += ( left: inout Acceleration, right: Acceleration) {
         left = Acceleration(

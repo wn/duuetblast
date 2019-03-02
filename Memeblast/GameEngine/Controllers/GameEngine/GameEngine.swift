@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import WNPhysicsEngine
 
 public class GameEngine {
     // MARK: - Properties

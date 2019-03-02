@@ -7,9 +7,8 @@
 //
 
 import CoreGraphics
-i
 
-public class Vecxtor {
+public class Vector {
     public var xDirection: CGFloat
     public var yDirection: CGFloat
 

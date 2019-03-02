@@ -1,0 +1,6 @@
+framework module WNPhysicsEngine {
+  umbrella header "WNPhysicsEngine-umbrella.h"
+
+  export *
+  module * { export * }
+}

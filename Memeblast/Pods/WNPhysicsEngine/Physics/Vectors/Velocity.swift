@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class Velocxty: Vector {
+public class Velocity: Vector {
     public func changeXDirection() {
         xDirection *= -1
     }

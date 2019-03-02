@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WNPhysicsEngine
 
 public class RenderEngine {
     private let diameter: CGFloat

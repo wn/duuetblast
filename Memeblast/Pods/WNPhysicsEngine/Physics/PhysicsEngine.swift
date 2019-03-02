@@ -8,11 +8,14 @@
 
 import CoreGraphics
 
-public class PhysixxcsEngine {
+public class PhysicsEngine {
+    public init() {
+        
+    }
 
     /// Convert collision velocity based on the Principle of Conservation of Linear Momentum (2D).
     /// Assume equal mass of 1kg.
-    func velocityAfterCollisionTwoDimension(
+    public func velocityAfterCollisionTwoDimension(
         velocityOne: Velocity,
         positionOne: CGPoint,
         velocityTwo: Velocity,
@@ -36,7 +39,7 @@ public class PhysixxcsEngine {
     }
 
     /// Get final velocity based on initial velocity
-    func finalVelocity(velocity: Velocity, acceleration: Acceleration, time: Double) -> Velocity {
+    public func finalVelocity(velocity: Velocity, acceleration: Acceleration, time: Double) -> Velocity {
         let finalX = finalVelocity(
             speed: velocity.xDirection,
             acceleration: acceleration.xDirection,
@@ -53,13 +56,13 @@ public class PhysixxcsEngine {
     }
 
     /// Assumes to be 0 acceleration. 
-    func positionAfterTime(position: CGPoint, velocity: Velocity, time: Double) -> CGPoint {
+    public func positionAfterTime(position: CGPoint, velocity: Velocity, time: Double) -> CGPoint {
         let newX = position.x + velocity.xDirection * CGFloat(time)
         let newY = position.y + velocity.yDirection * CGFloat(time)
         return CGPoint(x: newX, y: newY)
     }
 
-    func getBearing(startPoint: CGPoint, endPoint: CGPoint) -> CGFloat {
+    public func getBearing(startPoint: CGPoint, endPoint: CGPoint) -> CGFloat {
         let xLength = endPoint.x - startPoint.x
         let yLength = endPoint.y - startPoint.y
         return atan(-xLength / yLength)
@@ -67,7 +70,7 @@ public class PhysixxcsEngine {
 }
 
 extension CGPoint {
-    func displacementTo(point: CGPoint) -> CGFloat {
+    public func displacementTo(point: CGPoint) -> CGFloat {
         let deltaX = self.x - point.x
         let deltaY = self.y - point.y
         return sqrt((deltaX * deltaX) + (deltaY * deltaY))

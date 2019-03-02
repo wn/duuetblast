@@ -7,10 +7,11 @@
 //
 import Foundation
 import CoreGraphics
+import WNPhysicsEngine
 
 public class GameBubble: GameObject {
     let diameter: CGFloat
-    var velocity: Velocity = Velocity()
+    var velocity: Velocity = Velocity(magnitude: 0, angle: 0)
     var bubbleType: BubbleType
     var index: Int?
     var isFalling = false

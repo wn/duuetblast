@@ -1,16 +1,20 @@
 PODS:
   - TransitionButton (0.5.2)
+  - WNPhysicsEngine (1.0.4)
 
 DEPENDENCIES:
   - TransitionButton
+  - WNPhysicsEngine
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - TransitionButton
+    - WNPhysicsEngine
 
 SPEC CHECKSUMS:
   TransitionButton: fb271583d9c9e4bb116b97103047e5157653f233
+  WNPhysicsEngine: c2bf4a4990b720619a5a695cc579229e22243263
 
-PODFILE CHECKSUM: ffa482c32ef23534e5db255b8f6f4d7f35479774
+PODFILE CHECKSUM: a15c39d6cb2eb7f0aa0027f2f5b8c377c2c33f9c
 
 COCOAPODS: 1.5.3

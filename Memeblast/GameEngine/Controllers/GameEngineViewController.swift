@@ -65,14 +65,6 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
             gameLayout: gameLayout,
             isDualCannon: isDualCannon)
 
-        gameEngine = gameEngineTemp
-        gameEngine?.gameDelegate = self
-        restartLevel()
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
         // Create left and right view
         let gameWidth = gameBubbleCollection.frame.width
         let gameHeight = gameBubbleCollection.frame.height
@@ -125,6 +117,10 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
         timeLabel.center = CGPoint(x: gameWidth / 2, y: gameoverLine / 2)
         setupLabel(timeLabel, size: 240)
         self.timeLabel = timeLabel
+
+        gameEngine = gameEngineTemp
+        gameEngine?.gameDelegate = self
+        restartLevel()
     }
 
     var timeLabel: UILabel?
@@ -310,11 +306,10 @@ extension GameEngineViewController: UIGameDelegate {
         guard let loadedLevel = loadedLevel else {
             fatalError("Cant reach here is there is no loaded level.")
         }
-        loadedLevel.saveHighScore(score: score)
-//        if loadedLevel.saveHighScore(score: score) {
-//            // animate new highscore
-//            // TODO: animate
-//        }
+        if loadedLevel.saveHighScore(score: score) {
+            //            // animate new highscore
+            //            // TODO: animate
+        }
     }
 }
 

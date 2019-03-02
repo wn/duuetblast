@@ -54,29 +54,6 @@ class LevelDesignViewController: UIViewController {
         return true
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-        // Render time label
-        let frameWidth = gameBubbleCollection.frame.width
-        let frameHeight = gameBubbleCollection.frame.height
-        let posX = frameWidth / 2
-        let posY = 5 * frameHeight / 6
-        let timeLabel = UILabel(frame: CGRect(x: 0, y: 0, width: frameWidth, height: frameHeight))
-        timeLabel.center = CGPoint(x: posX, y: posY)
-
-        timeLabel.textAlignment = .center
-        timeLabel.text = "Time: \(time)"
-        timeLabel.textColor = .white
-        timeLabel.font = UIFont.systemFont(ofSize: 120, weight: .light)
-        timeLabel.alpha = 0.6
-        gameBubbleCollection.addSubview(timeLabel)
-        gameBubbleCollection.sendSubviewToBack(timeLabel)
-
-        self.timeLabel = timeLabel
-        timeStepper.value = Double(currentLevel.time)
-    }
-
     /// Button to load level. Switch to levelSelector view.
     @IBAction func loadLevel(_ sender: UIButton) {
         if !currentLevel.isEmpty {
@@ -122,6 +99,25 @@ class LevelDesignViewController: UIViewController {
         gameBubbleCollection!.collectionViewLayout = viewLayout
 
         addGestures()
+
+        // Render time label
+        let frameWidth = gameBubbleCollection.frame.width
+        let frameHeight = gameBubbleCollection.frame.height
+        let posX = frameWidth / 2
+        let posY = 5 * frameHeight / 6
+        let timeLabel = UILabel(frame: CGRect(x: 0, y: 0, width: frameWidth, height: frameHeight))
+        timeLabel.center = CGPoint(x: posX, y: posY)
+
+        timeLabel.textAlignment = .center
+        timeLabel.text = "Time: \(time)"
+        timeLabel.textColor = .white
+        timeLabel.font = UIFont.systemFont(ofSize: 120, weight: .light)
+        timeLabel.alpha = 0.6
+        gameBubbleCollection.addSubview(timeLabel)
+        gameBubbleCollection.sendSubviewToBack(timeLabel)
+
+        self.timeLabel = timeLabel
+        timeStepper.value = Double(currentLevel.time)
     }
 
     var containsPlayableBubble: Bool {

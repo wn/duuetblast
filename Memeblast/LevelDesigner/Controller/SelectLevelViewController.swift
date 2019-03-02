@@ -11,8 +11,16 @@ import CoreData
 class SelectLevelViewController: UIViewController, UIGestureRecognizerDelegate {
 
     @IBOutlet var levelSelectorCollection: UICollectionView!
-
     let levelSelectionCellIdentifier = "levelSelectionCell"
+
+    @IBAction func newLevel(_ sender: UIButton) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let levelDesignerController =
+            storyBoard.instantiateViewController(
+                withIdentifier: "levelDesigner")
+                as! LevelDesignViewController
+        renderChildController(levelDesignerController)
+    }
 
     private var levels: [LevelData] = []
 
@@ -26,6 +34,8 @@ class SelectLevelViewController: UIViewController, UIGestureRecognizerDelegate {
         let singleTapForLevel = UITapGestureRecognizer(target: self, action: #selector(handleLevelSelected(_:)))
         singleTapForLevel.delegate = self
         levelSelectorCollection.addGestureRecognizer(singleTapForLevel)
+
+        levelSelectorCollection.collectionViewLayout = UICollectionViewFlowLayout()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -111,7 +121,6 @@ extension SelectLevelViewController: UICollectionViewDataSource, UICollectionVie
         cell.setLevelName(name: level.levelName)
         cell.setImage(level.screenshot)
         cell.setHighScore(Int(level.highscore))
-        levelSelectorCollection.bringSubviewToFront(cell)
 
         cell.layer.cornerRadius = 50
         cell.layer.borderColor = UIColor.black.cgColor

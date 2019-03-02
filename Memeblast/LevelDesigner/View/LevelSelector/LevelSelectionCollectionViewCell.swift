@@ -20,6 +20,7 @@ class LevelSelectionCollectionViewCell: UICollectionViewCell {
         levelName.text = name
     }
 
+
     func setImage(_ data: Data?) {
         guard let data = data else {
             return
@@ -32,14 +33,14 @@ class LevelSelectionCollectionViewCell: UICollectionViewCell {
         let height = screenshotView.frame.height
         let width = ratio * height
         let viewFrame = screenshotView.frame
-        let newX = screenshotView.frame.origin.x + viewFrame.width - width
+        let newX = screenshotView.frame.origin.x + viewFrame.width / 2 - width / 2
         let newY = screenshotView.frame.origin.y
         screenshot.layer.frame = CGRect(x: newX, y: newY, width: width, height: height)
 
         screenshot.layer.borderWidth = 1
         screenshot.layer.masksToBounds = false
         screenshot.layer.borderColor = UIColor.black.cgColor
-        screenshot.layer.cornerRadius = screenshot.layer.frame.height/2
+        screenshot.layer.cornerRadius = screenshot.layer.frame.height / 2
         screenshot.clipsToBounds = true
 
         screenshot.image = image
@@ -52,5 +53,12 @@ class LevelSelectionCollectionViewCell: UICollectionViewCell {
         } else {
             highscore.text = "\(score)"
         }
+        let xPos = screenshot.frame.origin.x + screenshot.frame.width / 2
+        let yPos = screenshot.frame.origin.y + screenshot.frame.height / 2
+        let highscoreLabel = UILabel(frame: CGRect(x: 0, y: 0, width: screenshot.frame.width, height: screenshot.frame.height))
+        highscoreLabel.center = CGPoint(x: xPos, y: yPos)
+        highscoreLabel.text = "\(score)"
+        screenshot.addSubview(highscoreLabel)
+        screenshot.bringSubviewToFront(highscoreLabel)
     }
 }

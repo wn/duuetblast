@@ -35,10 +35,8 @@
 		EB887A64220C996700028F6F /* LevelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB887A63220C996700028F6F /* LevelData.swift */; };
 		EB8B38462210122B00E1CD5A /* GameEngineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B38452210122B00E1CD5A /* GameEngineViewController.swift */; };
 		EB8B38482210163300E1CD5A /* GameEngineBubbleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B38472210163300E1CD5A /* GameEngineBubbleCollectionViewCell.swift */; };
-		EB8B384C2210301A00E1CD5A /* PhysicsEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B384B2210301A00E1CD5A /* PhysicsEngine.swift */; };
 		EB8B384E221043A200E1CD5A /* GameBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B384D221043A200E1CD5A /* GameBubble.swift */; };
 		EB8B3850221043C000E1CD5A /* GameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B384F221043C000E1CD5A /* GameObject.swift */; };
-		EB8B3852221043E600E1CD5A /* Velocity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B3851221043E600E1CD5A /* Velocity.swift */; };
 		EB8B38552210673300E1CD5A /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B38542210673300E1CD5A /* GameEngine.swift */; };
 		EB8B38572211635D00E1CD5A /* LevelGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B38562211635D00E1CD5A /* LevelGame.swift */; };
 		EB8B385A221471E900E1CD5A /* RenderEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B3859221471E900E1CD5A /* RenderEngine.swift */; };
@@ -46,8 +44,6 @@
 		EB8B385E22171B9700E1CD5A /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B385D22171B9700E1CD5A /* Wall.swift */; };
 		EB8B38612217EC8200E1CD5A /* CannonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B38602217EC8200E1CD5A /* CannonView.swift */; };
 		EB8B38642218129700E1CD5A /* GameBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B38632218129700E1CD5A /* GameBubbleView.swift */; };
-		EB8B3866221962CE00E1CD5A /* Acceleration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B3865221962CE00E1CD5A /* Acceleration.swift */; };
-		EB8B38692219636600E1CD5A /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B38682219636600E1CD5A /* Vector.swift */; };
 		EB8B386E221AD6FC00E1CD5A /* GameEngine+DropLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B386D221AD6FC00E1CD5A /* GameEngine+DropLogic.swift */; };
 		EB8B3870221BDBF500E1CD5A /* IsometricLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B386F221BDBF500E1CD5A /* IsometricLayout.swift */; };
 		EB94227122251C3400D31C73 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB94227022251C3400D31C73 /* Constants.swift */; };
@@ -130,10 +126,8 @@
 		EB887A63220C996700028F6F /* LevelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelData.swift; sourceTree = "<group>"; };
 		EB8B38452210122B00E1CD5A /* GameEngineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineViewController.swift; sourceTree = "<group>"; };
 		EB8B38472210163300E1CD5A /* GameEngineBubbleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineBubbleCollectionViewCell.swift; sourceTree = "<group>"; };
-		EB8B384B2210301A00E1CD5A /* PhysicsEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsEngine.swift; sourceTree = "<group>"; };
 		EB8B384D221043A200E1CD5A /* GameBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBubble.swift; sourceTree = "<group>"; };
 		EB8B384F221043C000E1CD5A /* GameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObject.swift; sourceTree = "<group>"; };
-		EB8B3851221043E600E1CD5A /* Velocity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Velocity.swift; sourceTree = "<group>"; };
 		EB8B38542210673300E1CD5A /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		EB8B38562211635D00E1CD5A /* LevelGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LevelGame.swift; path = Game/Level/LevelGame.swift; sourceTree = SOURCE_ROOT; };
 		EB8B3859221471E900E1CD5A /* RenderEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderEngine.swift; sourceTree = "<group>"; };
@@ -141,8 +135,6 @@
 		EB8B385D22171B9700E1CD5A /* Wall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
 		EB8B38602217EC8200E1CD5A /* CannonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CannonView.swift; sourceTree = "<group>"; };
 		EB8B38632218129700E1CD5A /* GameBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBubbleView.swift; sourceTree = "<group>"; };
-		EB8B3865221962CE00E1CD5A /* Acceleration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Acceleration.swift; sourceTree = "<group>"; };
-		EB8B38682219636600E1CD5A /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
 		EB8B386D221AD6FC00E1CD5A /* GameEngine+DropLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameEngine+DropLogic.swift"; sourceTree = "<group>"; };
 		EB8B386F221BDBF500E1CD5A /* IsometricLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsometricLayout.swift; sourceTree = "<group>"; };
 		EB94227022251C3400D31C73 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -376,7 +368,6 @@
 		EB8B384A2210300A00E1CD5A /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				EB8B3871221BF49B00E1CD5A /* Physics */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -413,16 +404,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		EB8B38672219635900E1CD5A /* Vectors */ = {
-			isa = PBXGroup;
-			children = (
-				EB8B3851221043E600E1CD5A /* Velocity.swift */,
-				EB8B3865221962CE00E1CD5A /* Acceleration.swift */,
-				EB8B38682219636600E1CD5A /* Vector.swift */,
-			);
-			path = Vectors;
-			sourceTree = "<group>";
-		};
 		EB8B386A22197C4B00E1CD5A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -431,15 +412,6 @@
 				EB8B3859221471E900E1CD5A /* RenderEngine.swift */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		EB8B3871221BF49B00E1CD5A /* Physics */ = {
-			isa = PBXGroup;
-			children = (
-				EB8B38672219635900E1CD5A /* Vectors */,
-				EB8B384B2210301A00E1CD5A /* PhysicsEngine.swift */,
-			);
-			path = Physics;
 			sourceTree = "<group>";
 		};
 		EB8B3872221D137000E1CD5A /* Game */ = {
@@ -690,12 +662,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Memeblast/Pods-Memeblast-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/TransitionButton/TransitionButton.framework",
+				"${BUILT_PRODUCTS_DIR}/WNPhysicsEngine/WNPhysicsEngine.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TransitionButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WNPhysicsEngine.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -754,7 +728,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB8B38552210673300E1CD5A /* GameEngine.swift in Sources */,
-				EB8B38692219636600E1CD5A /* Vector.swift in Sources */,
 				EB5A1C4F2206AD5D005F1DA1 /* PaletteBubbles.swift in Sources */,
 				EB8B384E221043A200E1CD5A /* GameBubble.swift in Sources */,
 				EB5A1C95220730DC005F1DA1 /* LevelDesignerData.xcdatamodeld in Sources */,
@@ -767,7 +740,6 @@
 				EB8B385C2216B78600E1CD5A /* CannonObject.swift in Sources */,
 				EB8B38482210163300E1CD5A /* GameEngineBubbleCollectionViewCell.swift in Sources */,
 				EB8B38612217EC8200E1CD5A /* CannonView.swift in Sources */,
-				EB8B3852221043E600E1CD5A /* Velocity.swift in Sources */,
 				EB8B38642218129700E1CD5A /* GameBubbleView.swift in Sources */,
 				EB94227122251C3400D31C73 /* Constants.swift in Sources */,
 				EBCD31FE2206066B0003EF8E /* Level.swift in Sources */,
@@ -780,7 +752,6 @@
 				EB5A1C4B2206ABFA005F1DA1 /* PaletteBubble.swift in Sources */,
 				EB276CDA21FDE17500C23E9C /* Bubble.swift in Sources */,
 				EB9DB725220D929100241AB1 /* GridBubbleData.swift in Sources */,
-				EB8B3866221962CE00E1CD5A /* Acceleration.swift in Sources */,
 				EB5A1C6B22070601005F1DA1 /* BubbleType.swift in Sources */,
 				EB8B3870221BDBF500E1CD5A /* IsometricLayout.swift in Sources */,
 				EB5A1C4D2206AD02005F1DA1 /* GridBubble.swift in Sources */,
@@ -794,7 +765,6 @@
 				EB9AE2AA2222D408009BC786 /* GridLayout.swift in Sources */,
 				EB342BA9220584C3004537E5 /* IsometricViewLayout.swift in Sources */,
 				EB9422952227AE4200D31C73 /* BubbleThemes.swift in Sources */,
-				EB8B384C2210301A00E1CD5A /* PhysicsEngine.swift in Sources */,
 				EB9AE2AE2222DA86009BC786 /* RectViewLayout.swift in Sources */,
 				EB276CAC21FDD07900C23E9C /* AppDelegate.swift in Sources */,
 				EB8B3850221043C000E1CD5A /* GameObject.swift in Sources */,
