@@ -14,8 +14,7 @@ public class CannonObject: GameObject {
     var angle: CGFloat = 0
     private weak var delegate: GameEngine?
 
-    // TODO: initial velocity
-    private static let firingVelocity: CGFloat = 1_500
+    private static let firingVelocity = Constants.firingVelocity
 
     override init(position: CGPoint) {
         super.init(position: position)
@@ -36,8 +35,7 @@ public class CannonObject: GameObject {
         guard let gameEngine = delegate, !gameEngine.gameOver else {
             return
         }
-        // TODO: set 0.7
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + Constants.cannonDelay) {
             self.delegate?.generateFiringBubble(cannon: self)
         }
     }

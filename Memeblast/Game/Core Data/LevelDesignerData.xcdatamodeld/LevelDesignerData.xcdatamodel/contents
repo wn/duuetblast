@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18C54" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="LevelDesignerData">
+    <entity name="GridBubbleData" representedClassName=".GridBubbleData" syncable="YES" codeGenerationType="category">
+        <attribute name="bubbleTypeId" attributeType="Integer 32" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="position" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="level" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LevelData" inverseName="bubbles" inverseEntity="LevelData" syncable="YES"/>
+    </entity>
+    <entity name="LevelData" representedClassName=".LevelData" syncable="YES" codeGenerationType="category">
+        <attribute name="dual" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="highscore" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isRectGrid" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="levelName" attributeType="String" minValueString="3" maxValueString="20" syncable="YES"/>
+        <attribute name="screenshot" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="Integer 16" defaultValueString="100" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="bubbles" toMany="YES" deletionRule="Cascade" destinationEntity="GridBubbleData" inverseName="level" inverseEntity="GridBubbleData" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="GridBubbleData" positionX="82.625" positionY="20.06640625" width="128" height="90"/>
+        <element name="LevelData" positionX="366.875" positionY="-5.9140625" width="128" height="150"/>
+    </elements>
+</model>

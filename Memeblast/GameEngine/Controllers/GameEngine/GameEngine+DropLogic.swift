@@ -26,6 +26,7 @@ extension GameEngine {
                     return nil
         }
         bubble.index = minNeighbourIndex
+        Settings.playSoundWith(Constants.bubbleDropSound)
         return delegate.setBubbleTypeAndGetPosition(
             bubbleType: bubble.bubbleType,
             index: minNeighbourIndex)

@@ -226,10 +226,11 @@ class LevelDesignViewController: UIViewController {
         guard let screenshot = takeScreenshot(), let pngData = screenshot.pngData() else {
             return
         }
-        guard levelName.count >= 3 && levelName.count <= 20 else {
-            // TODO: NEW ALERT
+        let minLength = Constants.minNameLength
+        let maxLength = Constants.maxNameLength
+        guard levelName.count >= minLength && levelName.count <= maxLength else {
             title = "Saving failed"
-            message = "Name of level should be between 3 and 20 characters."
+            message = "Name of level should be between \(minLength) and \(maxLength) characters."
             let didNotSaveAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             didNotSaveAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(didNotSaveAlert, animated: true)

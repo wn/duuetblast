@@ -70,11 +70,13 @@ Pretty cool.
 
 ### Problem 7: Class Diagram
 
-Please save your diagram as `class-diagram.png` in the root directory of the repository and show it here using the correct syntax of [GitHub Flavored Markdown](https://github.github.com/gfm/).
+![Class Diagram](class-diagram.png)
+
+
 
 ### Problem 8: Testing
 
-Your answer here
+TODO
 
 ### Problem 9: The Bells & Whistles
 
@@ -106,4 +108,4 @@ Your answer here
 
 ### Problem 10: Final Reflection
 
-Your answer here
+TODO

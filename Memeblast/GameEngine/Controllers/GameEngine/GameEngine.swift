@@ -9,22 +9,23 @@
 import UIKit
 import AVFoundation
 import WNPhysicsEngine
+import PopupDialog
 
 public class GameEngine {
     // MARK: - Properties
-    private var gameBubbles = Set<GameBubble>()
-    private var gameplayBubbles: [Int: GameBubble] = [:]
+    var gameBubbles = Set<GameBubble>()
+    var gameplayBubbles: [Int: GameBubble] = [:]
     var bubbleRadius: CGFloat
     let physicsEngine = PhysicsEngine()
     private let gameplayArea: UIView
     weak var gameDelegate: UIGameDelegate?
-    private var renderEngine: RenderEngine
+    var renderEngine: RenderEngine
     var cannons: [CannonObject] = []
-    lazy private var obstacles = generateObstacle()
+    lazy var obstacles = generateObstacle()
     let gameLayout: GameLayout
-    private let gameoverHeight: CGFloat
+    let gameoverHeight: CGFloat
     var gameOver = false
-    private let FPS = 60.0
+    private let FPS = Constants.FPS
     private var refreshScreenTime: Double {
         return Double(1) / FPS
     }
@@ -110,9 +111,7 @@ public class GameEngine {
 
         renderEngine.animateCannon(firingCannon)
         gameDelegate?.score -= Constants.firingBubblePoints
-        /// 0.5 is half of animation time
-        /// TODO: Refactor 0.25 to be in constant file.
-        DispatchQueue.main.asyncAfter(wallDeadline: .now() + 0.25) {
+        DispatchQueue.main.asyncAfter(wallDeadline: .now() + Constants.cannonDelay / 2) {
             firingCannon.fireBubble()
         }
     }
@@ -131,12 +130,16 @@ public class GameEngine {
 
     // MARK: - Level designer Features
     func startTimer(seconds: Int) {
-        guard !gameOver else {
+        guard let gameDelegate = gameDelegate, !gameOver else {
             return
         }
-        gameDelegate?.timeValue = seconds
+        guard abs(seconds - gameDelegate.timeValue) <= 1 else {
+            // Guard against restarting level
+            return
+        }
+
+        gameDelegate.timeValue = seconds
         if seconds <= 0 {
-            print("TIMESUP")
             gameoverAction()
             return
         }
@@ -155,7 +158,6 @@ public class GameEngine {
             var connected = strongself.isAttachedBubbles()
             while let bubble = connected.randomElement(), let index = bubble.index {
                 guard strongself.gameplayBubbles.count < strongself.gameLayout.totalNumberOfBubble else {
-                    print("FULL BOARD")
                     strongself.gameoverAction()
                     return
                 }
@@ -198,7 +200,7 @@ public class GameEngine {
     // MARK: - Obstacles logic
 
     /// Check for collision with obstacles. If collision occur, execute obstacle action.
-    private func obstacleCollisionAction(_ bubble: GameBubble) {
+    func obstacleCollisionAction(_ bubble: GameBubble) {
         // Rockets not affected by obstacles!
         guard bubble.bubbleType != .rocket else {
             return
@@ -241,6 +243,7 @@ public class GameEngine {
         let topWallAction = { [weak self] (bubble: GameBubble) in
             bubble.position.y = self?.bubbleRadius ?? 0 // In case bubble move too fast and theres no position to drop.
             self?.dropFiringBubble(bubble: bubble)
+            Settings.playSoundWith(Constants.bubbleDropSound)
         }
         let topWall = Wall(frame: topWallFrame, stable: true, action: topWallAction)
         result.append(topWall)
@@ -300,85 +303,7 @@ public class GameEngine {
         return outOfHorizontalBound || outOfVerticalBound
     }
 
-    // MARK: - Collision mechanics
-
-    private func collisionLogic(bubbleOne: GameBubble, bubbleTwo: GameBubble) {
-        let finalVelocities = physicsEngine.velocityAfterCollisionTwoDimension(
-            velocityOne: bubbleOne.velocity,
-            positionOne: bubbleOne.position,
-            velocityTwo: bubbleTwo.velocity,
-            positionTwo: bubbleTwo.position)
-        bubbleOne.velocity = finalVelocities.0
-        bubbleTwo.velocity = finalVelocities.1
-    }
-
-    /// Get first bubble where collision did happen.
-    public func collidedBubble(_ bubble: GameBubble) -> GameBubble? {
-        return allCollidedBubbles(bubble).first
-    }
-
-    public func allCollidedBubbles(_ bubble: GameBubble) -> [GameBubble] {
-        return gameBubbles.filter {
-            bubble.isFalling == false
-                && didCollideBubbles(bubbleOne: bubble, bubbleTwo: $0)
-                && bubble.lastCollidedBubble != $0
-        }
-    }
-
-    private func didCollideBubbles(bubbleOne: GameBubble, bubbleTwo: GameBubble) -> Bool {
-        guard bubbleOne !== bubbleTwo else {
-            return false
-        }
-        return bubbleOne
-            .getCenterOfBubble
-            .displacementTo(point: bubbleTwo.getCenterOfBubble) <= bubbleOne.diameter
-    }
-
-    private func collisionWithBubble(bubble: GameBubble) {
-        if let collidedBubble = collidedBubble(bubble) {
-            bubble.lastCollidedBubble = nil
-            switch collidedBubble.movementType {
-            case .falling:
-                break
-            case .stationary:
-                guard bubble.bubbleType != .rocket else {
-                    // We do not check for collision and let rocket derender itself
-                    // when it is out of the game.
-                    for hitBubble in allCollidedBubbles(bubble) {
-                        activatePower(collidedBubble: hitBubble, collidee: bubble)
-                        deregisterBubble(bubble: hitBubble, type: .instant)
-                        gameDelegate?.score += Constants.rocketPoints
-                    }
-                    dropNonAttachedBubbles()
-                    return
-                }
-                dropFiringBubble(bubble: bubble, collidedBubble: collidedBubble)
-
-                activatePower(collidedBubble: collidedBubble, collidee: bubble)
-                return
-            case .moving:
-                // Guard against multiple collision with the same object
-                guard bubble.lastCollidedBubble != collidedBubble else {
-                    break
-                }
-                guard bubble.bubbleType != .chainsawBubble && collidedBubble.bubbleType != .chainsawBubble else {
-                    Settings.playSoundWith(Constants.chainsawSound)
-                    print("HIT CHAINSAW")
-                    gameoverAction()
-                    return
-                }
-                bubble.lastCollidedBubble = collidedBubble
-                collidedBubble.lastCollidedBubble = bubble
-
-                collisionLogic(bubbleOne: bubble, bubbleTwo: collidedBubble)
-            case .inCannon:
-                return
-            }
-        }
-        obstacleCollisionAction(bubble)
-    }
-
-    private func activatePower(collidedBubble: GameBubble, collidee: GameBubble) {
+    func activatePower(collidedBubble: GameBubble, collidee: GameBubble) {
         guard let index = collidedBubble.index else {
             return
         }
@@ -415,7 +340,6 @@ public class GameEngine {
             }
             deregisterBubble(bubble: collidedBubble, type: .match)
         case .star:
-            // TODO: star music
             Settings.playSoundWith(Constants.bombSound)
             for bubble in gameBubbles where bubble.movementType == .stationary {
                 if bubble.bubbleType == collidee.bubbleType {
@@ -429,12 +353,10 @@ public class GameEngine {
             }
             deregisterBubble(bubble: collidedBubble, type: .match)
         case .random:
-            // TODO: MUSIC
             let randomBubbleType = BubbleType.getRandomBubble
             collidedBubble.bubbleType = randomBubbleType
             _ = gameDelegate?.setBubbleTypeAndGetPosition(bubbleType: randomBubbleType, index: index)
         case .bin:
-            // TODO: MUSIC
             deregisterBubble(bubble: collidedBubble, type: .match)
             deregisterBubble(bubble: collidee, type: .match)
             gameDelegate?.score += Constants.binBubblePoints
@@ -446,7 +368,7 @@ public class GameEngine {
     }
 
     // MARK: - Endgame mechanics
-    private func gameoverAction() {
+    func gameoverAction() {
         guard !gameOver else {
             return
         }
@@ -454,19 +376,7 @@ public class GameEngine {
         // Must fall, or else bubble that just dropped will not have an
         // index + no speed, causing it to be 'in-cannon'
         completedGame(.falling)
-        guard let gameDelegate = gameDelegate else {
-            return
-        }
-        gameDelegate.saveScore()
-        let alert = UIAlertController(
-            title: "Game Over!",
-            message: "Do you want to restart the game?",
-            preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Sure", style: .default) { _ in
-            gameDelegate.restartLevel()
-        })
-        gameDelegate.present(alert, animated: true)
+        alertScore()
     }
 
     private var wonGame: Bool {
@@ -479,196 +389,39 @@ public class GameEngine {
                 return false
             }
         }
-
-        print("WON GAME")
         return true
     }
 
-    private func activateWinningActionIfWin() {
+    func activateWinningActionIfWin() {
         guard wonGame, let gameDelegate = gameDelegate else {
             return
         }
         completedGame(.falling)
         gameDelegate.score += gameDelegate.timeValue * Constants.extraTimePoints
         gameDelegate.timeValue = 0
-        gameDelegate.saveScore()
-        let alert = UIAlertController(title: "YAY YOU WON", message: "WANNA RESTART?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "CONFIRM", style: .default) { _ in
-            gameDelegate.restartLevel()
-        })
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        gameDelegate.present(alert, animated: true)
+
+        alertScore()
     }
 
-    // MARK: - Clearing of bubbles logic
-    private func destroyBubble(bubble: GameBubble, destroyType: DestroyType) {
-        switch destroyType {
-        case .matchThree:
-            matchThree(bubble: bubble)
-        }
-        dropNonAttachedBubbles()
-    }
-
-    private func matchThree(bubble: GameBubble) {
-        guard let index = bubble.index else {
+    func alertScore() {
+        guard let gameDelegate = gameDelegate else {
             return
         }
-        var toDestroy: [GameBubble] = [bubble]
-        var visitedIndexes: [Int] = [index]
-
-        var stack = getNonEmptyNeighbouringIndex(index)
-        while let neighbourIndex = stack.popLast() {
-            guard !visitedIndexes.contains(neighbourIndex),
-                let connectedBubble = gameplayBubbles[neighbourIndex] else {
-                continue
-            }
-            visitedIndexes.append(neighbourIndex)
-            if connectedBubble.bubbleType == bubble.bubbleType {
-                toDestroy.append(connectedBubble)
-                stack.append(contentsOf: getNonEmptyNeighbouringIndex(neighbourIndex))
-            }
-        }
-
-        guard toDestroy.count >= 3 else {
+        guard gameDelegate.currentLevel.levelName != nil else {
+            unsavedGameAlert()
             return
         }
-        gameDelegate?.score += toDestroy.count * Constants.matchBubblePoints
-        toDestroy.forEach { deregisterBubble(bubble: $0, type: .match) }
-    }
-
-    // Only game engine can deregister bubble from game
-    private func deregisterBubble(bubble: GameBubble, type: RemovingBubbleType) {
-        switch type {
-        case .falling:
-            setFreefallBubble(bubble)
-            removeBubbleFromGrid(bubble, animation: false)
-        case .match:
-            gameBubbles.remove(bubble)
-            removeBubbleFromGrid(bubble, animation: true)
-        case .instant:
-            removeBubbleFromGrid(bubble, animation: false)
-        }
-    }
-
-    /// Set bubble to be in free fall.
-    func setFreefallBubble(_ bubble: GameBubble) {
-        bubble.velocity.stop()
-
-        // Gravity
-        bubble.acceleration = Acceleration.gravity
-        bubble.isFalling = true
-        renderEngine.renderFallingBubble(bubble: bubble, topLeftPosition: bubble.position)
-        movingFiringBubble(bubble)
-    }
-
-    private func removeBubbleFromGrid(_ bubble: GameBubble, animation: Bool) {
-        guard let delegate = gameDelegate, let index = bubble.index else {
-            return
-        }
-        gameplayBubbles[index] = nil
-        delegate.currentLevel.setBubbleTypeAtIndex(index: index, bubbleType: .invisible)
-        if animation {
-            delegate.reload(index: index)
+        if gameDelegate.saveScore() {
+            newHighscoreAlert()
         } else {
-            UIView.performWithoutAnimation {
-                delegate.reload(index: index)
-            }
+            didntBreakHighscoreAlert()
         }
-    }
-
-    private func isAttachedBubbles() -> Set<GameBubble> {
-        var visitedIndexes: [Int] = []
-        var connectedBubbles: [GameBubble] = []
-        var stack = getStableBubbleIndex()
-        while let neighbourIndex = stack.popLast() {
-            guard !visitedIndexes.contains(neighbourIndex),
-                let bubble = gameplayBubbles[neighbourIndex] else {
-                continue
-            }
-            visitedIndexes.append(neighbourIndex)
-            stack.append(contentsOf: getNonEmptyNeighbouringIndex(neighbourIndex))
-            connectedBubbles.append(bubble)
-        }
-        return Set(connectedBubbles)
-    }
-
-    private func isStableBubble(_ bubble: GameBubble) -> Bool {
-        return obstacles.contains { $0.stable && $0.didCollide(bubble: bubble) }
-    }
-
-    private func dropNonAttachedBubbles() {
-        let attachedBubbles = isAttachedBubbles()
-        let nonAttachedBubbles = gameBubbles.filter { !attachedBubbles.contains($0) && $0.movementType == .stationary }
-        nonAttachedBubbles.forEach { deregisterBubble(bubble: $0, type: .falling) }
-        gameDelegate?.score += nonAttachedBubbles.count * Constants.unattachedBubblePoints
-
-        // We check if win in this function as before winning,
-        // this function must be called.
-        activateWinningActionIfWin()
-    }
-
-    private func dropBubble(bubble: GameBubble, didCollideBubble: GameBubble?) -> CGPoint? {
-        guard let delegate = gameDelegate else {
-            return nil
-        }
-        // We use center as we are dropping bubble based on center of bubble
-        let centerPoint = bubble.getCenterOfBubble
-        // Check if the center of the bubble is over the gameover line.
-        guard centerPoint.y < gameoverHeight else {
-            print("WENT OVER LINE")
-            gameoverAction()
-            return nil
-        }
-
-        // Check for collision
-        if let collidedBubble = didCollideBubble {
-            return dropBubbleDueToCollision(bubble: bubble, collidedBubble: collidedBubble)
-        }
-
-        guard let indexPath = delegate.getIndexPathAtPoint(point: centerPoint) else {
-            // Game Over
-            return nil
-        }
-        let index = indexPath.item
-        bubble.index = index
-        return delegate.setBubbleTypeAndGetPosition(bubbleType: bubble.bubbleType, index: index)
-    }
-
-    private func getStableBubbleIndex() -> [Int] {
-        var result: [Int] = []
-        for bubble in gameBubbles {
-            if isStableBubble(bubble), let index = bubble.index {
-                result.append(index)
-            }
-        }
-        return result
-    }
-
-    private func dropFiringBubble(
-        bubble: GameBubble,
-        collidedBubble: GameBubble? = nil,
-        allowClearing: Bool = true) {
-
-        bubble.velocity.stop()
-        guard let dropPosition = dropBubble(bubble: bubble, didCollideBubble: collidedBubble) else {
-            return
-        }
-        guard let index = bubble.index else {
-            fatalError("If execution reaches here, bubble must have an index!")
-        }
-        renderEngine.derenderBubble(bubble)
-        gameplayBubbles[index] = bubble
-        if allowClearing {
-            destroyBubble(bubble: bubble, destroyType: .matchThree)
-        }
-        bubble.setRenderingPosition(topLeftPoint: dropPosition)
     }
 
     // MARK: - Restart game engine logic
     public func restartEngine() {
         completedGame(.match)
         renderEngine.resetCannon()
-        print("restart")
         gameOver = false
     }
 
@@ -677,22 +430,4 @@ public class GameEngine {
         gameBubbles.forEach { deregisterBubble(bubble: $0, type: type) }
         gameplayBubbles = [:]
     }
-}
-
-// TODO: Refactor to new class
-public enum CollisionType {
-    case leftWall
-    case rightWall
-    case bubbleBubble
-    case topWall
-}
-
-public enum RemovingBubbleType {
-    case match
-    case falling
-    case instant
-}
-
-public enum DestroyType {
-    case matchThree
 }

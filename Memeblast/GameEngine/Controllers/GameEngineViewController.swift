@@ -133,6 +133,8 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
             timeLabel?.textColor = .red
         } else if time <= 20 {
             timeLabel?.textColor = .orange
+        } else {
+            timeLabel?.textColor = .white
         }
     }
 
@@ -143,13 +145,11 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
         scoreLabel?.text = "\(score)"
         gamePoints = score
         guard
-            loadedLevel?.levelName != nil,
-            let highscore = loadedLevel?.highscore,
-            highscore < score else {
+            currentLevel.levelName != nil,
+            currentLevel.highscore < score else {
             return
         }
         scoreLabel?.textColor = .yellow
-        saveScore()
     }
 
     func setupLevel(level: LevelGame) {
@@ -211,7 +211,7 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
         guard let loadedLevel = loadedLevel, let gameEngine = gameEngine else {
             fatalError("Level must be loaded before it can be restarted.")
         }
-
+        setTime(currentLevel.time)
         gameEngine.restartEngine()
         setupLevel(level: loadedLevel)
         gameEngine.setupLevel(level: loadedLevel.clone())
@@ -264,6 +264,10 @@ extension GameEngineViewController: UIGameDelegate {
         super.present(alert, animated: animated)
     }
 
+    func present(_ alert: UIViewController, animated: Bool) {
+        super.present(alert, animated: animated)
+    }
+
     func reload(index: Int) {
         let indexPath = getIndexPathAtIndex(index: index)
         gameBubbleCollection.reloadItems(at: [indexPath])
@@ -309,11 +313,11 @@ extension GameEngineViewController: UIGameDelegate {
         }
     }
 
-    func saveScore() {
+    func saveScore() -> Bool {
         guard let loadedLevel = loadedLevel else {
             fatalError("Cant reach here is there is no loaded level.")
         }
-        _ = loadedLevel.saveHighScore(score: score)
+        return loadedLevel.saveHighScore(score: score)
     }
 }
 
@@ -327,6 +331,7 @@ public protocol UIGameDelegate: class {
     func getIndexPathAtIndex(index: Int) -> IndexPath
     func getIndexPathAtPoint(point: CGPoint) -> IndexPath?
     func present(_ alert: UIAlertController, animated: Bool)
+    func present(_ alert: UIViewController, animated: Bool)
     func restartLevel()
-    func saveScore()
+    func saveScore() -> Bool
 }

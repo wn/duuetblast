@@ -8,7 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		22F28A1BB52414C1FDCC70AD /* Pods_Memeblast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E556ECA35BC05AADDD93B5C6 /* Pods_Memeblast.framework */; };
+		73F76E4AB827361FCCD7AA2B /* Pods_DuuetblastTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22902DA4A46CEF57A0EB2D29 /* Pods_DuuetblastTests.framework */; };
+		989588992D3B216C7C6C92C0 /* Pods_Duuetblast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E03B70CF163ED3E8963D4F9 /* Pods_Duuetblast.framework */; };
 		C4FD500E7D0B1C695CCDF6DC /* Pods_MemeblastTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A900487210F220D5D5D8FA6D /* Pods_MemeblastTests.framework */; };
+		D42076125860208E35044FA9 /* Pods_DuuetblastUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23986801DDAF919CA936C965 /* Pods_DuuetblastUITests.framework */; };
 		E32D62287237137903FB6A1A /* Pods_MemeblastUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AEBB26A207569C1D8FB1A41 /* Pods_MemeblastUITests.framework */; };
 		EB0F292C2202C2DF000EC7D6 /* BubbleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0F292B2202C2DF000EC7D6 /* BubbleCollectionViewCell.swift */; };
 		EB0F2ACF2208B42B000A5770 /* SelectLevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0F2ACE2208B42B000A5770 /* SelectLevelViewController.swift */; };
@@ -18,8 +21,6 @@
 		EB276CB121FDD07900C23E9C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB276CAF21FDD07900C23E9C /* Main.storyboard */; };
 		EB276CB321FDD07C00C23E9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB276CB221FDD07C00C23E9C /* Assets.xcassets */; };
 		EB276CB621FDD07C00C23E9C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB276CB421FDD07C00C23E9C /* LaunchScreen.storyboard */; };
-		EB276CC121FDD07C00C23E9C /* LevelDesignerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB276CC021FDD07C00C23E9C /* LevelDesignerTests.swift */; };
-		EB276CCC21FDD07C00C23E9C /* LevelDesignerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB276CCB21FDD07C00C23E9C /* LevelDesignerUITests.swift */; };
 		EB276CDA21FDE17500C23E9C /* Bubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB276CD921FDE17500C23E9C /* Bubble.swift */; };
 		EB342BA422044FBC004537E5 /* GameBubbleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB342BA322044FBC004537E5 /* GameBubbleCollectionViewCell.swift */; };
 		EB342BA622044FCC004537E5 /* PaletteBubbleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB342BA522044FCC004537E5 /* PaletteBubbleCollectionViewCell.swift */; };
@@ -33,14 +34,16 @@
 		EB5D84BD22290740002F314B /* Blueberry-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = EB5D84BC22290740002F314B /* Blueberry-Regular.otf */; };
 		EB5D84BF22292302002F314B /* UIColor+RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5D84BE22292302002F314B /* UIColor+RGB.swift */; };
 		EB74768B222BACEC00D627AD /* Cartoon Sound Effect - Bounce.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EB747682222BACEC00D627AD /* Cartoon Sound Effect - Bounce.mp3 */; };
-		EB74768C222BACEC00D627AD /* maplestory.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EB747683222BACEC00D627AD /* maplestory.mp3 */; };
 		EB74768D222BACEC00D627AD /* gameover_sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EB747684222BACEC00D627AD /* gameover_sound.mp3 */; };
-		EB74768E222BACEC00D627AD /* bubble_drop_to_collection.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EB747685222BACEC00D627AD /* bubble_drop_to_collection.mp3 */; };
 		EB74768F222BACEC00D627AD /* zap_sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EB747686222BACEC00D627AD /* zap_sound.mp3 */; };
 		EB747690222BACEC00D627AD /* start_sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EB747687222BACEC00D627AD /* start_sound.mp3 */; };
 		EB747691222BACEC00D627AD /* bomb_sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EB747688222BACEC00D627AD /* bomb_sound.mp3 */; };
 		EB747692222BACEC00D627AD /* cannon_sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EB747689222BACEC00D627AD /* cannon_sound.mp3 */; };
 		EB747693222BACEC00D627AD /* bounce.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EB74768A222BACEC00D627AD /* bounce.mp3 */; };
+		EB747697222BE93200D627AD /* bubble_drop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EB747696222BE93200D627AD /* bubble_drop.mp3 */; };
+		EB747699222BEBDE00D627AD /* GameEngine+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB747698222BEBDE00D627AD /* GameEngine+Alerts.swift */; };
+		EB74769B222BEC6D00D627AD /* GameEngine+CollisionLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB74769A222BEC6D00D627AD /* GameEngine+CollisionLogic.swift */; };
+		EB74769D222BEF1100D627AD /* background-music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EB74769C222BEF1100D627AD /* background-music.mp3 */; };
 		EB887A64220C996700028F6F /* LevelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB887A63220C996700028F6F /* LevelData.swift */; };
 		EB8B38462210122B00E1CD5A /* GameEngineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B38452210122B00E1CD5A /* GameEngineViewController.swift */; };
 		EB8B38482210163300E1CD5A /* GameEngineBubbleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B38472210163300E1CD5A /* GameEngineBubbleCollectionViewCell.swift */; };
@@ -90,11 +93,20 @@
 		054058A52E09D70C880815EF /* Pods-MemeblastUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemeblastUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MemeblastUITests/Pods-MemeblastUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		07D82FE3749585801786D665 /* Pods-MemeblastUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemeblastUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MemeblastUITests/Pods-MemeblastUITests.release.xcconfig"; sourceTree = "<group>"; };
 		17A43654C93C307D9480C228 /* Pods-Memeblast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Memeblast.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Memeblast/Pods-Memeblast.debug.xcconfig"; sourceTree = "<group>"; };
+		21851C754838E0AEF25BA05F /* Pods-DuuetblastUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DuuetblastUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DuuetblastUITests/Pods-DuuetblastUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		22902DA4A46CEF57A0EB2D29 /* Pods_DuuetblastTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DuuetblastTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		23986801DDAF919CA936C965 /* Pods_DuuetblastUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DuuetblastUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AEBB26A207569C1D8FB1A41 /* Pods_MemeblastUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MemeblastUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37BA44FCFDBB9C6B4C8CEA0F /* Pods-MemeblastTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemeblastTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MemeblastTests/Pods-MemeblastTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5E03B70CF163ED3E8963D4F9 /* Pods_Duuetblast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Duuetblast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		664CA903356A46F915D6B173 /* Pods-DuuetblastUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DuuetblastUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DuuetblastUITests/Pods-DuuetblastUITests.release.xcconfig"; sourceTree = "<group>"; };
 		9534860702A252B9DF4A3C28 /* Pods-MemeblastTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemeblastTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MemeblastTests/Pods-MemeblastTests.release.xcconfig"; sourceTree = "<group>"; };
 		A900487210F220D5D5D8FA6D /* Pods_MemeblastTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MemeblastTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC67D637C42DCD91CD878FE3 /* Pods-Duuetblast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Duuetblast.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Duuetblast/Pods-Duuetblast.debug.xcconfig"; sourceTree = "<group>"; };
+		D133D1E5FE4A981DBC789166 /* Pods-Duuetblast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Duuetblast.release.xcconfig"; path = "Pods/Target Support Files/Pods-Duuetblast/Pods-Duuetblast.release.xcconfig"; sourceTree = "<group>"; };
 		D26549A005BDDA8D702B8F4F /* Pods-Memeblast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Memeblast.release.xcconfig"; path = "Pods/Target Support Files/Pods-Memeblast/Pods-Memeblast.release.xcconfig"; sourceTree = "<group>"; };
+		D58A8C213BEDB32285F799C1 /* Pods-DuuetblastTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DuuetblastTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DuuetblastTests/Pods-DuuetblastTests.release.xcconfig"; sourceTree = "<group>"; };
+		DA7D2A788DE57204FC683155 /* Pods-DuuetblastTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DuuetblastTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DuuetblastTests/Pods-DuuetblastTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E556ECA35BC05AADDD93B5C6 /* Pods_Memeblast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Memeblast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB0F292B2202C2DF000EC7D6 /* BubbleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleCollectionViewCell.swift; sourceTree = "<group>"; };
 		EB0F2ACE2208B42B000A5770 /* SelectLevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLevelViewController.swift; sourceTree = "<group>"; };
@@ -105,13 +117,8 @@
 		EB276CB021FDD07900C23E9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EB276CB221FDD07C00C23E9C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB276CB521FDD07C00C23E9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		EB276CB721FDD07C00C23E9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB276CBC21FDD07C00C23E9C /* DuuetblastTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DuuetblastTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EB276CC021FDD07C00C23E9C /* LevelDesignerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDesignerTests.swift; sourceTree = "<group>"; };
-		EB276CC221FDD07C00C23E9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB276CC721FDD07C00C23E9C /* DuuetblastUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DuuetblastUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EB276CCB21FDD07C00C23E9C /* LevelDesignerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDesignerUITests.swift; sourceTree = "<group>"; };
-		EB276CCD21FDD07C00C23E9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB276CD921FDE17500C23E9C /* Bubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bubble.swift; sourceTree = "<group>"; };
 		EB342BA322044FBC004537E5 /* GameBubbleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBubbleCollectionViewCell.swift; sourceTree = "<group>"; };
 		EB342BA522044FCC004537E5 /* PaletteBubbleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteBubbleCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -125,14 +132,17 @@
 		EB5D84BC22290740002F314B /* Blueberry-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Blueberry-Regular.otf"; path = "../../../../../../../../Downloads/Blueberry-Regular.otf"; sourceTree = "<group>"; };
 		EB5D84BE22292302002F314B /* UIColor+RGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+RGB.swift"; sourceTree = "<group>"; };
 		EB747682222BACEC00D627AD /* Cartoon Sound Effect - Bounce.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Cartoon Sound Effect - Bounce.mp3"; path = "../../../Sound Assets/Cartoon Sound Effect - Bounce.mp3"; sourceTree = "<group>"; };
-		EB747683222BACEC00D627AD /* maplestory.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = maplestory.mp3; path = "../../../Sound Assets/maplestory.mp3"; sourceTree = "<group>"; };
 		EB747684222BACEC00D627AD /* gameover_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = gameover_sound.mp3; path = "../../../Sound Assets/gameover_sound.mp3"; sourceTree = "<group>"; };
-		EB747685222BACEC00D627AD /* bubble_drop_to_collection.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bubble_drop_to_collection.mp3; path = "../../../Sound Assets/bubble_drop_to_collection.mp3"; sourceTree = "<group>"; };
 		EB747686222BACEC00D627AD /* zap_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = zap_sound.mp3; path = "../../../Sound Assets/zap_sound.mp3"; sourceTree = "<group>"; };
 		EB747687222BACEC00D627AD /* start_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = start_sound.mp3; path = "../../../Sound Assets/start_sound.mp3"; sourceTree = "<group>"; };
 		EB747688222BACEC00D627AD /* bomb_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bomb_sound.mp3; path = "../../../Sound Assets/bomb_sound.mp3"; sourceTree = "<group>"; };
 		EB747689222BACEC00D627AD /* cannon_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = cannon_sound.mp3; path = "../../../Sound Assets/cannon_sound.mp3"; sourceTree = "<group>"; };
 		EB74768A222BACEC00D627AD /* bounce.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bounce.mp3; path = "../../../Sound Assets/bounce.mp3"; sourceTree = "<group>"; };
+		EB747696222BE93200D627AD /* bubble_drop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bubble_drop.mp3; path = "../../../Sound Assets/bubble_drop.mp3"; sourceTree = "<group>"; };
+		EB747698222BEBDE00D627AD /* GameEngine+Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameEngine+Alerts.swift"; sourceTree = "<group>"; };
+		EB74769A222BEC6D00D627AD /* GameEngine+CollisionLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameEngine+CollisionLogic.swift"; sourceTree = "<group>"; };
+		EB74769C222BEF1100D627AD /* background-music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "background-music.mp3"; path = "../../../Sound Assets/background-music.mp3"; sourceTree = "<group>"; };
+		EB7476A5222BF26D00D627AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "/Users/weineng/Google Drive/Y2S2/CS3217 - Software Engineering on Modern Application Platforms /Problem Sets/problem-set-5-wn/Memeblast/Info.plist"; sourceTree = "<absolute>"; };
 		EB887A63220C996700028F6F /* LevelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelData.swift; sourceTree = "<group>"; };
 		EB8B38452210122B00E1CD5A /* GameEngineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineViewController.swift; sourceTree = "<group>"; };
 		EB8B38472210163300E1CD5A /* GameEngineBubbleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineBubbleCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -167,6 +177,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22F28A1BB52414C1FDCC70AD /* Pods_Memeblast.framework in Frameworks */,
+				989588992D3B216C7C6C92C0 /* Pods_Duuetblast.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +186,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4FD500E7D0B1C695CCDF6DC /* Pods_MemeblastTests.framework in Frameworks */,
+				73F76E4AB827361FCCD7AA2B /* Pods_DuuetblastTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,6 +195,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E32D62287237137903FB6A1A /* Pods_MemeblastUITests.framework in Frameworks */,
+				D42076125860208E35044FA9 /* Pods_DuuetblastUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,6 +211,12 @@
 				9534860702A252B9DF4A3C28 /* Pods-MemeblastTests.release.xcconfig */,
 				054058A52E09D70C880815EF /* Pods-MemeblastUITests.debug.xcconfig */,
 				07D82FE3749585801786D665 /* Pods-MemeblastUITests.release.xcconfig */,
+				AC67D637C42DCD91CD878FE3 /* Pods-Duuetblast.debug.xcconfig */,
+				D133D1E5FE4A981DBC789166 /* Pods-Duuetblast.release.xcconfig */,
+				DA7D2A788DE57204FC683155 /* Pods-DuuetblastTests.debug.xcconfig */,
+				D58A8C213BEDB32285F799C1 /* Pods-DuuetblastTests.release.xcconfig */,
+				21851C754838E0AEF25BA05F /* Pods-DuuetblastUITests.debug.xcconfig */,
+				664CA903356A46F915D6B173 /* Pods-DuuetblastUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -226,9 +245,10 @@
 				EB276CAA21FDD07900C23E9C /* LevelDesigner */,
 				EB8B38582213D7BD00E1CD5A /* GameEngine */,
 				EBCD32002206A6B90003EF8E /* Supporting Files */,
-				EB276CAF21FDD07900C23E9C /* Main.storyboard */,
 				BA0FD3DFF07D0E61F61017E0 /* Pods */,
 				EF3EF291BE8DCD385D34537D /* Frameworks */,
+				EB276CAF21FDD07900C23E9C /* Main.storyboard */,
+				EB7476A5222BF26D00D627AD /* Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -249,30 +269,8 @@
 				EBCD31FF2206A6980003EF8E /* Model */,
 				EB5A1C472206A71E005F1DA1 /* Controller */,
 				EB5A1C462206A711005F1DA1 /* View */,
-				EB276CB721FDD07C00C23E9C /* Info.plist */,
-				EB5A1C93220730DC005F1DA1 /* LevelDesignerData.xcdatamodeld */,
-				EB276CBF21FDD07C00C23E9C /* LevelDesignerTests */,
-				EB276CCA21FDD07C00C23E9C /* LevelDesignerUITests */,
 			);
 			path = LevelDesigner;
-			sourceTree = "<group>";
-		};
-		EB276CBF21FDD07C00C23E9C /* LevelDesignerTests */ = {
-			isa = PBXGroup;
-			children = (
-				EB276CC021FDD07C00C23E9C /* LevelDesignerTests.swift */,
-				EB276CC221FDD07C00C23E9C /* Info.plist */,
-			);
-			path = LevelDesignerTests;
-			sourceTree = "<group>";
-		};
-		EB276CCA21FDD07C00C23E9C /* LevelDesignerUITests */ = {
-			isa = PBXGroup;
-			children = (
-				EB276CCB21FDD07C00C23E9C /* LevelDesignerUITests.swift */,
-				EB276CCD21FDD07C00C23E9C /* Info.plist */,
-			);
-			path = LevelDesignerUITests;
 			sourceTree = "<group>";
 		};
 		EB342BA722058498004537E5 /* Layouts */ = {
@@ -338,12 +336,12 @@
 			children = (
 				EB747688222BACEC00D627AD /* bomb_sound.mp3 */,
 				EB74768A222BACEC00D627AD /* bounce.mp3 */,
-				EB747685222BACEC00D627AD /* bubble_drop_to_collection.mp3 */,
 				EB747689222BACEC00D627AD /* cannon_sound.mp3 */,
 				EB747682222BACEC00D627AD /* Cartoon Sound Effect - Bounce.mp3 */,
 				EB747684222BACEC00D627AD /* gameover_sound.mp3 */,
-				EB747683222BACEC00D627AD /* maplestory.mp3 */,
+				EB747696222BE93200D627AD /* bubble_drop.mp3 */,
 				EB747687222BACEC00D627AD /* start_sound.mp3 */,
+				EB74769C222BEF1100D627AD /* background-music.mp3 */,
 				EB747686222BACEC00D627AD /* zap_sound.mp3 */,
 			);
 			path = SoundAssets;
@@ -354,6 +352,8 @@
 			children = (
 				EB8B38542210673300E1CD5A /* GameEngine.swift */,
 				EB8B386D221AD6FC00E1CD5A /* GameEngine+DropLogic.swift */,
+				EB747698222BEBDE00D627AD /* GameEngine+Alerts.swift */,
+				EB74769A222BEC6D00D627AD /* GameEngine+CollisionLogic.swift */,
 			);
 			path = GameEngine;
 			sourceTree = "<group>";
@@ -367,9 +367,19 @@
 			path = "Custom Fonts";
 			sourceTree = "<group>";
 		};
+		EB74769E222BF0D100D627AD /* Globals */ = {
+			isa = PBXGroup;
+			children = (
+				EB94227022251C3400D31C73 /* Constants.swift */,
+				EB9422962227B06A00D31C73 /* Settings.swift */,
+			);
+			path = Globals;
+			sourceTree = "<group>";
+		};
 		EB887A62220C995400028F6F /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				EB5A1C93220730DC005F1DA1 /* LevelDesignerData.xcdatamodeld */,
 				EB887A63220C996700028F6F /* LevelData.swift */,
 				EB9DB724220D929100241AB1 /* GridBubbleData.swift */,
 			);
@@ -379,6 +389,7 @@
 		EB8B384A2210300A00E1CD5A /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				EB5D84BE22292302002F314B /* UIColor+RGB.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -389,7 +400,6 @@
 				EB8B386A22197C4B00E1CD5A /* Controllers */,
 				EB8B38622218048600E1CD5A /* Models */,
 				EB8B385F2217EC7700E1CD5A /* View */,
-				EB8B384A2210300A00E1CD5A /* Utility */,
 			);
 			path = GameEngine;
 			sourceTree = "<group>";
@@ -428,12 +438,12 @@
 		EB8B3872221D137000E1CD5A /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				EB74769E222BF0D100D627AD /* Globals */,
+				EB887A62220C995400028F6F /* Core Data */,
 				EB8B3873221D138200E1CD5A /* Level */,
-				EB94227022251C3400D31C73 /* Constants.swift */,
-				EB9422962227B06A00D31C73 /* Settings.swift */,
 				EB94229C222833A600D31C73 /* Controller */,
+				EB8B384A2210300A00E1CD5A /* Utility */,
 				EB342BA722058498004537E5 /* Layouts */,
-				EB5D84BE22292302002F314B /* UIColor+RGB.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -478,7 +488,6 @@
 			isa = PBXGroup;
 			children = (
 				EB5A1C6E22070E94005F1DA1 /* Bubbles */,
-				EB887A62220C995400028F6F /* Core Data */,
 				EB5A1C502206ADAD005F1DA1 /* Palette */,
 				EB5A1C512206ADC0005F1DA1 /* Grid */,
 			);
@@ -504,6 +513,9 @@
 				E556ECA35BC05AADDD93B5C6 /* Pods_Memeblast.framework */,
 				A900487210F220D5D5D8FA6D /* Pods_MemeblastTests.framework */,
 				2AEBB26A207569C1D8FB1A41 /* Pods_MemeblastUITests.framework */,
+				5E03B70CF163ED3E8963D4F9 /* Pods_Duuetblast.framework */,
+				22902DA4A46CEF57A0EB2D29 /* Pods_DuuetblastTests.framework */,
+				23986801DDAF919CA936C965 /* Pods_DuuetblastUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -619,17 +631,17 @@
 				EB747691222BACEC00D627AD /* bomb_sound.mp3 in Resources */,
 				EB74768B222BACEC00D627AD /* Cartoon Sound Effect - Bounce.mp3 in Resources */,
 				EB276CB621FDD07C00C23E9C /* LaunchScreen.storyboard in Resources */,
-				EB74768C222BACEC00D627AD /* maplestory.mp3 in Resources */,
 				EB276CB321FDD07C00C23E9C /* Assets.xcassets in Resources */,
 				EB74768F222BACEC00D627AD /* zap_sound.mp3 in Resources */,
 				EB5D84BB22290513002F314B /* OpenSans-Regular.ttf in Resources */,
+				EB74769D222BEF1100D627AD /* background-music.mp3 in Resources */,
 				EB5D84BD22290740002F314B /* Blueberry-Regular.otf in Resources */,
 				EB74768D222BACEC00D627AD /* gameover_sound.mp3 in Resources */,
 				EB747690222BACEC00D627AD /* start_sound.mp3 in Resources */,
 				EB747693222BACEC00D627AD /* bounce.mp3 in Resources */,
 				EB747692222BACEC00D627AD /* cannon_sound.mp3 in Resources */,
+				EB747697222BE93200D627AD /* bubble_drop.mp3 in Resources */,
 				EB276CB121FDD07900C23E9C /* Main.storyboard in Resources */,
-				EB74768E222BACEC00D627AD /* bubble_drop_to_collection.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -665,7 +677,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Memeblast-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Duuetblast-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -680,7 +692,9 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Memeblast/Pods-Memeblast-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Duuetblast/Pods-Duuetblast-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework",
+				"${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework",
 				"${BUILT_PRODUCTS_DIR}/TransitionButton/TransitionButton.framework",
 				"${BUILT_PRODUCTS_DIR}/WNPhysicsEngine/WNPhysicsEngine.framework",
 			);
@@ -688,12 +702,14 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DynamicBlurView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopupDialog.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TransitionButton.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WNPhysicsEngine.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Memeblast/Pods-Memeblast-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Duuetblast/Pods-Duuetblast-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		62B582CBACE97D866A2697F4 /* [CP] Check Pods Manifest.lock */ = {
@@ -711,7 +727,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MemeblastTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-DuuetblastTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -733,7 +749,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MemeblastUITests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-DuuetblastUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -766,12 +782,14 @@
 				EB887A64220C996700028F6F /* LevelData.swift in Sources */,
 				EB9422972227B06A00D31C73 /* Settings.swift in Sources */,
 				EB8B38462210122B00E1CD5A /* GameEngineViewController.swift in Sources */,
+				EB747699222BEBDE00D627AD /* GameEngine+Alerts.swift in Sources */,
 				EB8B385E22171B9700E1CD5A /* Wall.swift in Sources */,
 				EB0F2AD32208B928000A5770 /* LevelSelectionCollectionViewCell.swift in Sources */,
 				EB8B38572211635D00E1CD5A /* LevelGame.swift in Sources */,
 				EB5A1C4B2206ABFA005F1DA1 /* PaletteBubble.swift in Sources */,
 				EB276CDA21FDE17500C23E9C /* Bubble.swift in Sources */,
 				EB9DB725220D929100241AB1 /* GridBubbleData.swift in Sources */,
+				EB74769B222BEC6D00D627AD /* GameEngine+CollisionLogic.swift in Sources */,
 				EB5A1C6B22070601005F1DA1 /* BubbleType.swift in Sources */,
 				EB8B3870221BDBF500E1CD5A /* IsometricLayout.swift in Sources */,
 				EB5A1C4D2206AD02005F1DA1 /* GridBubble.swift in Sources */,
@@ -795,7 +813,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB276CC121FDD07C00C23E9C /* LevelDesignerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -803,7 +820,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB276CCC21FDD07C00C23E9C /* LevelDesignerUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -960,12 +976,12 @@
 		};
 		EB276CD121FDD07C00C23E9C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 17A43654C93C307D9480C228 /* Pods-Memeblast.debug.xcconfig */;
+			baseConfigurationReference = AC67D637C42DCD91CD878FE3 /* Pods-Duuetblast.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XU366QZNPG;
-				INFOPLIST_FILE = LevelDesigner/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -980,12 +996,12 @@
 		};
 		EB276CD221FDD07C00C23E9C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D26549A005BDDA8D702B8F4F /* Pods-Memeblast.release.xcconfig */;
+			baseConfigurationReference = D133D1E5FE4A981DBC789166 /* Pods-Duuetblast.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XU366QZNPG;
-				INFOPLIST_FILE = LevelDesigner/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1000,7 +1016,7 @@
 		};
 		EB276CD421FDD07C00C23E9C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 37BA44FCFDBB9C6B4C8CEA0F /* Pods-MemeblastTests.debug.xcconfig */;
+			baseConfigurationReference = DA7D2A788DE57204FC683155 /* Pods-DuuetblastTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1022,7 +1038,7 @@
 		};
 		EB276CD521FDD07C00C23E9C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9534860702A252B9DF4A3C28 /* Pods-MemeblastTests.release.xcconfig */;
+			baseConfigurationReference = D58A8C213BEDB32285F799C1 /* Pods-DuuetblastTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1044,7 +1060,7 @@
 		};
 		EB276CD721FDD07C00C23E9C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 054058A52E09D70C880815EF /* Pods-MemeblastUITests.debug.xcconfig */;
+			baseConfigurationReference = 21851C754838E0AEF25BA05F /* Pods-DuuetblastUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1065,7 +1081,7 @@
 		};
 		EB276CD821FDD07C00C23E9C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 07D82FE3749585801786D665 /* Pods-MemeblastUITests.release.xcconfig */;
+			baseConfigurationReference = 664CA903356A46F915D6B173 /* Pods-DuuetblastUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1132,7 +1148,8 @@
 				EB5A1C94220730DC005F1DA1 /* LevelDesignerData.xcdatamodel */,
 			);
 			currentVersion = EB5A1C94220730DC005F1DA1 /* LevelDesignerData.xcdatamodel */;
-			path = LevelDesignerData.xcdatamodeld;
+			name = LevelDesignerData.xcdatamodeld;
+			path = "Game/Core Data/LevelDesignerData.xcdatamodeld";
 			sourceTree = SOURCE_ROOT;
 			versionGroupType = wrapper.xcdatamodel;
 		};

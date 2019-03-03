@@ -1,20 +1,20 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-target 'Memeblast' do
+target 'Duuetblast' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
   # Pods for Memeblast
   pod "TransitionButton"
   pod 'WNPhysicsEngine'
-
-  target 'MemeblastTests' do
+  pod 'PopupDialog', '~> 0.9'
+  target 'DuuetblastTests' do
     inherit! :search_paths
     # Pods for testing
   end
 
-  target 'MemeblastUITests' do
+  target 'DuuetblastUITests' do
     inherit! :search_paths
     # Pods for testing
   end
