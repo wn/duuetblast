@@ -36,14 +36,17 @@ extension GameEngine {
         presentAlert(title: title, message: message)
     }
 
-    func didntBreakHighscoreAlert() {
-        guard let gameDelegate = gameDelegate else {
-            return
-        }
+    func gameOverAlert() {
         // Prepare the popup assets
         let title = "Game Over"
-        let message = "Your score of \(gameDelegate.score ) did not break the high " +
-        "score of \(gameDelegate.currentLevel.highscore)!"
+        let message = "You lose!"
+        presentAlert(title: title, message: message)
+    }
+
+    func didntBreakHighScore() {
+        // Prepare the popup assets
+        let title = "No prize"
+        let message = "You did not beat the high score"
         presentAlert(title: title, message: message)
     }
 }

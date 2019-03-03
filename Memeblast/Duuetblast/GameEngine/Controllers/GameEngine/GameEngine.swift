@@ -110,7 +110,7 @@ public class GameEngine {
         Settings.playSoundWith(Constants.firingSound)
 
         renderEngine.animateCannon(firingCannon)
-        gameDelegate?.score -= Constants.firingBubblePoints
+        gameDelegate?.score += Constants.firingBubblePoints
         DispatchQueue.main.asyncAfter(wallDeadline: .now() + Constants.cannonDelay / 2) {
             firingCannon.fireBubble()
         }
@@ -380,7 +380,7 @@ public class GameEngine {
         // Must fall, or else bubble that just dropped will not have an
         // index + no speed, causing it to be 'in-cannon'
         completedGame(.falling)
-        alertScore()
+        gameOverAlert()
     }
 
     private var wonGame: Bool {
@@ -418,7 +418,7 @@ public class GameEngine {
         if gameDelegate.saveScore() {
             newHighscoreAlert()
         } else {
-            didntBreakHighscoreAlert()
+            didntBreakHighScore()
         }
     }
 

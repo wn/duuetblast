@@ -147,7 +147,8 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
         guard
             currentLevel.levelName != nil,
             currentLevel.highscore < score else {
-            return
+                scoreLabel?.textColor = .white
+                return
         }
         scoreLabel?.textColor = .yellow
     }
@@ -212,6 +213,7 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
             fatalError("Level must be loaded before it can be restarted.")
         }
         setTime(currentLevel.time)
+        setScore(Constants.initialScore)
         gameEngine.restartEngine()
         setupLevel(level: loadedLevel)
         gameEngine.setupLevel(level: loadedLevel.clone())
@@ -317,7 +319,11 @@ extension GameEngineViewController: UIGameDelegate {
         guard let loadedLevel = loadedLevel else {
             fatalError("Cant reach here is there is no loaded level.")
         }
-        return loadedLevel.saveHighScore(score: gamePoints)
+        if loadedLevel.saveHighScore(score: gamePoints) {
+            currentLevel.highscore = gamePoints
+            loadedLevel.highscore = gamePoints
+        }
+        return false
     }
 }
 
