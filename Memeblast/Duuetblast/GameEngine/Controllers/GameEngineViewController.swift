@@ -145,8 +145,8 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
         gamePoints = score
         scoreLabel?.text = "\(gamePoints)"
         guard
-            currentLevel.levelName != nil,
-            currentLevel.highscore < score else {
+            loadedLevel.levelName != nil,
+            loadedLevel.highscore < score else {
                 scoreLabel?.textColor = .white
                 return
         }
