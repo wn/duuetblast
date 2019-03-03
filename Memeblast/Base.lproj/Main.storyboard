@@ -13,7 +13,7 @@
         <!--Level Design View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="levelDesigner" id="BYZ-38-t0r" customClass="LevelDesignViewController" customModule="Memeblast" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="levelDesigner" id="BYZ-38-t0r" customClass="LevelDesignViewController" customModule="Duuetblast" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -27,9 +27,9 @@
                                             <collectionView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gQf-dM-KDF">
                                                 <rect key="frame" x="0.0" y="0.0" width="834" height="805"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <collectionViewLayout key="collectionViewLayout" id="YM5-80-AiN" customClass="RectViewLayout" customModule="Memeblast" customModuleProvider="target"/>
+                                                <collectionViewLayout key="collectionViewLayout" id="YM5-80-AiN" customClass="RectViewLayout" customModule="Duuetblast" customModuleProvider="target"/>
                                                 <cells>
-                                                    <collectionViewCell autoresizesSubviews="NO" opaque="NO" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="gameBubbleCell" id="J0I-SK-Ywb" customClass="GameBubbleCollectionViewCell" customModule="Memeblast" customModuleProvider="target">
+                                                    <collectionViewCell autoresizesSubviews="NO" opaque="NO" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="gameBubbleCell" id="J0I-SK-Ywb" customClass="GameBubbleCollectionViewCell" customModule="Duuetblast" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="203" height="152"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -104,7 +104,7 @@
                                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                 </collectionViewFlowLayout>
                                                                 <cells>
-                                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="paletteSelectorBubbleCell" id="V9P-VX-JTe" customClass="PaletteBubbleCollectionViewCell" customModule="Memeblast" customModuleProvider="target">
+                                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="paletteSelectorBubbleCell" id="V9P-VX-JTe" customClass="PaletteBubbleCollectionViewCell" customModule="Duuetblast" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="25.5" width="134" height="122"/>
                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
                                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -235,7 +235,7 @@
         <!--Game Engine View Controller-->
         <scene sceneID="wM3-Kw-q0I">
             <objects>
-                <viewController storyboardIdentifier="gameEngine" id="qp4-rh-UbL" customClass="GameEngineViewController" customModule="Memeblast" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="gameEngine" id="qp4-rh-UbL" customClass="GameEngineViewController" customModule="Duuetblast" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Omt-M8-YXB">
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -249,9 +249,9 @@
                                             <collectionView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JxS-TL-u5k">
                                                 <rect key="frame" x="0.0" y="0.0" width="834" height="1079"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <collectionViewLayout key="collectionViewLayout" id="PDU-cs-ZGd" customClass="GridLayout" customModule="Memeblast" customModuleProvider="target"/>
+                                                <collectionViewLayout key="collectionViewLayout" id="PDU-cs-ZGd" customClass="GridLayout" customModule="Duuetblast" customModuleProvider="target"/>
                                                 <cells>
-                                                    <collectionViewCell autoresizesSubviews="NO" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="gameEngineBubbleCell" id="I0P-LC-BoZ" customClass="GameEngineBubbleCollectionViewCell" customModule="Memeblast" customModuleProvider="target">
+                                                    <collectionViewCell autoresizesSubviews="NO" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="gameEngineBubbleCell" id="I0P-LC-BoZ" customClass="GameEngineBubbleCollectionViewCell" customModule="Duuetblast" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="203" height="152"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -285,10 +285,10 @@
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9SK-Es-Riw">
                                                         <rect key="frame" x="0.0" y="0.0" width="417" height="69"/>
-                                                        <color key="backgroundColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="17"/>
                                                         <state key="normal" title="BACK">
-                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="titleColor" red="0.12941176469999999" green="0.80784313730000001" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="backToLevelSelector:" destination="qp4-rh-UbL" eventType="touchUpInside" id="be9-cl-YAJ"/>
@@ -296,17 +296,17 @@
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pQD-GQ-Afi">
                                                         <rect key="frame" x="417" y="0.0" width="417" height="69"/>
-                                                        <color key="backgroundColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="17"/>
                                                         <state key="normal" title="RESTART">
-                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="titleColor" red="0.12941176469999999" green="0.80784313730000001" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="restartLevel:" destination="qp4-rh-UbL" eventType="touchUpInside" id="mbT-94-Im3"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <color key="backgroundColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -333,7 +333,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="9Ik-yq-zvt" firstAttribute="leading" secondItem="Omt-M8-YXB" secondAttribute="leading" id="AV5-Mx-uPc"/>
                             <constraint firstItem="9Ik-yq-zvt" firstAttribute="top" secondItem="KHz-NF-6uZ" secondAttribute="top" id="HIe-x0-9Zs"/>
@@ -353,7 +353,7 @@
         <!--Start Game Controller-->
         <scene sceneID="GDs-iB-31g">
             <objects>
-                <viewController storyboardIdentifier="mainMenu" id="DsL-fC-jsI" customClass="StartGameController" customModule="Memeblast" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mainMenu" id="DsL-fC-jsI" customClass="StartGameController" customModule="Duuetblast" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Wws-h4-ePt">
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -437,7 +437,7 @@
         <!--LevelSelector-->
         <scene sceneID="ytB-oW-rvx">
             <objects>
-                <viewController storyboardIdentifier="levelSelector" title="LevelSelector" id="bfG-bH-Yqe" customClass="SelectLevelViewController" customModule="Memeblast" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="levelSelector" title="LevelSelector" id="bfG-bH-Yqe" customClass="SelectLevelViewController" customModule="Duuetblast" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oC3-IT-XQf">
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -479,7 +479,7 @@
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="levelSelectionCell" id="FDg-t9-WiC" customClass="LevelSelectionCollectionViewCell" customModule="Memeblast" customModuleProvider="target">
+                                                    <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="levelSelectionCell" id="FDg-t9-WiC" customClass="LevelSelectionCollectionViewCell" customModule="Duuetblast" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="356"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
