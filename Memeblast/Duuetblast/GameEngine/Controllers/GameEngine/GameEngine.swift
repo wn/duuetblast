@@ -122,7 +122,7 @@ public class GameEngine {
 
     /// Logic to determine next bubble
     private func getNextBubbleType() -> BubbleType {
-        if arc4random_uniform(10) < 1 {
+        if arc4random_uniform(UInt32(Constants.rocketChance)) < 1 {
             return .rocket
         }
         return Bubble.getRandomBubble()

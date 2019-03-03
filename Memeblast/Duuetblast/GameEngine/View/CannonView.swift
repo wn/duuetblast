@@ -45,11 +45,11 @@ class CannonView {
         superView.bringSubviewToFront(cannonBaseView)
 
         // Render cannon //
-        let image = CannonView.cannonSpriteBase
+        let image = Constants.cannonBase
         cannonView.image = image
         cannonView.frame.origin.y += cannonBaseHeight * 0.285
 
-        cannonView.animationImages = CannonView.cannonSpriteAnimationSet
+        cannonView.animationImages = Constants.cannonAnimationSet
         cannonView.animationDuration = 0.5
         cannonView.animationRepeatCount = 1
 
@@ -64,50 +64,4 @@ class CannonView {
     func animate() {
         self.cannonView.startAnimating()
     }
-
-    static let cannonSpriteRows = 2
-    static let cannonSpriteCols = 6
-    static let cannonSprite = #imageLiteral(resourceName: "cannon").cgImage!
-    static let cannonSpriteWidth = CGFloat(cannonSprite.width) / CGFloat(cannonSpriteCols)
-    static let cannonSpriteHeight = CGFloat(cannonSprite.height) / CGFloat(cannonSpriteRows)
-    static let cannonSpriteSize = CGSize(width: cannonSpriteWidth,
-                                         height: cannonSpriteHeight)
-    static let cannonSpriteBase = UIImage(cgImage: cannonSprite.cropping(to:
-        CGRect(origin: .zero, size: cannonSpriteSize))!)
-    static let cannonSpriteAnimationSet = [
-        cannonSpriteBase,
-        UIImage(cgImage: cannonSprite.cropping(to:
-            CGRect(origin: CGPoint(x: cannonSpriteWidth, y: 0),
-                   size: cannonSpriteSize))!),
-        UIImage(cgImage: cannonSprite.cropping(to:
-            CGRect(origin: CGPoint(x: 2 * cannonSpriteWidth, y: 0),
-                   size: cannonSpriteSize))!),
-        UIImage(cgImage: cannonSprite.cropping(to:
-            CGRect(origin: CGPoint(x: 3 * cannonSpriteWidth, y: 0),
-                   size: cannonSpriteSize))!),
-        UIImage(cgImage: cannonSprite.cropping(to:
-            CGRect(origin: CGPoint(x: 4 * cannonSpriteWidth, y: 0),
-                   size: cannonSpriteSize))!),
-        UIImage(cgImage: cannonSprite.cropping(to:
-            CGRect(origin: CGPoint(x: 5 * cannonSpriteWidth, y: 0),
-                   size: cannonSpriteSize))!),
-        UIImage(cgImage: cannonSprite.cropping(to:
-            CGRect(origin: CGPoint(x: 0, y: cannonSpriteHeight),
-                   size: cannonSpriteSize))!),
-        UIImage(cgImage: cannonSprite.cropping(to:
-            CGRect(origin: CGPoint(x: cannonSpriteWidth, y: cannonSpriteHeight),
-                   size: cannonSpriteSize))!),
-        UIImage(cgImage: cannonSprite.cropping(to:
-            CGRect(origin: CGPoint(x: 2 * cannonSpriteWidth, y: cannonSpriteHeight),
-                   size: cannonSpriteSize))!),
-        UIImage(cgImage: cannonSprite.cropping(to:
-            CGRect(origin: CGPoint(x: 3 * cannonSpriteWidth, y: cannonSpriteHeight),
-                   size: cannonSpriteSize))!),
-        UIImage(cgImage: cannonSprite.cropping(to:
-            CGRect(origin: CGPoint(x: 4 * cannonSpriteWidth, y: cannonSpriteHeight),
-                   size: cannonSpriteSize))!),
-        UIImage(cgImage: cannonSprite.cropping(to:
-            CGRect(origin: CGPoint(x: 5 * cannonSpriteWidth, y: cannonSpriteHeight),
-                   size: cannonSpriteSize))!),
-        ]
 }

@@ -96,7 +96,7 @@ public class RenderEngine {
     // MARK: - Methods for rendering game line
 
     private func renderGameLine(height: CGFloat) {
-        let lineDashPattern: [NSNumber]  = [10, 40] // [size per dash, size per blank]
+        let lineDashPattern = Constants.dashPattern // [size per dash, size per blank]
 
         let shapeLayer = CAShapeLayer()
         shapeLayer.strokeColor = UIColor.black.cgColor

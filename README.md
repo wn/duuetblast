@@ -33,7 +33,7 @@ CS3217 Problem Set 5
     - Clear game before time ends
 
 - Special notes:
-    - A random bubble will spawn every 10 seconds
+    - A random bubble will spawn every 20 seconds
     - Chainsaw is in game to prevent you from randomly spamming
     - This is a cooperative game. For multiplayer, you should work with your team to fire less bubbles to clear as many bubbles as possible. 
     - When game has ended, bubbles will freeze in the background. THIS IS A FEATURE. Players can see the last instance of when they end the game. :)
@@ -41,11 +41,11 @@ CS3217 Problem Set 5
 
 ### Problem 1: Cannon Direction
 
-For single player: Hold anywhere on the screen to adjust cannon direction. Release to fire. Tapping on screen works too. 
+- For single player: Hold anywhere on the screen to adjust cannon direction. Release to fire. Tapping on screen works too. 
 
-For two player: Same as single player, but tapping zone is restricted to each cannons's half, indicated by the yellow and red tint in the background. 
+- For two player: Same as single player, but tapping zone is restricted to each cannons's half, indicated by the yellow and red tint in the background. 
 
-Note: Cannon angle can only be between 0 to 180 degrees.
+- Note: Cannon angle can only be between 0 to 180 degrees.
 
 ### Problem 2: Upcoming Bubbles
 
@@ -70,7 +70,7 @@ Once bubble is activated, we will activate surrounding bubbles, if they are also
 
 For example, if we have an isolated bomb bubble on its own, surrounded by normal bubbles, and we have another bomb and star bubble, side by side. When we hit the bomb bubble, the star bubble should be activated. Since the star bubble was activated by a bomb, all bomb bubbles will be destroyed. The isolated bomb bubble will be activated, causing the surrounding normal bubbles to be destroyed. 
 
-Pretty cool. 
+Pretty lit. 
 
 ### Problem 5
 
@@ -87,6 +87,7 @@ Number of cannon is decided when game is being designed. Once game is saved, the
 3. `Level` and `GridBubble` are models that represent the grids in the level design. GridBubble contains the state for a single bubble in the grid, while Level contains the state for all `GridBubble` in the grid. Level should encapsulate the state of the current level design. 
 4. `LevelData` and `GridBubbleData` are `NSManagedObject` used for Core Data. Creation of these object result in new entries being created in the database.
 5. `GameBubble`, `CannonObject`, `Wall` is used to modal their object. They are subclasses of `GameObject`
+
 #### Controller
 
 1. `LevelDesignViewController` controls the logic in the level design storyboard, particularly the palettecollectionview and the gridcollectionview.
@@ -412,7 +413,7 @@ Number of cannon is decided when game is being designed. Once game is saved, the
         - When time is below 5, time textbecomes red
         - When highscore is broken, score text become gold colour. 
 - Nice background
-- Preview level from `LevelSelector`
+- Preview level screenshot from `LevelSelector`
 - End game screen
     - Show if broke highscore or not.
 - Allow deletion of levels!
@@ -431,3 +432,4 @@ Number of cannon is decided when game is being designed. Once game is saved, the
 5. There was a number of repeatitive code in each controller, which I had to 'copy and paste' since they are in different controller. This shows the poor design that I had in my code. I could have written more delegates to fix this issue, but 1. I'm still not familiar with delegate patterns and 2. I was too deep in the shit to fix my code. 
 6. A lot of my time for PS5 was spent on UI. However, I noticed that the size of my code for Views are quite low. Most of the code ended up in the controller. This also shows bad planning as I had to recode my controllers just to inject new view. 
 7. All in all, the main issue I had was that I didn't plan well, hence when new requirements comes in, I had to basically rewrite my code to allow for the new feature. Probably a good lesson to learn at this stage, since there isn't any PS6 to screw me up. However, for the project, it is extremely important to plan so that there won't be any issues in the end. 
+8. 
