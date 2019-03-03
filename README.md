@@ -18,18 +18,18 @@ CS3217 Problem Set 5
 
 - Clear bubbles before the time ends to earn points. 
 
-How to win points:
+- How to win points:
     - Clear bubbles
     - Finish game before time ends
         - Remaining time will be converted to scores
     - Fire as little bubbles as possible. Each firing of cannon cost 300 points.
 
-How to not lose:
+- How to not lose:
     - Do not hit chainsaw 
     - Do not allow grid bubbles to cross the gameover line
     - Clear game before time ends
 
-Special notes:
+- Special notes:
     - A random bubble will spawn every 10 seconds
     - Chainsaw is in game to prevent you from randomly spamming
     - This is a cooperative game. For multiplayer, you should work with your team to fire less bubbles to clear as many bubbles as possible. 
@@ -73,39 +73,14 @@ Pretty cool.
 
 ![Class Diagram](class-diagram.jpg)
 
-GameEngineViewController:
-
-This is the class that will feed data to the game engine to run.
-It is also in charge of modifying collectionView.
-GameEngine:
-
-This is where all the game logic happens, such as
-detecting collisions
-dropping bubbles to grids
-Generating firing bubbles
-Moving bubbles in gamearea
-Performing logic such as destroying if match, drop if unconnected
-Performing coordination between rendering engine and game objects.
-PhysicsEngine:
-
-This is the engine that performs all physics in the game, given vectors as inputs.
-RenderEngine:
-
-In charge of rendering objects in the game area that isn't snapped to any collectionview cell.
-Others
-
-The other objects in the project are simply to model the objects they represent.
-
-### Problem 8: Testing
-
-### Models
+#### Models
 
 1. `Bubble` and `BubbleType` represents Bubbles in the game, whether its from the grid or from the palette. `BubbleType` reflect the type of bubble.
 2. `PaletteBubble` and `PaletteBubbles` are models for the palette. `PaletteBubble` represent a single bubble in the palette, and `PaletteBubbles` represent the set of bubbles in the palette.
 3. `Level` and `GridBubble` are models that represent the grids in the level design. GridBubble contains the state for a single bubble in the grid, while Level contains the state for all `GridBubble` in the grid. Level should encapsulate the state of the current level design. 
 4. `LevelData` and `GridBubbleData` are `NSManagedObject` used for Core Data. Creation of these object result in new entries being created in the database.
 5. `GameBubble`, `CannonObject`, `Wall` is used to modal their object. They are subclasses of `GameObject`
-### Controller
+#### Controller
 
 1. `LevelDesignViewController` controls the logic in the level design storyboard, particularly the palettecollectionview and the gridcollectionview.
 2. `SelectLevelViewController` controls the logic in the level selection storyboard, particularly the collectionview.
@@ -125,7 +100,7 @@ The other objects in the project are simply to model the objects they represent.
 6. `RenderEngine`:
     - In charge of rendering objects in the game area that isn't snapped to any collectionview cell.
 
-### View
+#### View
 1. `GridLayout` determines the layout of the grid bubbles in level design
 2. `BubbleCollectionViewCell` is a collectionviewcell that contains the image to be rendered.
 3. `GameBubbleCollectionViewCell` is a collectionviewcell that inherits from `BubbleCollectionViewCell` and performs rendering of the gridbubble in level design view.
@@ -135,7 +110,7 @@ The other objects in the project are simply to model the objects they represent.
 7. `GameBubbleView` is a view for the bubbles in the game
 8. `CannonView` is a view for the cannon
 
-### Others
+#### Others
 1. `Constants` Store all constant value in the game
 2. `Settings` In charge of setting music and images of the game
 3. `Level` and `LevelGame` models the levels in the game. Used by `LevelDesignViewController` and `GameEngineViewController`
@@ -143,6 +118,9 @@ The other objects in the project are simply to model the objects they represent.
 5. `BubbleTheme` is used to generate file name of bubbles based on theme. Game currently only have one theme.
 6. `GameLayout`, `RectLayout`, `IsometricLayout` is used to determine layout logic such as nearest neighbours.
 7. `GridLayout`, `RectViewLayout` and `IsometricViewLayout` is used to render the arrangement of the collectionview for rect and isometric arrangement.
+
+### Problem 8: Testing
+
 
 ### Problem 9: The Bells & Whistles
 
