@@ -322,6 +322,7 @@ extension GameEngineViewController: UIGameDelegate {
         if loadedLevel.saveHighScore(score: gamePoints) {
             currentLevel.highscore = gamePoints
             loadedLevel.highscore = gamePoints
+            return true
         }
         return false
     }
