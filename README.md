@@ -387,7 +387,8 @@ Number of cannon is decided when game is being designed. Once game is saved, the
         - When `renderChildController(child)` is called, `viewController` should have a new child and `child`'s parent should be `viewController`
         - When `derenderChildController(_ moveToParent: Bool = true)` is called, viewController should be derendered. if moveToParent is True, parent will appear and vice versa.
 
-** Note: I did not test for my bells and whistle **
+**Note: I did not test for my bells and whistle**
+
 ### Problem 9: The Bells & Whistles
 
 - Cannon has animation!!

@@ -353,6 +353,10 @@ public class GameEngine {
             }
             deregisterBubble(bubble: collidedBubble, type: .match)
         case .random:
+            guard collidee.bubbleType.isNormalBubble else {
+                deregisterBubble(bubble: collidedBubble, type: .match)
+                break
+            }
             let randomBubbleType = BubbleType.getRandomBubble
             collidedBubble.bubbleType = randomBubbleType
             _ = gameDelegate?.setBubbleTypeAndGetPosition(bubbleType: randomBubbleType, index: index)
