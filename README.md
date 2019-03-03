@@ -102,9 +102,7 @@ Number of cannon is decided when game is being designed. Once game is saved, the
         - Moving bubbles in gamearea
         - Performing logic such as destroying if match, drop if unconnected
         - Performing coordination between rendering engine and game objects.
-5. `PhysicsEngine`:
-    - This is the engine that performs all physics in the game, given vectors as inputs. 
-6. `RenderEngine`:
+5. `RenderEngine`:
     - In charge of rendering objects in the game area that isn't snapped to any collectionview cell.
 
 #### View
@@ -263,6 +261,7 @@ Number of cannon is decided when game is being designed. Once game is saved, the
     - Bubble should bounce off realistically. 
 - Test grid layout
     - If rect grid game was selected, grid should be a rect layout. Same for isometric layout.
+    - Check that when bubble drops on the grid, it follows the correct layout. 
 - Test number of cannon
     - Start a game with one player, there should be one cannon in the game.
     - Start a game with two player, there should be two cannons in the game.
@@ -279,14 +278,13 @@ Number of cannon is decided when game is being designed. Once game is saved, the
     - `presentLevelSelector()`
         1. When this function is called, level selector storyboard should appear.
     - `getHeightOfGameArea()`
-        1. Should return the height of 
+        - Should return the height of collectionview
 - `SelectLevelViewController`
     - loadSavedLevel()
         - UI Should show all levels that was previously saved
 - `Level`
     - `getBubbleTypeAtIndex` 
         - should get the bubble type at the index. 
-        - 
     - `setBubbleTypeAtIndex`
         - After function is called, check if bubble type at the index is indeed set correctly.
     - `setBubbleTypeAtIndex`
@@ -319,17 +317,6 @@ Number of cannon is decided when game is being designed. Once game is saved, the
 - `GameEngineViewController`
     - `firingPosition`
         - firingPosition should return a coordinate that is at the bottom center of the gameplay area.
-- `PhysicsEngine`
-    - `finalVelocity(velocity: Velocity, acceleration: Acceleration, time: Double)`
-        - output should be velocity + acceleration * time
-    - `positionAfterTime(position: CGPoint, velocity: Velocity, time: Double)`
-        - output should be position + velocity * time, relative to both x and y coordinates. 
-    - `getBearing(startPoint: CGPoint, endPoint: CGPoint)`
-        - Taking angle of 0 degree as upwards. 
-        - Should return angle from 0 degrees from endPoint and startPoint
-- `CGPoint`
-    - `displacementTo(point: CGPoint)`
-        - Test that given two points, the displacement is the same as how one would get using pythogoras theorem. 
 - `RenderEngine`
     - `renderBubble` 
         - Given a bubble type, a bubble of that type should be rendered at the firing point.
@@ -343,6 +330,7 @@ Number of cannon is decided when game is being designed. Once game is saved, the
         - `gameBubblesView` should be updated with the bubble new position
     - `setAngle`
         - Ensure that angle was indeed set to the input.
+    - Length of `cannonsViewMap` should be equal to number of players in the game. 
 - `GameEngine`
     - `fireBubble`
         - Check that angle must be upwards of game. For this game, upwards is considered 0 degrees. Hence, new angle set must be between -pi / 2 to pi / 2, or no execution should occur.
@@ -366,9 +354,40 @@ Number of cannon is decided when game is being designed. Once game is saved, the
         - gameBubbles should be empty at end of function
         - gameplayBubbles should be empty at end of function
         - A new bubble should be generated at the firing position.
-    - 
+    - `setupLevel`
+        - When this function is ran, the following should happen:
+            - renderEngine should render a chainsaw bubble
+        - All non-attached bubbles should fall.
+    - `activatePower(collidedBubble, collidee)`
+        - If collidedBubble is a normal bubble, do nothing
+        - Else, collidedbubble power should be activated
+        - Switch collidedBubble.bubbleType
+            - case: .star
+                - bubbles in gameBubbles with the same type should disappear
+            - case: .bomb
+                - Bubbles that are of neighbouring index of collidee should explode
+            - case: .indestructible
+                - Ensure that indestructible bubble will not be spawn, hence matchThree cant work
+            - case: .lightning:
+                - Bubbles that are in same row of lightning bubble should explode
+        - In those cases, if there are unattached bubbles, they should be removed from gameBubbles set.
+        - Test for chaining of power.
+            - Provide test cases of gameBubbles to check that chaining works. Problem 4.4 shows the UI testing method, but it can easily be translated to glass-box testing.
+    - Test grid layout
+        - For rect grid, there should be 12 bubbles in each row, and there should be 9 rows.
+            - We can check this using `getRowIndexes`
+        - For isometric grid, there should be alternating 12 and 11 bubbles in each row, with 9 rows.
+    - Test neighbours
+        - Depending on isometric or rect grid, we can test at critical indexes. i.e. start and end of row one and two, and out of bound indexes.
+    - Test Multiple Cannon
+        - length of `cannons` should be equal to the number of players in the game. 
 
+- Global classes
+    - `UIViewController+Render`
+        - When `renderChildController(child)` is called, `viewController` should have a new child and `child`'s parent should be `viewController`
+        - When `derenderChildController(_ moveToParent: Bool = true)` is called, viewController should be derendered. if moveToParent is True, parent will appear and vice versa.
 
+** Note: I did not test for my bells and whistle **
 ### Problem 9: The Bells & Whistles
 
 - Cannon has animation!!

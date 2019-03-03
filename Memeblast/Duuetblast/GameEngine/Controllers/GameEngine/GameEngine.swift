@@ -154,7 +154,9 @@ public class GameEngine {
             return
         }
         DispatchQueue.main.asyncAfter(wallDeadline: .now() + time) { [weak self] () in
-            guard let strongself = self else { return }
+            guard let strongself = self else {
+                return
+            }
             var connected = strongself.isAttachedBubbles()
             while let bubble = connected.randomElement(), let index = bubble.index {
                 guard strongself.gameplayBubbles.count < strongself.gameLayout.totalNumberOfBubble else {
@@ -181,7 +183,6 @@ public class GameEngine {
                 strongself.dropFiringBubble(bubble: newBubble, allowClearing: false)
                 break
             }
-
             strongself.spawnRandomBubble(time: time)
         }
     }

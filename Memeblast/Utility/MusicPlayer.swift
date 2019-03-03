@@ -10,7 +10,7 @@ import Foundation
 import AVFoundation
 
 class MusicPlayer {
-    var audioPlayer: [AVAudioPlayer] = []
+    private var audioPlayer: [AVAudioPlayer] = []
     var isMusicActive: Bool = true
 
     func playSoundWith(_ filename: String, loop: Int = 0, vol: Float = 1) {
