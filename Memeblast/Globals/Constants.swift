@@ -71,7 +71,7 @@ class Constants {
     static let randomBubbleInterval: Double = 10
     // Used when instantiating new level and timestepper isnt rendered yet.
     static let defaultTime = 100
-    static let cannonDelay = 0.7
+    static let cannonDelay = 0.3
 
     static let FPS: Double = 60
 
@@ -79,5 +79,5 @@ class Constants {
     static let minNameLength = 3
     static let maxNameLength = 20
 
-    static let firingVelocity: CGFloat = 1500
+    static let firingVelocity: CGFloat = 2000
 }

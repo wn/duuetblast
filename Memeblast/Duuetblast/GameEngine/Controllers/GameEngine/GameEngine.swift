@@ -254,7 +254,6 @@ public class GameEngine {
     // MARK: - Bubble movements logic
     public func moveBubble(_ bubble: GameBubble) {
         guard gameBubbles.count > 0 else {
-            print("COMPLETED")
             return
         }
         bubble.position = physicsEngine.positionAfterTime(

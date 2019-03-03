@@ -1,6 +1,8 @@
 CS3217 Problem Set 5
 ==
 
+## App works best on iPad 11". There is no guarantee that app will work on other devices.
+
 **Name:** Ang Wei Neng
 
 **Matric No:** A0164178X
@@ -20,6 +22,7 @@ CS3217 Problem Set 5
 
 - How to win points:
     - Clear bubbles
+        - If only indestructible bubble remains, the game ends and player wins.
     - Finish game before time ends
         - Remaining time will be converted to scores
     - Fire as little bubbles as possible. Each firing of cannon cost 300 points.
@@ -33,7 +36,7 @@ CS3217 Problem Set 5
     - A random bubble will spawn every 10 seconds
     - Chainsaw is in game to prevent you from randomly spamming
     - This is a cooperative game. For multiplayer, you should work with your team to fire less bubbles to clear as many bubbles as possible. 
-    - When game has ended, bubbles will freeze in the background. THIS IS A FEATURE. players can see the last instance of when they end the game. :)
+    - When game has ended, bubbles will freeze in the background. THIS IS A FEATURE. Players can see the last instance of when they end the game. :)
 
 
 ### Problem 1: Cannon Direction
@@ -68,6 +71,10 @@ Once bubble is activated, we will activate surrounding bubbles, if they are also
 For example, if we have an isolated bomb bubble on its own, surrounded by normal bubbles, and we have another bomb and star bubble, side by side. When we hit the bomb bubble, the star bubble should be activated. Since the star bubble was activated by a bomb, all bomb bubbles will be destroyed. The isolated bomb bubble will be activated, causing the surrounding normal bubbles to be destroyed. 
 
 Pretty cool. 
+
+### Problem 5
+
+Number of cannon is decided when game is being designed. Once game is saved, there is no changing the number of cannons in the game. 
 
 ### Problem 7: Class Diagram
 
@@ -121,6 +128,250 @@ Pretty cool.
 
 ### Problem 8: Testing
 
+#### Black-box testing
+
+- Test background image 
+    - There should be a background image in the game.
+
+#### Assume that user is in start menu
+- There should be a "load level" and "create level" button
+- When "Load Level" button is pressed, user should enter level selector page
+- When "Create Level" button is pressed, user will have a choice to create a rectangle grid or isometric grid layout, or simply cancel the alert. When user select rectangle or isometric grid layout, they should enter level designer page.
+
+#### Assume that user is in level designer
+- Test by eyeballing the layout 
+    - There should be a grid on the screen, with 12 columns and 9 rows. For isometric layout, there should be 12 or 11 columns in each row, alternating.
+    - There should be a palette at the bottom of the screen, scrollable horizontally.
+    - There should be 3 buttons at the bottom of the screen, `back`, `start` and `save`.
+    - Approx in the center of the screen, there should be a time showing how much time was selected. There is also two buttons.
+        - Select number of players allow user to choose how many cannon will be in the game
+        - The `+` and `-` button adjust the time, in steps of 10, up to a max of 200 and a min of 20
+- Test that grid bubbles can be coloured with palette.
+    1. Create a new game by pressing `New Level` in the level selection page. 
+    2. Select a color in the palette. By default, no color should be selected.
+    3. Tap a grid bubble. That grid bubble color should change to the color of the selected palette bubble. 
+    4. If erase bubble is selected, the grid bubble will reset to empty.
+- Test gestures:
+    - Single tap of palette:
+        1. Tap a palette bubble
+        2. If palette bubble is not selected, that palette bubble should now have a solid border with 100% opacity. Other bubbles should only have 50% opacity with no border. 
+        3. If palette bubble was selected, the tap should de-select it, resulting in no palette bubbles being selected.
+        4. Note that magnet is a normal bubble, hence it will appear in the cycle.
+    - Long press:
+        1. Long-press a grid bubble that is not empty (grey).
+        2. The bubble should become empty (grey).
+    - Panning:
+        1. Select a color in the palette.
+        2. Pan on the grid bubbles.
+        3. Bubbles that was panned should turn into the color of the selected palette bubble.
+    - Single-tap to cycle color
+        1. Ensure that no palette bubble is selected.
+        2. Tap on a grid bubble that is not empty (grey).
+        3. Color should change based on the order: red -> blue -> orange -> green.
+- Test buttons:
+    - Test `back` button
+        1. Confirmation alert should appear, warning user that any unsaved data will be deleted. 
+        2. View where user came from should appear.
+    - Test `save` button
+        1. Press save. 
+        2. Type name of level that you want to call the level.
+        3. Grid must fuifill some rules:
+            - If there is no bubbles in the top row, saving will not occur.
+            - If grid is empty, saving will not occur
+            - If grid only contains indestructible bubbles
+        4. If name of level already exist, a confirmation alert will appear. 
+            1. If confirm is press, previous level with same name will be over-ridden
+            2. If cancel is pressed, no further action will happen.
+        5. Prefix and suffix spaces will be removed from name for sanitisation.
+            - If length of name is not betweeen 3 and 20 (inclusive), saving will fail.
+        6. Saving confirmation will appear if saving is successful.
+    - Test start button:
+        1. Grid must fuifill some rules:
+                - If there is no bubbles in the top row, saving will not occur.
+                - If grid is empty, saving will not occur
+                - If grid only contains indestructible bubbles
+        2. Game should start if rules are fufilled.
+
+#### Assume that user is in level selector
+- Test deleting of level
+    1. On the level cell that you wish to delete, press the dustbin button.
+    2. Press confirm to delete
+        - If cancel is pressed, deletion will not occur
+    3. Level will be deleted, cell should disappear from view
+- Test start game
+    1. Press on the cell. Game will start
+- Test buttons:
+    - BACK button:
+        - Should go back to start menu
+    - Create level
+        - Option to create rect or isometric grid
+        - On selection, should go to level designer view
+- Test cell info
+    - Cell on the view should contain the following info:
+        - Screenshot of level
+        - Name
+        - Highscore
+        - Time
+        - Number of cannons in the game
+    - Start game in cell. Game that ran should follow the above screenshot, time, number of cannons and highscore.
+
+#### Assume that user is in game
+- Test firing bubble:
+    - Tap on any point above or at the same height as the cannon, from 0 to 180 degress of the cannon, and in the gameplay area. Bubble should fly towards that position
+- Test firing cannon angle
+    - Pan on any position in the grid, cannon should change position based the pan position. 
+    - For two players, testing of a cannon should be done on each player view. 
+- Test colliding bubbles:
+    - Fire two bubbles from two cannon at any angle such that their path collides. 
+    - Bubble should realistically bounce off.
+    - Note that there is a possibility that bubble can move downwards and disappear out of the game. (Not a feature or bug, just physics)
+- Test cannon not being able to fire when collided with ball:
+    - Fire a ball horizontally. Cannon should not release bubble to ensure that no two balls overlaps. 
+- Test bubbles being attached to the top wall:
+    - Fire a bubble upwards.
+    - Bubble should snap to a grid on the frist row.
+- Test game-over logic:
+    - Fire bubble into the game area until a bubble snaps on a grid below the dotted line in the game.
+    - All bubbles, moving or stationary, should fall.
+    - No more bubbles should be allowed to be fired. 
+- Test bubbles that is not connected to fall:
+    - Set up game area such that bubbles will be unconnected. This can be done by firing bubbles to the game area.
+    - Bubbles that is unconnected should fall.
+- Test bubbles disappearing on matchThree:
+    - Fire bubbles into the game such that there at 3 bubbles of the same color in the game connected. 
+    - The bubbles does not need to be touching all other bubbles simultaneously. As long as there is a path from one bubble to another, where the path are of the same bubble color, those bubbles connected should drop.
+- Test powerups
+    - Star
+        - Create a grid with a star. Fire a bubble of any color at the star
+        - All bubbles of that color should disappear, and any unattached bubble should fall
+    - Bomb
+        - All neighbouring bubbles should disappear when a firing bubble hits a bomb
+    - Lightning
+        - All bubbles of the same row should disappear when a firing bubble hits a lightning bubble.
+    - Indestructible
+        - This bubble should never be fired, hence matchThree can never occur with Indestructible
+    - Chaining of powerups
+        - See problem 4.4 for testing
+- Test restart logic:
+    - Press restart and confirm restart
+    - All bubbles should fall and be removed from the game.
+- Test falling bubbles not being able to interact with moving bubbles:
+    - Set up game area such that bubbles will be unconnected. This can be done by firing bubbles to the game area.
+    - While bubbles is falling, firing bubbles into the game such that firing bubbles and falling bubbles will collide. There should not be any interaction between them. 
+- Test bounding of bubbles off vertical walls:
+    - Fire a bubble at a wall.
+    - Bubble should bounce off realistically. 
+- Test grid layout
+    - If rect grid game was selected, grid should be a rect layout. Same for isometric layout.
+- Test number of cannon
+    - Start a game with one player, there should be one cannon in the game.
+    - Start a game with two player, there should be two cannons in the game.
+
+### Glass-box testing
+
+#### LevelDesign & LevelSelector
+- `LevelDesignViewController`
+    - `loadGrid`
+        1. Precondition: `LevelData` is in database.
+        2. if `levelName` is not in `LevelData`, grid should not be updated. 
+        3. if `levelName` is in `LevelData`, grid should be updated.
+        4. Alert should pop up indicating if load was successful or not.
+    - `presentLevelSelector()`
+        1. When this function is called, level selector storyboard should appear.
+    - `getHeightOfGameArea()`
+        1. Should return the height of 
+
+- `SelectLevelViewController`
+    - loadSavedLevel()
+        - UI Should show all levels that was previously saved
+
+- `Level`
+    - `getBubbleTypeAtIndex` 
+        - should get the bubble type at the index. 
+        - 
+    - `setBubbleTypeAtIndex`
+        - After function is called, check if bubble type at the index is indeed set correctly.
+    - `setBubbleTypeAtIndex`
+        - After function is called, check if bubble type at the index is indeed set correctly.
+    - `cycleTypeAtIndex`
+        - Let number of playable bubbles be n. Calling the cycle n times should cause bubble at the `index` to be of n different bubble types. 
+        - `eraseAllBubbles`
+            - All bubbles should have a bubbleType of .empty
+        - `isEmpty`
+            - Create 2 levels, one with empty grids and one without
+                - If grid is empty, return true
+                - If grid is not empty, return false. 
+
+- `GridBubble`
+    - `cycleNextColor`
+        - Let number of playable bubbles be n. Calling the cycle n times should cause bubble to be of n different bubble types. 
+    - `eraseBubble`
+        - Bubble should now be of `BubbleType` `empty`. 
+    - `togglePaletteBubble`
+        - `isSelected` value at `index` of `paletteBubbles` should be flipped.
+
+- `Bubble`
+    - `imageUrl`
+        - Check that `Bubble` of `BubbleType` .red has `imageUrl` of "bubble-red.png"
+        - Check with other known `BubbleType`
+
+- `BubbleType`
+    - `imageUrl`
+        - Check that `BubbleType` .red has `imageUrl` of "bubble-red.png"
+        - Check with other known `BubbleType`
+
+#### GameEngine Test
+- `GameEngineViewController`
+    - `firingPosition`
+        - firingPosition should return a coordinate that is at the bottom center of the gameplay area.
+- `PhysicsEngine`
+    - `finalVelocity(velocity: Velocity, acceleration: Acceleration, time: Double)`
+        - output should be velocity + acceleration * time
+    - `positionAfterTime(position: CGPoint, velocity: Velocity, time: Double)`
+        - output should be position + velocity * time, relative to both x and y coordinates. 
+    - `getBearing(startPoint: CGPoint, endPoint: CGPoint)`
+        - Taking angle of 0 degree as upwards. 
+        - Should return angle from 0 degrees from endPoint and startPoint
+- `CGPoint`
+    - `displacementTo(point: CGPoint)`
+        - Test that given two points, the displacement is the same as how one would get using pythogoras theorem. 
+- `RenderEngine`
+    - `renderBubble` 
+        - Given a bubble type, a bubble of that type should be rendered at the firing point.
+        - Bubble should be inserted into `gameBubblesView`. 
+    - `renderFallingBubble`
+        - Input bubble should be rendered at input position.
+        - Bubble should be inserted into `gameBubblesView` if it was not inserted before. 
+    - `rerenderBubble`
+        - `gameBubblesView` should be updated to hold the bubble new position. 
+    - `moveBubble`
+        - `gameBubblesView` should be updated with the bubble new position
+    - `setAngle`
+        - Ensure that angle was indeed set to the input.
+- `GameEngine`
+    - `fireBubble`
+        - Check that angle must be upwards of game. For this game, upwards is considered 0 degrees. Hence, new angle set must be between -pi / 2 to pi / 2, or no execution should occur.
+        - If angle is correct, ensure that cannon is set to the respective angle, and cannon.fireBubble() is executed. 
+    - `generateFiringBubble`
+        - Check that if gameover, nothing should happen
+        - Check that if not gameover, bubble should be loaded to cannon, and `gameBubbles` should have a bubble inserted. 
+    - `moveBubble`
+        - Given a bubble input, bubble position should be updated based on its velocity and initial position. 
+    - `collidedBubble`
+        - Given a bubble input, get the first bubble in the game that is colliding with the input bubble, and isnt falling or was the last collided bubble.
+    - `movingFiringBubble`
+        - Given the bubble state, perform action:
+            - If bubble is falling, just check whether it is out of bounds before derendering the ball from the view
+            - If bubble is moving, check for any collision
+            - if bubble is stationary, terminate the function
+            - if bubble is in cannon, and bubble is moving, the app should crash as this makes no sense.
+        - Move bubble based on its velocity and initial position.
+    - `restartEngine()`
+        - deregister all bubbles in the game with `falling` movementType. 
+        - gameBubbles should be empty at end of function
+        - gameplayBubbles should be empty at end of function
+        - A new bubble should be generated at the firing position.
+
 
 ### Problem 9: The Bells & Whistles
 
@@ -132,7 +383,7 @@ Pretty cool.
     - Magnet: Currently does nothing. (i.e. Normal bubble)
     - Random (Question mark icon): On collision, becomes a random power-up.
     - Rubbish Bin: On collision, both bin and bubble disappear.
-    - Rocket: This is released by the cannon with 10% probability. On firing, drop anything on its path due to its fast speed. 
+    - Rocket: This is released by the cannon with 10% probability. On firing, drop anything on its path due to it being a rocket. 
     - Nice bubble assets
 - Score
     - With cool scoring algorithms
@@ -145,12 +396,11 @@ Pretty cool.
         - When time is below 5, time textbecomes red
         - When highscore is broken, score text become gold colour. 
 - Nice background
+- Preview level from `LevelSelector`
 - End game screen
     - Show if broke highscore or not.
 - Allow deletion of levels!
-- Note that editing of levels is trival, but I did not implement it as it doesn't make sense for one guy to create a level and another guy to edit it. 
+- Note that editing of levels is trival, but I did not implement it as it doesn't make sense for one guy to create a level and another guy to edit it, although my PS4 supports that. Please don't deduct marks here. 
 - Alot of nice popups for user confirmation
 
 ### Problem 10: Final Reflection
-
-TODO

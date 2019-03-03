@@ -144,9 +144,9 @@ class LevelDesignViewController: UIViewController {
     private func emptyGridAlert() {
         let alert = UIAlertController(
             title: "Empty grid",
-            message: "Whachu tryna do with empty?",
+            message: "There is nothing you can do with an empty grid.",
             preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Sorry boss", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true)
     }
 
@@ -155,7 +155,7 @@ class LevelDesignViewController: UIViewController {
             title: "First row cannot be empty",
             message: "If the first row is empty, the game will end immediately.",
             preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Sorry boss", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true)
     }
 
@@ -164,7 +164,7 @@ class LevelDesignViewController: UIViewController {
             title: "No playable bubble",
             message: "There must be a playable bubble. Empty grid or indestructible bubble doesn't count.",
             preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Sorry boss", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true)
     }
 
@@ -244,7 +244,6 @@ class LevelDesignViewController: UIViewController {
         } catch {
             self.savingFailureAlert()
         }
-
     }
 
     /// Present the level selector storyboard to user.
@@ -269,7 +268,8 @@ extension LevelDesignViewController {
             // Prompt for new name
             let alert = UIAlertController(
                 title: "Save Level!",
-                message: "What would you like to call this level? Note: Name should be less than 20 characters. ",
+                message: "What would you like to call this level? " +
+                "Note: Name should be between \(Constants.minNameLength)  and \(Constants.maxNameLength) characters.",
                 preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 

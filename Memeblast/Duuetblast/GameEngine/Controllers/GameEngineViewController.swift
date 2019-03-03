@@ -142,8 +142,8 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
     var gamePoints: Int = 0
 
     func setScore(_ score: Int) {
-        scoreLabel?.text = "\(score)"
         gamePoints = score
+        scoreLabel?.text = "\(gamePoints)"
         guard
             currentLevel.levelName != nil,
             currentLevel.highscore < score else {
@@ -317,7 +317,7 @@ extension GameEngineViewController: UIGameDelegate {
         guard let loadedLevel = loadedLevel else {
             fatalError("Cant reach here is there is no loaded level.")
         }
-        return loadedLevel.saveHighScore(score: score)
+        return loadedLevel.saveHighScore(score: gamePoints)
     }
 }
 
