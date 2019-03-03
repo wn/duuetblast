@@ -48,7 +48,6 @@ class SelectLevelViewController: UIViewController, UIGestureRecognizerDelegate {
     func loadSavedLevel() {
         levels = LevelGame.retrieveLevels()
         levels.sort { $0.levelName! < $1.levelName! }
-        levelSelectorCollection?.reloadData()
     }
 }
 
@@ -60,7 +59,8 @@ extension SelectLevelViewController {
         guard let indexPath = (self.levelSelectorCollection?.indexPathForItem(at: point)) else {
             return
         }
-        guard let levelName = levels[indexPath.item].levelName else {
+        let level = levels[indexPath.item]
+        guard let levelName = level.levelName else {
             return
         }
 
@@ -76,10 +76,12 @@ extension SelectLevelViewController {
             fatalError("Level should be retrieval")
         }
         gameEngineController.setupLevel(level: selectedLevel)
-        gameEngineController.isDualCannon = true
+        gameEngineController.isDualCannon = level.dual
         renderChildController(gameEngineController)
-
     }
+
+    
+
     /// Button to create a new level.
     @IBAction func renderMainMenu(_ sender: Any) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -107,13 +109,14 @@ extension SelectLevelViewController: UICollectionViewDataSource, UICollectionVie
             for: indexPath as IndexPath)
             as! LevelSelectionCollectionViewCell
         let level = levels[indexPath.item]
-        cell.setLevelName(name: level.levelName)
+        cell.setLevelName(name: level.levelName, dualCannon: level.dual, time: Int(level.time))
         cell.setImage(level.screenshot)
         cell.setHighScore(Int(level.highscore))
 
         cell.layer.cornerRadius = 50
         cell.layer.borderColor = UIColor.black.cgColor
         cell.layer.borderWidth = 4
+        cell.delegate = self
         return cell
     }
 }
@@ -124,5 +127,28 @@ extension SelectLevelViewController: UICollectionViewDelegateFlowLayout {
         let collectionViewSize = collectionView.frame.size.width - padding
 
         return CGSize(width: collectionViewSize/2, height: collectionViewSize/2 * 1.2)
+    }
+}
+
+extension SelectLevelViewController: CardCellDelegate {
+    func deleteAtPosition(_ cell: LevelSelectionCollectionViewCell) {
+        guard let indexPath = levelSelectorCollection.indexPath(for: cell) else {
+            return
+        }
+
+        let index = indexPath.item
+        let lvlData = levels[index]
+
+        guard let lvlName = lvlData.levelName, LevelData.deleteLevel(name: lvlName) else {
+            return
+        }
+
+        let alert = UIAlertController(title: "Deleting level", message: "Are you sure you want to delete \(lvlName)?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Confirm", style: .default) { [weak self]_ in
+            self?.levels.remove(at: index)
+            self?.levelSelectorCollection.reloadData()
+        })
+        self.present(alert, animated: true)
     }
 }

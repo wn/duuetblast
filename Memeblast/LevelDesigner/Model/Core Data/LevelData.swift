@@ -15,7 +15,7 @@ class LevelData: NSManagedObject {
         super.init(entity: entity, insertInto: context)
     }
 
-    init(name: String, isRect: Bool, time: Int16, highscore: Int32, screenshot: Data) {
+    init(name: String, isRect: Bool, dual: Bool, time: Int16, highscore: Int32, screenshot: Data) {
         let context = AppDelegate.viewContext
         guard let entity = NSEntityDescription.entity(forEntityName: "LevelData", in: context) else {
             fatalError("Core data must contain entity LevelData!")
@@ -26,6 +26,7 @@ class LevelData: NSManagedObject {
         self.highscore = highscore
         self.time = time
         self.screenshot = screenshot
+        self.dual = dual
     }
 
     func saveBubbles(bubbles: [GridBubble]) {

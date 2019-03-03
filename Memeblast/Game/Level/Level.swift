@@ -17,6 +17,7 @@ public class Level {
     var time: Int = Constants.defaultTime
     var highscore = 0
     var screenshot: Data?
+    var dual: Bool = false
 
     public init(totalBubbles: Int, fillType: BubbleType, isRect: Bool) {
         self.isRect = isRect
@@ -64,28 +65,27 @@ public class Level {
 
     public func saveHighScore(score: Int) -> Bool {
         guard let levelName = levelName, let screenshot = screenshot else {
-            print(2)
             return false
         }
         guard score > 0, score > highscore else {
-            print(1)
             return false
         }
         highscore = score
-        saveGridBubblesToDatabase(name: levelName, isRectGrid: isRect, time: time, screenshot: screenshot)
+        saveGridBubblesToDatabase(name: levelName, dual: dual, isRectGrid: isRect, time: time, screenshot: screenshot)
         return true
     }
 
     /// Save level to database.
-    public func saveGridBubblesToDatabase(name: String, isRectGrid: Bool, time: Int, screenshot: Data) {
+    public func saveGridBubblesToDatabase(name: String, dual: Bool, isRectGrid: Bool, time: Int, screenshot: Data) {
         // If level exist, we delete it.
         _ = LevelData.deleteLevel(name: name)
 
-        let levelData = LevelData(name: name, isRect: isRectGrid, time: Int16(time), highscore: Int32(highscore), screenshot: screenshot)
+        let levelData = LevelData(name: name, isRect: isRectGrid, dual: dual, time: Int16(time), highscore: Int32(highscore), screenshot: screenshot)
         levelName = name
         self.time = time
         self.screenshot = screenshot
         levelData.saveBubbles(bubbles: gridBubbles)
+        self.dual = dual
 
         do {
             _ = try AppDelegate.viewContext.save()

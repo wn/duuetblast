@@ -57,6 +57,9 @@ class StartGameController: CustomTransitionViewController {
             levelDesignerController.isRectGrid = false
             self.renderChildController(levelDesignerController)
         })
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
         self.present(alert, animated: true)
+
     }
+
 }

@@ -67,10 +67,8 @@ class LevelDesignViewController: UIViewController {
     lazy var time: Int = currentLevel.time
     var isRectGrid = false
     let paletteBubbles = PaletteBubbles()
-    //var levelName: String?
 
     var dualCannon: Bool {
-        // TODO: ADD TO CORE DATA
         return numOfPlayer.selectedSegmentIndex == 1
     }
 
@@ -118,6 +116,7 @@ class LevelDesignViewController: UIViewController {
 
         self.timeLabel = timeLabel
         timeStepper.value = Double(currentLevel.time)
+
     }
 
     var containsPlayableBubble: Bool {
@@ -233,7 +232,7 @@ class LevelDesignViewController: UIViewController {
             self.present(didNotSaveAlert, animated: true)
             return
         }
-        currentLevel.saveGridBubblesToDatabase(name: levelName, isRectGrid: isRectGrid, time: self.time, screenshot: pngData)
+        currentLevel.saveGridBubblesToDatabase(name: levelName, dual: dualCannon, isRectGrid: isRectGrid, time: self.time, screenshot: pngData)
         do {
             try context.save()
             confirmAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -330,9 +329,10 @@ extension LevelDesignViewController: GridLayoutDelegate {
 /// Extension to mainain collectionView actions.
 extension LevelDesignViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellRadius = colorSelectorCollection.frame.size.height / 2 + 1
+        let padding: CGFloat = 10
+        let cellDiameter = colorSelectorCollection.frame.size.height + padding
 
-        return CGSize(width: cellRadius, height: cellRadius)
+        return CGSize(width: cellDiameter / 2, height: cellDiameter / 2)
     }
 
     // Tell the collection view how many cells to make
@@ -356,9 +356,9 @@ extension LevelDesignViewController: UICollectionViewDataSource, UICollectionVie
                 as! PaletteBubbleCollectionViewCell
             let selectedPaletteBubble = paletteBubbles.getBubbleAtIndex(index: indexPath.item)
             cell.setupImage(imageUrl: Settings.selectedTheme.getBubbleTypePath(type: selectedPaletteBubble.bubbleType), isSelected: selectedPaletteBubble.isSelected)
-            let cellDiameter = colorSelectorCollection.frame.height / 2
-            let yPos = cell.frame.origin.y + cellDiameter / 2
-            cell.frame = CGRect(x: cell.frame.origin.x, y: yPos, width: cellDiameter, height:cellDiameter)
+//            let cellDiameter = cell.frame.width
+//            // let yPos = cell.frame.origin.y + cellDiameter / 2
+//            cell.layer.frame = CGRect(x: cellDiameter * CGFloat(indexPath.item), y: cell.frame.origin.y, width: cellDiameter, height: cellDiameter)
             return cell
         case gameBubbleCollection:
             let cell = collectionView.dequeueReusableCell(

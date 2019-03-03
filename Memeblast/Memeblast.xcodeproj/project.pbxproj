@@ -32,6 +32,15 @@
 		EB5D84BB22290513002F314B /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB5D84BA22290513002F314B /* OpenSans-Regular.ttf */; };
 		EB5D84BD22290740002F314B /* Blueberry-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = EB5D84BC22290740002F314B /* Blueberry-Regular.otf */; };
 		EB5D84BF22292302002F314B /* UIColor+RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5D84BE22292302002F314B /* UIColor+RGB.swift */; };
+		EB74768B222BACEC00D627AD /* Cartoon Sound Effect - Bounce.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EB747682222BACEC00D627AD /* Cartoon Sound Effect - Bounce.mp3 */; };
+		EB74768C222BACEC00D627AD /* maplestory.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EB747683222BACEC00D627AD /* maplestory.mp3 */; };
+		EB74768D222BACEC00D627AD /* gameover_sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EB747684222BACEC00D627AD /* gameover_sound.mp3 */; };
+		EB74768E222BACEC00D627AD /* bubble_drop_to_collection.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EB747685222BACEC00D627AD /* bubble_drop_to_collection.mp3 */; };
+		EB74768F222BACEC00D627AD /* zap_sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EB747686222BACEC00D627AD /* zap_sound.mp3 */; };
+		EB747690222BACEC00D627AD /* start_sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EB747687222BACEC00D627AD /* start_sound.mp3 */; };
+		EB747691222BACEC00D627AD /* bomb_sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EB747688222BACEC00D627AD /* bomb_sound.mp3 */; };
+		EB747692222BACEC00D627AD /* cannon_sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EB747689222BACEC00D627AD /* cannon_sound.mp3 */; };
+		EB747693222BACEC00D627AD /* bounce.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EB74768A222BACEC00D627AD /* bounce.mp3 */; };
 		EB887A64220C996700028F6F /* LevelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB887A63220C996700028F6F /* LevelData.swift */; };
 		EB8B38462210122B00E1CD5A /* GameEngineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B38452210122B00E1CD5A /* GameEngineViewController.swift */; };
 		EB8B38482210163300E1CD5A /* GameEngineBubbleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B38472210163300E1CD5A /* GameEngineBubbleCollectionViewCell.swift */; };
@@ -112,17 +121,18 @@
 		EB5A1C4E2206AD5D005F1DA1 /* PaletteBubbles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteBubbles.swift; sourceTree = "<group>"; };
 		EB5A1C6A22070601005F1DA1 /* BubbleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleType.swift; sourceTree = "<group>"; };
 		EB5A1C94220730DC005F1DA1 /* LevelDesignerData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LevelDesignerData.xcdatamodel; sourceTree = "<group>"; };
-		EB5D84AB22287452002F314B /* bubble_drop_to_collection.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bubble_drop_to_collection.mp3; sourceTree = "<group>"; };
-		EB5D84AC22287452002F314B /* bounce.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bounce.mp3; sourceTree = "<group>"; };
-		EB5D84AD22287452002F314B /* cannon_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cannon_sound.mp3; sourceTree = "<group>"; };
-		EB5D84AE22287452002F314B /* start_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = start_sound.mp3; sourceTree = "<group>"; };
-		EB5D84AF22287452002F314B /* maplestory.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = maplestory.mp3; sourceTree = "<group>"; };
-		EB5D84B022287452002F314B /* zap_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zap_sound.mp3; sourceTree = "<group>"; };
-		EB5D84B122287452002F314B /* bomb_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bomb_sound.mp3; sourceTree = "<group>"; };
-		EB5D84B222287453002F314B /* gameover_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameover_sound.mp3; sourceTree = "<group>"; };
 		EB5D84BA22290513002F314B /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Regular.ttf"; path = "../../../../../../../../Downloads/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		EB5D84BC22290740002F314B /* Blueberry-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Blueberry-Regular.otf"; path = "../../../../../../../../Downloads/Blueberry-Regular.otf"; sourceTree = "<group>"; };
 		EB5D84BE22292302002F314B /* UIColor+RGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+RGB.swift"; sourceTree = "<group>"; };
+		EB747682222BACEC00D627AD /* Cartoon Sound Effect - Bounce.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Cartoon Sound Effect - Bounce.mp3"; path = "../../../Sound Assets/Cartoon Sound Effect - Bounce.mp3"; sourceTree = "<group>"; };
+		EB747683222BACEC00D627AD /* maplestory.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = maplestory.mp3; path = "../../../Sound Assets/maplestory.mp3"; sourceTree = "<group>"; };
+		EB747684222BACEC00D627AD /* gameover_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = gameover_sound.mp3; path = "../../../Sound Assets/gameover_sound.mp3"; sourceTree = "<group>"; };
+		EB747685222BACEC00D627AD /* bubble_drop_to_collection.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bubble_drop_to_collection.mp3; path = "../../../Sound Assets/bubble_drop_to_collection.mp3"; sourceTree = "<group>"; };
+		EB747686222BACEC00D627AD /* zap_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = zap_sound.mp3; path = "../../../Sound Assets/zap_sound.mp3"; sourceTree = "<group>"; };
+		EB747687222BACEC00D627AD /* start_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = start_sound.mp3; path = "../../../Sound Assets/start_sound.mp3"; sourceTree = "<group>"; };
+		EB747688222BACEC00D627AD /* bomb_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bomb_sound.mp3; path = "../../../Sound Assets/bomb_sound.mp3"; sourceTree = "<group>"; };
+		EB747689222BACEC00D627AD /* cannon_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = cannon_sound.mp3; path = "../../../Sound Assets/cannon_sound.mp3"; sourceTree = "<group>"; };
+		EB74768A222BACEC00D627AD /* bounce.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bounce.mp3; path = "../../../Sound Assets/bounce.mp3"; sourceTree = "<group>"; };
 		EB887A63220C996700028F6F /* LevelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelData.swift; sourceTree = "<group>"; };
 		EB8B38452210122B00E1CD5A /* GameEngineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineViewController.swift; sourceTree = "<group>"; };
 		EB8B38472210163300E1CD5A /* GameEngineBubbleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineBubbleCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -326,14 +336,15 @@
 		EB5D84AA22287448002F314B /* SoundAssets */ = {
 			isa = PBXGroup;
 			children = (
-				EB5D84AC22287452002F314B /* bounce.mp3 */,
-				EB5D84AD22287452002F314B /* cannon_sound.mp3 */,
-				EB5D84B122287452002F314B /* bomb_sound.mp3 */,
-				EB5D84AB22287452002F314B /* bubble_drop_to_collection.mp3 */,
-				EB5D84B222287453002F314B /* gameover_sound.mp3 */,
-				EB5D84AE22287452002F314B /* start_sound.mp3 */,
-				EB5D84B022287452002F314B /* zap_sound.mp3 */,
-				EB5D84AF22287452002F314B /* maplestory.mp3 */,
+				EB747688222BACEC00D627AD /* bomb_sound.mp3 */,
+				EB74768A222BACEC00D627AD /* bounce.mp3 */,
+				EB747685222BACEC00D627AD /* bubble_drop_to_collection.mp3 */,
+				EB747689222BACEC00D627AD /* cannon_sound.mp3 */,
+				EB747682222BACEC00D627AD /* Cartoon Sound Effect - Bounce.mp3 */,
+				EB747684222BACEC00D627AD /* gameover_sound.mp3 */,
+				EB747683222BACEC00D627AD /* maplestory.mp3 */,
+				EB747687222BACEC00D627AD /* start_sound.mp3 */,
+				EB747686222BACEC00D627AD /* zap_sound.mp3 */,
 			);
 			path = SoundAssets;
 			sourceTree = "<group>";
@@ -605,11 +616,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB747691222BACEC00D627AD /* bomb_sound.mp3 in Resources */,
+				EB74768B222BACEC00D627AD /* Cartoon Sound Effect - Bounce.mp3 in Resources */,
 				EB276CB621FDD07C00C23E9C /* LaunchScreen.storyboard in Resources */,
+				EB74768C222BACEC00D627AD /* maplestory.mp3 in Resources */,
 				EB276CB321FDD07C00C23E9C /* Assets.xcassets in Resources */,
+				EB74768F222BACEC00D627AD /* zap_sound.mp3 in Resources */,
 				EB5D84BB22290513002F314B /* OpenSans-Regular.ttf in Resources */,
 				EB5D84BD22290740002F314B /* Blueberry-Regular.otf in Resources */,
+				EB74768D222BACEC00D627AD /* gameover_sound.mp3 in Resources */,
+				EB747690222BACEC00D627AD /* start_sound.mp3 in Resources */,
+				EB747693222BACEC00D627AD /* bounce.mp3 in Resources */,
+				EB747692222BACEC00D627AD /* cannon_sound.mp3 in Resources */,
 				EB276CB121FDD07900C23E9C /* Main.storyboard in Resources */,
+				EB74768E222BACEC00D627AD /* bubble_drop_to_collection.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

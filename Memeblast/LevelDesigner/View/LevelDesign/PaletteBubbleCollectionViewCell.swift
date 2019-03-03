@@ -12,23 +12,28 @@ class PaletteBubbleCollectionViewCell: BubbleCollectionViewCell {
 
     func setupImage(imageUrl: String, isSelected: Bool) {
         colorSelectorBubble.image = UIImage(named: imageUrl)
+        let pos = colorSelectorBubble.frame.origin
+        let width = colorSelectorBubble.frame.size.width
+        let height = colorSelectorBubble.frame.size.height
+        colorSelectorBubble.frame = CGRect(x: pos.x, y: pos.y, width: width, height: height)
         isSelected ? setBubbleSelected() : setBubbleUnselected()
+        colorSelectorBubble.layer.backgroundColor = UIColor.white.cgColor
+        colorSelectorBubble.layer.cornerRadius = layer.frame.size.height / 2
+        colorSelectorBubble.layer.masksToBounds = false
+        colorSelectorBubble.clipsToBounds = true
     }
 
     private func setBubbleSelected() {
         layer.borderColor = UIColor.black.cgColor
-        layer.cornerRadius = frame.size.width / 2
+        layer.cornerRadius = layer.frame.size.height / 2
         layer.borderWidth = 3
-        UIView.animate(withDuration: 0.3, delay: 0.0, options: [.curveLinear], animations: {
-            self.layer.frame = self.layer.frame.offsetBy(dx: 0, dy: -15)
-        }, completion: nil)
         alpha = 1
     }
 
     private func setBubbleUnselected() {
         layer.borderColor = nil
         layer.borderWidth = 0
-        layer.cornerRadius = 0
+//        layer.cornerRadius = 0
         alpha = 0.6
     }
 }

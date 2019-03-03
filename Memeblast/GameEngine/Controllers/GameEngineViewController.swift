@@ -17,7 +17,7 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
     var loadedLevel: LevelGame?
 
     // MARK: Layout properties
-    var isDualCannon = false
+    var isDualCannon = true
     @IBOutlet private weak var gameBubbleCollection: UICollectionView!
     private let gameEngineBubbleCellIdentifier = "gameEngineBubbleCell"
     var isRectGrid = true

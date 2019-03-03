@@ -33,6 +33,8 @@ public class LevelGame: Level {
         newLevel.time = time
         newLevel.highscore = highscore
         newLevel.screenshot = screenshot
+        newLevel.isRect = isRect
+        newLevel.dual = dual
         return newLevel
     }
 

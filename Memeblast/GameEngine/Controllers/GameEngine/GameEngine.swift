@@ -393,6 +393,9 @@ public class GameEngine {
             for bubbleIndex in rows {
                 if let rowBubble = gameplayBubbles[bubbleIndex] {
                     deregisterBubble(bubble: rowBubble, type: .falling)
+                    if rowBubble.bubbleType.isPowerBubble && rowBubble != collidedBubble {
+                        activatePower(collidedBubble: rowBubble, collidee: collidedBubble)
+                    }
                     gameDelegate?.score += Constants.lightningScore
                 }
             }
@@ -402,6 +405,9 @@ public class GameEngine {
             for bubbleIndex in rows {
                 if let rowBubble = gameplayBubbles[bubbleIndex] {
                     deregisterBubble(bubble: rowBubble, type: .match)
+                    if rowBubble.bubbleType.isPowerBubble && rowBubble != collidedBubble{
+                        activatePower(collidedBubble: rowBubble, collidee: collidedBubble)
+                    }
                     gameDelegate?.score += Constants.bombScore
                 }
             }
@@ -417,7 +423,6 @@ public class GameEngine {
             }
             deregisterBubble(bubble: collidedBubble, type: .match)
         case .random:
-            // TODO: generate random bubble
             // TODO: MUSIC
             let randomBubbleType = BubbleType.getRandomBubble
             collidedBubble.bubbleType = randomBubbleType

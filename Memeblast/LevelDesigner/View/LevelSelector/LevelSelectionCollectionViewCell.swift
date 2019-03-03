@@ -9,23 +9,30 @@ import UIKit
 
 class LevelSelectionCollectionViewCell: UICollectionViewCell {
 
+    var delegate: CardCellDelegate?
+
+    @IBOutlet var highscoreLabel: UILabel!
+
     @IBOutlet var screenshot: UIImageView!
 
-    @IBOutlet var highscore: UILabel!
     @IBOutlet var levelName: UILabel!
+    @IBOutlet var timeLabel: UILabel!
+    @IBOutlet var dualCannon: UILabel!
 
     @IBOutlet var screenshotView: UIView!
 
-    func setLevelName(name: String?) {
-        levelName.text = name
+    func setLevelName(name: String?, dualCannon: Bool, time: Int) {
+        guard let lvlName = name else {
+            return
+        }
+        levelName.text = "⭑ \(lvlName) ⭑"
+        self.dualCannon.text = dualCannon ? "✌🏽 Player" : "👆🏽 Player"
+        timeLabel.text = "⏳ \(time) ⌛️"
     }
 
     func setImage(_ data: Data?) {
-        guard let data = data else {
-            return
-        }
-
-        guard let image = UIImage(data:data, scale:1.0) else {
+        guard let data = data,
+            let image = UIImage(data: data, scale: 1.0) else {
             return
         }
 
@@ -56,11 +63,24 @@ class LevelSelectionCollectionViewCell: UICollectionViewCell {
 
     }
 
+    @IBAction func deleteLevel(_ sender: UIButton) {
+        guard let delegate = delegate else {
+            return
+        }
+        delegate.deleteAtPosition(self)
+
+    }
+
     func setHighScore(_ score: Int) {
         if score == 0 {
-            highscore.text = "-"
+            highscoreLabel.text = "   🏆 -"
         } else {
-            highscore.text = "1 \(score)"
+            highscoreLabel.text = "   🏆 \(score)"
         }
     }
+}
+
+
+protocol CardCellDelegate {
+    func deleteAtPosition(_ cell: LevelSelectionCollectionViewCell)
 }
