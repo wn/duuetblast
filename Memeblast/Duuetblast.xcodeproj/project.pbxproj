@@ -7,12 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		22F28A1BB52414C1FDCC70AD /* Pods_Memeblast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E556ECA35BC05AADDD93B5C6 /* Pods_Memeblast.framework */; };
-		73F76E4AB827361FCCD7AA2B /* Pods_DuuetblastTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22902DA4A46CEF57A0EB2D29 /* Pods_DuuetblastTests.framework */; };
 		989588992D3B216C7C6C92C0 /* Pods_Duuetblast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E03B70CF163ED3E8963D4F9 /* Pods_Duuetblast.framework */; };
-		C4FD500E7D0B1C695CCDF6DC /* Pods_MemeblastTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A900487210F220D5D5D8FA6D /* Pods_MemeblastTests.framework */; };
-		D42076125860208E35044FA9 /* Pods_DuuetblastUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23986801DDAF919CA936C965 /* Pods_DuuetblastUITests.framework */; };
-		E32D62287237137903FB6A1A /* Pods_MemeblastUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AEBB26A207569C1D8FB1A41 /* Pods_MemeblastUITests.framework */; };
 		EB0F292C2202C2DF000EC7D6 /* BubbleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0F292B2202C2DF000EC7D6 /* BubbleCollectionViewCell.swift */; };
 		EB0F2ACF2208B42B000A5770 /* SelectLevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0F2ACE2208B42B000A5770 /* SelectLevelViewController.swift */; };
 		EB0F2AD32208B928000A5770 /* LevelSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0F2AD22208B928000A5770 /* LevelSelectionCollectionViewCell.swift */; };
@@ -29,7 +24,6 @@
 		EB5A1C4D2206AD02005F1DA1 /* GridBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A1C4C2206AD02005F1DA1 /* GridBubble.swift */; };
 		EB5A1C4F2206AD5D005F1DA1 /* PaletteBubbles.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A1C4E2206AD5D005F1DA1 /* PaletteBubbles.swift */; };
 		EB5A1C6B22070601005F1DA1 /* BubbleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A1C6A22070601005F1DA1 /* BubbleType.swift */; };
-		EB5A1C95220730DC005F1DA1 /* LevelDesignerData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EB5A1C93220730DC005F1DA1 /* LevelDesignerData.xcdatamodeld */; };
 		EB5D84BB22290513002F314B /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB5D84BA22290513002F314B /* OpenSans-Regular.ttf */; };
 		EB5D84BD22290740002F314B /* Blueberry-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = EB5D84BC22290740002F314B /* Blueberry-Regular.otf */; };
 		EB5D84BF22292302002F314B /* UIColor+RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5D84BE22292302002F314B /* UIColor+RGB.swift */; };
@@ -44,13 +38,14 @@
 		EB747699222BEBDE00D627AD /* GameEngine+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB747698222BEBDE00D627AD /* GameEngine+Alerts.swift */; };
 		EB74769B222BEC6D00D627AD /* GameEngine+CollisionLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB74769A222BEC6D00D627AD /* GameEngine+CollisionLogic.swift */; };
 		EB74769D222BEF1100D627AD /* background-music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EB74769C222BEF1100D627AD /* background-music.mp3 */; };
+		EB7476A9222BF3C300D627AD /* LevelDesignerData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EB7476A7222BF3C300D627AD /* LevelDesignerData.xcdatamodeld */; };
+		EB7476AB222BF4E600D627AD /* LevelGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7476AA222BF4E500D627AD /* LevelGame.swift */; };
 		EB887A64220C996700028F6F /* LevelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB887A63220C996700028F6F /* LevelData.swift */; };
 		EB8B38462210122B00E1CD5A /* GameEngineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B38452210122B00E1CD5A /* GameEngineViewController.swift */; };
 		EB8B38482210163300E1CD5A /* GameEngineBubbleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B38472210163300E1CD5A /* GameEngineBubbleCollectionViewCell.swift */; };
 		EB8B384E221043A200E1CD5A /* GameBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B384D221043A200E1CD5A /* GameBubble.swift */; };
 		EB8B3850221043C000E1CD5A /* GameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B384F221043C000E1CD5A /* GameObject.swift */; };
 		EB8B38552210673300E1CD5A /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B38542210673300E1CD5A /* GameEngine.swift */; };
-		EB8B38572211635D00E1CD5A /* LevelGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B38562211635D00E1CD5A /* LevelGame.swift */; };
 		EB8B385A221471E900E1CD5A /* RenderEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B3859221471E900E1CD5A /* RenderEngine.swift */; };
 		EB8B385C2216B78600E1CD5A /* CannonObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B385B2216B78600E1CD5A /* CannonObject.swift */; };
 		EB8B385E22171B9700E1CD5A /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B385D22171B9700E1CD5A /* Wall.swift */; };
@@ -94,20 +89,15 @@
 		07D82FE3749585801786D665 /* Pods-MemeblastUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemeblastUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MemeblastUITests/Pods-MemeblastUITests.release.xcconfig"; sourceTree = "<group>"; };
 		17A43654C93C307D9480C228 /* Pods-Memeblast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Memeblast.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Memeblast/Pods-Memeblast.debug.xcconfig"; sourceTree = "<group>"; };
 		21851C754838E0AEF25BA05F /* Pods-DuuetblastUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DuuetblastUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DuuetblastUITests/Pods-DuuetblastUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		22902DA4A46CEF57A0EB2D29 /* Pods_DuuetblastTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DuuetblastTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		23986801DDAF919CA936C965 /* Pods_DuuetblastUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DuuetblastUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2AEBB26A207569C1D8FB1A41 /* Pods_MemeblastUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MemeblastUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37BA44FCFDBB9C6B4C8CEA0F /* Pods-MemeblastTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemeblastTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MemeblastTests/Pods-MemeblastTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5E03B70CF163ED3E8963D4F9 /* Pods_Duuetblast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Duuetblast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		664CA903356A46F915D6B173 /* Pods-DuuetblastUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DuuetblastUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DuuetblastUITests/Pods-DuuetblastUITests.release.xcconfig"; sourceTree = "<group>"; };
 		9534860702A252B9DF4A3C28 /* Pods-MemeblastTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemeblastTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MemeblastTests/Pods-MemeblastTests.release.xcconfig"; sourceTree = "<group>"; };
-		A900487210F220D5D5D8FA6D /* Pods_MemeblastTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MemeblastTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC67D637C42DCD91CD878FE3 /* Pods-Duuetblast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Duuetblast.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Duuetblast/Pods-Duuetblast.debug.xcconfig"; sourceTree = "<group>"; };
 		D133D1E5FE4A981DBC789166 /* Pods-Duuetblast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Duuetblast.release.xcconfig"; path = "Pods/Target Support Files/Pods-Duuetblast/Pods-Duuetblast.release.xcconfig"; sourceTree = "<group>"; };
 		D26549A005BDDA8D702B8F4F /* Pods-Memeblast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Memeblast.release.xcconfig"; path = "Pods/Target Support Files/Pods-Memeblast/Pods-Memeblast.release.xcconfig"; sourceTree = "<group>"; };
 		D58A8C213BEDB32285F799C1 /* Pods-DuuetblastTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DuuetblastTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DuuetblastTests/Pods-DuuetblastTests.release.xcconfig"; sourceTree = "<group>"; };
 		DA7D2A788DE57204FC683155 /* Pods-DuuetblastTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DuuetblastTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DuuetblastTests/Pods-DuuetblastTests.debug.xcconfig"; sourceTree = "<group>"; };
-		E556ECA35BC05AADDD93B5C6 /* Pods_Memeblast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Memeblast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB0F292B2202C2DF000EC7D6 /* BubbleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleCollectionViewCell.swift; sourceTree = "<group>"; };
 		EB0F2ACE2208B42B000A5770 /* SelectLevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLevelViewController.swift; sourceTree = "<group>"; };
 		EB0F2AD22208B928000A5770 /* LevelSelectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSelectionCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -127,7 +117,6 @@
 		EB5A1C4C2206AD02005F1DA1 /* GridBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridBubble.swift; sourceTree = "<group>"; };
 		EB5A1C4E2206AD5D005F1DA1 /* PaletteBubbles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteBubbles.swift; sourceTree = "<group>"; };
 		EB5A1C6A22070601005F1DA1 /* BubbleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleType.swift; sourceTree = "<group>"; };
-		EB5A1C94220730DC005F1DA1 /* LevelDesignerData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LevelDesignerData.xcdatamodel; sourceTree = "<group>"; };
 		EB5D84BA22290513002F314B /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Regular.ttf"; path = "../../../../../../../../Downloads/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		EB5D84BC22290740002F314B /* Blueberry-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Blueberry-Regular.otf"; path = "../../../../../../../../Downloads/Blueberry-Regular.otf"; sourceTree = "<group>"; };
 		EB5D84BE22292302002F314B /* UIColor+RGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+RGB.swift"; sourceTree = "<group>"; };
@@ -143,13 +132,14 @@
 		EB74769A222BEC6D00D627AD /* GameEngine+CollisionLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameEngine+CollisionLogic.swift"; sourceTree = "<group>"; };
 		EB74769C222BEF1100D627AD /* background-music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "background-music.mp3"; path = "../../../Sound Assets/background-music.mp3"; sourceTree = "<group>"; };
 		EB7476A5222BF26D00D627AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "/Users/weineng/Google Drive/Y2S2/CS3217 - Software Engineering on Modern Application Platforms /Problem Sets/problem-set-5-wn/Memeblast/Info.plist"; sourceTree = "<absolute>"; };
+		EB7476A8222BF3C300D627AD /* LevelDesignerData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LevelDesignerData.xcdatamodel; sourceTree = "<group>"; };
+		EB7476AA222BF4E500D627AD /* LevelGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelGame.swift; sourceTree = "<group>"; };
 		EB887A63220C996700028F6F /* LevelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelData.swift; sourceTree = "<group>"; };
 		EB8B38452210122B00E1CD5A /* GameEngineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineViewController.swift; sourceTree = "<group>"; };
 		EB8B38472210163300E1CD5A /* GameEngineBubbleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineBubbleCollectionViewCell.swift; sourceTree = "<group>"; };
 		EB8B384D221043A200E1CD5A /* GameBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBubble.swift; sourceTree = "<group>"; };
 		EB8B384F221043C000E1CD5A /* GameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObject.swift; sourceTree = "<group>"; };
 		EB8B38542210673300E1CD5A /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
-		EB8B38562211635D00E1CD5A /* LevelGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LevelGame.swift; path = Game/Level/LevelGame.swift; sourceTree = SOURCE_ROOT; };
 		EB8B3859221471E900E1CD5A /* RenderEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderEngine.swift; sourceTree = "<group>"; };
 		EB8B385B2216B78600E1CD5A /* CannonObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CannonObject.swift; sourceTree = "<group>"; };
 		EB8B385D22171B9700E1CD5A /* Wall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
@@ -176,7 +166,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22F28A1BB52414C1FDCC70AD /* Pods_Memeblast.framework in Frameworks */,
 				989588992D3B216C7C6C92C0 /* Pods_Duuetblast.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -185,8 +174,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4FD500E7D0B1C695CCDF6DC /* Pods_MemeblastTests.framework in Frameworks */,
-				73F76E4AB827361FCCD7AA2B /* Pods_DuuetblastTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,8 +181,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E32D62287237137903FB6A1A /* Pods_MemeblastUITests.framework in Frameworks */,
-				D42076125860208E35044FA9 /* Pods_DuuetblastUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,9 +226,12 @@
 		EB276C9F21FDD07900C23E9C = {
 			isa = PBXGroup;
 			children = (
-				EB8B3872221D137000E1CD5A /* Game */,
-				EB276CAA21FDD07900C23E9C /* LevelDesigner */,
-				EB8B38582213D7BD00E1CD5A /* GameEngine */,
+				EB74769E222BF0D100D627AD /* Globals */,
+				EB887A62220C995400028F6F /* Core Data */,
+				EB8B3873221D138200E1CD5A /* Level */,
+				EB8B384A2210300A00E1CD5A /* Utility */,
+				EB342BA722058498004537E5 /* Layouts */,
+				EB7476A6222BF2B500D627AD /* Duuetblast */,
 				EBCD32002206A6B90003EF8E /* Supporting Files */,
 				BA0FD3DFF07D0E61F61017E0 /* Pods */,
 				EF3EF291BE8DCD385D34537D /* Frameworks */,
@@ -299,7 +287,6 @@
 			children = (
 				EB276CAD21FDD07900C23E9C /* LevelDesignViewController.swift */,
 				EB0F2ACE2208B42B000A5770 /* SelectLevelViewController.swift */,
-				EB94227422258D0100D31C73 /* MusicPlayer.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -326,7 +313,6 @@
 			children = (
 				EB276CD921FDE17500C23E9C /* Bubble.swift */,
 				EB5A1C6A22070601005F1DA1 /* BubbleType.swift */,
-				EB9422942227AE4200D31C73 /* BubbleThemes.swift */,
 			);
 			path = Bubbles;
 			sourceTree = "<group>";
@@ -376,10 +362,20 @@
 			path = Globals;
 			sourceTree = "<group>";
 		};
+		EB7476A6222BF2B500D627AD /* Duuetblast */ = {
+			isa = PBXGroup;
+			children = (
+				EB8B3872221D137000E1CD5A /* Game */,
+				EB276CAA21FDD07900C23E9C /* LevelDesigner */,
+				EB8B38582213D7BD00E1CD5A /* GameEngine */,
+			);
+			path = Duuetblast;
+			sourceTree = "<group>";
+		};
 		EB887A62220C995400028F6F /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				EB5A1C93220730DC005F1DA1 /* LevelDesignerData.xcdatamodeld */,
+				EB7476A7222BF3C300D627AD /* LevelDesignerData.xcdatamodeld */,
 				EB887A63220C996700028F6F /* LevelData.swift */,
 				EB9DB724220D929100241AB1 /* GridBubbleData.swift */,
 			);
@@ -389,7 +385,10 @@
 		EB8B384A2210300A00E1CD5A /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				EB94227422258D0100D31C73 /* MusicPlayer.swift */,
 				EB5D84BE22292302002F314B /* UIColor+RGB.swift */,
+				EB9422942227AE4200D31C73 /* BubbleThemes.swift */,
+				EB94229A2227E51400D31C73 /* UIViewController+Render.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -438,12 +437,7 @@
 		EB8B3872221D137000E1CD5A /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				EB74769E222BF0D100D627AD /* Globals */,
-				EB887A62220C995400028F6F /* Core Data */,
-				EB8B3873221D138200E1CD5A /* Level */,
 				EB94229C222833A600D31C73 /* Controller */,
-				EB8B384A2210300A00E1CD5A /* Utility */,
-				EB342BA722058498004537E5 /* Layouts */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -452,7 +446,7 @@
 			isa = PBXGroup;
 			children = (
 				EBCD31FD2206066B0003EF8E /* Level.swift */,
-				EB8B38562211635D00E1CD5A /* LevelGame.swift */,
+				EB7476AA222BF4E500D627AD /* LevelGame.swift */,
 			);
 			path = Level;
 			sourceTree = "<group>";
@@ -461,7 +455,6 @@
 			isa = PBXGroup;
 			children = (
 				EB94229D222833BF00D31C73 /* StartGameController.swift */,
-				EB94229A2227E51400D31C73 /* UIViewController+Render.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -510,12 +503,7 @@
 		EF3EF291BE8DCD385D34537D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E556ECA35BC05AADDD93B5C6 /* Pods_Memeblast.framework */,
-				A900487210F220D5D5D8FA6D /* Pods_MemeblastTests.framework */,
-				2AEBB26A207569C1D8FB1A41 /* Pods_MemeblastUITests.framework */,
 				5E03B70CF163ED3E8963D4F9 /* Pods_Duuetblast.framework */,
-				22902DA4A46CEF57A0EB2D29 /* Pods_DuuetblastTests.framework */,
-				23986801DDAF919CA936C965 /* Pods_DuuetblastUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -763,11 +751,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB7476AB222BF4E600D627AD /* LevelGame.swift in Sources */,
 				EB8B38552210673300E1CD5A /* GameEngine.swift in Sources */,
 				EB5A1C4F2206AD5D005F1DA1 /* PaletteBubbles.swift in Sources */,
 				EB8B384E221043A200E1CD5A /* GameBubble.swift in Sources */,
-				EB5A1C95220730DC005F1DA1 /* LevelDesignerData.xcdatamodeld in Sources */,
 				EB94229B2227E51400D31C73 /* UIViewController+Render.swift in Sources */,
+				EB7476A9222BF3C300D627AD /* LevelDesignerData.xcdatamodeld in Sources */,
 				EB342BA422044FBC004537E5 /* GameBubbleCollectionViewCell.swift in Sources */,
 				EB342BA622044FCC004537E5 /* PaletteBubbleCollectionViewCell.swift in Sources */,
 				EB94227522258D0100D31C73 /* MusicPlayer.swift in Sources */,
@@ -785,7 +774,6 @@
 				EB747699222BEBDE00D627AD /* GameEngine+Alerts.swift in Sources */,
 				EB8B385E22171B9700E1CD5A /* Wall.swift in Sources */,
 				EB0F2AD32208B928000A5770 /* LevelSelectionCollectionViewCell.swift in Sources */,
-				EB8B38572211635D00E1CD5A /* LevelGame.swift in Sources */,
 				EB5A1C4B2206ABFA005F1DA1 /* PaletteBubble.swift in Sources */,
 				EB276CDA21FDE17500C23E9C /* Bubble.swift in Sources */,
 				EB9DB725220D929100241AB1 /* GridBubbleData.swift in Sources */,
@@ -1142,15 +1130,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		EB5A1C93220730DC005F1DA1 /* LevelDesignerData.xcdatamodeld */ = {
+		EB7476A7222BF3C300D627AD /* LevelDesignerData.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				EB5A1C94220730DC005F1DA1 /* LevelDesignerData.xcdatamodel */,
+				EB7476A8222BF3C300D627AD /* LevelDesignerData.xcdatamodel */,
 			);
-			currentVersion = EB5A1C94220730DC005F1DA1 /* LevelDesignerData.xcdatamodel */;
-			name = LevelDesignerData.xcdatamodeld;
-			path = "Game/Core Data/LevelDesignerData.xcdatamodeld";
-			sourceTree = SOURCE_ROOT;
+			currentVersion = EB7476A8222BF3C300D627AD /* LevelDesignerData.xcdatamodel */;
+			path = LevelDesignerData.xcdatamodeld;
+			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
 /* End XCVersionGroup section */

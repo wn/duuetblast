@@ -33,6 +33,7 @@ Special notes:
     - A random bubble will spawn every 10 seconds
     - Chainsaw is in game to prevent you from randomly spamming
     - This is a cooperative game. For multiplayer, you should work with your team to fire less bubbles to clear as many bubbles as possible. 
+    - When game has ended, bubbles will freeze in the background. THIS IS A FEATURE. players can see the last instance of when they end the game. :)
 
 
 ### Problem 1: Cannon Direction
@@ -70,13 +71,78 @@ Pretty cool.
 
 ### Problem 7: Class Diagram
 
-![Class Diagram](class-diagram.png)
+![Class Diagram](class-diagram.jpg)
 
+GameEngineViewController:
 
+This is the class that will feed data to the game engine to run.
+It is also in charge of modifying collectionView.
+GameEngine:
+
+This is where all the game logic happens, such as
+detecting collisions
+dropping bubbles to grids
+Generating firing bubbles
+Moving bubbles in gamearea
+Performing logic such as destroying if match, drop if unconnected
+Performing coordination between rendering engine and game objects.
+PhysicsEngine:
+
+This is the engine that performs all physics in the game, given vectors as inputs.
+RenderEngine:
+
+In charge of rendering objects in the game area that isn't snapped to any collectionview cell.
+Others
+
+The other objects in the project are simply to model the objects they represent.
 
 ### Problem 8: Testing
 
-TODO
+### Models
+
+1. `Bubble` and `BubbleType` represents Bubbles in the game, whether its from the grid or from the palette. `BubbleType` reflect the type of bubble.
+2. `PaletteBubble` and `PaletteBubbles` are models for the palette. `PaletteBubble` represent a single bubble in the palette, and `PaletteBubbles` represent the set of bubbles in the palette.
+3. `Level` and `GridBubble` are models that represent the grids in the level design. GridBubble contains the state for a single bubble in the grid, while Level contains the state for all `GridBubble` in the grid. Level should encapsulate the state of the current level design. 
+4. `LevelData` and `GridBubbleData` are `NSManagedObject` used for Core Data. Creation of these object result in new entries being created in the database.
+5. `GameBubble`, `CannonObject`, `Wall` is used to modal their object. They are subclasses of `GameObject`
+### Controller
+
+1. `LevelDesignViewController` controls the logic in the level design storyboard, particularly the palettecollectionview and the gridcollectionview.
+2. `SelectLevelViewController` controls the logic in the level selection storyboard, particularly the collectionview.
+3. `GameEngineViewController`: 
+    - This is the class that will feed data to the game engine to run. 
+    - It is also in charge of modifying collectionView.
+4. `GameEngine`: 
+    - This is where all the game logic happens, such as 
+        - detecting collisions
+        - dropping bubbles to grids
+        - Generating firing bubbles
+        - Moving bubbles in gamearea
+        - Performing logic such as destroying if match, drop if unconnected
+        - Performing coordination between rendering engine and game objects.
+5. `PhysicsEngine`:
+    - This is the engine that performs all physics in the game, given vectors as inputs. 
+6. `RenderEngine`:
+    - In charge of rendering objects in the game area that isn't snapped to any collectionview cell.
+
+### View
+1. `GridLayout` determines the layout of the grid bubbles in level design
+2. `BubbleCollectionViewCell` is a collectionviewcell that contains the image to be rendered.
+3. `GameBubbleCollectionViewCell` is a collectionviewcell that inherits from `BubbleCollectionViewCell` and performs rendering of the gridbubble in level design view.
+4. `PaletteBubbleCollectionViewCell` is a collectionviewcell that inherits from `BubbleCollectionViewCell` and performs rendering of the palette in level design view.
+5. `LevelSelectionCollectionViewCell` is a collectionviewcell that renders the table in level selection.
+6. `GameEngineBubbleCollectionViewCell` is a collectionviewcell that renders the bubble in game.
+7. `GameBubbleView` is a view for the bubbles in the game
+8. `CannonView` is a view for the cannon
+
+### Others
+1. `Constants` Store all constant value in the game
+2. `Settings` In charge of setting music and images of the game
+3. `Level` and `LevelGame` models the levels in the game. Used by `LevelDesignViewController` and `GameEngineViewController`
+4. `MusicPlayer` is used to play music logic
+5. `BubbleTheme` is used to generate file name of bubbles based on theme. Game currently only have one theme.
+6. `GameLayout`, `RectLayout`, `IsometricLayout` is used to determine layout logic such as nearest neighbours.
+7. `GridLayout`, `RectViewLayout` and `IsometricViewLayout` is used to render the arrangement of the collectionview for rect and isometric arrangement.
 
 ### Problem 9: The Bells & Whistles
 
@@ -102,6 +168,7 @@ TODO
         - When highscore is broken, score text become gold colour. 
 - Nice background
 - End game screen
+    - Show if broke highscore or not.
 - Allow deletion of levels!
 - Note that editing of levels is trival, but I did not implement it as it doesn't make sense for one guy to create a level and another guy to edit it. 
 - Alot of nice popups for user confirmation
