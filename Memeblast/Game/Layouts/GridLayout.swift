@@ -12,7 +12,6 @@ protocol GridLayoutDelegate: class {
     func getHeightOfGameArea() -> CGFloat
 }
 
-
 class GridLayout: UICollectionViewLayout {
     weak var delegate: GridLayoutDelegate!
 

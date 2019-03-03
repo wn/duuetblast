@@ -9,7 +9,6 @@
 import UIKit
 
 class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
-    // UI outlets
     @IBOutlet private weak var statusView: UIView!
 
     // MARK: Level's settings
@@ -74,35 +73,11 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
         let rightView = UIView(frame: CGRect(x: gameWidth / 2, y: 0, width: gameWidth / 2, height: gameHeight))
         rightView.backgroundColor = .red
 
-        func setupTap(view: UIView) {
-            let longPressForGameplayArea = UILongPressGestureRecognizer(target: self, action: #selector(fireBubble(_:)))
-            longPressForGameplayArea.delegate = self
-            longPressForGameplayArea.minimumPressDuration = 0
-            view.addGestureRecognizer(longPressForGameplayArea)
-        }
-
-        func setupFiringZone(view: UIView) {
-            gameBubbleCollection.addSubview(view)
-            gameBubbleCollection.sendSubviewToBack(view)
-            setupTap(view: view)
-            view.alpha = 0.02
-        }
-
         if isDualCannon {
             setupFiringZone(view: leftView)
             setupFiringZone(view: rightView)
         } else {
             setupTap(view: gameBubbleCollection)
-        }
-
-        func setupLabel(_ label: UILabel, size: CGFloat = 120) {
-            label.textAlignment = .center
-            label.text = ""
-            label.textColor = .white
-            label.font = UIFont.systemFont(ofSize: size, weight: .light)
-            label.alpha = 0.6
-            gameBubbleCollection.addSubview(label)
-            gameBubbleCollection.sendSubviewToBack(label)
         }
 
         // Setup score label
@@ -121,6 +96,30 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
         gameEngine = gameEngineTemp
         gameEngine?.gameDelegate = self
         restartLevel()
+    }
+
+    func setupTap(view: UIView) {
+        let longPressForGameplayArea = UILongPressGestureRecognizer(target: self, action: #selector(fireBubble(_:)))
+        longPressForGameplayArea.delegate = self
+        longPressForGameplayArea.minimumPressDuration = 0
+        view.addGestureRecognizer(longPressForGameplayArea)
+    }
+
+    func setupFiringZone(view: UIView) {
+        gameBubbleCollection.addSubview(view)
+        gameBubbleCollection.sendSubviewToBack(view)
+        setupTap(view: view)
+        view.alpha = 0.02
+    }
+
+    func setupLabel(_ label: UILabel, size: CGFloat = 120) {
+        label.textAlignment = .center
+        label.text = ""
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: size, weight: .light)
+        label.alpha = 0.6
+        gameBubbleCollection.addSubview(label)
+        gameBubbleCollection.sendSubviewToBack(label)
     }
 
     var timeLabel: UILabel?
@@ -143,6 +142,14 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
     func setScore(_ score: Int) {
         scoreLabel?.text = "\(score)"
         gamePoints = score
+        guard
+            loadedLevel?.levelName != nil,
+            let highscore = loadedLevel?.highscore,
+            highscore < score else {
+            return
+        }
+        scoreLabel?.textColor = .yellow
+        saveScore()
     }
 
     func setupLevel(level: LevelGame) {
@@ -155,7 +162,9 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
     @objc
     private func fireBubble(_ sender: UILongPressGestureRecognizer) {
         let pos = sender.location(in: gameBubbleCollection)
-        guard sender.view != nil else {return}
+        guard sender.view != nil else {
+            return
+        }
         switch sender.state {
 
         case .possible, .began, .changed:
@@ -169,7 +178,6 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-
         // We have to set game over to be true as game engine
         // contains async code, which does variable capturing.
         // Failure to set game over to be true will cause
@@ -177,7 +185,6 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
         gameEngine?.completedGame(.falling)
         gameEngine?.gameOver = true
     }
-
 
     // Get center of firing position
     public var firingPosition: CGPoint {
@@ -188,7 +195,7 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
         return gameBubbleCollection.frame.width / CGFloat(Constants.numOfCols) / 2
     }
 
-    @IBAction func restartLevel(_ sender: UIButton) {
+    @IBAction private func restartLevel(_ sender: UIButton) {
         let alert = UIAlertController(
             title: "Restart Level!",
             message: "Are you sure you want to restart level?",
@@ -215,7 +222,7 @@ class GameEngineViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
 
-    @IBAction func backToLevelSelector(_ sender: UIButton) {
+    @IBAction private func backToLevelSelector(_ sender: UIButton) {
         derenderChildController()
     }
 }
@@ -277,7 +284,7 @@ extension GameEngineViewController: UIGameDelegate {
     }
 
     func getIndexPathAtIndex(index: Int) -> IndexPath {
-        return IndexPath(item : index, section: 0)
+        return IndexPath(item: index, section: 0)
     }
 
     func getIndexPathAtPoint(point: CGPoint) -> IndexPath? {
@@ -306,17 +313,14 @@ extension GameEngineViewController: UIGameDelegate {
         guard let loadedLevel = loadedLevel else {
             fatalError("Cant reach here is there is no loaded level.")
         }
-        if loadedLevel.saveHighScore(score: score) {
-            //            // animate new highscore
-            //            // TODO: animate
-        }
+        _ = loadedLevel.saveHighScore(score: score)
     }
 }
 
 public protocol UIGameDelegate: class {
     var currentLevel: LevelGame { get }
-    var timeValue: Int {get set}
-    var score: Int {get set}
+    var timeValue: Int { get set }
+    var score: Int { get set }
     func reload(index: Int)
     func getPositionAtIndex(index: Int) -> CGPoint?
     func setBubbleTypeAndGetPosition(bubbleType: BubbleType, index: Int) -> CGPoint?

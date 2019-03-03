@@ -72,13 +72,11 @@ public class GameEngine {
             generatedBubble.setRenderingPosition(topLeftPoint: currPos)
         }
 
-        // TODO: FEATURES!!!!!!!!
-        // HAVE FLAG IN LEVEL SELECTOR
+        // Features :)
         generateChainBubble()
         spawnRandomBubble(time: Constants.randomBubbleInterval)
         startTimer(seconds: level.time)
         gameDelegate?.score = Constants.initialScore
-
         dropNonAttachedBubbles()
     }
 
@@ -108,10 +106,10 @@ public class GameEngine {
         }
 
         // Play music
-        Settings.playSoundWith(Constants.firing_sound)
+        Settings.playSoundWith(Constants.firingSound)
 
         renderEngine.animateCannon(firingCannon)
-        gameDelegate?.score -= 300
+        gameDelegate?.score -= Constants.firingBubblePoints
         /// 0.5 is half of animation time
         /// TODO: Refactor 0.25 to be in constant file.
         DispatchQueue.main.asyncAfter(wallDeadline: .now() + 0.25) {
@@ -124,7 +122,6 @@ public class GameEngine {
     }
 
     /// Logic to determine next bubble
-    /// TODO: Only generate bubbles that is in game
     private func getNextBubbleType() -> BubbleType {
         if arc4random_uniform(10) < 1 {
             return .rocket
@@ -171,7 +168,9 @@ public class GameEngine {
                     let randomIndex = emptyIndexes.randomElement(),
                     let randomElement = BubbleType.getNormalBubbles.randomElement(),
                     let delegate = strongself.gameDelegate,
-                    let position = delegate.setBubbleTypeAndGetPosition(bubbleType: randomElement, index: randomIndex) else {
+                    let position = delegate.setBubbleTypeAndGetPosition(
+                        bubbleType: randomElement,
+                        index: randomIndex) else {
                     break
                 }
                 let newBubble = GameBubble(position: CGPoint(), diameter: strongself.bubbleDiameter, type: randomElement)
@@ -188,7 +187,7 @@ public class GameEngine {
     func generateChainBubble() {
         // We need to get center position of bubble just below gameover line
         let pos = CGPoint(x: bubbleRadius, y: gameoverHeight + bubbleRadius)
-        let chainBubble = renderEngine.renderBubble(position: pos, bubbleType: .chainsaw_bubble)
+        let chainBubble = renderEngine.renderBubble(position: pos, bubbleType: .chainsawBubble)
         chainBubble.setVelocity(speed: 200, angle: CGFloat.pi / 2)
         // TODO: Remove hard coding
 
@@ -216,7 +215,7 @@ public class GameEngine {
             bubble.velocity.setXDirection(.positive)
             bubble.position.x = bubble.radius
             if bubble.bubbleType.isNormalBubble {
-                Settings.playSoundWith(Constants.bounce_wall)
+                Settings.playSoundWith(Constants.bounceWall)
             }
         }
         let leftWall = Wall(frame: leftWallFrame, stable: false, action: leftWallAction)
@@ -232,7 +231,7 @@ public class GameEngine {
             bubble.velocity.setXDirection(.negative)
             bubble.position.x = strongSelf.gameplayArea.frame.width - bubble.radius
             if bubble.bubbleType.isNormalBubble {
-                Settings.playSoundWith(Constants.bounce_wall)
+                Settings.playSoundWith(Constants.bounceWall)
             }
         }
         let rightWall = Wall(frame: rightWallFrame, stable: false, action: rightWallAction)
@@ -348,7 +347,7 @@ public class GameEngine {
                     for hitBubble in allCollidedBubbles(bubble) {
                         activatePower(collidedBubble: hitBubble, collidee: bubble)
                         deregisterBubble(bubble: hitBubble, type: .instant)
-                        gameDelegate?.score += Constants.rocketScore
+                        gameDelegate?.score += Constants.rocketPoints
                     }
                     dropNonAttachedBubbles()
                     return
@@ -362,8 +361,8 @@ public class GameEngine {
                 guard bubble.lastCollidedBubble != collidedBubble else {
                     break
                 }
-                guard bubble.bubbleType != .chainsaw_bubble && collidedBubble.bubbleType != .chainsaw_bubble else {
-                    Settings.playSoundWith(Constants.chainsaw_sound)
+                guard bubble.bubbleType != .chainsawBubble && collidedBubble.bubbleType != .chainsawBubble else {
+                    Settings.playSoundWith(Constants.chainsawSound)
                     print("HIT CHAINSAW")
                     gameoverAction()
                     return
@@ -388,7 +387,7 @@ public class GameEngine {
         }
         switch collidedBubble.bubbleType {
         case .lightning:
-            Settings.playSoundWith(Constants.zap_sound)
+            Settings.playSoundWith(Constants.zapSound)
             let rows = gameLayout.getRowIndexes(index)
             for bubbleIndex in rows {
                 if let rowBubble = gameplayBubbles[bubbleIndex] {
@@ -396,29 +395,36 @@ public class GameEngine {
                     if rowBubble.bubbleType.isPowerBubble && rowBubble != collidedBubble {
                         activatePower(collidedBubble: rowBubble, collidee: collidedBubble)
                     }
-                    gameDelegate?.score += Constants.lightningScore
+                    gameDelegate?.score += Constants.lightningPoints
                 }
             }
         case .bomb:
-            Settings.playSoundWith(Constants.bomb_sound)
+            Settings.playSoundWith(Constants.bombSound)
             let rows = gameLayout.getNeighboursAtIndex(index)
+            // We destroy the bomb first.
+            deregisterBubble(bubble: collidedBubble, type: .match)
             for bubbleIndex in rows {
                 if let rowBubble = gameplayBubbles[bubbleIndex] {
-                    deregisterBubble(bubble: rowBubble, type: .match)
-                    if rowBubble.bubbleType.isPowerBubble && rowBubble != collidedBubble{
+                    if rowBubble.bubbleType.isPowerBubble {
                         activatePower(collidedBubble: rowBubble, collidee: collidedBubble)
+                    } else {
+                        deregisterBubble(bubble: rowBubble, type: .match)
                     }
-                    gameDelegate?.score += Constants.bombScore
+                    gameDelegate?.score += Constants.bombPoints
                 }
             }
             deregisterBubble(bubble: collidedBubble, type: .match)
         case .star:
             // TODO: star music
-            Settings.playSoundWith(Constants.bomb_sound)
+            Settings.playSoundWith(Constants.bombSound)
             for bubble in gameBubbles where bubble.movementType == .stationary {
-                if bubble.bubbleType == collidee.bubbleType{
-                    deregisterBubble(bubble: bubble, type: .match)
-                    gameDelegate?.score += Constants.starBubble
+                if bubble.bubbleType == collidee.bubbleType {
+                    if bubble.bubbleType.isPowerBubble {
+                        activatePower(collidedBubble: bubble, collidee: collidedBubble)
+                    } else {
+                        deregisterBubble(bubble: bubble, type: .match)
+                    }
+                    gameDelegate?.score += Constants.starBubblePoints
                 }
             }
             deregisterBubble(bubble: collidedBubble, type: .match)
@@ -427,15 +433,11 @@ public class GameEngine {
             let randomBubbleType = BubbleType.getRandomBubble
             collidedBubble.bubbleType = randomBubbleType
             _ = gameDelegate?.setBubbleTypeAndGetPosition(bubbleType: randomBubbleType, index: index)
-        case .magnet:
-            // TODO
-            // Probably check in movingBubble
-            print("affected by magnet")
         case .bin:
             // TODO: MUSIC
             deregisterBubble(bubble: collidedBubble, type: .match)
             deregisterBubble(bubble: collidee, type: .match)
-            gameDelegate?.score += Constants.binBubble
+            gameDelegate?.score += Constants.binBubblePoints
         default:
             // Non-special bubbles or indestructible.
             break
@@ -448,8 +450,9 @@ public class GameEngine {
         guard !gameOver else {
             return
         }
-        Settings.playSoundWith(Constants.gameover_sound)
-        // Must fall, or else bubble that just dropped will not have an index + no speed, causing it to be 'in-cannon'
+        Settings.playSoundWith(Constants.gameoverSound)
+        // Must fall, or else bubble that just dropped will not have an
+        // index + no speed, causing it to be 'in-cannon'
         completedGame(.falling)
         guard let gameDelegate = gameDelegate else {
             return
@@ -529,7 +532,7 @@ public class GameEngine {
         guard toDestroy.count >= 3 else {
             return
         }
-        gameDelegate?.score += toDestroy.count * Constants.matchBubble
+        gameDelegate?.score += toDestroy.count * Constants.matchBubblePoints
         toDestroy.forEach { deregisterBubble(bubble: $0, type: .match) }
     }
 
@@ -597,7 +600,7 @@ public class GameEngine {
         let attachedBubbles = isAttachedBubbles()
         let nonAttachedBubbles = gameBubbles.filter { !attachedBubbles.contains($0) && $0.movementType == .stationary }
         nonAttachedBubbles.forEach { deregisterBubble(bubble: $0, type: .falling) }
-        gameDelegate?.score += nonAttachedBubbles.count * Constants.unattachedBubble
+        gameDelegate?.score += nonAttachedBubbles.count * Constants.unattachedBubblePoints
 
         // We check if win in this function as before winning,
         // this function must be called.

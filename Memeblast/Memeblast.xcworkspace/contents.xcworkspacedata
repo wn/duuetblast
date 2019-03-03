@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Memeblast.xcodeproj">
+      location = "group:/Users/weineng/Google Drive/Y2S2/CS3217 - Software Engineering on Modern Application Platforms /Problem Sets/problem-set-5-wn/Memeblast/Duuetblast.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

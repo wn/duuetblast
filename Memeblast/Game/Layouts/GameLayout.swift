@@ -9,7 +9,7 @@
 import Foundation
 
 protocol GameLayout {
-    var totalNumberOfBubble: Int {get}
+    var totalNumberOfBubble: Int { get }
 
     init(rows: Int, firstRowCol: Int)
     func getNeighboursAtIndex(_ index: Int) -> [Int]

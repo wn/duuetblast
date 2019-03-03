@@ -12,13 +12,13 @@ public enum BubbleType: Int, CaseIterable {
     case orange = 2
     case green = 3
     case empty = 4
-    case bomb = 5
-    case indestructible = 6
+    case indestructible = 5
+    case bomb = 6
     case star = 7
     case lightning = 8
     case erase = 9
     case invisible = 10
-    case chainsaw_bubble = 11
+    case chainsawBubble = 11
     case magnet = 12
     case rocket = 13
     case random = 14
@@ -37,7 +37,7 @@ public enum BubbleType: Int, CaseIterable {
 
     var isNormalBubble: Bool {
         switch self {
-        case .red, .blue, .green, .orange:
+        case .red, .blue, .green, .orange, .magnet:
             return true
         default:
             return false
@@ -66,7 +66,6 @@ public enum BubbleType: Int, CaseIterable {
             $0.isNormalBubble
                 || $0.isPowerBubble
                 || $0 == .indestructible
-                || $0 == .magnet
         }
     }
 
@@ -75,7 +74,7 @@ public enum BubbleType: Int, CaseIterable {
     }
 
     static var getRandomBubble: BubbleType {
-        let randomBubble = getPowerBubbles.filter { $0 != .random}.randomElement()
+        let randomBubble = getPowerBubbles.filter { $0 != .random }.randomElement()
         guard let bubble = randomBubble else {
             fatalError("There must be an existing power bubble other than random.")
         }

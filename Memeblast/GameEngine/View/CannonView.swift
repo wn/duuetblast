@@ -13,7 +13,6 @@ class CannonView {
     var cannonView: UIImageView
     var rotatedAngle: CGFloat = 0
 
-
     init(position: CGPoint, superView: UIView) {
         firingPosition = position
         let cannonWidth = Constants.cannonWidth
@@ -40,11 +39,10 @@ class CannonView {
 
         let cannonBaseFrame = CGRect(x: firingPosition.x - cannonBaseWidth / 2, y: superView.frame.height - cannonBaseHeight, width: cannonBaseWidth, height: cannonBaseHeight)
         let cannonBaseView = UIImageView(frame: cannonBaseFrame)
-        let cannonBaseImage = UIImage(named: Constants.cannon_base_image)
+        let cannonBaseImage = UIImage(named: Constants.cannonBaseImage)
         cannonBaseView.image = cannonBaseImage
         superView.addSubview(cannonBaseView)
         superView.bringSubviewToFront(cannonBaseView)
-
 
         // Render cannon //
         let image = CannonView.cannonSpriteBase

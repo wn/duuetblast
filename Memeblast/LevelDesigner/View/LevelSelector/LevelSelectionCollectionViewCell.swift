@@ -11,15 +11,15 @@ class LevelSelectionCollectionViewCell: UICollectionViewCell {
 
     var delegate: CardCellDelegate?
 
-    @IBOutlet var highscoreLabel: UILabel!
+    @IBOutlet private var highscoreLabel: UILabel!
 
-    @IBOutlet var screenshot: UIImageView!
+    @IBOutlet private var screenshot: UIImageView!
 
-    @IBOutlet var levelName: UILabel!
-    @IBOutlet var timeLabel: UILabel!
-    @IBOutlet var dualCannon: UILabel!
+    @IBOutlet private var levelName: UILabel!
+    @IBOutlet private var timeLabel: UILabel!
+    @IBOutlet private var dualCannon: UILabel!
 
-    @IBOutlet var screenshotView: UIView!
+    @IBOutlet private var screenshotView: UIView!
 
     func setLevelName(name: String?, dualCannon: Bool, time: Int) {
         guard let lvlName = name else {
@@ -63,7 +63,7 @@ class LevelSelectionCollectionViewCell: UICollectionViewCell {
 
     }
 
-    @IBAction func deleteLevel(_ sender: UIButton) {
+    @IBAction private func deleteLevel(_ sender: UIButton) {
         guard let delegate = delegate else {
             return
         }
@@ -80,7 +80,6 @@ class LevelSelectionCollectionViewCell: UICollectionViewCell {
     }
 }
 
-
-protocol CardCellDelegate {
+protocol CardCellDelegate: class {
     func deleteAtPosition(_ cell: LevelSelectionCollectionViewCell)
 }

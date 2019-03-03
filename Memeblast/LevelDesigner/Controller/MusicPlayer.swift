@@ -17,7 +17,7 @@ class MusicPlayer {
         guard isMusicActive else {
             return
         }
-        let audioSourceUrl = Bundle.main.url(forResource: filename, withExtension: Constants.music_ext)
+        let audioSourceUrl = Bundle.main.url(forResource: filename, withExtension: Constants.musicExt)
         var playingMusics = audioPlayer.filter { $0.isPlaying }
 
         guard let audioUrl = audioSourceUrl else {
@@ -25,7 +25,7 @@ class MusicPlayer {
             return
         }
         do {
-            let musicPlayer = try AVAudioPlayer.init(contentsOf: audioUrl)
+            let musicPlayer = try AVAudioPlayer(contentsOf: audioUrl)
             musicPlayer.prepareToPlay()
             musicPlayer.numberOfLoops = loop
             musicPlayer.volume = vol

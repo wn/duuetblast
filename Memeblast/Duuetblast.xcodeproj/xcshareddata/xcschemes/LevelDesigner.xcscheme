@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "EB276CA721FDD07900C23E9C"
-               BuildableName = "Memeblast.app"
-               BlueprintName = "Memeblast"
-               ReferencedContainer = "container:Memeblast.xcodeproj">
+               BuildableName = "Duuetblast.app"
+               BlueprintName = "Duuetblast"
+               ReferencedContainer = "container:Duuetblast.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "EB276CBB21FDD07C00C23E9C"
-               BuildableName = "MemeblastTests.xctest"
-               BlueprintName = "MemeblastTests"
-               ReferencedContainer = "container:Memeblast.xcodeproj">
+               BuildableName = "DuuetblastTests.xctest"
+               BlueprintName = "DuuetblastTests"
+               ReferencedContainer = "container:Duuetblast.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "EB276CC621FDD07C00C23E9C"
-               BuildableName = "MemeblastUITests.xctest"
-               BlueprintName = "MemeblastUITests"
-               ReferencedContainer = "container:Memeblast.xcodeproj">
+               BuildableName = "DuuetblastUITests.xctest"
+               BlueprintName = "DuuetblastUITests"
+               ReferencedContainer = "container:Duuetblast.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "EB276CA721FDD07900C23E9C"
-            BuildableName = "Memeblast.app"
-            BlueprintName = "Memeblast"
-            ReferencedContainer = "container:Memeblast.xcodeproj">
+            BuildableName = "Duuetblast.app"
+            BlueprintName = "Duuetblast"
+            ReferencedContainer = "container:Duuetblast.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -78,9 +78,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "EB276CA721FDD07900C23E9C"
-            BuildableName = "Memeblast.app"
-            BlueprintName = "Memeblast"
-            ReferencedContainer = "container:Memeblast.xcodeproj">
+            BuildableName = "Duuetblast.app"
+            BlueprintName = "Duuetblast"
+            ReferencedContainer = "container:Duuetblast.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
@@ -104,9 +104,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "EB276CA721FDD07900C23E9C"
-            BuildableName = "Memeblast.app"
-            BlueprintName = "Memeblast"
-            ReferencedContainer = "container:Memeblast.xcodeproj">
+            BuildableName = "Duuetblast.app"
+            BlueprintName = "Duuetblast"
+            ReferencedContainer = "container:Duuetblast.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

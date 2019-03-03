@@ -55,10 +55,10 @@ public class RenderEngine {
     private func getClosestCannon(_ point: CGPoint) -> CannonObject {
         var displacement = CGFloat.infinity
         // Get cannon closest to the point
-        var closestCannon: CannonObject? = nil
+        var closestCannon: CannonObject?
         for (cannon, cannonView) in cannonsViewMap {
             let position = cannonView.firingPosition
-            let currDisplacement =  point.displacementTo(point: position)
+            let currDisplacement = point.displacementTo(point: position)
             if currDisplacement < displacement {
                 displacement = currDisplacement
                 closestCannon = cannon
@@ -96,7 +96,7 @@ public class RenderEngine {
     // MARK: - Methods for rendering game line
 
     private func renderGameLine(height: CGFloat) {
-        let lineDashPattern: [NSNumber]  = [10,40] // [size per dash, size per blank]
+        let lineDashPattern: [NSNumber]  = [10, 40] // [size per dash, size per blank]
 
         let shapeLayer = CAShapeLayer()
         shapeLayer.strokeColor = UIColor.black.cgColor
@@ -194,5 +194,3 @@ extension CGPoint {
         return CGPoint(x: newX, y: newY)
     }
 }
-
-

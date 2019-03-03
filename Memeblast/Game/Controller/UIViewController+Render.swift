@@ -16,7 +16,6 @@ extension UIViewController: UIViewControllerTransitioningDelegate {
         child.viewWillAppear(true)
     }
 
-
     func derenderChildController(_ moveToParent: Bool = true) {
         guard let parent = self.parent else {
             return

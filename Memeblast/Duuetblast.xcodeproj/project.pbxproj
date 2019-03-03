@@ -99,17 +99,17 @@
 		EB0F292B2202C2DF000EC7D6 /* BubbleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleCollectionViewCell.swift; sourceTree = "<group>"; };
 		EB0F2ACE2208B42B000A5770 /* SelectLevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLevelViewController.swift; sourceTree = "<group>"; };
 		EB0F2AD22208B928000A5770 /* LevelSelectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSelectionCollectionViewCell.swift; sourceTree = "<group>"; };
-		EB276CA821FDD07900C23E9C /* Memeblast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memeblast.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB276CA821FDD07900C23E9C /* Duuetblast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Duuetblast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB276CAB21FDD07900C23E9C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB276CAD21FDD07900C23E9C /* LevelDesignViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDesignViewController.swift; sourceTree = "<group>"; };
 		EB276CB021FDD07900C23E9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EB276CB221FDD07C00C23E9C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB276CB521FDD07C00C23E9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EB276CB721FDD07C00C23E9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EB276CBC21FDD07C00C23E9C /* MemeblastTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemeblastTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB276CBC21FDD07C00C23E9C /* DuuetblastTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DuuetblastTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB276CC021FDD07C00C23E9C /* LevelDesignerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDesignerTests.swift; sourceTree = "<group>"; };
 		EB276CC221FDD07C00C23E9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EB276CC721FDD07C00C23E9C /* MemeblastUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemeblastUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB276CC721FDD07C00C23E9C /* DuuetblastUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DuuetblastUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB276CCB21FDD07C00C23E9C /* LevelDesignerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDesignerUITests.swift; sourceTree = "<group>"; };
 		EB276CCD21FDD07C00C23E9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB276CD921FDE17500C23E9C /* Bubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bubble.swift; sourceTree = "<group>"; };
@@ -235,9 +235,9 @@
 		EB276CA921FDD07900C23E9C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EB276CA821FDD07900C23E9C /* Memeblast.app */,
-				EB276CBC21FDD07C00C23E9C /* MemeblastTests.xctest */,
-				EB276CC721FDD07C00C23E9C /* MemeblastUITests.xctest */,
+				EB276CA821FDD07900C23E9C /* Duuetblast.app */,
+				EB276CBC21FDD07C00C23E9C /* DuuetblastTests.xctest */,
+				EB276CC721FDD07C00C23E9C /* DuuetblastUITests.xctest */,
 			);
 			name = Products;
 			path = ..;
@@ -511,9 +511,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		EB276CA721FDD07900C23E9C /* Memeblast */ = {
+		EB276CA721FDD07900C23E9C /* Duuetblast */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EB276CD021FDD07C00C23E9C /* Build configuration list for PBXNativeTarget "Memeblast" */;
+			buildConfigurationList = EB276CD021FDD07C00C23E9C /* Build configuration list for PBXNativeTarget "Duuetblast" */;
 			buildPhases = (
 				2F174895C6A6EFD0F24706CA /* [CP] Check Pods Manifest.lock */,
 				EB276CA421FDD07900C23E9C /* Sources */,
@@ -525,14 +525,14 @@
 			);
 			dependencies = (
 			);
-			name = Memeblast;
+			name = Duuetblast;
 			productName = LevelDesigner;
-			productReference = EB276CA821FDD07900C23E9C /* Memeblast.app */;
+			productReference = EB276CA821FDD07900C23E9C /* Duuetblast.app */;
 			productType = "com.apple.product-type.application";
 		};
-		EB276CBB21FDD07C00C23E9C /* MemeblastTests */ = {
+		EB276CBB21FDD07C00C23E9C /* DuuetblastTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EB276CD321FDD07C00C23E9C /* Build configuration list for PBXNativeTarget "MemeblastTests" */;
+			buildConfigurationList = EB276CD321FDD07C00C23E9C /* Build configuration list for PBXNativeTarget "DuuetblastTests" */;
 			buildPhases = (
 				62B582CBACE97D866A2697F4 /* [CP] Check Pods Manifest.lock */,
 				EB276CB821FDD07C00C23E9C /* Sources */,
@@ -544,14 +544,14 @@
 			dependencies = (
 				EB276CBE21FDD07C00C23E9C /* PBXTargetDependency */,
 			);
-			name = MemeblastTests;
+			name = DuuetblastTests;
 			productName = LevelDesignerTests;
-			productReference = EB276CBC21FDD07C00C23E9C /* MemeblastTests.xctest */;
+			productReference = EB276CBC21FDD07C00C23E9C /* DuuetblastTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		EB276CC621FDD07C00C23E9C /* MemeblastUITests */ = {
+		EB276CC621FDD07C00C23E9C /* DuuetblastUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EB276CD621FDD07C00C23E9C /* Build configuration list for PBXNativeTarget "MemeblastUITests" */;
+			buildConfigurationList = EB276CD621FDD07C00C23E9C /* Build configuration list for PBXNativeTarget "DuuetblastUITests" */;
 			buildPhases = (
 				C0FF4587BA93C85DD3DCF310 /* [CP] Check Pods Manifest.lock */,
 				EB276CC321FDD07C00C23E9C /* Sources */,
@@ -563,9 +563,9 @@
 			dependencies = (
 				EB276CC921FDD07C00C23E9C /* PBXTargetDependency */,
 			);
-			name = MemeblastUITests;
+			name = DuuetblastUITests;
 			productName = LevelDesignerUITests;
-			productReference = EB276CC721FDD07C00C23E9C /* MemeblastUITests.xctest */;
+			productReference = EB276CC721FDD07C00C23E9C /* DuuetblastUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -591,7 +591,7 @@
 					};
 				};
 			};
-			buildConfigurationList = EB276CA321FDD07900C23E9C /* Build configuration list for PBXProject "Memeblast" */;
+			buildConfigurationList = EB276CA321FDD07900C23E9C /* Build configuration list for PBXProject "Duuetblast" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -604,9 +604,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				EB276CA721FDD07900C23E9C /* Memeblast */,
-				EB276CBB21FDD07C00C23E9C /* MemeblastTests */,
-				EB276CC621FDD07C00C23E9C /* MemeblastUITests */,
+				EB276CA721FDD07900C23E9C /* Duuetblast */,
+				EB276CBB21FDD07C00C23E9C /* DuuetblastTests */,
+				EB276CC621FDD07C00C23E9C /* DuuetblastUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -812,12 +812,12 @@
 /* Begin PBXTargetDependency section */
 		EB276CBE21FDD07C00C23E9C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = EB276CA721FDD07900C23E9C /* Memeblast */;
+			target = EB276CA721FDD07900C23E9C /* Duuetblast */;
 			targetProxy = EB276CBD21FDD07C00C23E9C /* PBXContainerItemProxy */;
 		};
 		EB276CC921FDD07C00C23E9C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = EB276CA721FDD07900C23E9C /* Memeblast */;
+			target = EB276CA721FDD07900C23E9C /* Duuetblast */;
 			targetProxy = EB276CC821FDD07C00C23E9C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -971,7 +971,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = nus.cs3217.a0164178x.memeblast;
+				PRODUCT_BUNDLE_IDENTIFIER = nus.cs3217.a0164178x.dueetblast;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -991,7 +991,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = nus.cs3217.a0164178x.memeblast;
+				PRODUCT_BUNDLE_IDENTIFIER = nus.cs3217.a0164178x.dueetblast;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1016,7 +1016,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Memeblast.app/Memeblast";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Duuetblast.app/Duuetblast";
 			};
 			name = Debug;
 		};
@@ -1038,7 +1038,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Memeblast.app/Memeblast";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Duuetblast.app/Duuetblast";
 			};
 			name = Release;
 		};
@@ -1087,7 +1087,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		EB276CA321FDD07900C23E9C /* Build configuration list for PBXProject "Memeblast" */ = {
+		EB276CA321FDD07900C23E9C /* Build configuration list for PBXProject "Duuetblast" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EB276CCE21FDD07C00C23E9C /* Debug */,
@@ -1096,7 +1096,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EB276CD021FDD07C00C23E9C /* Build configuration list for PBXNativeTarget "Memeblast" */ = {
+		EB276CD021FDD07C00C23E9C /* Build configuration list for PBXNativeTarget "Duuetblast" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EB276CD121FDD07C00C23E9C /* Debug */,
@@ -1105,7 +1105,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EB276CD321FDD07C00C23E9C /* Build configuration list for PBXNativeTarget "MemeblastTests" */ = {
+		EB276CD321FDD07C00C23E9C /* Build configuration list for PBXNativeTarget "DuuetblastTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EB276CD421FDD07C00C23E9C /* Debug */,
@@ -1114,7 +1114,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EB276CD621FDD07C00C23E9C /* Build configuration list for PBXNativeTarget "MemeblastUITests" */ = {
+		EB276CD621FDD07C00C23E9C /* Build configuration list for PBXNativeTarget "DuuetblastUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EB276CD721FDD07C00C23E9C /* Debug */,

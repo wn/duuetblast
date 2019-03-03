@@ -10,7 +10,7 @@ import CoreGraphics
 
 public class PhysicsEngine {
     public init() {
-        
+
     }
 
     /// Convert collision velocity based on the Principle of Conservation of Linear Momentum (2D).

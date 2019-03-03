@@ -13,7 +13,7 @@ class Bubble {
     internal init(bubbleType: BubbleType) {
         self.bubbleType = bubbleType
     }
-    
+
     public static func getRandomBubble() -> BubbleType {
         guard let randomBubble = BubbleType.getNormalBubbles.randomElement() else {
             fatalError("There must be a bubble in playableBubbles")

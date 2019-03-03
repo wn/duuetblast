@@ -17,6 +17,6 @@ public class Acceleraxtion: Vector {
     }
 
     public static var gravity: Acceleration {
-        return Acceleration(magnitude: 1000, angle: CGFloat.pi)
+        return Acceleration(magnitude: 1_000, angle: CGFloat.pi)
     }
 }

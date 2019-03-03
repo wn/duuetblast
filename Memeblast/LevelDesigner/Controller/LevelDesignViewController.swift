@@ -13,28 +13,28 @@ class LevelDesignViewController: UIViewController {
     @IBOutlet private var gameArea: UIView!
     @IBOutlet private var paletteViewArea: UIView!
 
-    @IBOutlet var startButton: UIButton!
+    @IBOutlet private var startButton: UIButton!
 
-    @IBOutlet var timeStepper: UIStepper!
-    @IBOutlet var numOfPlayer: UISegmentedControl!
+    @IBOutlet private var timeStepper: UIStepper!
+    @IBOutlet private var numOfPlayer: UISegmentedControl!
 
     @IBOutlet private var colorSelectorCollection: UICollectionView!
     let paletteCellIdentifier = "paletteSelectorBubbleCell"
     @IBOutlet private var gameBubbleCollection: UICollectionView!
     let gameBubbleCellIdentifier = "gameBubbleCell"
 
-    @IBAction func timeSetting(_ sender: UIStepper) {
+    @IBAction private func timeSetting(_ sender: UIStepper) {
         let time = Int(sender.value)
         timeLabel?.text = "Time: \(Int(time))"
         self.time = time
         currentLevel.time = time
     }
 
-    @IBAction func startGame(_ sender: UIButton) {
+    @IBAction private func startGame(_ sender: UIButton) {
         guard checkValidGrid() else {
             return
         }
-        Settings.playSoundWith(Constants.start_game_sound)
+        Settings.playSoundWith(Constants.startGameSound)
         transitToGame()
     }
 
@@ -55,7 +55,7 @@ class LevelDesignViewController: UIViewController {
     }
 
     /// Button to load level. Switch to levelSelector view.
-    @IBAction func loadLevel(_ sender: UIButton) {
+    @IBAction private func loadLevel(_ sender: UIButton) {
         if !currentLevel.isEmpty {
             loseCurrentDataAlert()
         } else {
@@ -72,8 +72,11 @@ class LevelDesignViewController: UIViewController {
         return numOfPlayer.selectedSegmentIndex == 1
     }
 
-    lazy var currentLevel = LevelGame(totalBubbles: gameLayout.totalNumberOfBubble, fillType: .empty, isRect: isRectGrid)
-    
+    lazy var currentLevel = LevelGame(
+        totalBubbles: gameLayout.totalNumberOfBubble,
+        fillType: .empty,
+        isRect: isRectGrid)
+
     var gameLayout: GameLayout {
         if isRectGrid {
         return RectLayout(rows: Constants.numOfRows, firstRowCol: Constants.numOfCols)
@@ -254,7 +257,7 @@ extension LevelDesignViewController {
     /// Button to save current level.
     /// Saving using core data solution from https://www.youtube.com/watch?v=dIXkR-2rdvM
     /// Alert solution inspired from https://learnappmaking.com/uialertcontroller-alerts-swift-how-to/
-    @IBAction func saveLevel(_ sender: UIButton) {
+    @IBAction private func saveLevel(_ sender: UIButton) {
         guard checkValidGrid() else {
             return
         }
@@ -356,9 +359,6 @@ extension LevelDesignViewController: UICollectionViewDataSource, UICollectionVie
                 as! PaletteBubbleCollectionViewCell
             let selectedPaletteBubble = paletteBubbles.getBubbleAtIndex(index: indexPath.item)
             cell.setupImage(imageUrl: Settings.selectedTheme.getBubbleTypePath(type: selectedPaletteBubble.bubbleType), isSelected: selectedPaletteBubble.isSelected)
-//            let cellDiameter = cell.frame.width
-//            // let yPos = cell.frame.origin.y + cellDiameter / 2
-//            cell.layer.frame = CGRect(x: cellDiameter * CGFloat(indexPath.item), y: cell.frame.origin.y, width: cellDiameter, height: cellDiameter)
             return cell
         case gameBubbleCollection:
             let cell = collectionView.dequeueReusableCell(

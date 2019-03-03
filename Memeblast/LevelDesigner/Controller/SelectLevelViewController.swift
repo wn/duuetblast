@@ -10,16 +10,29 @@ import CoreData
 
 class SelectLevelViewController: UIViewController, UIGestureRecognizerDelegate {
 
-    @IBOutlet var levelSelectorCollection: UICollectionView!
+    @IBOutlet private var levelSelectorCollection: UICollectionView!
     let levelSelectionCellIdentifier = "levelSelectionCell"
 
-    @IBAction func newLevel(_ sender: UIButton) {
+    @IBAction private func newLevel(_ sender: UIButton) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let levelDesignerController =
             storyBoard.instantiateViewController(
                 withIdentifier: "levelDesigner")
                 as! LevelDesignViewController
-        renderChildController(levelDesignerController)
+        let alert = UIAlertController(
+            title: "Rectangular OR Isometric?",
+            message: "Choose your preferred grid layout",
+            preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Rectangular", style: .default) { _ in
+            levelDesignerController.isRectGrid = true
+            self.renderChildController(levelDesignerController)
+        })
+        alert.addAction(UIAlertAction(title: "Isometric", style: .default) { _ in
+            levelDesignerController.isRectGrid = false
+            self.renderChildController(levelDesignerController)
+        })
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+        self.present(alert, animated: true)
     }
 
     private var levels: [LevelData] = []
@@ -47,6 +60,7 @@ class SelectLevelViewController: UIViewController, UIGestureRecognizerDelegate {
     /// Read from database and show name of all saved levels in UITableView.
     func loadSavedLevel() {
         levels = LevelGame.retrieveLevels()
+        // Force unwrap below as levelName must be defined.
         levels.sort { $0.levelName! < $1.levelName! }
     }
 }
@@ -80,16 +94,14 @@ extension SelectLevelViewController {
         renderChildController(gameEngineController)
     }
 
-    
-
     /// Button to create a new level.
-    @IBAction func renderMainMenu(_ sender: Any) {
+    @IBAction private func renderMainMenu(_ sender: Any) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let newVC =
             storyBoard.instantiateViewController(
                 withIdentifier: "mainMenu")
                 as! StartGameController
-        derenderChildController(false)
+        derenderChildController()
         renderChildController(newVC)
     }
 }
@@ -122,11 +134,14 @@ extension SelectLevelViewController: UICollectionViewDataSource, UICollectionVie
 }
 
 extension SelectLevelViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let padding: CGFloat =  50
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let padding: CGFloat = 50
         let collectionViewSize = collectionView.frame.size.width - padding
 
-        return CGSize(width: collectionViewSize/2, height: collectionViewSize/2 * 1.2)
+        return CGSize(width: collectionViewSize / 2, height: collectionViewSize / 2 * 1.2)
     }
 }
 
@@ -143,7 +158,10 @@ extension SelectLevelViewController: CardCellDelegate {
             return
         }
 
-        let alert = UIAlertController(title: "Deleting level", message: "Are you sure you want to delete \(lvlName)?", preferredStyle: .alert)
+        let alert = UIAlertController(
+            title: "Deleting level",
+            message: "Are you sure you want to delete \(lvlName)?",
+            preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Confirm", style: .default) { [weak self]_ in
             self?.levels.remove(at: index)
