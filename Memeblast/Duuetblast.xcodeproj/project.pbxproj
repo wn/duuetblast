@@ -24,9 +24,9 @@
 		EB5A1C4D2206AD02005F1DA1 /* GridBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A1C4C2206AD02005F1DA1 /* GridBubble.swift */; };
 		EB5A1C4F2206AD5D005F1DA1 /* PaletteBubbles.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A1C4E2206AD5D005F1DA1 /* PaletteBubbles.swift */; };
 		EB5A1C6B22070601005F1DA1 /* BubbleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5A1C6A22070601005F1DA1 /* BubbleType.swift */; };
-		EB5D84BB22290513002F314B /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB5D84BA22290513002F314B /* OpenSans-Regular.ttf */; };
-		EB5D84BD22290740002F314B /* Blueberry-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = EB5D84BC22290740002F314B /* Blueberry-Regular.otf */; };
 		EB5D84BF22292302002F314B /* UIColor+RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5D84BE22292302002F314B /* UIColor+RGB.swift */; };
+		EB5F448B2264EF6700D73BE6 /* Blueberry-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = EB5F448A2264EF6700D73BE6 /* Blueberry-Regular.otf */; };
+		EB5F448D2264EF7100D73BE6 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB5F448C2264EF7000D73BE6 /* OpenSans-Regular.ttf */; };
 		EB74768B222BACEC00D627AD /* Cartoon Sound Effect - Bounce.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EB747682222BACEC00D627AD /* Cartoon Sound Effect - Bounce.mp3 */; };
 		EB74768D222BACEC00D627AD /* gameover_sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EB747684222BACEC00D627AD /* gameover_sound.mp3 */; };
 		EB74768F222BACEC00D627AD /* zap_sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EB747686222BACEC00D627AD /* zap_sound.mp3 */; };
@@ -117,9 +117,9 @@
 		EB5A1C4C2206AD02005F1DA1 /* GridBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridBubble.swift; sourceTree = "<group>"; };
 		EB5A1C4E2206AD5D005F1DA1 /* PaletteBubbles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteBubbles.swift; sourceTree = "<group>"; };
 		EB5A1C6A22070601005F1DA1 /* BubbleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleType.swift; sourceTree = "<group>"; };
-		EB5D84BA22290513002F314B /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Regular.ttf"; path = "../../../../../../../../Downloads/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
-		EB5D84BC22290740002F314B /* Blueberry-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Blueberry-Regular.otf"; path = "../../../../../../../../Downloads/Blueberry-Regular.otf"; sourceTree = "<group>"; };
 		EB5D84BE22292302002F314B /* UIColor+RGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+RGB.swift"; sourceTree = "<group>"; };
+		EB5F448A2264EF6700D73BE6 /* Blueberry-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Blueberry-Regular.otf"; sourceTree = "<group>"; };
+		EB5F448C2264EF7000D73BE6 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		EB747682222BACEC00D627AD /* Cartoon Sound Effect - Bounce.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Cartoon Sound Effect - Bounce.mp3"; path = "../../../Sound Assets/Cartoon Sound Effect - Bounce.mp3"; sourceTree = "<group>"; };
 		EB747684222BACEC00D627AD /* gameover_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = gameover_sound.mp3; path = "../../../Sound Assets/gameover_sound.mp3"; sourceTree = "<group>"; };
 		EB747686222BACEC00D627AD /* zap_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = zap_sound.mp3; path = "../../../Sound Assets/zap_sound.mp3"; sourceTree = "<group>"; };
@@ -347,8 +347,8 @@
 		EB5D84B92229050A002F314B /* Custom Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				EB5D84BC22290740002F314B /* Blueberry-Regular.otf */,
-				EB5D84BA22290513002F314B /* OpenSans-Regular.ttf */,
+				EB5F448A2264EF6700D73BE6 /* Blueberry-Regular.otf */,
+				EB5F448C2264EF7000D73BE6 /* OpenSans-Regular.ttf */,
 			);
 			path = "Custom Fonts";
 			sourceTree = "<group>";
@@ -621,12 +621,12 @@
 				EB276CB621FDD07C00C23E9C /* LaunchScreen.storyboard in Resources */,
 				EB276CB321FDD07C00C23E9C /* Assets.xcassets in Resources */,
 				EB74768F222BACEC00D627AD /* zap_sound.mp3 in Resources */,
-				EB5D84BB22290513002F314B /* OpenSans-Regular.ttf in Resources */,
 				EB74769D222BEF1100D627AD /* background-music.mp3 in Resources */,
-				EB5D84BD22290740002F314B /* Blueberry-Regular.otf in Resources */,
 				EB74768D222BACEC00D627AD /* gameover_sound.mp3 in Resources */,
+				EB5F448B2264EF6700D73BE6 /* Blueberry-Regular.otf in Resources */,
 				EB747690222BACEC00D627AD /* start_sound.mp3 in Resources */,
 				EB747693222BACEC00D627AD /* bounce.mp3 in Resources */,
+				EB5F448D2264EF7100D73BE6 /* OpenSans-Regular.ttf in Resources */,
 				EB747692222BACEC00D627AD /* cannon_sound.mp3 in Resources */,
 				EB747697222BE93200D627AD /* bubble_drop.mp3 in Resources */,
 				EB276CB121FDD07900C23E9C /* Main.storyboard in Resources */,
