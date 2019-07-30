@@ -1,11 +1,12 @@
 # Duuetblast
-==
 
 **Name:** Ang Wei Neng
 
 **Matric No:** A0164178X
 
 **Tutor:** Wang Yanhao
+
+![gameplay](./Images/screenshots/duuetblast_gameplay.png)
 
 ## Tips
 
@@ -424,10 +425,11 @@ Number of cannon is decided when game is being designed. Once game is saved, the
     - Out of the M, V and C, for my code, the controller did the most work. This is quite unproportionate. In fact, for controllers such as `GameEngine`, I had to break the code into 4 files just for the code to be cleaner. One way to improve is to delegate the work to other classes. Due to time constrain, I could only refactor the code into 4 file of the same class. With more time, those 4 files could become 4 classes instead. 
 2. While I attempted to decouple the model and the view, I am still not confident that the modals in my code did not talk to the view. 
 3. For some modal that can be designed to be reusable, I did not plan ahead, and ended up creating classes that can be combined (Bubble, GameObject, and GridBubbles). 
-4. One interesting choice I had to make was with the music player. I could either make every controller play their own music, or have a global class that stores all musics that is being played. I chose the second option because less code will need to be written and I was under time constrain. However, the advantages of each controller having to play their own music is that I can guarantee that when the controller goes out of view, there wont be any background music. For my case, I could only allow instantaneous music (cannon boom, bomb explosion sound, which are 1second) to guarantee that background music won't be played. Based on this experience, I felt that a functional approach to MVC will be alot cleaner. (i.e. We write functionals that are only dependant on the inputs. Only when we need to mutate the state then we have a function to mutate the object). Because I did not do this, I had a lot of dependancy bugs which wasted ALOT of my time. 
-5. There was a number of repeatitive code in each controller, which I had to 'copy and paste' since they are in different controller. This shows the poor design that I had in my code. I could have written more delegates to fix this issue, but 1. I'm still not familiar with delegate patterns and 2. I was too deep in the shit to fix my code. 
+4. One interesting choice I had to make was with the music player. I could either make every controller play their own music, or have a global class that stores all musics that is being played. I chose the second option because less code will need to be written and I was under time constrain. However, the advantages of each controller having to play their own music is that I can guarantee that when the controller goes out of view, there wont be any background music. For my case, I could only allow instantaneous music (cannon boom, bomb explosion sound, which are 1second) to guarantee that background music won't be played. Based on this experience, I felt that a functional approach to MVC will be alot cleaner. (i.e. We write functionals that are only dependant on the inputs. Only when we need to mutate the state then we have a function to mutate the object). Because I did not do this, I had a lot of dependancy bugs which wasted ALOT of my time.
+5. There was a number of repeatitive code in each controller, which I had to 'copy and paste' since they are in different controller. This shows the poor design that I had in my code. I could have written more delegates to fix this issue, but 1. I'm still not familiar with delegate patterns and 2. I was too deep in the shit to fix my code.
 6. A lot of my time for PS5 was spent on UI. However, I noticed that the size of my code for Views are quite low. Most of the code ended up in the controller. This also shows bad planning as I had to recode my controllers just to inject new view. 
 7. All in all, the main issue I had was that I didn't plan well, hence when new requirements comes in, I had to basically rewrite my code to allow for the new feature. Probably a good lesson to learn at this stage, since there isn't any PS6 to screw me up. However, for the project, it is extremely important to plan so that there won't be any issues in the end. 
 
+### Note:
 
-## Note: App works best on iPad 11". There is no guarantee that app will work on other devices.
+- App works best on iPad 11". There is no guarantee that app will work on other devices.
