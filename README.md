@@ -1,7 +1,5 @@
-CS3217 Problem Set 5
+# Duuetblast
 ==
-
-## App works best on iPad 11". There is no guarantee that app will work on other devices.
 
 **Name:** Ang Wei Neng
 
@@ -16,7 +14,7 @@ CS3217 Problem Set 5
 3. A Swiftlint configuration file is provided for you. It is recommended for you to use Swiftlint and follow this configuration. Keep in mind that, ultimately, this tool is only a guideline; some exceptions may be made as long as code quality is not compromised.
 4. Do not burn out. Have fun!
 
-### Rules of Your Game
+### Rules of the game
 
 - Clear bubbles before the time ends to earn points. 
 
@@ -388,8 +386,6 @@ Number of cannon is decided when game is being designed. Once game is saved, the
         - When `renderChildController(child)` is called, `viewController` should have a new child and `child`'s parent should be `viewController`
         - When `derenderChildController(_ moveToParent: Bool = true)` is called, viewController should be derendered. if moveToParent is True, parent will appear and vice versa.
 
-**Note: I did not test for my bells and whistle**
-
 ### Problem 9: The Bells & Whistles
 
 - Cannon has animation!!
@@ -432,4 +428,6 @@ Number of cannon is decided when game is being designed. Once game is saved, the
 5. There was a number of repeatitive code in each controller, which I had to 'copy and paste' since they are in different controller. This shows the poor design that I had in my code. I could have written more delegates to fix this issue, but 1. I'm still not familiar with delegate patterns and 2. I was too deep in the shit to fix my code. 
 6. A lot of my time for PS5 was spent on UI. However, I noticed that the size of my code for Views are quite low. Most of the code ended up in the controller. This also shows bad planning as I had to recode my controllers just to inject new view. 
 7. All in all, the main issue I had was that I didn't plan well, hence when new requirements comes in, I had to basically rewrite my code to allow for the new feature. Probably a good lesson to learn at this stage, since there isn't any PS6 to screw me up. However, for the project, it is extremely important to plan so that there won't be any issues in the end. 
-8. 
+
+
+## Note: App works best on iPad 11". There is no guarantee that app will work on other devices.
